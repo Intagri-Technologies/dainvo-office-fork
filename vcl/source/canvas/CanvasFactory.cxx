@@ -1,0 +1,273 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+ */
+
+#include <sal/config.h>
+
+#include <CanvasFactory.hxx>
+
+#include <comphelper/configuration.hxx>
+#include <cppuhelper/implbase.hxx>
+#include <comphelper/propertysequence.hxx>
+#include <cppuhelper/supportsservice.hxx>
+#include <o3tl/functional.hxx>
+#include <o3tl/string_view.hxx>
+#include <sal/log.hxx>
+#include <vcl/skia/SkiaHelper.hxx>
+#include <officecfg/Office/Canvas.hxx>
+
+#include <com/sun/star/container/XHierarchicalNameAccess.hpp>
+#include <com/sun/star/container/XNameAccess.hpp>
+#include <com/sun/star/lang/IllegalArgumentException.hpp>
+#include <com/sun/star/lang/XServiceName.hpp>
+
+using namespace ::com::sun::star;
+using namespace ::com::sun::star::uno;
+
+CanvasFactory::CanvasFactory()
+    : m_bCacheHasForcedLastImpl()
+    , m_bCacheHasUseAcceleratedEntry()
+    , m_bCacheHasUseAAEntry()
+{
+    if (!comphelper::IsFuzzing())
+    {
+        try
+        {
+            // read out configuration for preferred services:
+
+            Reference<container::XNameAccess> xNameAccess = officecfg::Office::Canvas::CanvasServiceList::get();
+            Reference<container::XHierarchicalNameAccess> xHierarchicalNameAccess(
+                xNameAccess, UNO_QUERY_THROW);
+
+
+            for (auto& serviceName : xNameAccess->getElementNames())
+            {
+                Reference<container::XNameAccess> xEntryNameAccess(
+                    xHierarchicalNameAccess->getByHierarchicalName(serviceName),
+                    UNO_QUERY );
+
+                if( xEntryNameAccess.is() )
+                {
+                    Sequence<OUString> implementationList;
+                    if( xEntryNameAccess->getByName(u"PreferredImplementations"_ustr) >>= implementationList )
+                    {
+                        m_aAvailableImplementations[serviceName] = implementationList;
+                    }
+                    if( xEntryNameAccess->getByName(u"AcceleratedImplementations"_ustr) >>= implementationList )
+                    {
+                        m_aAcceleratedImplementations[serviceName] = implementationList;
+                    }
+                    if( xEntryNameAccess->getByName(u"AntialiasingImplementations"_ustr) >>= implementationList )
+                    {
+                        m_aAAImplementations[serviceName] = implementationList;
+                    }
+                }
+            }
+        }
+        catch (const RuntimeException &)
+        {
+            throw;
+        }
+        catch (const Exception&)
+        {
+        }
+    }
+
+    if (m_aAvailableImplementations.empty())
+    {
+        // Ugh. Looks like configuration is borked. Fake minimal
+        // setup.
+        m_aAvailableImplementations[u"com.sun.star.rendering.Canvas"_ustr]
+            = Sequence<OUString>{ u"com.sun.star.comp.rendering.Canvas.VCL"_ustr };
+
+        m_aAvailableImplementations[u"com.sun.star.rendering.SpriteCanvas"_ustr]
+            = Sequence<OUString>{ u"com.sun.star.comp.rendering.SpriteCanvas.VCL"_ustr };
+    }
+}
+
+CanvasFactory::~CanvasFactory()
+{
+}
+
+Reference<XInterface> CanvasFactory::use(OUString const& serviceName, Sequence<Any> const& args,
+                                         Reference<XComponentContext> const& xContext)
+{
+    try {
+        return xContext->getServiceManager()->createInstanceWithArgumentsAndContext(serviceName,
+                                                                                    args, xContext);
+    }
+    catch (css::lang::IllegalArgumentException &)
+    {
+        return Reference<XInterface>();
+    }
+    catch (const RuntimeException &)
+    {
+        throw;
+    }
+    catch (const Exception &)
+    {
+        return Reference<XInterface>();
+    }
+}
+
+
+void CanvasFactory::checkConfigFlag( bool& r_bFlag,
+                                     bool& r_CacheFlag,
+                                     bool bCurrentConfigValue ) const
+{
+    r_bFlag = bCurrentConfigValue;
+
+    if( r_CacheFlag != r_bFlag )
+    {
+        // cache is invalid, because of different order of
+        // elements
+        r_CacheFlag = r_bFlag;
+        m_aCachedImplementations.clear();
+    }
+}
+
+
+Reference<XInterface> CanvasFactory::lookupAndUse(
+    OUString const & serviceName, Sequence<Any> const & args,
+    Reference<XComponentContext> const & xContext ) const
+{
+    std::scoped_lock guard(m_mutex);
+
+    // forcing last entry from impl list, if config flag set
+    bool bForceLastEntry(false);
+    checkConfigFlag( bForceLastEntry,
+                     m_bCacheHasForcedLastImpl,
+                     officecfg::Office::Canvas::ForceSafeServiceImpl::get() );
+
+    // use anti-aliasing canvas, if config flag set (or not existing)
+    bool bUseAAEntry(true);
+    checkConfigFlag( bUseAAEntry,
+                     m_bCacheHasUseAAEntry,
+                     officecfg::Office::Canvas::UseAntialiasingCanvas::get() );
+
+    // use accelerated canvas, if config flag set (or not existing)
+    bool bUseAcceleratedEntry(true);
+    checkConfigFlag( bUseAcceleratedEntry,
+                     m_bCacheHasUseAcceleratedEntry,
+                     officecfg::Office::Canvas::UseAcceleratedCanvas::get() );
+
+    // try to reuse last working implementation for given service name
+    const auto aMatch = m_aCachedImplementations.find(serviceName);
+    if (aMatch != m_aCachedImplementations.end())
+    {
+        Reference<XInterface> xCanvas( use( aMatch->second, args, xContext ) );
+        if(xCanvas.is())
+            return xCanvas;
+    }
+
+    // lookup in available service list
+    const auto aAvailImplsMatch = m_aAvailableImplementations.find(serviceName);
+    if (aAvailImplsMatch == m_aAvailableImplementations.end())
+    {
+        return Reference<XInterface>();
+    }
+
+    const auto aAAImplsMatch = m_aAAImplementations.find(serviceName);
+    if (aAAImplsMatch == m_aAAImplementations.end())
+    {
+        return Reference<XInterface>();
+    }
+
+    const auto aAccelImplsMatch = m_aAcceleratedImplementations.find(serviceName);
+    if (aAccelImplsMatch == m_aAcceleratedImplementations.end())
+    {
+        return Reference<XInterface>();
+    }
+
+    const Sequence<OUString> aPreferredImpls( aAvailImplsMatch->second );
+    const OUString* pCurrImpl = aPreferredImpls.begin();
+    const OUString* const pEndImpl = aPreferredImpls.end();
+
+    const Sequence<OUString> aAAImpls( aAAImplsMatch->second );
+
+    const Sequence<OUString> aAccelImpls( aAccelImplsMatch->second );
+
+    // force last entry from impl list, if config flag set
+    if (bForceLastEntry && pCurrImpl != pEndImpl)
+        pCurrImpl = pEndImpl-1;
+
+    for(; pCurrImpl != pEndImpl; ++pCurrImpl)
+    {
+        const OUString aCurrName(pCurrImpl->trim());
+
+        // Skia works only with vclcanvas.
+        if( SkiaHelper::isVCLSkiaEnabled() && !aCurrName.endsWith(".VCL"))
+            continue;
+
+        // check whether given canvas service is listed in the
+        // sequence of "accelerated canvas implementations"
+        const bool bIsAcceleratedImpl(
+            std::any_of(aAccelImpls.begin(), aAccelImpls.end(),
+                         [&aCurrName](OUString const& src)
+                         { return aCurrName == o3tl::trim(src); }
+                ));
+
+        // check whether given canvas service is listed in the
+        // sequence of "antialiasing canvas implementations"
+        const bool bIsAAImpl(
+            std::any_of(aAAImpls.begin(), aAAImpls.end(),
+                         [&aCurrName](OUString const& src)
+                         { return aCurrName == o3tl::trim(src); }
+                ));
+
+        // try to instantiate canvas *only* if either accel and AA
+        // property match preference, *or*, if there's a mismatch, only
+        // go for a less capable canvas (that effectively let those
+        // pour canvas impls still work as fallbacks, should an
+        // accelerated/AA one fail). Property implies configuration:
+        // http://en.wikipedia.org/wiki/Truth_table#Logical_implication
+        if( (!bIsAAImpl || bUseAAEntry) && (!bIsAcceleratedImpl || bUseAcceleratedEntry) )
+        {
+            Reference<XInterface> xCanvas(use(aCurrName, args, xContext));
+
+            if(xCanvas.is())
+            {
+                m_aCachedImplementations[serviceName] = aCurrName;
+
+                return xCanvas;
+            }
+        }
+    }
+
+    return Reference<XInterface>();
+}
+
+Reference<XInterface> CanvasFactory::createCanvas(OUString const& preferredOne,
+                                                  Sequence<Any> const& args)
+{
+    const Reference<XComponentContext>& xContext = comphelper::getProcessComponentContext();
+    Reference<XInterface> xCanvas(lookupAndUse(preferredOne, args, xContext));
+    if (!xCanvas.is())
+        // last resort: try service name directly
+        xCanvas = use(preferredOne, args, xContext);
+
+    if (xCanvas.is())
+    {
+        Reference<lang::XServiceName> xServiceName(xCanvas, uno::UNO_QUERY);
+        SAL_INFO("canvas", "using " << (xServiceName.is() ? xServiceName->getServiceName()
+                                                          : u"(unknown)"_ustr));
+    }
+    return xCanvas;
+}
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

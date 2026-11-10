@@ -1,0 +1,245 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+ */
+
+#include <controls/table/AccessibleGridControlBase.hxx>
+
+#include <utility>
+#include <vcl/svapp.hxx>
+#include <vcl/unohelp.hxx>
+#include <vcl/window.hxx>
+#include <cppuhelper/supportsservice.hxx>
+#include <sal/types.h>
+
+#include <com/sun/star/accessibility/AccessibleRole.hpp>
+#include <com/sun/star/accessibility/AccessibleStateType.hpp>
+#include <com/sun/star/accessibility/IllegalAccessibleComponentStateException.hpp>
+#include <unotools/accessiblerelationsethelper.hxx>
+#include <sal/log.hxx>
+
+using ::com::sun::star::uno::Sequence;
+using ::com::sun::star::uno::Any;
+
+using namespace ::com::sun::star;
+using namespace ::com::sun::star::accessibility;
+using namespace ::comphelper;
+using namespace ::vcl;
+
+
+namespace accessibility {
+
+using namespace com::sun::star::accessibility::AccessibleStateType;
+
+AccessibleGridControlBase::AccessibleGridControlBase(
+    const rtl::Reference<comphelper::OAccessible>& rpParent, svt::table::TableControl& rTable,
+    AccessibleTableControlObjType eObjType)
+    : m_pParent(rpParent)
+    , m_rTable(rTable)
+    , m_eObjType(eObjType)
+{
+}
+
+void SAL_CALL AccessibleGridControlBase::disposing()
+{
+    SolarMutexGuard g;
+
+    OAccessible::disposing();
+
+    m_pParent = nullptr;
+    //m_aTable = NULL;
+}
+
+// css::accessibility::XAccessibleContext
+
+css::uno::Reference< css::accessibility::XAccessible > SAL_CALL AccessibleGridControlBase::getAccessibleParent()
+{
+    SolarMutexGuard g;
+
+    ensureAlive();
+    return m_pParent;
+}
+
+OUString SAL_CALL AccessibleGridControlBase::getAccessibleDescription()
+{
+    SolarMutexGuard g;
+
+    ensureAlive();
+    return m_rTable.GetAccessibleObjectDescription(m_eObjType);
+}
+
+OUString SAL_CALL AccessibleGridControlBase::getAccessibleName()
+{
+    SolarMutexGuard g;
+
+    ensureAlive();
+    return m_rTable.GetAccessibleObjectName(m_eObjType, 0, 0);
+}
+
+css::uno::Reference< css::accessibility::XAccessibleRelationSet > SAL_CALL
+AccessibleGridControlBase::getAccessibleRelationSet()
+{
+   SolarMutexGuard g;
+
+   ensureAlive();
+   // GridControl does not have relations.
+   return new utl::AccessibleRelationSetHelper;
+}
+
+sal_Int64 SAL_CALL
+AccessibleGridControlBase::getAccessibleStateSet()
+{
+    SolarMutexGuard aSolarGuard;
+
+    // don't check whether alive -> StateSet may contain DEFUNC
+    return implCreateStateSet();
+}
+
+lang::Locale SAL_CALL AccessibleGridControlBase::getLocale()
+{
+    SolarMutexGuard g;
+
+    ensureAlive();
+    if (m_pParent.is())
+        return m_pParent->getLocale();
+
+    throw IllegalAccessibleComponentStateException();
+}
+
+// internal virtual methods
+
+bool AccessibleGridControlBase::implIsShowing()
+{
+    bool bShowing = false;
+    if (m_pParent.is())
+    {
+        bShowing = implGetBoundingBox().Overlaps(
+            vcl::unohelper::ConvertToVCLRect(m_pParent->getBounds()));
+    }
+    return bShowing;
+}
+
+tools::Rectangle AccessibleGridControlBase::implGetBoundingBox()
+{
+    // calculate parent-relative position from own and parent's absolute position
+    tools::Rectangle aBound(implGetBoundingBoxOnScreen());
+    if (!m_pParent.is())
+        return aBound;
+
+    awt::Point aParentPos = m_pParent->getLocationOnScreen();
+    aBound.Move(-aParentPos.X, -aParentPos.Y);
+    return aBound;
+}
+
+sal_Int64 AccessibleGridControlBase::implCreateStateSet()
+{
+    sal_Int64 nStateSet = 0;
+
+    if( isAlive() )
+    {
+        // SHOWING done with m_xParent
+        if( implIsShowing() )
+            nStateSet |= AccessibleStateType::SHOWING;
+        // GridControl fills StateSet with states depending on object type
+        m_rTable.FillAccessibleStateSet(nStateSet, getType());
+    }
+    else
+        nStateSet |= AccessibleStateType::DEFUNC;
+    return nStateSet;
+}
+
+css::awt::Rectangle AccessibleGridControlBase::implGetBounds()
+{
+    return vcl::unohelper::ConvertToAWTRect(implGetBoundingBox());
+}
+
+void AccessibleGridControlBase::commitEvent(
+        sal_Int16 _nEventId, const Any& _rNewValue, const Any& _rOldValue )
+{
+    NotifyAccessibleEvent(_nEventId, _rOldValue, _rNewValue);
+}
+
+sal_Int16 SAL_CALL AccessibleGridControlBase::getAccessibleRole()
+{
+    ensureAlive();
+    sal_Int16 nRole = AccessibleRole::UNKNOWN;
+    switch ( m_eObjType )
+    {
+        case AccessibleTableControlObjType::ROWHEADERCELL:
+        nRole = AccessibleRole::ROW_HEADER;
+        break;
+    case AccessibleTableControlObjType::COLUMNHEADERCELL:
+        nRole = AccessibleRole::COLUMN_HEADER;
+        break;
+    case AccessibleTableControlObjType::COLUMNHEADERBAR:
+    case AccessibleTableControlObjType::ROWHEADERBAR:
+    case AccessibleTableControlObjType::TABLE:
+        nRole = AccessibleRole::TABLE;
+        break;
+    case AccessibleTableControlObjType::TABLECELL:
+        nRole = AccessibleRole::TABLE_CELL;
+        break;
+    case AccessibleTableControlObjType::GRIDCONTROL:
+        nRole = AccessibleRole::PANEL;
+        break;
+    }
+    return nRole;
+}
+
+css::uno::Reference<css::accessibility::XAccessible > SAL_CALL AccessibleGridControlBase::getAccessibleAtPoint( const css::awt::Point& )
+{
+    return nullptr;
+}
+
+sal_Int32 SAL_CALL AccessibleGridControlBase::getForeground(  )
+{
+    SolarMutexGuard aSolarGuard;
+
+    ensureAlive();
+
+    Color nColor;
+    if (m_rTable.IsControlForeground())
+        nColor = m_rTable.GetControlForeground();
+    else
+    {
+        vcl::Font aFont;
+        if (m_rTable.IsControlFont())
+            aFont = m_rTable.GetControlFont();
+        else
+            aFont = m_rTable.GetFont();
+        nColor = aFont.GetColor();
+    }
+    return sal_Int32(nColor);
+}
+
+sal_Int32 SAL_CALL AccessibleGridControlBase::getBackground(  )
+{
+    SolarMutexGuard aSolarGuard;
+
+    ensureAlive();
+    Color nColor;
+    if (m_rTable.IsControlBackground())
+        nColor = m_rTable.GetControlBackground();
+    else
+        nColor = m_rTable.GetBackground().GetColor();
+    return sal_Int32(nColor);
+}
+
+} // namespace accessibility
+
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

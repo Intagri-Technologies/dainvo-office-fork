@@ -1,0 +1,370 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+ */
+
+#include <sal/config.h>
+
+#include <cstddef>
+
+#include "PresenterCanvas.hxx"
+#include "PresenterHelper.hxx"
+
+#include <cppcanvas/vclfactory.hxx>
+#include <cppuhelper/supportsservice.hxx>
+#include <com/sun/star/awt/XVclWindowPeer.hpp>
+#include <com/sun/star/uno/XComponentContext.hpp>
+#include <toolkit/helper/vclunohelper.hxx>
+#include <tools/mapunit.hxx>
+#include <vcl/window.hxx>
+#include <vcl/wrkwin.hxx>
+
+
+#include <bitmaps.hlst>
+
+using namespace ::com::sun::star;
+using namespace ::com::sun::star::uno;
+
+namespace sd::presenter {
+
+VclPtr<vcl::Window> PresenterHelper::createWindow(const Reference<awt::XWindow>& rxParentWindow,
+                                                  bool bInitiallyVisible)
+{
+    VclPtr<vcl::Window> pParentWindow(VCLUnoHelper::GetWindow(rxParentWindow));
+
+    // Create a new window.
+    VclPtr<vcl::Window> pWindow = VclPtr<vcl::Window>::Create(pParentWindow);
+
+    pWindow->Show(bInitiallyVisible);
+
+    pWindow->SetMapMode(MapMode(MapUnit::MapPixel));
+    pWindow->SetBackground();
+    pWindow->SetParentClipMode(ParentClipMode::NoClip);
+    pWindow->SetPaintTransparent(true);
+
+    return pWindow;
+}
+
+Reference<rendering::XCanvas> PresenterHelper::createSharedCanvas (
+    const Reference<rendering::XSpriteCanvas>& rxUpdateCanvas,
+    const Reference<awt::XWindow>& rxUpdateWindow,
+    const Reference<rendering::XCanvas>& rxSharedCanvas,
+    const Reference<awt::XWindow>& rxSharedWindow,
+    const Reference<awt::XWindow>& rxWindow)
+{
+    if ( ! rxSharedCanvas.is()
+        || ! rxSharedWindow.is()
+        || ! rxWindow.is())
+    {
+        throw RuntimeException(u"illegal argument"_ustr);
+    }
+
+    if (rxWindow == rxSharedWindow)
+        return rxSharedCanvas;
+    else
+        return new PresenterCanvas(
+            rxUpdateCanvas,
+            rxUpdateWindow,
+            rxSharedCanvas,
+            rxSharedWindow,
+            rxWindow);
+}
+
+void PresenterHelper::toTop(const Reference<awt::XWindow>& rxWindow)
+{
+    VclPtr<vcl::Window> pWindow = VCLUnoHelper::GetWindow(rxWindow);
+    if (pWindow)
+    {
+        pWindow->ToTop();
+        pWindow->SetZOrder(nullptr, ZOrderFlags::Last);
+    }
+}
+
+Reference<rendering::XBitmap> PresenterHelper::loadBitmap (
+    std::u16string_view sId,
+    const Reference<rendering::XCanvas>& rxCanvas)
+{
+    if ( ! rxCanvas.is())
+        return nullptr;
+
+    static const std::unordered_map<std::u16string_view, OUString> aMap {
+        { u"bitmaps/Background.png", BMP_PRESENTERSCREEN_BACKGROUND },
+        { u"bitmaps/Animation.png",
+          BMP_PRESENTERSCREEN_ANIMATION },
+        { u"bitmaps/Transition.png",
+          BMP_PRESENTERSCREEN_TRANSITION },
+        { u"bitmaps/BorderActiveBottom.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_BOTTOM },
+        { u"bitmaps/BorderActiveBottomLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_BOTTOM_LEFT },
+        { u"bitmaps/BorderActiveBottomRight.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_BOTTOM_RIGHT },
+        { u"bitmaps/BorderActiveLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_LEFT },
+        { u"bitmaps/BorderActiveRight.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_RIGHT },
+        { u"bitmaps/BorderActiveTop.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_TOP },
+        { u"bitmaps/BorderActiveTopLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_TOP_LEFT },
+        { u"bitmaps/BorderActiveTopRight.png",
+          BMP_PRESENTERSCREEN_BORDER_ACTIVE_TOP_RIGHT },
+        { u"bitmaps/BorderBottom.png", BMP_PRESENTERSCREEN_BORDER_BOTTOM },
+        { u"bitmaps/BorderBottomLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_BOTTOM_LEFT },
+        { u"bitmaps/BorderBottomRight.png",
+          BMP_PRESENTERSCREEN_BORDER_BOTTOM_RIGHT },
+        { u"bitmaps/BorderCurrentSlideBottom.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_BOTTOM },
+        { u"bitmaps/BorderCurrentSlideBottomLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_BOTTOM_LEFT },
+        { u"bitmaps/BorderCurrentSlideBottomRight.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_BOTTOM_RIGHT },
+        { u"bitmaps/BorderCurrentSlideLeft.png"_ustr,
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_LEFT },
+        { u"bitmaps/BorderCurrentSlideRight.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_RIGHT },
+        { u"bitmaps/BorderCurrentSlideTop.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_TOP },
+        { u"bitmaps/BorderCurrentSlideTopLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_TOP_LEFT },
+        { u"bitmaps/BorderCurrentSlideTopRight.png",
+          BMP_PRESENTERSCREEN_BORDER_CURRENT_SLIDE_TOP_RIGHT },
+        { u"bitmaps/BorderLeft.png", BMP_PRESENTERSCREEN_BORDER_LEFT },
+        { u"bitmaps/BorderRight.png", BMP_PRESENTERSCREEN_BORDER_RIGHT },
+        { u"bitmaps/BorderToolbarBottom.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_BOTTOM },
+        { u"bitmaps/BorderToolbarLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_LEFT },
+        { u"bitmaps/BorderToolbarRight.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_RIGHT },
+        { u"bitmaps/BorderToolbarTop.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_TOP },
+        { u"bitmaps/BorderToolbarTopLeft.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_TOP_LEFT },
+        { u"bitmaps/BorderToolbarTopRight.png",
+          BMP_PRESENTERSCREEN_BORDER_TOOLBAR_TOP_RIGHT },
+        { u"bitmaps/BorderTop.png", BMP_PRESENTERSCREEN_BORDER_TOP },
+        { u"bitmaps/BorderTopLeft.png", BMP_PRESENTERSCREEN_BORDER_TOP_LEFT },
+        { u"bitmaps/BorderTopRight.png", BMP_PRESENTERSCREEN_BORDER_TOP_RIGHT },
+        { u"bitmaps/ButtonEffectNextDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_EFFECT_NEXT_DISABLED },
+        { u"bitmaps/ButtonEffectNextMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_EFFECT_NEXT_MOUSE_OVER },
+        { u"bitmaps/ButtonEffectNextNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_EFFECT_NEXT_NORMAL },
+        { u"bitmaps/ButtonEffectNextSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_EFFECT_NEXT_SELECTED },
+        { u"bitmaps/ButtonFrameCenterMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_CENTER_MOUSE_OVER },
+        { u"bitmaps/ButtonFrameCenterNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_CENTER_NORMAL },
+        { u"bitmaps/ButtonFrameLeftMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_LEFT_MOUSE_OVER },
+        { u"bitmaps/ButtonFrameLeftNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_LEFT_NORMAL },
+        { u"bitmaps/ButtonFrameRightMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_RIGHT_MOUSE_OVER },
+        { u"bitmaps/ButtonFrameRightNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_FRAME_RIGHT_NORMAL },
+        { u"bitmaps/ButtonHelpDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_HELP_DISABLED },
+        { u"bitmaps/ButtonHelpMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_HELP_MOUSE_OVER },
+        { u"bitmaps/ButtonHelpNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_HELP_NORMAL },
+        { u"bitmaps/ButtonHelpSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_HELP_SELECTED },
+        { u"bitmaps/ButtonExitPresenterMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_EXIT_PRESENTER_MOUSE_OVER },
+        { u"bitmaps/ButtonExitPresenterNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_EXIT_PRESENTER_NORMAL },
+        { u"bitmaps/ButtonMinusDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_MINUS_DISABLED },
+        { u"bitmaps/ButtonMinusMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_MINUS_MOUSE_OVER },
+        { u"bitmaps/ButtonMinusNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_MINUS_NORMAL },
+        { u"bitmaps/ButtonMinusSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_MINUS_SELECTED },
+        { u"bitmaps/ButtonNotesDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_NOTES_DISABLED },
+        { u"bitmaps/ButtonNotesMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_NOTES_MOUSE_OVER },
+        { u"bitmaps/ButtonNotesNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_NOTES_NORMAL },
+        { u"bitmaps/ButtonNotesSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_NOTES_SELECTED },
+        { u"bitmaps/ButtonPlusDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_PLUS_DISABLED },
+        { u"bitmaps/ButtonPlusMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_PLUS_MOUSE_OVER },
+        { u"bitmaps/ButtonPlusNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_PLUS_NORMAL },
+        { u"bitmaps/ButtonPlusSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_PLUS_SELECTED },
+        { u"bitmaps/ButtonSlideNextDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_NEXT_DISABLED },
+        { u"bitmaps/ButtonSlideNextMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_NEXT_MOUSE_OVER },
+        { u"bitmaps/ButtonSlideNextNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_NEXT_NORMAL },
+        { u"bitmaps/ButtonSlidePreviousDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_PREVIOUS_DISABLED },
+        { u"bitmaps/ButtonSlidePreviousMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_PREVIOUS_MOUSE_OVER },
+        { u"bitmaps/ButtonSlidePreviousNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_PREVIOUS_NORMAL },
+        { u"bitmaps/ButtonSlidePreviousSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_PREVIOUS_SELECTED },
+        { u"bitmaps/ButtonSlideSorterDisabled.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_SORTER_DISABLED },
+        { u"bitmaps/ButtonSlideSorterMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_SORTER_MOUSE_OVER },
+        { u"bitmaps/ButtonSlideSorterNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_SORTER_NORMAL },
+        { u"bitmaps/ButtonSlideSorterSelected.png",
+          BMP_PRESENTERSCREEN_BUTTON_SLIDE_SORTER_SELECTED },
+        { u"bitmaps/ButtonSwitchMonitorMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_SWITCH_MONITOR_MOUSE_OVER },
+        { u"bitmaps/ButtonSwitchMonitorNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_SWITCH_MONITOR_NORMAL },
+        { u"bitmaps/ButtonRestartTimerMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_RESTART_TIMER_MOUSE_OVER },
+        { u"bitmaps/ButtonRestartTimerNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_RESTART_TIMER_NORMAL },
+        { u"bitmaps/ButtonPauseTimerMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_PAUSE_TIMER_MOUSE_OVER },
+        { u"bitmaps/ButtonPauseTimerNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_PAUSE_TIMER_NORMAL },
+        { u"bitmaps/ButtonResumeTimerMouseOver.png",
+          BMP_PRESENTERSCREEN_BUTTON_RESUME_TIMER_MOUSE_OVER },
+        { u"bitmaps/ButtonResumeTimerNormal.png",
+          BMP_PRESENTERSCREEN_BUTTON_RESUME_TIMER_NORMAL },
+        { u"bitmaps/LabelMouseOverCenter.png",
+          BMP_PRESENTERSCREEN_LABEL_MOUSE_OVER_CENTER },
+        { u"bitmaps/LabelMouseOverLeft.png",
+          BMP_PRESENTERSCREEN_LABEL_MOUSE_OVER_LEFT },
+        { u"bitmaps/LabelMouseOverRight.png",
+          BMP_PRESENTERSCREEN_LABEL_MOUSE_OVER_RIGHT },
+        { u"bitmaps/ScrollbarArrowDownDisabled.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_DOWN_DISABLED },
+        { u"bitmaps/ScrollbarArrowDownMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_DOWN_MOUSE_OVER },
+        { u"bitmaps/ScrollbarArrowDownNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_DOWN_NORMAL },
+        { u"bitmaps/ScrollbarArrowDownSelected.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_DOWN_SELECTED },
+        { u"bitmaps/ScrollbarArrowUpDisabled.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_UP_DISABLED },
+        { u"bitmaps/ScrollbarArrowUpMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_UP_MOUSE_OVER },
+        { u"bitmaps/ScrollbarArrowUpNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_UP_NORMAL },
+        { u"bitmaps/ScrollbarArrowUpSelected.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_ARROW_UP_SELECTED },
+        { u"bitmaps/ScrollbarPagerMiddleMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_PAGER_MIDDLE_MOUSE_OVER },
+        { u"bitmaps/ScrollbarPagerMiddleNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_PAGER_MIDDLE_NORMAL },
+        { u"bitmaps/ScrollbarThumbBottomMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_BOTTOM_MOUSE_OVER },
+        { u"bitmaps/ScrollbarThumbBottomNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_BOTTOM_NORMAL },
+        { u"bitmaps/ScrollbarThumbMiddleMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_MIDDLE_MOUSE_OVER },
+        { u"bitmaps/ScrollbarThumbMiddleNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_MIDDLE_NORMAL },
+        { u"bitmaps/ScrollbarThumbTopMouseOver.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_TOP_MOUSE_OVER },
+        { u"bitmaps/ScrollbarThumbTopNormal.png",
+          BMP_PRESENTERSCREEN_SCROLLBAR_THUMB_TOP_NORMAL },
+        { u"bitmaps/ViewBackground.png", BMP_PRESENTERSCREEN_VIEW_BACKGROUND },
+        { u"bitmaps/Separator.png",
+          BMP_PRESENTERSCREEN_SEPARATOR }
+    };
+
+    if (!aMap.contains(sId))
+        return nullptr;
+
+    const OUString bmpid = aMap.at(sId);
+    if (bmpid.isEmpty()) {
+        return nullptr;
+    }
+
+    ::osl::MutexGuard aGuard (::osl::Mutex::getGlobalMutex());
+
+    const cppcanvas::CanvasSharedPtr pCanvas (
+        cppcanvas::VCLFactory::createCanvas(rxCanvas));
+
+    if (pCanvas)
+    {
+        Bitmap aBitmap(bmpid);
+        cppcanvas::BitmapSharedPtr xBitmap(
+            cppcanvas::VCLFactory::createBitmap(pCanvas,
+                aBitmap));
+        if (!xBitmap)
+            return nullptr;
+        return xBitmap->getUNOBitmap();
+    }
+
+    return nullptr;
+}
+
+void PresenterHelper::captureMouse (
+    const Reference<awt::XWindow>& rxWindow)
+{
+    ::osl::MutexGuard aGuard (::osl::Mutex::getGlobalMutex());
+
+    // Capture the mouse (if not already done.)
+    VclPtr<vcl::Window> pWindow = VCLUnoHelper::GetWindow(rxWindow);
+    if (pWindow && ! pWindow->IsMouseCaptured())
+    {
+        pWindow->CaptureMouse();
+    }
+}
+
+void PresenterHelper::releaseMouse (const Reference<awt::XWindow>& rxWindow)
+{
+    ::osl::MutexGuard aGuard (::osl::Mutex::getGlobalMutex());
+
+    // Release the mouse (if not already done.)
+    VclPtr<vcl::Window> pWindow = VCLUnoHelper::GetWindow(rxWindow);
+    if (pWindow && pWindow->IsMouseCaptured())
+    {
+        pWindow->ReleaseMouse();
+    }
+}
+
+awt::Rectangle PresenterHelper::getWindowExtentsRelative (
+    const Reference<awt::XWindow>& rxChildWindow,
+    const Reference<awt::XWindow>& rxParentWindow)
+{
+    VclPtr<vcl::Window> pChildWindow = VCLUnoHelper::GetWindow(rxChildWindow);
+    VclPtr<vcl::Window> pParentWindow = VCLUnoHelper::GetWindow(rxParentWindow);
+    if (pChildWindow && pParentWindow)
+    {
+        ::tools::Rectangle aBox (pChildWindow->GetWindowExtentsRelative(*pParentWindow));
+        return awt::Rectangle(aBox.Left(),aBox.Top(),aBox.GetWidth(),aBox.GetHeight());
+    }
+    else
+        return awt::Rectangle();
+}
+
+} // end of namespace ::sd::presenter
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

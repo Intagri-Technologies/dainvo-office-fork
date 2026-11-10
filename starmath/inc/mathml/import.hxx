@@ -1,0 +1,74 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; fill-column: 100 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#pragma once
+
+// Our mathml
+#include "element.hxx"
+
+#include <unomodel.hxx>
+
+// XML tools
+#include <comphelper/errcode.hxx>
+#include <xmloff/xmlimp.hxx>
+
+// Extras
+
+class SfxMedium;
+class SmDocShell;
+class SmMLImport;
+class SmModel;
+
+class SmMLImport final : public SvXMLImport
+{
+private:
+    SmMlElement* m_pElementTree = new SmMlElement(SmMlElementType::NMlEmpty);
+    bool m_bSuccess;
+    size_t m_nSmSyntaxVersion;
+
+public:
+    /** Checks out if parse was a success
+     */
+    bool getSuccess() const { return m_bSuccess; }
+
+    /** Handles an error on the mathml structure
+     */
+    void declareMlError();
+
+    /** Constructor
+    */
+    SmMLImport(const css::uno::Reference<css::uno::XComponentContext>& rContext,
+               OUString const& implementationName, SvXMLImportFlags nImportFlags);
+
+    /** Destructor
+    */
+    virtual ~SmMLImport() noexcept override { cleanup(); };
+
+    /** End the document
+    */
+    void SAL_CALL endDocument() override;
+
+    /** Create a fast context
+    */
+    SvXMLImportContext* CreateFastContext(
+        sal_Int32 nElement,
+        const css::uno::Reference<css::xml::sax::XFastAttributeList>& xAttrList) override;
+
+    /** Imports view settings formula
+    */
+    virtual void
+    SetViewSettings(const css::uno::Sequence<css::beans::PropertyValue>& aViewProps) override;
+
+    /** Imports configuration settings formula
+    */
+    virtual void SetConfigurationSettings(
+        const css::uno::Sequence<css::beans::PropertyValue>& aViewProps) override;
+};
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab cinoptions=b1,g0,N-s cinkeys+=0=break: */

@@ -1,0 +1,55 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; fill-column: 100 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+ */
+
+#pragma once
+
+#include <tools/long.hxx>
+#include <o3tl/unit_conversion.hxx>
+
+class MapMode;
+
+struct ImplMapRes
+{
+    ImplMapRes() = default;
+    ImplMapRes(const MapMode& rMapMode, tools::Long nDPIX, tools::Long nDPIY);
+
+    void SetMapRes(const o3tl::Length eUnit);
+    void CalcMapResolution(const MapMode& rMapMode, tools::Long nDPIX, tools::Long nDPIY);
+    ImplMapRes ResolveMapRes(const MapMode* pMode, const MapMode& rDefaultMapMode, bool bMap,
+                             tools::Long nDPIX, tools::Long nDPIY);
+
+    tools::Long ScaleDistanceX(const tools::Long nDistance, const ImplMapRes& rDestRes) const;
+    tools::Long ScaleDistanceY(const tools::Long nDistance, const ImplMapRes& rDestRes) const;
+
+    tools::Long LocalToAbsoluteX(const tools::Long nLocalX) const;
+    tools::Long AbsoluteToLocalX(const tools::Long nLocalX) const;
+
+    tools::Long LocalToAbsoluteY(const tools::Long nLocalY) const;
+    tools::Long AbsoluteToLocalY(const tools::Long nLocalY) const;
+
+    tools::Long TransformPointX(const tools::Long nLocalX, const ImplMapRes& rDestRes) const;
+    tools::Long TransformPointY(const tools::Long nLocalY, const ImplMapRes& rDestRes) const;
+
+    tools::Long mnMapOfsX = 0; ///< Offset in X direction
+    tools::Long mnMapOfsY = 0; ///< Offset in Y direction
+    double mfMapScX = 1; ///< Scaling factor in X direction
+    double mfMapScY = 1; ///< Scaling factor in Y direction
+};
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab cinoptions=b1,g0,N-s cinkeys+=0=break: */

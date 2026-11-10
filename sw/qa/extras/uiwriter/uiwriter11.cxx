@@ -1,0 +1,1298 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#include <swmodeltestbase.hxx>
+
+#include <com/sun/star/awt/FontUnderline.hpp>
+#include <com/sun/star/util/XPropertyReplace.hpp>
+
+#include <i18nutil/searchopt.hxx>
+#include <officecfg/Office/Writer.hxx>
+#include <test/commontesttools.hxx>
+#include <vcl/pdf/PDFPageObjectType.hxx>
+#include <vcl/scheduler.hxx>
+
+#include <comphelper/propertysequence.hxx>
+#include <comphelper/propertyvalue.hxx>
+#include <comphelper/sequence.hxx>
+#include <comphelper/scopeguard.hxx>
+#include <comphelper/configuration.hxx>
+
+#include <AnnotationWin.hxx>
+#include <cmdid.h>
+#include <docufld.hxx>
+#include <edtwin.hxx>
+#include <PostItMgr.hxx>
+#include <view.hxx>
+#include <wrtsh.hxx>
+#include <unotxdoc.hxx>
+#include <ndtxt.hxx>
+#include <IDocumentLayoutAccess.hxx>
+#include <IDocumentRedlineAccess.hxx>
+#include <sfx2/bindings.hxx>
+#include <sfx2/request.hxx>
+#include <svl/srchitem.hxx>
+#include <svx/svxids.hrc>
+#include <sortedobjs.hxx>
+#include <rootfrm.hxx>
+#include <anchoredobject.hxx>
+#include <flyfrm.hxx>
+
+#include <workctrl.hxx>
+#include <docstyle.hxx>
+#include <fmtcol.hxx>
+#include <hintids.hxx>
+#include <editeng/colritem.hxx>
+#include <svl/itemset.hxx>
+#include <tools/color.hxx>
+#include <tools/mapunit.hxx>
+#include <IDocumentStylePoolAccess.hxx>
+#include <poolfmt.hxx>
+
+namespace
+{
+class SwUiWriterTest11 : public SwModelTestBase
+{
+public:
+    SwUiWriterTest11()
+        : SwModelTestBase(u"/sw/qa/extras/uiwriter/data/"_ustr)
+    {
+    }
+};
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf167760_numberedPara)
+{
+    createSwDoc("tdf167760_numberedPara.odt");
+
+    CPPUNIT_ASSERT_EQUAL(OUString("1.1."),
+                         getProperty<OUString>(getParagraph(1), "ListLabelString"));
+
+    // apply a non-numbered style to paragraph 1
+    dispatchCommand(mxComponent, u".uno:StyleApply"_ustr,
+                    { comphelper::makePropertyValue(u"FamilyName"_ustr, u"ParagraphStyles"_ustr),
+                      comphelper::makePropertyValue(u"Style"_ustr, u"Text body"_ustr) });
+    // the numbering should not be affected by changing a paragraph style
+    CPPUNIT_ASSERT_EQUAL(OUString("1.1."),
+                         getProperty<OUString>(getParagraph(1), "ListLabelString"));
+
+    // apply a numbered style
+    dispatchCommand(mxComponent, u".uno:StyleApply"_ustr,
+                    { comphelper::makePropertyValue(u"FamilyName"_ustr, u"ParagraphStyles"_ustr),
+                      comphelper::makePropertyValue(u"Style"_ustr, u"aList"_ustr) });
+    // the numbering should be changed to that specified by the paragraph style
+    CPPUNIT_ASSERT_EQUAL(OUString("i.I.a)"),
+                         getProperty<OUString>(getParagraph(1), "ListLabelString"));
+
+    // apply the non-numbered style while holding down the Ctrl-key
+    dispatchCommand(mxComponent, u".uno:StyleApply"_ustr,
+                    { comphelper::makePropertyValue(u"FamilyName"_ustr, u"ParagraphStyles"_ustr),
+                      comphelper::makePropertyValue(u"Style"_ustr, u"Text body"_ustr),
+                      comphelper::makePropertyValue(u"KeyModifier"_ustr, uno::Any(KEY_MOD1)) });
+    // the numbering should be removed when the Ctrl-key is held down
+    CPPUNIT_ASSERT_EQUAL(OUString(), getProperty<OUString>(getParagraph(1), "ListLabelString"));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf113213_addToList)
+{
+    // given a document with two separate numbering lists
+    createSwDoc("tdf113213_addToList.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+
+    // Select the second list
+    pWrtShell->EndOfSection();
+    pWrtShell->Up(/*bSelect=*/true);
+    // "Add to list": join the second list to the previous one
+    dispatchCommand(mxComponent, u".uno:ContinueNumbering"_ustr, {});
+    // The "restart numbering" property should be helpfully removed when joining to another list
+    CPPUNIT_ASSERT_EQUAL(OUString("3"), getProperty<OUString>(getParagraph(6), "ListLabelString"));
+
+    pWrtShell->Undo();
+    CPPUNIT_ASSERT_EQUAL(OUString("1."), getProperty<OUString>(getParagraph(6), "ListLabelString"));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf149061_moveNumParas)
+{
+    // given a document with a list containing some subPoints
+    createSwDoc("tdf149061_moveNumParas.odt");
+
+    // Move 'First Point' below 'Second Point' and its subpoint
+    dispatchCommand(mxComponent, u".uno:MoveDownSubItems"_ustr, {});
+    // Without the fix, this action was prevented by the section.
+    getParagraph(3, "First Point.");
+
+    // Position the cursor on 'A Point'
+    dispatchCommand(mxComponent, u".uno:GoToEndOfDoc"_ustr, {}); // subpoint
+    dispatchCommand(mxComponent, u".uno:GoToPrevPara"_ustr, {}); // B Point
+    dispatchCommand(mxComponent, u".uno:GoToPrevPara"_ustr, {}); // A Point
+
+    // Move 'A Point' below 'B Point' and its subpoint
+    dispatchCommand(mxComponent, u".uno:MoveDownSubItems"_ustr, {});
+    // Without the fix, this separated B from its subpoint - leaving the subpoint under A.
+    getParagraph(8, "A Point");
+}
+
+SwPostItMgr* getPostItMgr(SwDocShell* pDocShell)
+{
+    CPPUNIT_ASSERT(pDocShell);
+    SwView* pView = pDocShell->GetView();
+    CPPUNIT_ASSERT(pView);
+    SwPostItMgr* pPostItMgr = pView->GetPostItMgr();
+    CPPUNIT_ASSERT(pPostItMgr);
+    return pPostItMgr;
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791)
+{
+    // Given a document with tracked changes enabled, having some threads of comments:
+
+    createSwDoc("tdf108791_comments_with_tracked_changes.fodt");
+
+    // Test "Delete Comment": the selected comment must be marked as deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Comment thread 1 reply 2"_ustr, pPostItField->GetText());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteComment"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (size_t i = 0; i < aPostItFields.size(); ++i)
+    {
+        CPPUNIT_ASSERT(aPostItFields[i]);
+        CPPUNIT_ASSERT_EQUAL(i == 2 ? SwPostItHelper::SwLayoutStatus::DELETED
+                                    : SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             aPostItFields[i]->mLayoutStatus);
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_2)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.fodt");
+
+    // Test "Delete Comment Thread": the comment, and all its thread, must be marked as deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Comment thread 1 reply 2"_ustr, pPostItField->GetText());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteCommentThread"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (size_t i = 0; i < aPostItFields.size(); ++i)
+    {
+        CPPUNIT_ASSERT(aPostItFields[i]);
+        CPPUNIT_ASSERT_EQUAL(i <= 2 ? SwPostItHelper::SwLayoutStatus::DELETED
+                                    : SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             aPostItFields[i]->mLayoutStatus);
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_3)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.fodt");
+
+    // Test "Delete Comments by Author3": the author's comments must be marked as deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Author3"_ustr, pPostItField->GetPar1());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteAuthor"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt);
+        pPostItField = rPostItFieldItem->mpPostIt->GetPostItField();
+        CPPUNIT_ASSERT(pPostItField);
+        CPPUNIT_ASSERT_EQUAL(pPostItField->GetPar1() == "Author3"
+                                 ? SwPostItHelper::SwLayoutStatus::DELETED
+                                 : SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_4)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.fodt");
+
+    // Test "Delete All Comments": all comments must be marked as deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select any comment
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteAllNotes"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::DELETED,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_5)
+{
+    // Now test the same with an equivalent DOCX: comment deletion must delete immediately
+
+    createSwDoc("tdf108791_comments_with_tracked_changes.docx");
+
+    // Test "Delete Comment": the selected comment must be deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Comment thread 1 reply 2"_ustr, pPostItField->GetText());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteComment"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(5), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt);
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt->GetPostItField());
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt->GetPostItField()->GetText()
+                       != "Comment thread 1 reply 2");
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_6)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.docx");
+
+    // Test "Delete Comment Thread": the comment, and all its thread, must be deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Comment thread 1 reply 2"_ustr, pPostItField->GetText());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteCommentThread"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(3), aPostItFields.size());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_7)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.docx");
+
+    // Test "Delete Comments by Author3": the author's comments must be deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select "Comment thread 1 reply 2"
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+    const SwPostItField* pPostItField = aPostItFields[2]->mpPostIt->GetPostItField();
+    CPPUNIT_ASSERT(pPostItField);
+    CPPUNIT_ASSERT_EQUAL(u"Author3"_ustr, pPostItField->GetPar1());
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteAuthor"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(size_t(4), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt);
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt->GetPostItField());
+        CPPUNIT_ASSERT(rPostItFieldItem->mpPostIt->GetPostItField()->GetPar1() != "Author3");
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf108791_8)
+{
+    createSwDoc("tdf108791_comments_with_tracked_changes.docx");
+
+    // Test "Delete All Comments": all comments must be deleted
+
+    SwPostItMgr* pPostItMgr = getPostItMgr(getSwDocShell());
+    auto& aPostItFields = pPostItMgr->GetPostItFields();
+
+    CPPUNIT_ASSERT_EQUAL(size_t(6), aPostItFields.size());
+    for (const auto& rPostItFieldItem : aPostItFields)
+    {
+        CPPUNIT_ASSERT(rPostItFieldItem);
+        CPPUNIT_ASSERT_EQUAL(SwPostItHelper::SwLayoutStatus::VISIBLE,
+                             rPostItFieldItem->mLayoutStatus);
+    }
+
+    // Select any comment
+    CPPUNIT_ASSERT(aPostItFields[2]->mpPostIt);
+
+    pPostItMgr->SetActiveSidebarWin(aPostItFields[2]->mpPostIt);
+    dispatchCommand(mxComponent, u".uno:DeleteAllNotes"_ustr, {});
+
+    CPPUNIT_ASSERT(aPostItFields.empty());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf162120AutoRTL)
+{
+    createSwDoc("tdf162120-auto-rtl.fodt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    // The initial direction should be RTL
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+
+    // Insert a strong LTR character at the start of the paragraph.
+    // The writing mode should automatically switch to LTR.
+    pWrtShell->Insert(u"a"_ustr);
+    CPPUNIT_ASSERT_EQUAL(short(0),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+
+    // Delete the leading LTR character.
+    // The writing mode should switch back to RTL.
+    pWrtShell->DelLeft();
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf162120AutoRTLAfterDirSwitch)
+{
+    // Tests that Writer no longer tries to update the writing direction after
+    // an explicit override.
+
+    createSwDoc("tdf162120-auto-rtl.fodt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    // The initial direction should be RTL
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT(getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+
+    // Explicitly set the direction to RTL
+    // This should clear the auto writing mode flag
+    dispatchCommand(mxComponent, u".uno:ParaRightToLeft"_ustr, {});
+    CPPUNIT_ASSERT(!getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+
+    // Insert a strong LTR character at the start of the paragraph.
+    // Since the flag is gone, the writing mode should not automatically switch to LTR.
+    pWrtShell->Insert(u"a"_ustr);
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testFontworkSelection)
+{
+    // Load a document with a Fontwork shape and select the shape
+    createSwDoc("tdf131124_Fontwork_Selection.odt");
+    dispatchCommand(mxComponent, u".uno:JumpToNextFrame"_ustr, {});
+
+    // Make sure the CurrentSelection of the document is not empty.
+    uno::Reference<frame::XModel> xModel(mxComponent, uno::UNO_QUERY);
+    uno::Reference<container::XIndexAccess> xSelections(xModel->getCurrentSelection(),
+                                                        uno::UNO_QUERY);
+    // Without fix, this test would have failed here
+    CPPUNIT_ASSERT(xSelections.is());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testExtrudedShapeSelection)
+{
+    // Load a document with an extruded custom shape and select the shape
+    createSwDoc("tdf131124_Extruded_Shape_Selection.odt");
+    dispatchCommand(mxComponent, u".uno:JumpToNextFrame"_ustr, {});
+
+    // Make sure the CurrentSelection of the document is not empty.
+    uno::Reference<frame::XModel> xModel(mxComponent, uno::UNO_QUERY);
+    uno::Reference<container::XIndexAccess> xSelections(xModel->getCurrentSelection(),
+                                                        uno::UNO_QUERY);
+    // Without fix, this test would have failed here
+    CPPUNIT_ASSERT(xSelections.is());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf152244DefaultStartEndArrowSizes)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    // Insert a line with end arrow via Ctrl key
+    dispatchCommand(mxComponent, u".uno:LineArrowEnd"_ustr,
+                    comphelper::InitPropertySequence({ { "KeyModifier", uno::Any(KEY_MOD1) } }));
+    CPPUNIT_ASSERT_EQUAL(1, getShapes());
+
+    uno::Reference<drawing::XShape> xShape = getShape(1);
+    uno::Reference<beans::XPropertySet> xPropSet(xShape, uno::UNO_QUERY);
+
+    sal_uInt32 nStartWidth = 0;
+    xPropSet->getPropertyValue(u"LineStartWidth"_ustr) >>= nStartWidth;
+    sal_uInt32 nEndWidth = 0;
+    xPropSet->getPropertyValue(u"LineEndWidth"_ustr) >>= nEndWidth;
+
+    // Without the fix in place, this test would have failed with
+    // - Expected: 353
+    // - Actual  : 176
+    // i.e. the start/end arrow widths are not equal
+    CPPUNIT_ASSERT_EQUAL(nStartWidth, nEndWidth);
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf169035ParaStartDefault)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    CPPUNIT_ASSERT_EQUAL(short(5),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"ParaAdjust"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf162120AutoRTLDefault)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    CPPUNIT_ASSERT(getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf163194)
+{
+    // Test (1) that exporting comments in margin to PDF produces expected layout of the comments,
+    // that have limited and reasonable width and position, inside the page bounds (and close to
+    // its right side), independent of the manually set comment sidebar width; and (2) that the
+    // export doesn't change the annotation sizes in the document.
+
+    // Annotation size depends on DisplayWidthFactor. Set it to a fixed value for testing.
+    ScopedConfigValue<officecfg::Office::Writer::Notes::DisplayWidthFactor> aCfg(4.0);
+
+    createSwDoc("tdf163194-two-comments.fodt");
+
+    SwDocShell* pDocShell = getSwDocShell();
+    CPPUNIT_ASSERT(pDocShell);
+    SwView* pView = pDocShell->GetView();
+    CPPUNIT_ASSERT(pView);
+    SwPostItMgr* pPostItMgr = pView->GetPostItMgr();
+    CPPUNIT_ASSERT(pPostItMgr);
+
+    CPPUNIT_ASSERT_EQUAL(size_t(2), pPostItMgr->GetPostItFields().size());
+    std::vector<tools::Long> aOriginalHeights;
+    for (const auto& pAnnotationItem : pPostItMgr->GetPostItFields())
+    {
+        CPPUNIT_ASSERT(pAnnotationItem);
+        CPPUNIT_ASSERT(pAnnotationItem->mpPostIt);
+        const Size aSize = pAnnotationItem->mpPostIt->GetSizePixel();
+        // Pixel width depends on DisplayWidthFactor, seems to not depend on DPI
+        CPPUNIT_ASSERT_EQUAL(tools::Long(400), aSize.Width());
+        // Heights depend on width and current DPI scaling; just remember them for later comparison
+        aOriginalHeights.push_back(aSize.Height());
+    }
+
+    // Export to PDF with comments in margin
+    uno::Sequence aFilterData{ comphelper::makePropertyValue(u"ExportNotes"_ustr, false),
+                               comphelper::makePropertyValue(u"ExportNotesInMargin"_ustr, true) };
+    uno::Sequence aDescriptor{ comphelper::makePropertyValue(u"FilterData"_ustr, aFilterData),
+                               comphelper::makePropertyValue(u"URL"_ustr, maTempFile.GetURL()) };
+    dispatchCommand(mxComponent, u".uno:ExportToPDF"_ustr, aDescriptor);
+
+    if (std::shared_ptr<vcl::pdf::PDFium> pPDFium
+        = vcl::pdf::PDFiumLibrary::get()) // This part will be skipped without PDFium
+    {
+        auto pPdfDocument = parsePDFExport(pPDFium);
+        CPPUNIT_ASSERT_EQUAL(1, pPdfDocument->getPageCount());
+        auto pPage = pPdfDocument->openPage(0);
+        CPPUNIT_ASSERT(pPage);
+        // 595 pt corresponds to 210 mm (width of A4)
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(595, pPage->getWidth(), 1.0);
+        auto pTextPage = pPage->getTextPage();
+        CPPUNIT_ASSERT(pTextPage);
+
+        // There should be two filled path objects corresponding to the two annotations
+        int nPathCount = 0;
+
+        // Check that there are all the expected lines of the annotations, i.e. that the layout
+        // of the comments is stable and independent of the DPI.
+        const OUString aLines[] = {
+            // First annotation
+            u"A comment. One two three four "_ustr,
+            u"five six seven eight nine ten "_ustr,
+            u"eleven twelve thirteen fourteen "_ustr,
+            u"fifteen sixteen seventeen "_ustr,
+            u"eighteen nineteen twenty."_ustr,
+            // Second annotation
+            u"Another comment. Twenty-one "_ustr,
+            u"twenty-two twenty-three "_ustr,
+            u"twenty-four twenty-five twenty-"_ustr,
+            u"six twenty-seven twenty-eight "_ustr,
+            u"twenty-nine thirty."_ustr,
+        };
+        std::set<OUString> aFoundLines;
+
+        for (int i = 0; i < pPage->getObjectCount(); ++i)
+        {
+            auto pObject = pPage->getObject(i);
+
+            if (pObject->getType() == vcl::pdf::PDFPageObjectType::Path
+                && pObject->getPathSegmentCount() == 5)
+            {
+                // This is the filled rectangle of an annotation. I hope that path segment count
+                // is stable and unique enough to identify it.
+                CPPUNIT_ASSERT(pObject->getFillColor() != COL_TRANSPARENT);
+                basegfx::B2DRectangle bounds = pObject->getBounds();
+                // The object must start at position 448, and have width 101 (so its right
+                // edge is ~at position 549, within the page's width of 595).
+                // Without the fix, this failed like "Expected: 101; Actual: 225", i.e. its
+                // right edge protruded beyond the right page limit (and generally depended
+                // on the UI width of the comment sidebar).
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(101, bounds.getWidth(), 1.0);
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(448, bounds.getMinX(), 1.0);
+                ++nPathCount;
+            }
+            else if (pObject->getType() == vcl::pdf::PDFPageObjectType::Text)
+            {
+                // This is text; check if it matches expected annotation lines
+                OUString aText = pObject->getText(pTextPage);
+                if (std::ranges::find(aLines, aText) != std::end(aLines))
+                {
+                    // Check that it fits into the expected horizontal range of the comment
+                    basegfx::B2DRectangle bounds = pObject->getBounds();
+                    CPPUNIT_ASSERT_LESS(101.0, bounds.getWidth());
+                    CPPUNIT_ASSERT_DOUBLES_EQUAL(450, bounds.getMinX(), 1.0);
+
+                    CPPUNIT_ASSERT(!aFoundLines.contains(aText)); // each line only once
+                    aFoundLines.insert(aText);
+                }
+            }
+        }
+        CPPUNIT_ASSERT_EQUAL(2, nPathCount); // all annotation rectangles
+        CPPUNIT_ASSERT_EQUAL(std::size(aLines), aFoundLines.size()); // all annotation lines
+    }
+
+    // Test that export didn't change the annotation sizes
+    CPPUNIT_ASSERT_EQUAL(size_t(2), pPostItMgr->GetPostItFields().size());
+    for (size_t i = 0; i < 2; ++i)
+    {
+        const auto& pAnnotationItem = pPostItMgr->GetPostItFields()[i];
+        CPPUNIT_ASSERT(pAnnotationItem);
+        CPPUNIT_ASSERT(pAnnotationItem->mpPostIt);
+        const Size aSize = pAnnotationItem->mpPostIt->GetSizePixel();
+        CPPUNIT_ASSERT_EQUAL(tools::Long(400), aSize.Width());
+        CPPUNIT_ASSERT_EQUAL(aOriginalHeights[i], aSize.Height());
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf111880RtlPageCommentsOnLeftSide)
+{
+    // This test is a duplicate of testTdf163194, except the page style is RTL instead of
+    // LTR. For RTL pages, comments are rendered in the left margin, rather than the right.
+
+    // Annotation size depends on DisplayWidthFactor. Set it to a fixed value for testing.
+    ScopedConfigValue<officecfg::Office::Writer::Notes::DisplayWidthFactor> aCfg(4.0);
+
+    createSwDoc("tdf111880-two-comments-rtl.fodt");
+
+    SwDocShell* pDocShell = getSwDocShell();
+    CPPUNIT_ASSERT(pDocShell);
+    SwView* pView = pDocShell->GetView();
+    CPPUNIT_ASSERT(pView);
+    SwPostItMgr* pPostItMgr = pView->GetPostItMgr();
+    CPPUNIT_ASSERT(pPostItMgr);
+
+    CPPUNIT_ASSERT_EQUAL(size_t(2), pPostItMgr->GetPostItFields().size());
+    std::vector<tools::Long> aOriginalHeights;
+    for (const auto& pAnnotationItem : pPostItMgr->GetPostItFields())
+    {
+        CPPUNIT_ASSERT(pAnnotationItem);
+        CPPUNIT_ASSERT(pAnnotationItem->mpPostIt);
+        const Size aSize = pAnnotationItem->mpPostIt->GetSizePixel();
+        // Pixel width depends on DisplayWidthFactor, seems to not depend on DPI
+        CPPUNIT_ASSERT_EQUAL(tools::Long(400), aSize.Width());
+        // Heights depend on width and current DPI scaling; just remember them for later comparison
+        aOriginalHeights.push_back(aSize.Height());
+    }
+
+    // Export to PDF with comments in margin
+    uno::Sequence aFilterData{ comphelper::makePropertyValue(u"ExportNotes"_ustr, false),
+                               comphelper::makePropertyValue(u"ExportNotesInMargin"_ustr, true) };
+    save(TestFilter::PDF, { comphelper::makePropertyValue(u"FilterData"_ustr, aFilterData) });
+
+    if (std::shared_ptr<vcl::pdf::PDFium> pPDFium
+        = vcl::pdf::PDFiumLibrary::get()) // This part will be skipped without PDFium
+    {
+        auto pPdfDocument = parsePDFExport(pPDFium);
+        CPPUNIT_ASSERT_EQUAL(1, pPdfDocument->getPageCount());
+        auto pPage = pPdfDocument->openPage(0);
+        CPPUNIT_ASSERT(pPage);
+        // 595 pt corresponds to 210 mm (width of A4)
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(595, pPage->getWidth(), 1.0);
+        auto pTextPage = pPage->getTextPage();
+        CPPUNIT_ASSERT(pTextPage);
+
+        // There should be two filled path objects corresponding to the two annotations
+        int nPathCount = 0;
+
+        // Check that there are all the expected lines of the annotations, i.e. that the layout
+        // of the comments is stable and independent of the DPI.
+        const OUString aLines[] = {
+            // First annotation
+            u"A comment. One two three four "_ustr,
+            u"five six seven eight nine ten "_ustr,
+            u"eleven twelve thirteen fourteen "_ustr,
+            u"fifteen sixteen seventeen "_ustr,
+            u"eighteen nineteen twenty."_ustr,
+            // Second annotation
+            u"Another comment. Twenty-one "_ustr,
+            u"twenty-two twenty-three "_ustr,
+            u"twenty-four twenty-five twenty-"_ustr,
+            u"six twenty-seven twenty-eight "_ustr,
+            u"twenty-nine thirty."_ustr,
+        };
+        std::set<OUString> aFoundLines;
+
+        for (int i = 0; i < pPage->getObjectCount(); ++i)
+        {
+            auto pObject = pPage->getObject(i);
+
+            if (pObject->getType() == vcl::pdf::PDFPageObjectType::Path
+                && pObject->getPathSegmentCount() == 5)
+            {
+                // This is the filled rectangle of an annotation. I hope that path segment count
+                // is stable and unique enough to identify it.
+                CPPUNIT_ASSERT(pObject->getFillColor() != COL_TRANSPARENT);
+                basegfx::B2DRectangle bounds = pObject->getBounds();
+
+                // Like the other test, check to make sure the shape containing the comment
+                // fits within the page bounds. Without the fix, this would be negative
+                // (i.e. off the left side of the page).
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(101, bounds.getWidth(), 1.0);
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(47, bounds.getMinX(), 1.0);
+                ++nPathCount;
+            }
+            else if (pObject->getType() == vcl::pdf::PDFPageObjectType::Text)
+            {
+                // This is text; check if it matches expected annotation lines
+                OUString aText = pObject->getText(pTextPage);
+                if (std::ranges::find(aLines, aText) != std::end(aLines))
+                {
+                    // Check that it fits into the expected horizontal range of the comment
+                    basegfx::B2DRectangle bounds = pObject->getBounds();
+                    CPPUNIT_ASSERT_LESS(101.0, bounds.getWidth());
+                    CPPUNIT_ASSERT_DOUBLES_EQUAL(50, bounds.getMinX(), 1.0);
+
+                    CPPUNIT_ASSERT(!aFoundLines.contains(aText)); // each line only once
+                    aFoundLines.insert(aText);
+                }
+            }
+        }
+        CPPUNIT_ASSERT_EQUAL(2, nPathCount); // all annotation rectangles
+        CPPUNIT_ASSERT_EQUAL(std::size(aLines), aFoundLines.size()); // all annotation lines
+    }
+
+    // Test that export didn't change the annotation sizes
+    CPPUNIT_ASSERT_EQUAL(size_t(2), pPostItMgr->GetPostItFields().size());
+    for (size_t i = 0; i < 2; ++i)
+    {
+        const auto& pAnnotationItem = pPostItMgr->GetPostItFields()[i];
+        CPPUNIT_ASSERT(pAnnotationItem);
+        CPPUNIT_ASSERT(pAnnotationItem->mpPostIt);
+        const Size aSize = pAnnotationItem->mpPostIt->GetSizePixel();
+        CPPUNIT_ASSERT_EQUAL(tools::Long(400), aSize.Width());
+        CPPUNIT_ASSERT_EQUAL(aOriginalHeights[i], aSize.Height());
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf165206DirSwitchPreservesAlignment)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    dispatchCommand(mxComponent, u".uno:ParaLeftToRight"_ustr, {});
+    dispatchCommand(mxComponent, u".uno:LeftPara"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(short(0),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT_EQUAL(short(0),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"ParaAdjust"_ustr));
+
+    // Explicitly set the direction to RTL.
+    // Previously, this would have also set ParaAdjust to force right.
+    dispatchCommand(mxComponent, u".uno:ParaRightToLeft"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT_EQUAL(short(0),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"ParaAdjust"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf169651)
+{
+    // Given a document with a fly frame that has anchored FLY_AT_FLY, a shape object and a
+    // fly frame that itself has a shape object anchored FLY_AT_FLY:
+    createSwDoc("tdf169651.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    const SwSortedObjs* pAnchoredObjs
+        = pWrtShell->GetLayout()->GetLower()->GetLower()->GetLower()->GetDrawObjs();
+    CPPUNIT_ASSERT(pAnchoredObjs);
+    SwAnchoredObject* pAnchoredObj = (*pAnchoredObjs)[0];
+    SwFlyFrame* pFlyFrame = pAnchoredObj->DynCastFlyFrame();
+    CPPUNIT_ASSERT(pFlyFrame);
+
+    pWrtShell->SelectFlyFrame(*pFlyFrame);
+
+    // Without the patch this test would crash during the following
+    pWrtShell->UnfloatFlyFrame();
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf151857ParaStylePreservesWritingMode)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    // Initially, paragraphs have environment writing mode and automatic writing mode enabled
+    CPPUNIT_ASSERT_EQUAL(short(4),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT(getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+
+    dispatchCommand(mxComponent, u".uno:ParaRightToLeft"_ustr, {});
+
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT(!getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+
+    uno::Sequence<beans::PropertyValue> aPropertyValues = comphelper::InitPropertySequence({
+        { "Style", uno::Any(u"Heading 1"_ustr) },
+        { "FamilyName", uno::Any(u"ParagraphStyles"_ustr) },
+    });
+    dispatchCommand(mxComponent, u".uno:StyleApply"_ustr, aPropertyValues);
+
+    // Verify that changing the paragraph style preserves the writing mode DF
+    CPPUNIT_ASSERT_EQUAL(short(1),
+                         getProperty<short>(getRun(getParagraph(1), 1), u"WritingMode"_ustr));
+    CPPUNIT_ASSERT(!getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf172081SplitParaClearsWritingModeAutoDF)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    pWrtShell->Insert(u"Some content"_ustr);
+
+    // Cycle the paragraph direction to add WritingModeAutomatic direct formatting
+    dispatchCommand(mxComponent, u".uno:ParaRightToLeft"_ustr, {});
+    dispatchCommand(mxComponent, u".uno:ParaLeftToRight"_ustr, {});
+    CPPUNIT_ASSERT(!getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+
+    // Split the paragraph in the middle
+    pWrtShell->Left(SwCursorSkipMode::Chars, /*bSelect*/ false, 4, /*bBasicCall*/ false);
+    pWrtShell->SplitNode();
+
+    // The first paragraph should still have the DF, but it should be cleared on the second one
+    CPPUNIT_ASSERT(!getProperty<bool>(getRun(getParagraph(1), 1), u"WritingModeAutomatic"_ustr));
+    CPPUNIT_ASSERT(getProperty<bool>(getRun(getParagraph(2), 1), u"WritingModeAutomatic"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf36181_findReplaceParaStyle)
+{
+    // given a document with various paragraph styles
+
+    createSwDoc("tdf36181_findReplaceParaStyle.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwView& rView = pWrtShell->GetView();
+
+    // initialize find/replace static environment
+    SfxItemSet aSet(rView.GetPool(), svl::Items<SID_SEARCH_ITEM, SID_SEARCH_ITEM>);
+    rView.StateSearch(aSet); // initializes SwView::GetSearchItem
+    SvxSearchItem& rInit = *SwView::GetSearchItem();
+    rInit.SetSearchString("Body Text");
+    rInit.SetReplaceString("Caption");
+    rInit.SetPattern(true); // paragraph styles replacement
+    rInit.SetSelection(true); // only search inside of the current selection
+    rInit.SetBackward(false); // search forward - important to specify to avoid other tests...
+    rInit.SetCommand(SvxSearchCmd::REPLACE);
+
+    // pre-select something - that is what the bug is about...
+    dispatchCommand(mxComponent, u".uno:SelectAll"_ustr, {});
+
+    // Execute 'Replace' one instance
+    SfxItemSet aFn(rView.GetPool(), svl::Items<FN_REPEAT_SEARCH, FN_REPEAT_SEARCH>);
+    SfxRequest aRequest(FN_REPEAT_SEARCH, SfxCallMode::SYNCHRON, aFn);
+    rView.ExecSearch(aRequest);
+
+    // Without the fix, the Title style was also replaced by the Caption style
+    CPPUNIT_ASSERT_EQUAL(u"Title"_ustr,
+                         getProperty<OUString>(getParagraph(1), u"ParaStyleName"_ustr));
+    CPPUNIT_ASSERT_EQUAL(u"Caption"_ustr,
+                         getProperty<OUString>(getParagraph(2), u"ParaStyleName"_ustr));
+    // Without the fix, all of the selection applied the Caption style
+    CPPUNIT_ASSERT_EQUAL(u"Text body indent"_ustr,
+                         getProperty<OUString>(getParagraph(3), u"ParaStyleName"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf129449_findReplaceParaStyle2)
+{
+    // given a document that starts (and ends) with an empty paragraph with Title style
+
+    createSwDoc("tdf129449_findReplaceParaStyle2.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwView& rView = pWrtShell->GetView();
+
+    // initialize find/replace static environment
+    SfxItemSet aSet(rView.GetPool(), svl::Items<SID_SEARCH_ITEM, SID_SEARCH_ITEM>);
+    rView.StateSearch(aSet); // initializes SwView::GetSearchItem
+    SvxSearchItem& rInit = *SwView::GetSearchItem();
+    rInit.SetSearchString("Title");
+    rInit.SetReplaceString("Caption");
+    rInit.SetPattern(true); // paragraph styles replacement
+    rInit.SetBackward(true); // find the previous result
+    rInit.SetCommand(SvxSearchCmd::FIND);
+
+    // Go to the end of document, so we can test finding backwards
+    dispatchCommand(mxComponent, u".uno:GoToEndOfDoc"_ustr, {});
+
+    // Execute 'Find' - should find the first paragraph
+    SfxItemSet aFn(rView.GetPool(), svl::Items<FN_REPEAT_SEARCH, FN_REPEAT_SEARCH>);
+    SfxRequest aRequest(FN_REPEAT_SEARCH, SfxCallMode::SYNCHRON, aFn);
+    rView.ExecSearch(aRequest);
+
+    // Sanity check - no change requested yet.
+    CPPUNIT_ASSERT_EQUAL(u"Title"_ustr,
+                         getProperty<OUString>(getParagraph(1), u"ParaStyleName"_ustr));
+
+    // Find doesn't tell us much. Change it to replace (it replaces what was already found)
+    // and moves to the next item
+    rInit.SetCommand(SvxSearchCmd::REPLACE);
+    rInit.SetBackward(false); // after replacing, test using search forward for the last paragraph
+    rView.ExecSearch(aRequest);
+
+    // Test the replacement of the first paragraph. Without the fix, the Title style was not found.
+    CPPUNIT_ASSERT_EQUAL(u"Caption"_ustr,
+                         getProperty<OUString>(getParagraph(1), u"ParaStyleName"_ustr));
+    CPPUNIT_ASSERT_EQUAL(u"Title"_ustr,
+                         getProperty<OUString>(getParagraph(3), u"ParaStyleName"_ustr));
+
+    // Last Paragraph found - now do the actual replace.
+    rView.ExecSearch(aRequest);
+    // Test the replacement of the last paragraph. Without the fix, the Title style was not found.
+    CPPUNIT_ASSERT_EQUAL(u"Caption"_ustr,
+                         getProperty<OUString>(getParagraph(3), u"ParaStyleName"_ustr));
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf129449_findReplaceParaStyle3)
+{
+    // given a document that starts (and ends) with an empty paragraph with Title style
+
+    createSwDoc("tdf129449_findReplaceParaStyle2.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwView& rView = pWrtShell->GetView();
+
+    // initialize find/replace static environment
+    SfxItemSet aSet(rView.GetPool(), svl::Items<SID_SEARCH_ITEM, SID_SEARCH_ITEM>);
+    rView.StateSearch(aSet); // initializes SwView::GetSearchItem
+    SvxSearchItem& rInit = *SwView::GetSearchItem();
+    rInit.SetSearchString("Title");
+    rInit.SetPattern(true); // paragraph styles replacement
+    rInit.SetBackward(false); // find the next result
+    rInit.SetCommand(SvxSearchCmd::FIND);
+
+    // Go to the end of document (wrap around to find the first paragraph in the document)
+    dispatchCommand(mxComponent, u".uno:GoToEndOfDoc"_ustr, {});
+    CPPUNIT_ASSERT_EQUAL(SwNodeOffset(11), pWrtShell->GetCursor()->GetPointNode().GetIndex());
+
+    // Execute search with 'Find' - should find the first paragraph's style
+    SfxItemSet aFn(rView.GetPool(), svl::Items<FN_REPEAT_SEARCH, FN_REPEAT_SEARCH>);
+    SfxRequest aRequest(FN_REPEAT_SEARCH, SfxCallMode::SYNCHRON, aFn);
+    rView.ExecSearch(aRequest);
+
+    // Without the fix, the Cursor had not moved.
+    CPPUNIT_ASSERT_EQUAL(SwNodeOffset(9), pWrtShell->GetCursor()->GetPointNode().GetIndex());
+
+    // Go to the start of document (wrap around to find the last paragraph in the document)
+    dispatchCommand(mxComponent, u".uno:GoToStartOfDoc"_ustr, {});
+    CPPUNIT_ASSERT_EQUAL(SwNodeOffset(9), pWrtShell->GetCursor()->GetPointNode().GetIndex());
+
+    rInit.SetBackward(true); // find the previous result
+    rView.ExecSearch(aRequest);
+
+    // Without the fix, the Cursor had not moved.
+    CPPUNIT_ASSERT_EQUAL(SwNodeOffset(11), pWrtShell->GetCursor()->GetPointNode().GetIndex());
+
+    // Get the count of a FindAll for the paragraphs with a Title style
+    uno::Reference<util::XSearchable> xSearch(mxComponent, uno::UNO_QUERY);
+    uno::Reference<util::XSearchDescriptor> xSearchDes = xSearch->createSearchDescriptor();
+
+    // specifying the search attributes
+    uno::Reference<beans::XPropertySet> xPropSet(xSearchDes, uno::UNO_QUERY_THROW);
+    xSearchDes->setPropertyValue(u"SearchStyles"_ustr, uno::Any(true));
+    xSearchDes->setSearchString(u"Title"_ustr);
+
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(2), xSearch->findAll(xSearchDes)->getCount());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf135857_findWithoutUnderline)
+{
+    // given a document contains a few underlined words and a few explicitly un-underlined words
+
+    createSwDoc("tdf135857_findWithoutUnderline.odt");
+
+    // Get the count of a FindAll of all runs that are not underlined.
+    uno::Reference<util::XSearchable> xSearch(mxComponent, uno::UNO_QUERY);
+    uno::Reference<util::XSearchDescriptor> xSearchDes = xSearch->createSearchDescriptor();
+
+    // specifying the search attributes
+    uno::Reference<util::XPropertyReplace> xProp(xSearchDes, uno::UNO_QUERY);
+    uno::Sequence<beans::PropertyValue> aDescriptor(comphelper::InitPropertySequence(
+        { { "CharUnderline", uno::Any(css::awt::FontUnderline::NONE) } }));
+    xProp->setSearchAttributes(aDescriptor);
+
+    // In the UI, this results in 5 matches. UNO seems to produce different results
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(4), xSearch->findAll(xSearchDes)->getCount());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf36582_findReplaceRedline)
+{
+    // given a two-paragraph document, where the first paragraph contains a change tracking deletion
+
+    createSwDoc("tdf36582_findReplaceRedline.odt");
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwView& rView = pWrtShell->GetView();
+    IDocumentRedlineAccess& rIDRA(getSwDoc()->getIDocumentRedlineAccess());
+
+    // Start by seeing the redlines, but NOT tracking changes.
+    CPPUNIT_ASSERT(!rIDRA.IsRedlineOn());
+
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(1)->getString()); // showing deletion
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(2)->getString()); // all normal text
+
+    // initialize environment to emulate a Find and Replace situation
+    SfxItemSet aSet(
+        SfxItemSet::makeFixedSfxItemSet<SID_SEARCH_ITEM, SID_SEARCH_ITEM>(rView.GetPool()));
+    rView.StateSearch(aSet); // initializes SwView::GetSearchItem
+    SvxSearchItem& rInit = *SwView::GetSearchItem();
+    rInit.SetReplaceString("Deleted"); // emulated environment needs to match replaceString below
+    rInit.SetCommand(SvxSearchCmd::REPLACE); // needed only to emulate find/replace environment
+
+    i18nutil::SearchOptions2 aSearchOpt;
+    aSearchOpt.searchString = "Expunged Text"; // deletion is 'Expunged ': search for more than that
+    aSearchOpt.replaceString = "Deleted";
+    aSearchOpt.AlgorithmType2 = css::util::SearchAlgorithms2::ABSOLUTE;
+    const FindRanges flagReplaceAll = FindRanges::InBody | FindRanges::InSelAll;
+
+    // Find and replace all
+    pWrtShell->SearchPattern(aSearchOpt, /*SearchInNotes=*/false, SwDocPositions::Start,
+                             SwDocPositions::End, flagReplaceAll, /*Replace=*/true);
+
+    // don't replace when it found a mixture of deleted and non-deleted text
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(1)->getString()); // found mixture
+    CPPUNIT_ASSERT_EQUAL(u"Deleted"_ustr, getParagraph(2)->getString());
+
+    pWrtShell->Undo();
+    // reset search to just find (part of) the deletion string
+    aSearchOpt.searchString = "Expunged";
+
+    pWrtShell->SearchPattern(aSearchOpt, /*SearchInNotes=*/false, SwDocPositions::Start,
+                             SwDocPositions::End, flagReplaceAll, /*Replace=*/true);
+
+    // Special case: the deletion should remain deleted - just 'fix' the deleted text
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(2)->getString()); // sanity check
+
+    pWrtShell->Undo();
+
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(2)->getString());
+
+    pWrtShell->Redo();
+
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(2)->getString());
+
+    pWrtShell->Undo(); // back to initial state
+
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(2)->getString());
+    CPPUNIT_ASSERT_EQUAL(SwRedlineTable::size_type(1), rIDRA.GetRedlineTable().size());
+
+    // now turn change tracking on and do it again
+    RedlineFlags const nMode(pWrtShell->GetRedlineFlags() | RedlineFlags::On);
+    pWrtShell->SetRedlineFlags(nMode);
+    CPPUNIT_ASSERT(getSwDoc()->getIDocumentRedlineAccess().IsRedlineOn());
+
+    pWrtShell->SearchPattern(aSearchOpt, /*SearchInNotes=*/false, SwDocPositions::Start,
+                             SwDocPositions::End, flagReplaceAll, /*Replace=*/true);
+
+    // The deletion should remain deleted - just 'fix' the deleted text
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"ExpungedDeleted Text"_ustr, getParagraph(2)->getString());
+
+    pWrtShell->Undo();
+
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"Expunged Text"_ustr, getParagraph(2)->getString());
+    CPPUNIT_ASSERT_EQUAL(SwRedlineTable::size_type(1), rIDRA.GetRedlineTable().size());
+
+    pWrtShell->Redo();
+
+    CPPUNIT_ASSERT_EQUAL(u"Deleted Text"_ustr, getParagraph(1)->getString());
+    CPPUNIT_ASSERT_EQUAL(u"ExpungedDeleted Text"_ustr, getParagraph(2)->getString());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testRedlineAutoCorrectInsertOverlap)
+{
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    CPPUNIT_ASSERT(pWrtShell);
+
+    emulateTyping(u"tset");
+
+    RedlineFlags const nMode(pWrtShell->GetRedlineFlags() | RedlineFlags::On);
+    pWrtShell->SetRedlineFlags(nMode);
+    CPPUNIT_ASSERT(getSwDoc()->getIDocumentRedlineAccess().IsRedlineOn());
+
+    // The trailing space is a tracked insertion adjacent to the autocorrect
+    // word "tset". The replacement "tset" -> "test" must still fire.
+    emulateTyping(u" ");
+
+    // NOTE: whether the autocorrect replacement itself should be recorded
+    // as a tracked change is an open question.
+    CPPUNIT_ASSERT_EQUAL(u"tsettest "_ustr, getParagraph(1)->getString());
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf124442)
+{
+    // Create a new empty Writer document
+    createSwDoc();
+
+    SwDoc* pDoc = getSwDoc();
+    SwCursorShell* pShell(pDoc->GetEditShell());
+    CPPUNIT_ASSERT(pShell);
+    SwPaM* pCursor = pShell->GetCursor();
+    IDocumentContentOperations& rIDCO(pDoc->getIDocumentContentOperations());
+    rIDCO.InsertString(*pCursor, u"Test search not found bug"_ustr);
+
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwView& rView = pWrtShell->GetView();
+
+    SfxItemSet aSet(rView.GetPool(), svl::Items<SID_SEARCH_ITEM, SID_SEARCH_ITEM>);
+    rView.StateSearch(aSet); // initializes SwView::GetSearchItem
+    SvxSearchItem& rSearchItem = *SwView::GetSearchItem();
+    rSearchItem.SetCommand(SvxSearchCmd::FIND);
+
+    SfxItemSet aFn(rView.GetPool(), svl::Items<FN_REPEAT_SEARCH, FN_REPEAT_SEARCH>);
+    SfxRequest aRequest(FN_REPEAT_SEARCH, SfxCallMode::SYNCHRON, aFn);
+    OUString sText;
+    OUString sSearchString;
+
+    // Test when a forward search finds a unique match at the end of the document followed by a
+    // backward search.
+    sSearchString = "bug";
+    rSearchItem.SetSearchString(sSearchString);
+
+    rSearchItem.SetBackward(false);
+    rView.ExecSearch(aRequest);
+    rSearchItem.SetBackward(true);
+    rView.ExecSearch(aRequest);
+
+    pWrtShell->GetSelectedText(sText);
+
+    // Without the patch in place assert failed with:
+    // equality assertion failed
+    // - Expected: bug
+    // - Actual  :
+    CPPUNIT_ASSERT_EQUAL(sSearchString, sText);
+
+    // Test when a backward search finds a unique match at the start of the document followed by a
+    // forward search.
+    sSearchString = "Test";
+    rSearchItem.SetSearchString(sSearchString);
+
+    rSearchItem.SetBackward(true);
+    rView.ExecSearch(aRequest);
+    rSearchItem.SetBackward(false);
+    rView.ExecSearch(aRequest);
+
+    pWrtShell->GetSelectedText(sText);
+
+    // Without the patch in place assert failed with:
+    // equality assertion failed
+    // - Expected: Test
+    // - Actual  :
+    CPPUNIT_ASSERT_EQUAL(sSearchString, sText);
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testNavigateByHyperlinkOrder)
+{
+    createSwDoc("navigate_by_hyperlink.odt");
+
+    SwDoc* pDoc = getSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    SwCursorShell* pShell(pDoc->GetEditShell());
+    CPPUNIT_ASSERT(pShell);
+    SwPaM* pCursor = pShell->GetCursor();
+
+    // navigate by hyperlink
+    SwView::SetMoveType(NID_HYPERLINK);
+
+    const OUString aStringArray[]{ "Sed",
+                                   "eros",
+                                   "turpis",
+                                   "Footnote hyperlink1",
+                                   "Footnote hyperlink2",
+                                   "Footnote hyperlink3",
+                                   "Footnote hyperlink4",
+                                   "ultricies",
+                                   "Endnote hyperlink" };
+
+    for (const OUString& rString : aStringArray)
+    {
+        // navigate to the next hyperlink and test that it is equal to rString
+        dispatchCommand(mxComponent, u".uno:ScrollToNext"_ustr, {});
+        pWrtShell->Right(SwCursorSkipMode::Chars, /*bSelect=*/true, rString.getLength(),
+                         /*bBasicCall=*/false);
+        CPPUNIT_ASSERT_EQUAL(rString, pCursor->GetText());
+    }
+}
+
+CPPUNIT_TEST_FIXTURE(SwUiWriterTest11, testTdf172128_sharedStyleSheetCache)
+{
+    // tdf#172128: SwDocStyleSheetPool::Find() reuses one sheet. Loading Heading 1
+    // into that sheet, then finding Default Paragraph Style, must not leave
+    // Heading 1's direct attributes (e.g. color) SET on the shared ItemSet —
+    // otherwise ODF export writes them onto unrelated parent styles.
+    createSwDoc();
+    SwDoc* pDoc = getSwDoc();
+    auto& rStyles = pDoc->getIDocumentStylePoolAccess();
+
+    SwTextFormatColl* pHeading1 = rStyles.GetTextCollFromPool(SwPoolFormatId::COLL_HEADLINE1);
+    CPPUNIT_ASSERT(pHeading1);
+    pDoc->SetAttr(SvxColorItem(COL_RED, RES_CHRATR_COLOR), *pHeading1);
+
+    SwTextFormatColl* pStandard = rStyles.GetTextCollFromPool(SwPoolFormatId::COLL_STANDARD);
+    CPPUNIT_ASSERT(pStandard);
+    // Ensure Standard does not already carry a direct color override
+    pStandard->ResetFormatAttr(RES_CHRATR_COLOR);
+
+    SfxStyleSheetBasePool* pPool = getSwDocShell()->GetStyleSheetPool();
+    CPPUNIT_ASSERT(pPool);
+
+    const OUString aHeadingName = pHeading1->GetName().toString();
+    const OUString aStandardName = pStandard->GetName().toString();
+
+    SfxStyleSheetBase* pSheet = pPool->Find(aHeadingName, SfxStyleFamily::Para);
+    CPPUNIT_ASSERT(pSheet);
+    CPPUNIT_ASSERT_EQUAL(SfxItemState::SET,
+                         pSheet->GetItemSet().GetItemState(RES_CHRATR_COLOR, false));
+
+    // Property-chip path used to Find(parent) here and pollute the shared sheet
+    rtl::Reference<SwDocStyleSheet> xTmp(
+        new SwDocStyleSheet(*static_cast<SwDocStyleSheet*>(pSheet)));
+    (void)xTmp->GetItemPresentation(MapUnit::MapTwip);
+
+    pSheet = pPool->Find(aStandardName, SfxStyleFamily::Para);
+    CPPUNIT_ASSERT(pSheet);
+    // Without the fix, residual Heading 1 color remained SET on this ItemSet
+    CPPUNIT_ASSERT_MESSAGE(
+        "Shared style sheet cache leaked Heading 1 color onto Default Paragraph Style",
+        pSheet->GetItemSet().GetItemState(RES_CHRATR_COLOR, false) != SfxItemState::SET);
+
+    CPPUNIT_ASSERT(pStandard->GetItemState(RES_CHRATR_COLOR, false) != SfxItemState::SET);
+}
+
+} // end of anonymous namespace
+CPPUNIT_PLUGIN_IMPLEMENT();
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

@@ -1,0 +1,15 @@
+/build
+/.gradle
+/.idea
+/local.properties
+/app/assets/
+/app/assets_strippedUI/
+/app/build/
+/app/captures/
+/app/jni/Application.mk
+/app/res_generated
+/jniLibs/
+/app/liboSettings.gradle.kts
+/app/native-code.cxx
+/obj/
+/app/source.iml

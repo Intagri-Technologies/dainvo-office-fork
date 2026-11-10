@@ -1,0 +1,31 @@
+Don't grow the top of the glyph bounding box by a 64th.
+
+CPDF_CIDFont::GetCharBBox() is the only caller of CFX_Face::GetCharBBox(),
+so this made composite fonts measure glyphs taller than simple fonts, which
+get their bounding box from CFX_Face::GetGlyphBBox() directly.
+
+diff -ru pdfium.orig/core/fxge/cfx_face.cpp pdfium/core/fxge/cfx_face.cpp
+--- pdfium.orig/core/fxge/cfx_face.cpp
++++ pdfium/core/fxge/cfx_face.cpp
+@@ -58,9 +58,6 @@
+ 
+ namespace {
+ 
+-// Boundary value to avoid integer overflow when adding 1/64th of the value.
+-constexpr int kMaxRectTop = 2114445437;
+-
+ #if defined(PDF_ENABLE_FREETYPE)
+ constexpr int kThousandthMinInt = std::numeric_limits<int>::min() / 1000;
+ constexpr int kThousandthMaxInt = std::numeric_limits<int>::max() / 1000;
+@@ -1678,11 +1675,6 @@
+     int err = LoadGlyph(glyph_index, /*scale=*/false);
+     if (err == 0) {
+       rect = GetGlyphBBox(glyph_index);
+-      if (rect.top <= kMaxRectTop) {
+-        rect.top += rect.top / 64;
+-      } else {
+-        rect.top = std::numeric_limits<int>::max();
+-      }
+     }
+   }
+ #endif  // defined(PDF_ENABLE_FREETYPE)

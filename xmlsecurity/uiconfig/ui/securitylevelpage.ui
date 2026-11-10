@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface domain="xsc">
+  <requires lib="gtk+" version="3.24"/>
+  <!-- n-columns=3 n-rows=9 -->
+  <object class="GtkGrid" id="SecurityLevelPage">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="halign">start</property>
+    <property name="margin-start">12</property>
+    <property name="margin-end">12</property>
+    <property name="margin-top">12</property>
+    <property name="margin-bottom">12</property>
+    <property name="vexpand">True</property>
+    <property name="border-width">6</property>
+    <property name="orientation">vertical</property>
+    <property name="row-spacing">6</property>
+    <property name="column-spacing">12</property>
+    <child>
+      <object class="GtkRadioButton" id="low">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">False</property>
+        <property name="halign">start</property>
+        <property name="use-underline">True</property>
+        <property name="draw-indicator">True</property>
+        <property name="group">high</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="low-atkobject">
+            <property name="AtkObject::accessible-description" translatable="yes" context="extended_tip|low">A macro can be set to auto-start, and it can perform potentially damaging actions, as for example delete or rename files. This setting is not recommended when you open documents from other authors.</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">1</property>
+        <property name="top-attach">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkRadioButton" id="med">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">False</property>
+        <property name="halign">start</property>
+        <property name="use-underline">True</property>
+        <property name="draw-indicator">True</property>
+        <property name="group">high</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="med-atkobject">
+            <property name="AtkObject::accessible-description" translatable="yes" context="extended_tip|med">Trusted sources can be set on the Trusted Sources tab page. Signed macros from a trusted source are allowed to run. In addition, any macro from a trusted file location is allowed to run. All other macros require your confirmation.</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">1</property>
+        <property name="top-attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkRadioButton" id="high">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">False</property>
+        <property name="halign">start</property>
+        <property name="use-underline">True</property>
+        <property name="active">True</property>
+        <property name="draw-indicator">True</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="high-atkobject">
+            <property name="AtkObject::accessible-description" translatable="yes" context="extended_tip|high">Only signed macros or macros from a trusted file location are allowed to run. Macros signed with untrusted certificates will require confirmation to run, when located in untrusted file locations. Trusted certificates and trusted file locations can be set on the Trusted Sources tab page.</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">1</property>
+        <property name="top-attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkRadioButton" id="vhigh">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">False</property>
+        <property name="halign">start</property>
+        <property name="use-underline">True</property>
+        <property name="draw-indicator">True</property>
+        <property name="group">high</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="vhigh-atkobject">
+            <property name="AtkObject::accessible-description" translatable="yes" context="extended_tip|vhigh">Trusted file locations can be set on the Trusted Sources tab page. Any macro from a trusted file location is allowed to run.</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">1</property>
+        <property name="top-attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage" id="vhighimg">
+        <property name="can-focus">False</property>
+        <property name="no-show-all">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="icon-name">res/lock.png</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="vhighimg-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes" context="SecurityLevelPage|vhighimg">Very high security level</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage" id="highimg">
+        <property name="can-focus">False</property>
+        <property name="no-show-all">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="icon-name">res/lock.png</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="highimg-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes" context="SecurityLevelPage|highimg">High security level</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage" id="medimg">
+        <property name="can-focus">False</property>
+        <property name="no-show-all">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="icon-name">res/lock.png</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="medimg-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes" context="SecurityLevelPage|medimg">Medium security level</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage" id="lowimg">
+        <property name="can-focus">False</property>
+        <property name="no-show-all">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="icon-name">res/lock.png</property>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="lowimg-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes" context="SecurityLevelPage|lowimg">Low security level</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="warningbox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkImage" id="warningimg">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">center</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">3</property>
+            <property name="margin-top">3</property>
+            <property name="margin-bottom">3</property>
+            <property name="icon-name">vcl/res/warningbox.png</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="warningimg-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes" context="SecurityLevelPage|warningimg">File reload needed</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="warningmsg">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="no-show-all">True</property>
+            <property name="margin-start">3</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">3</property>
+            <property name="margin-bottom">3</property>
+            <property name="hexpand">True</property>
+            <property name="wrap">True</property>
+            <property name="max-width-chars">50</property>
+            <property name="xalign">0</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="warningmsg-atkobject">
+                <property name="AtkObject::accessible-role">static</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">8</property>
+        <property name="width">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="VeryHighDescription">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="margin-bottom">12</property>
+        <property name="label" translatable="yes" context="securitylevelpage|VeryHighDescription">Only macros from trusted file locations are allowed to run. All other macros, regardless whether signed or not, are disabled.</property>
+        <property name="wrap">True</property>
+        <property name="max-width-chars">80</property>
+        <property name="xalign">0</property>
+        <attributes>
+          <attribute name="scale" value="0.9"/>
+        </attributes>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="VeryHighDescription-atkobject">
+            <property name="AtkObject::accessible-role">static</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="highDescription">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="margin-bottom">12</property>
+        <property name="label" translatable="yes" context="securitylevelpage|HighDescription">Only signed macros and macros from trusted file locations are executed. Unsigned macros are disabled.</property>
+        <property name="wrap">True</property>
+        <property name="max-width-chars">80</property>
+        <property name="xalign">0</property>
+        <attributes>
+          <attribute name="scale" value="0.9"/>
+        </attributes>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="highDescription-atkobject">
+            <property name="AtkObject::accessible-role">static</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="medDescription">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="margin-bottom">12</property>
+        <property name="label" translatable="yes" context="securitylevelpage|medDescription">Confirmation required before executing macros from untrusted sources.</property>
+        <property name="wrap">True</property>
+        <property name="max-width-chars">80</property>
+        <property name="xalign">0</property>
+        <attributes>
+          <attribute name="scale" value="0.9"/>
+        </attributes>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="medDescription-atkobject">
+            <property name="AtkObject::accessible-role">static</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="LowDescription">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="margin-bottom">12</property>
+        <property name="label" translatable="yes" context="securitylevelpage|LowDescription">All macros will be executed without confirmation. Use this setting only if you are certain that all documents that will be opened are safe.</property>
+        <property name="wrap">True</property>
+        <property name="max-width-chars">80</property>
+        <property name="xalign">0</property>
+        <attributes>
+          <attribute name="scale" value="0.9"/>
+        </attributes>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="LowDescription-atkobject">
+            <property name="AtkObject::accessible-role">static</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">7</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="veryhighLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes" context="securitylevelpage|vhigh">_Very high</property>
+        <property name="use-underline">True</property>
+        <property name="mnemonic-widget">vhigh</property>
+        <property name="ellipsize">end</property>
+        <property name="max-width-chars">80</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="highLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes" context="securitylevelpage|high">H_igh</property>
+        <property name="use-underline">True</property>
+        <property name="mnemonic-widget">high</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="mediumLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes" context="securitylevelpage|med">_Medium</property>
+        <property name="use-underline">True</property>
+        <property name="mnemonic-widget">med</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="lowLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes" context="securitylevelpage|low">_Low (not recommended)</property>
+        <property name="use-underline">True</property>
+        <property name="mnemonic-widget">low</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="left-attach">2</property>
+        <property name="top-attach">6</property>
+      </packing>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+  </object>
+</interface>

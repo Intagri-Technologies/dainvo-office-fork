@@ -1,0 +1,109 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+ */
+
+#pragma once
+
+#include <svtools/toolbarmenu.hxx>
+#include <rtl/ustring.hxx>
+#include <svx/ColorIconView.hxx>
+#include <svx/MenuOrToolMenuButton.hxx>
+#include <svx/Palette.hxx>
+#include <vcl/toolboxid.hxx>
+#include <vcl/weld/Button.hxx>
+#include <vcl/weld/MenuButton.hxx>
+
+typedef std::function<weld::Window*()> TopLevelParentFunction;
+
+namespace com::sun::star::frame { class XFrame; }
+
+namespace weld { class ComboBox; }
+namespace weld { class Toolbar; }
+
+class PaletteManager;
+class ToolBox;
+
+class UNLESS_MERGELIBS_MORE(SVXCORE_DLLPUBLIC) ColorStatus
+{
+    Color maColor;
+    Color maTLBRColor;
+    Color maBLTRColor;
+public:
+    ColorStatus();
+    void statusChanged( const css::frame::FeatureStateEvent& rEvent );
+    Color GetColor();
+};
+
+#define COL_NONE_COLOR    ::Color(ColorTransparency, 0x80, 0xFF, 0xFF, 0xFF)
+
+class SvxColorToolBoxControl;
+
+class SVXCORE_DLLPUBLIC ColorWindow final : public WeldToolbarPopup
+{
+private:
+    const sal_uInt16    mnSlotId;
+    OUString            maCommand;
+    MenuOrToolMenuButton maMenuButton;
+    std::shared_ptr<PaletteManager> mxPaletteManager;
+    ColorStatus& mrColorStatus;
+    TopLevelParentFunction maTopLevelParentFunction;
+    ColorSelectFunction maColorSelectFunction;
+
+    ColorIconView maColorIconView;
+    ColorIconView maRecentColorIconView;
+    std::unique_ptr<weld::ComboBox> mxPaletteListBox;
+    std::unique_ptr<weld::Button> mxButtonAutoColor;
+    std::unique_ptr<weld::Button> mxButtonNoneColor;
+    std::unique_ptr<weld::Button> mxButtonPicker;
+    std::unique_ptr<weld::Widget> mxAutomaticSeparator;
+    weld::Button* mpDefaultButton;
+
+    DECL_DLLPRIVATE_LINK(ColorSelectHdl, int, void);
+    DECL_DLLPRIVATE_LINK(RecentColorSelectHdl, int, void);
+    DECL_DLLPRIVATE_LINK(SelectPaletteHdl, weld::ComboBox&, void);
+    DECL_DLLPRIVATE_LINK(AutoColorClickHdl, weld::Button&, void);
+    DECL_DLLPRIVATE_LINK(OpenPickerClickHdl, weld::Button&, void);
+
+    static bool SelectIconViewEntry(ColorIconView& rColorIconView, const Color& rColor);
+    static NamedColor GetEntryColor(const ColorIconView& rColorIconView, int nIndex);
+    NamedColor GetAutoColor() const;
+    void ApplyColor(ColorIconView& rColorIconView, int nIndex);
+
+public:
+    ColorWindow(OUString  rCommand,
+                std::shared_ptr<PaletteManager> xPaletteManager,
+                ColorStatus& rColorStatus,
+                sal_uInt16 nSlotId,
+                const css::uno::Reference<css::frame::XFrame>& rFrame,
+                const MenuOrToolMenuButton &rMenuButton,
+                TopLevelParentFunction aTopLevelParentFunction,
+                ColorSelectFunction aColorSelectFunction);
+    virtual ~ColorWindow() override;
+    void                ShowNoneButton();
+    void                SetNoSelection();
+    bool                IsNoSelection() const;
+    void                SelectEntry(const NamedColor& rColor);
+    void                SelectEntry(const Color& rColor);
+    NamedColor          GetSelectEntryColor() const;
+
+    virtual void        statusChanged( const css::frame::FeatureStateEvent& rEvent ) override;
+
+    virtual void GrabFocus() override;
+};
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

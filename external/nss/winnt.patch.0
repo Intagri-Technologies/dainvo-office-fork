@@ -1,0 +1,10 @@
+--- nss/coreconf/WINNT.mk	2025-03-24 14:11:13.771104127 +0100
++++ nss/coreconf/WINNT.mk	2025-03-24 14:11:13.771104127 +0100
+@@ -8,6 +8,3 @@
+ #
+ 
+ include $(CORE_DEPTH)/coreconf/WIN32.mk
+-
+-# NSPR's WIN95 target prefixes its import libraries only for GCC, like ours.
+-NSPR31_LIB_PREFIX = $(IMPORT_LIB_PREFIX)
+
