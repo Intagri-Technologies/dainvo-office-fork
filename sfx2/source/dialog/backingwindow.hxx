@@ -75,6 +75,8 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Label> mxRecentColName;
     std::unique_ptr<weld::Label> mxRecentColLocation;
     std::unique_ptr<weld::Label> mxRecentColModified;
+    std::unique_ptr<weld::Widget> mxRecentCols;
+    std::unique_ptr<weld::Button> mxBrowseTemplates;
     struct RecentRow
     {
         OUString aName, aFolder, aPath, aModified, aIcon;

@@ -194,6 +194,8 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     , mxRecentColName(m_xBuilder->weld_label(u"dv_colhead0"_ustr))
     , mxRecentColLocation(m_xBuilder->weld_label(u"dv_colhead1"_ustr))
     , mxRecentColModified(m_xBuilder->weld_label(u"dv_colhead2"_ustr))
+    , mxRecentCols(m_xBuilder->weld_widget(u"dv_recent_cols"_ustr))
+    , mxBrowseTemplates(m_xBuilder->weld_button(u"dv_browse_templates"_ustr))
     , mxActions(m_xBuilder->weld_menu_button(u"mbActions"_ustr))
     , mxWriterAllButton(m_xBuilder->weld_button(u"writer_all"_ustr))
     , mxCalcAllButton(m_xBuilder->weld_button(u"calc_all"_ustr))
@@ -364,6 +366,8 @@ void BackingWindow::dispose()
     mxRecentColName.reset();
     mxRecentColLocation.reset();
     mxRecentColModified.reset();
+    mxRecentCols.reset();
+    mxBrowseTemplates.reset();
     mxActions.reset();
     mxWriterAllButton.reset();
     mxCalcAllButton.reset();
@@ -436,6 +440,7 @@ void BackingWindow::initControls()
 
     mxExtensionsButton->connect_clicked(LINK(this, BackingWindow, ExtLinkClickHdl));
     mxSettingsButton->connect_clicked(LINK(this, BackingWindow, ClickHdl));
+    mxBrowseTemplates->connect_clicked(LINK(this, BackingWindow, ClickHdl));
     mxDonateButton->connect_clicked(LINK(this, BackingWindow, ExtLinkClickHdl));
 
     mxOpenButton->connect_clicked(LINK(this, BackingWindow, ClickHdl));
@@ -523,8 +528,11 @@ void BackingWindow::ApplyStyleSettings()
             mxCreateLabel->set_label(aCreate.copy(0, aCreate.getLength() - 1));
     }
 
-    mxAllButtonsBox->set_background(aButtonsBackground);
-    mxSmallButtonsBox->set_background(aButtonsBackground);
+    // Dainvo: sidebar a shade apart from the main area (works in light and dark)
+    Color aSidebar(aButtonsBackground);
+    aSidebar.Merge(rStyleSettings.GetWindowTextColor(), 242);
+    mxAllButtonsBox->set_background(aSidebar);
+    mxSmallButtonsBox->set_background(aSidebar);
     SetBackground(aButtonsBackground);
 
     // compute the menubar height
@@ -836,6 +844,7 @@ void BackingWindow::fillRecentList()
     const bool bEmpty = mxRecentList->n_children() == 0;
     // the scrolled window is merged into the list by the builder, so hide the list itself
     mxRecentList->set_visible(!bEmpty);
+    mxRecentCols->set_visible(!bEmpty);
     mxRecentEmpty->set_visible(bEmpty);
 }
 
@@ -997,6 +1006,11 @@ IMPL_LINK( BackingWindow, ClickHdl, weld::Button&, rButton, void )
         dispatchURL( u"private:factory/sdatabase?Interactive"_ustr );
     else if( &rButton == mxMathAllButton.get() )
         dispatchURL( u"private:factory/smath"_ustr );
+    else if (&rButton == mxBrowseTemplates.get())
+    {
+        mxTemplateButton->set_active(true);
+        ToggleHdl(*mxTemplateButton);
+    }
     else if (&rButton == mxSettingsButton.get())
     {
         Reference<XDispatchProvider> xFrame(mxFrame, UNO_QUERY);
