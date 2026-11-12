@@ -21,6 +21,7 @@
 #define INCLUDED_SFX2_SOURCE_DIALOG_BACKINGWINDOW_HXX
 
 #include <rtl/ustring.hxx>
+#include <map>
 
 #include <vcl/InterimItemWindow.hxx>
 #include <vcl/weld/Button.hxx>
@@ -70,6 +71,18 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Entry> mxRecentSearch;
     std::unique_ptr<weld::TreeView> mxRecentList;
     std::unique_ptr<weld::Label> mxRecentEmpty;
+    std::unique_ptr<weld::Label> mxRecentHeading;
+    std::unique_ptr<weld::Label> mxRecentColName;
+    std::unique_ptr<weld::Label> mxRecentColLocation;
+    std::unique_ptr<weld::Label> mxRecentColModified;
+    struct RecentRow
+    {
+        OUString aName, aFolder, aPath, aModified, aIcon;
+    };
+    std::map<OUString, RecentRow> maRecentRows; // keyed by URL (the row id)
+    bool mbRecentNarrow = false;
+    bool mbRecentRendererOn = false;
+    tools::Long mnRecentWidth = 800; // current list width; rows are drawn this wide
     std::unique_ptr<weld::MenuButton> mxActions;
 
     std::unique_ptr<weld::Button> mxWriterAllButton;
@@ -118,6 +131,10 @@ class BackingWindow : public InterimItemWindow
     DECL_LINK(FilterHdl, weld::ComboBox&, void);
     DECL_LINK(RecentSearchHdl, weld::TextWidget&, void);
     DECL_LINK(RecentActivatedHdl, const weld::TreeIter&, bool);
+    DECL_LINK(RecentGetSizeHdl, weld::TreeView::get_size_args, Size);
+    DECL_LINK(RecentRenderHdl, weld::TreeView::render_args, void);
+    DECL_LINK(RecentTooltipHdl, const weld::TreeIter&, OUString);
+    DECL_LINK(RecentSizeAllocHdl, const Size&, void);
     DECL_LINK(ClickHdl, weld::Button&, void);
     DECL_LINK(ClickHelpHdl, weld::Button&, void);
     DECL_LINK(MenuSelectHdl, const OUString&, void);

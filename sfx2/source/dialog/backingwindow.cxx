@@ -73,6 +73,7 @@
 #include <sfx2/sfxresid.hxx>
 #include <bitmaps.hlst>
 #include <rtl/bootstrap.hxx>
+#include <vcl/image.hxx>
 #include <vcl/virdev.hxx>
 #include <vcl/graph.hxx>
 #include <vcl/graphicfilter.hxx>
@@ -189,6 +190,10 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     , mxRecentSearch(m_xBuilder->weld_entry(u"dv_recent_search"_ustr))
     , mxRecentList(m_xBuilder->weld_tree_view(u"dv_recent_list"_ustr))
     , mxRecentEmpty(m_xBuilder->weld_label(u"dv_recent_empty"_ustr))
+    , mxRecentHeading(m_xBuilder->weld_label(u"dv_recent_heading"_ustr))
+    , mxRecentColName(m_xBuilder->weld_label(u"dv_colhead0"_ustr))
+    , mxRecentColLocation(m_xBuilder->weld_label(u"dv_colhead1"_ustr))
+    , mxRecentColModified(m_xBuilder->weld_label(u"dv_colhead2"_ustr))
     , mxActions(m_xBuilder->weld_menu_button(u"mbActions"_ustr))
     , mxWriterAllButton(m_xBuilder->weld_button(u"writer_all"_ustr))
     , mxCalcAllButton(m_xBuilder->weld_button(u"calc_all"_ustr))
@@ -354,6 +359,10 @@ void BackingWindow::dispose()
     mxRecentSearch.reset();
     mxRecentList.reset();
     mxRecentEmpty.reset();
+    mxRecentHeading.reset();
+    mxRecentColName.reset();
+    mxRecentColLocation.reset();
+    mxRecentColModified.reset();
     mxActions.reset();
     mxWriterAllButton.reset();
     mxCalcAllButton.reset();
@@ -408,6 +417,10 @@ void BackingWindow::initControls()
     mxAllRecentThumbnails->Reload();
     mxAllRecentThumbnails->ShowTooltips( true );
 
+    mxRecentList->connect_custom_get_size(LINK(this, BackingWindow, RecentGetSizeHdl));
+    mxRecentList->connect_custom_render(LINK(this, BackingWindow, RecentRenderHdl));
+    mxRecentList->connect_query_tooltip(LINK(this, BackingWindow, RecentTooltipHdl));
+    mxRecentList->connect_size_allocate(LINK(this, BackingWindow, RecentSizeAllocHdl));
     mxRecentButton->set_active(true);
     ToggleHdl(*mxRecentButton);
 
@@ -445,10 +458,6 @@ void BackingWindow::initControls()
     mxRecentSearch->connect_changed(LINK(this, BackingWindow, RecentSearchHdl));
     mxRecentList->connect_item_activated(LINK(this, BackingWindow, RecentActivatedHdl));
     mxRecentList->set_size_request(-1, mxRecentList->get_height_rows(8));
-    {
-        const int nDigit = mxRecentList->get_approximate_digit_width();
-        mxRecentList->set_column_fixed_widths({ nDigit * 48, nDigit * 56 });
-    }
     mxActions->connect_selected(LINK(this, BackingWindow, MenuSelectHdl));
 
     ApplyStyleSettings();
@@ -499,6 +508,17 @@ void BackingWindow::ApplyStyleSettings()
         aHeading.SetFontSize(Size(0, aHeading.GetFontSize().Height() * 1.6));
         aHeading.SetWeight(WEIGHT_SEMIBOLD);
         mxCreateLabel->set_font(aHeading);
+        mxRecentHeading->set_font(aHeading);
+
+        vcl::Font aColumn(aLabelFont);
+        aColumn.SetWeight(WEIGHT_SEMIBOLD);
+        Color aMuted(rStyleSettings.GetWindowTextColor());
+        aMuted.Merge(rStyleSettings.GetWindowColor(), 110);
+        for (weld::Label* pLabel : { mxRecentColName.get(), mxRecentColLocation.get(), mxRecentColModified.get() })
+        {
+            pLabel->set_font(aColumn);
+            pLabel->set_font_color(aMuted);
+        }
         OUString aCreate = mxCreateLabel->get_label();
         if (aCreate.endsWith(":"))
             mxCreateLabel->set_label(aCreate.copy(0, aCreate.getLength() - 1));
@@ -754,6 +774,14 @@ void BackingWindow::fillRecentList()
 
     mxRecentList->freeze();
     mxRecentList->clear();
+    maRecentRows.clear();
+    if (!mbRecentRendererOn)
+    {
+        // must be enabled while the list is empty; the first fill can happen
+        // during construction, before the rest of the setup runs
+        mxRecentList->set_column_custom_renderer(1, true); // column 0 is the icon slot
+        mbRecentRendererOn = true;
+    }
     for (const SvtHistoryOptions::HistoryItem& rItem : SvtHistoryOptions::GetList(EHistoryType::PickList))
     {
         if (!mxAllRecentThumbnails->acceptsURL(rItem.sURL))
@@ -763,7 +791,7 @@ void BackingWindow::fillRecentList()
         if (!aQuery.isEmpty() && aName.toAsciiLowerCase().indexOf(aQuery) == -1)
             continue;
 
-        OUString aLocation;
+        OUString aLocation, aFolder;
         if (aURL.GetProtocol() == INetProtocol::File)
         {
             INetURLObject aDir(aURL);
@@ -773,9 +801,13 @@ void BackingWindow::fillRecentList()
                 aLocation = aLocation.copy(0, aLocation.getLength() - 1);
             if (!aHome.isEmpty() && aLocation.startsWith(aHome))
                 aLocation = "~" + aLocation.copy(aHome.getLength());
+            // show just the folder name; the full path is in the tooltip
+            aFolder = aLocation == "~" ? aLocation : aLocation.copy(aLocation.lastIndexOf('/') + 1);
+            if (aFolder.isEmpty())
+                aFolder = aLocation;
         }
         else
-            aLocation = aURL.GetHost();
+            aLocation = aFolder = aURL.GetHost();
 
         OUString aModified;
         osl::DirectoryItem aDirItem;
@@ -797,16 +829,114 @@ void BackingWindow::fillRecentList()
             }
         }
 
-        mxRecentList->append(rItem.sURL, aName, lcl_RecentIcon(aURL.getExtension()));
-        const int nRow = mxRecentList->n_children() - 1;
-        mxRecentList->set_text(nRow, aLocation, 1);
-        mxRecentList->set_text(nRow, aModified, 2);
+        maRecentRows[rItem.sURL] = { aName, aFolder, aLocation, aModified,
+                                     lcl_RecentIcon(aURL.getExtension()) };
+        mxRecentList->append(rItem.sURL, aName);
     }
     mxRecentList->thaw();
     const bool bEmpty = mxRecentList->n_children() == 0;
     // the scrolled window is merged into the list by the builder, so hide the list itself
     mxRecentList->set_visible(!bEmpty);
     mxRecentEmpty->set_visible(bEmpty);
+}
+
+// Dainvo: recent rows are drawn here - icon + name, folder, modified - at the
+// same 50/30/20 split as the dv_recent_cols header grid, so both scale with the
+// window. Below about 560px the Location column folds away.
+constexpr tools::Long RECENT_ROW_HEIGHT = 40;
+constexpr tools::Long RECENT_NARROW_WIDTH = 560;
+
+IMPL_LINK_NOARG(BackingWindow, RecentGetSizeHdl, weld::TreeView::get_size_args, Size)
+{
+    // the reported width is the area the row is drawn in, so span the list
+    return Size(std::max<tools::Long>(mnRecentWidth - 40, 1), RECENT_ROW_HEIGHT);
+}
+
+IMPL_LINK(BackingWindow, RecentRenderHdl, weld::TreeView::render_args, rArgs, void)
+{
+    vcl::RenderContext& rDev = std::get<0>(rArgs);
+    const tools::Rectangle& rRect = std::get<1>(rArgs);
+    const bool bSelected = std::get<2>(rArgs);
+    auto it = maRecentRows.find(std::get<3>(rArgs));
+    if (it == maRecentRows.end())
+        return;
+    const RecentRow& rRow = it->second;
+    const StyleSettings& rStyle = rDev.GetSettings().GetStyleSettings();
+
+    rDev.Push(vcl::PushFlags::FONT | vcl::PushFlags::TEXTCOLOR | vcl::PushFlags::FILLCOLOR
+              | vcl::PushFlags::LINECOLOR);
+
+    const tools::Long nLeft = rRect.Left(), nWidth = rRect.GetWidth();
+    if (bSelected)
+    {
+        rDev.SetLineColor();
+        rDev.SetFillColor(rStyle.GetHighlightColor());
+        tools::Rectangle aSel(rRect);
+        aSel.AdjustTop(2);
+        aSel.AdjustBottom(-2);
+        rDev.DrawRect(aSel, 6, 6);
+    }
+    else
+    {
+        rDev.SetLineColor(rStyle.GetSeparatorColor());
+        rDev.DrawLine(Point(nLeft, rRect.Bottom()), Point(mnRecentWidth - 12, rRect.Bottom()));
+    }
+
+    vcl::Font aFont(rStyle.GetLabelFont());
+    aFont.SetFontHeight(aFont.GetFontHeight() * 115 / 100);
+    rDev.SetFont(aFont);
+    const Color aText(bSelected ? rStyle.GetHighlightTextColor() : rStyle.GetWindowTextColor());
+    Color aMuted(aText);
+    if (!bSelected)
+        aMuted.Merge(rStyle.GetWindowColor(), 110);
+
+    constexpr tools::Long nIcon = 20;
+    if (!rRow.aIcon.isEmpty())
+    {
+        Image aImage(StockImage::Yes, rRow.aIcon);
+        rDev.DrawImage(Point(nLeft, rRect.Top() + (rRect.GetHeight() - nIcon) / 2),
+                       Size(nIcon, nIcon), aImage);
+    }
+
+    // columns are placed in list coordinates (the header grid spans the whole
+    // list), not relative to the row, which VCL indents for its icon slot
+    (void)nWidth;
+    const bool bNarrow = mnRecentWidth < RECENT_NARROW_WIDTH;
+    const tools::Long nNameEnd = mnRecentWidth * (bNarrow ? 80 : 50) / 100;
+    const tools::Long nLocEnd = mnRecentWidth * 80 / 100;
+    const DrawTextFlags nFlags = DrawTextFlags::Left | DrawTextFlags::VCenter | DrawTextFlags::EndEllipsis;
+    auto drawCell = [&](const OUString& rText, tools::Long nX, tools::Long nEnd, const Color& rColor) {
+        rDev.SetTextColor(rColor);
+        rDev.DrawText(tools::Rectangle(nX, rRect.Top(), nEnd - 12, rRect.Bottom()), rText, nFlags);
+    };
+    drawCell(rRow.aName, nLeft + nIcon + 12, nNameEnd, aText);
+    if (!bNarrow)
+        drawCell(rRow.aFolder, nNameEnd, nLocEnd, aMuted);
+    drawCell(rRow.aModified, bNarrow ? nNameEnd : nLocEnd, mnRecentWidth, aMuted);
+
+    rDev.Pop();
+}
+
+IMPL_LINK(BackingWindow, RecentTooltipHdl, const weld::TreeIter&, rIter, OUString)
+{
+    auto it = maRecentRows.find(mxRecentList->get_id(rIter));
+    return it == maRecentRows.end() ? OUString() : it->second.aPath;
+}
+
+IMPL_LINK(BackingWindow, RecentSizeAllocHdl, const Size&, rSize, void)
+{
+    const bool bNarrow = rSize.Width() < RECENT_NARROW_WIDTH;
+    if (bNarrow != mbRecentNarrow)
+    {
+        mbRecentNarrow = bNarrow;
+        mxRecentColLocation->set_visible(!bNarrow);
+    }
+    if (rSize.Width() != mnRecentWidth)
+    {
+        // row sizes are measured on insert: refill so rows follow the new width
+        mnRecentWidth = rSize.Width();
+        fillRecentList();
+    }
 }
 
 IMPL_LINK_NOARG(BackingWindow, RecentSearchHdl, weld::TextWidget&, void)

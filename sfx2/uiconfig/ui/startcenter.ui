@@ -4,13 +4,7 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkListStore" id="dv_recent_store">
     <columns>
-      <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name location -->
-      <column type="gchararray"/>
-      <!-- column-name modified -->
+      <!-- column-name text -->
       <column type="gchararray"/>
       <!-- column-name id -->
       <column type="gchararray"/>
@@ -134,6 +128,7 @@
                 </child>
                 <child>
                   <object class="GtkBox" id="buttons_box">
+                    <property name="margin-start">8</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="vexpand">True</property>
@@ -182,7 +177,7 @@
                     </child>
                     <child>
                       <object class="GtkSeparator" id="separator3">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
                         <property name="margin-end">6</property>
@@ -235,7 +230,7 @@
                     </child>
                     <child>
                       <object class="GtkSeparator" id="separator1">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
                         <property name="margin-end">6</property>
@@ -269,7 +264,7 @@
                 <child>
                   <object class="GtkSeparator" id="separator2">
                     <property name="height-request">2</property>
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                   </object>
                   <packing>
@@ -425,11 +420,11 @@
                 <property name="halign">start</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="spacing">12</property>
+                    <property name="spacing">8</property>
                     <property name="homogeneous">False</property>
                     <child>
                       <object class="GtkButton" id="writer_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|writer_all">_Writer Document</property>
                         <property name="visible">True</property>
@@ -450,7 +445,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="calc_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|calc_all">_Calc Spreadsheet</property>
                         <property name="visible">True</property>
@@ -471,7 +466,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="impress_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|impress_all">_Impress Presentation</property>
                         <property name="visible">True</property>
@@ -492,7 +487,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="draw_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|draw_all">_Draw Drawing</property>
                         <property name="visible">True</property>
@@ -513,7 +508,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="math_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|math_all">_Math Formula</property>
                         <property name="visible">True</property>
@@ -534,7 +529,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="database_all">
-                        <property name="width-request">112</property>
+                        <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|database_all">_Base Database</property>
                         <property name="visible">True</property>
@@ -594,78 +589,6 @@
               </packing>
             </child>
             <child>
-              <!-- n-columns=3 n-rows=1 -->
-              <object class="GtkGrid" id="actions">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="margin-start">6</property>
-                <property name="margin-end">6</property>
-                <property name="margin-top">6</property>
-                <property name="margin-bottom">6</property>
-                <property name="column-spacing">3</property>
-                <child>
-                  <object class="GtkLabel" id="lbFilter">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="label" translatable="yes" context="startcenter|filter_label">Filter:</property>
-                    <accessibility>
-                      <relation type="label-for" target="cbFilter"/>
-                    </accessibility>
-                  </object>
-                  <packing>
-                    <property name="left-attach">0</property>
-                    <property name="top-attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBoxText" id="cbFilter">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="active">0</property>
-                    <items>
-                      <item id="filter_none" translatable="yes" context="startcenter|filter_none">All Documents</item>
-                      <item id="filter_writer" translatable="yes" context="startcenter|filter_writer">Text Documents</item>
-                      <item id="filter_calc" translatable="yes" context="startcenter|filter_calc">Spreadsheets</item>
-                      <item id="filter_impress" translatable="yes" context="startcenter|filter_impress">Presentations</item>
-                      <item id="filter_draw" translatable="yes" context="startcenter|filter_draw">Drawings</item>
-                    </items>
-                    <accessibility>
-                      <relation type="labelled-by" target="lbFilter"/>
-                    </accessibility>
-                  </object>
-                  <packing>
-                    <property name="left-attach">1</property>
-                    <property name="top-attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkMenuButton" id="mbActions">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="focus-on-click">False</property>
-                    <property name="receives-default">True</property>
-                    <property name="tooltip-text" translatable="yes" context="startcenter|mbActions|tool_tip">Actions</property>
-                    <property name="halign">end</property>
-                    <property name="hexpand">True</property>
-                    <property name="image">imActions</property>
-                    <property name="always-show-image">True</property>
-                    <property name="popup">clearmenu</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">2</property>
-                    <property name="top-attach">0</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkBox" id="dv_recent_box">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
@@ -677,12 +600,97 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">8</property>
                 <child>
-                  <object class="GtkEntry" id="dv_recent_search">
+                  <object class="GtkBox" id="dv_recent_header">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="halign">start</property>
-                    <property name="width-chars">36</property>
-                    <property name="placeholder-text" translatable="yes" context="startcenter|dv_recent_search">Search recent files</property>
+                    <property name="can-focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="dv_recent_heading">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes" context="startcenter|dv_recent_heading">Recent</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="dv_recent_search">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="halign">end</property>
+                        <property name="width-chars">18</property>
+                        <property name="placeholder-text" translatable="yes" context="startcenter|dv_recent_search">Search recent files</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <!-- n-columns=3 n-rows=1 -->
+                      <object class="GtkGrid" id="actions">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="column-spacing">3</property>
+                        <child>
+                          <object class="GtkComboBoxText" id="cbFilter">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="active">0</property>
+                            <items>
+                              <item id="filter_none" translatable="yes" context="startcenter|filter_none">All Documents</item>
+                              <item id="filter_writer" translatable="yes" context="startcenter|filter_writer">Text Documents</item>
+                              <item id="filter_calc" translatable="yes" context="startcenter|filter_calc">Spreadsheets</item>
+                              <item id="filter_impress" translatable="yes" context="startcenter|filter_impress">Presentations</item>
+                              <item id="filter_draw" translatable="yes" context="startcenter|filter_draw">Drawings</item>
+                            </items>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="cbFilter-atkobject">
+                                <property name="AtkObject::accessible-name" translatable="yes" context="startcenter|cbFilter-atkobject">Filter</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left-attach">1</property>
+                            <property name="top-attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkMenuButton" id="mbActions">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="focus-on-click">False</property>
+                            <property name="receives-default">True</property>
+                            <property name="tooltip-text" translatable="yes" context="startcenter|mbActions|tool_tip">Actions</property>
+                            <property name="halign">end</property>
+                            <property name="hexpand">True</property>
+                            <property name="image">imActions</property>
+                            <property name="always-show-image">True</property>
+                            <property name="popup">clearmenu</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">2</property>
+                            <property name="top-attach">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -691,12 +699,69 @@
                   </packing>
                 </child>
                 <child>
+                  <!-- n-columns=10 n-rows=1 -->
+                  <object class="GtkGrid" id="dv_recent_cols">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">8</property>
+                    <property name="column-homogeneous">True</property>
+                    <child>
+                      <object class="GtkLabel" id="dv_colhead0">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="margin-start">12</property>
+                        <property name="label" translatable="yes" context="startcenter|dv_colhead0">Name</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                        <property name="width">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="dv_colhead1">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="margin-start">0</property>
+                        <property name="label" translatable="yes" context="startcenter|dv_colhead1">Location</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">5</property>
+                        <property name="top-attach">0</property>
+                        <property name="width">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="dv_colhead2">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="margin-start">0</property>
+                        <property name="label" translatable="yes" context="startcenter|dv_colhead2">Modified</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">8</property>
+                        <property name="top-attach">0</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkScrolledWindow" id="dv_recent_scroll">
+                    <property name="hscrollbar-policy">never</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="shadow-type">in</property>
+                    <property name="shadow-type">none</property>
                     <child>
                       <object class="GtkTreeView" id="dv_recent_list">
                         <property name="visible">True</property>
@@ -704,8 +769,9 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">dv_recent_store</property>
-                        <property name="search-column">1</property>
-                        <child internal-child="accessible">
+                      <property name="headers-visible">False</property>
+                      <property name="search-column">0</property>
+                                                <child internal-child="accessible">
                           <object class="AtkObject" id="dv_recent_list-atkobject">
                             <property name="AtkObject::accessible-name" translatable="yes" context="startcenter|dv_recent_list-atkobject">Recent files</property>
                           </object>
@@ -715,46 +781,11 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="dv_col0">
-                            <property name="resizable">True</property>
-                            <property name="spacing">8</property>
-                            <property name="title" translatable="yes" context="startcenter|dv_col0">Name</property>
                             <property name="expand">True</property>
-                            <child>
-                              <object class="GtkCellRendererPixbuf" id="dv_cell_icon"/>
-                              <attributes>
-                                <attribute name="pixbuf">0</attribute>
-                              </attributes>
-                            </child>
                             <child>
                               <object class="GtkCellRendererText" id="dv_cell_name"/>
                               <attributes>
-                                <attribute name="text">1</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="dv_col1">
-                            <property name="resizable">True</property>
-                            <property name="spacing">8</property>
-                            <property name="title" translatable="yes" context="startcenter|dv_col1">Location</property>
-                            <child>
-                              <object class="GtkCellRendererText" id="dv_cell1"/>
-                              <attributes>
-                                <attribute name="text">2</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="dv_col2">
-                            <property name="resizable">True</property>
-                            <property name="spacing">8</property>
-                            <property name="title" translatable="yes" context="startcenter|dv_col2">Modified</property>
-                            <child>
-                              <object class="GtkCellRendererText" id="dv_cell2"/>
-                              <attributes>
-                                <attribute name="text">3</attribute>
+                                <attribute name="text">0</attribute>
                               </attributes>
                             </child>
                           </object>
@@ -765,7 +796,7 @@
                   <packing>
                     <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -778,14 +809,14 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">4</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
@@ -816,7 +847,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">4</property>
               </packing>
             </child>
             <child>
@@ -847,7 +878,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">6</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child>
@@ -940,7 +971,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">7</property>
+                <property name="position">6</property>
               </packing>
             </child>
           </object>
