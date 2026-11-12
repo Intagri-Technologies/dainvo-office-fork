@@ -124,6 +124,14 @@ ICONS = {
     'ViewRowColumnHeaders': 'table-2', 'WordCountDialog': 'whole-word', 'Zoom': 'zoom-in',
     'Zoom100Percent': 'd:onehundred', 'ZoomPage': 'scan', 'ZoomPageWidth': 'd:pagewidth',
     'StylesPreview': 'd:styles',
+    # sidebar deck tabs (Sidebar.xcu and the symphony links point at these)
+    'ConfigureDialog': 'sliders-horizontal', 'Gallery': 'images', 'DiaEffect': 'sparkles', 'InsertMath': 'sigma',
+    'DBViewFunctions': 'square-function', 'AddDirect': 'file-plus', 'InspectorDeck': 'scan-search',
+    'RecSearch': 'search', 'TrackChangesBar': 'file-diff',
+}
+# other images by path (without extension) -> (icon, size)
+FILES = {
+    'sfx2/res/symphony/sidebar-a11y-large': ('accessibility', 24),
 }
 # large buttons that carry the accent colour on the ribbon
 ACCENT = {'Paste', 'InsertTable', 'InsertGraphic', 'InsertObjectChart', 'InsertAnnotation', 'TrackChanges',
@@ -174,6 +182,10 @@ def main():
                 os.makedirs(os.path.dirname(path), exist_ok=True)
                 open(path, 'w', encoding='utf-8').write(svg(spec, size, width, c))
                 written += 1
+        for stem, (spec, size) in FILES.items():
+            path = os.path.join(ROOT, 'icon-themes', theme, stem + '.svg')
+            open(path, 'w', encoding='utf-8').write(svg(spec, size, SIZES['lc_'][1], color))
+            written += 1
         # per-language variants (Bold as "F", "N", ...) would bring the old style back
         for f in glob.glob(os.path.join(cmd_dir, '*', '*.svg')) + glob.glob(os.path.join(cmd_dir, '32', '*', '*.svg')):
             stem = os.path.basename(f)[:-4]
