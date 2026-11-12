@@ -994,6 +994,25 @@ void PushButton::ImplDrawPushButton(vcl::RenderContext& rRenderContext)
     bool bRollOver = (IsMouseOver() && aInRect.Contains(GetPointerPosPixel()));
     if (bRollOver)
         nButtonStyle |= DrawButtonFlags::Highlight;
+
+    // Dainvo: flat (ribbon) buttons, including menu buttons with their menu open,
+    // get the same rounded fill as toolbar buttons instead of the native bezel
+    if ((GetStyle() & WB_FLATBUTTON) && !IsControlBackground())
+    {
+        const bool bPressed = mbPressed || (GetButtonState() & DrawButtonFlags::Pressed);
+        const sal_uInt16 nHighlight = bPressed ? 1 : (bRollOver ? 2 : 0);
+        if (nHighlight || IsChecked())
+            rRenderContext.DrawSelectionBackground(aInRect, GetParent()->GetBackgroundColor(), nHighlight,
+                                                   IsChecked(), false, false, nullptr, 6);
+        tools::Rectangle aContentRect(aInRect);
+        aContentRect.shrink(4); // same content inset as the native path
+        ImplDrawPushButtonContent(&rRenderContext, SystemTextColorFlags::NONE, aContentRect,
+                                  /*bDrawMenuSep*/false, nButtonStyle);
+        if (HasFocus())
+            ShowFocus(ImplGetFocusRect());
+        return;
+    }
+
     // tdf#123175 if there is a custom control bg set, draw the button without outsourcing to the NWF
     bNativeOK = !IsControlBackground() && rRenderContext.IsNativeControlSupported(ControlType::Pushbutton, ControlPart::Entire);
     if (bNativeOK)
