@@ -1,0 +1,159 @@
+{
+  "_comment": "Dainvo Office ribbon spec. Each tab is a list of groups. A group has L (large labelled buttons), R (one or two rows of small icon buttons), G (a gallery command) and L2 (large buttons after the gallery). Append |o to an item to leave it out of the icons-only layout. Run dainvo/ribbon/generate.py after editing.",
+  "documents": {
+    "file": "sw/uiconfig/swriter/ui/notebookbar.ui",
+    "compact": "sw/uiconfig/swriter/ui/notebookbar_compact.ui",
+    "context": "TabbedWriter",
+    "suppr": "solenv/sanitizers/ui/modules/swriter.suppr",
+    "compactGallery": ".uno:StyleApply",
+    "tabs": [
+      ["Home", [
+        {"R": [[".uno:Undo"], [".uno:Redo"]]},
+        {"L": [".uno:Paste"], "R": [[".uno:Cut", ".uno:Copy"], [".uno:FormatPaintbrush"]]},
+        {"R": [[".uno:CharFontName", ".uno:FontHeight", ".uno:Grow|o", ".uno:Shrink|o", ".uno:ResetAttributes"],
+               [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:Strikeout", ".uno:SubScript|o", ".uno:SuperScript|o", ".uno:CharBackColor", ".uno:Color"]]},
+        {"R": [[".uno:DefaultBullet", ".uno:DefaultNumbering", ".uno:SetOutline|o", ".uno:DecrementIndent", ".uno:IncrementIndent", ".uno:ControlCodes|o"],
+               [".uno:LeftPara", ".uno:CenterPara", ".uno:RightPara", ".uno:JustifyPara", ".uno:LineSpacing", ".uno:BackgroundColor|o", ".uno:SetBorderStyle|o"]]},
+        {"G": ".uno:StylesPreview", "L2": [".uno:DesignerDialog"]},
+        {"R": [[".uno:SearchDialog"]]}
+      ]],
+      ["Insert", [
+        {"L": [".uno:InsertPagebreak"]},
+        {"L": [".uno:InsertTable"]},
+        {"L": [".uno:InsertGraphic", ".uno:BasicShapes", ".uno:InsertObjectChart"]},
+        {"L": [".uno:DrawText"], "R": [[".uno:InsertPageHeader", ".uno:InsertPageFooter"], [".uno:InsertPageNumberField", ".uno:InsertFieldCtrl"]]},
+        {"R": [[".uno:HyperlinkDialog"], [".uno:InsertBookmark"]]},
+        {"L": [".uno:InsertAnnotation"]},
+        {"R": [[".uno:InsertObjectStarMath"], [".uno:CharmapControl"]]}
+      ]],
+      ["Layout", [
+        {"L": [".uno:PageMargin", ".uno:Orientation", ".uno:AttributePageSize", ".uno:PageColumnType"], "R": [[".uno:InsertBreak"], [".uno:LineNumberingDialog|o", ".uno:Hyphenate|o"]]},
+        {"R": [[".uno:LeftParaMargin", ".uno:AboveSpacing"], [".uno:RightParaMargin", ".uno:BelowSpacing"]]},
+        {"L": [".uno:TextWrap"], "R": [[".uno:ObjectForwardOne", ".uno:ObjectBackOne"], [".uno:ObjectAlign", ".uno:FormatGroup", ".uno:RotateRight"]]}
+      ]],
+      ["References", [
+        {"L": [".uno:InsertMultiIndex"], "R": [[".uno:UpdateAllIndexes"]]},
+        {"L": [".uno:InsertFootnote"], "R": [[".uno:InsertEndnote"], [".uno:InsertFootnoteDialog"]]},
+        {"L": [".uno:InsertAuthoritiesEntry"], "R": [[".uno:BibliographyComponent"]]},
+        {"L": [".uno:InsertCaptionDialog"], "R": [[".uno:InsertReferenceField"]]},
+        {"L": [".uno:InsertIndexesEntry"], "R": [[".uno:UpdateCurIndex"]]}
+      ]],
+      ["Review", [
+        {"L": [".uno:SpellingAndGrammarDialog"], "R": [[".uno:ThesaurusDialog", ".uno:SpellOnline"], [".uno:WordCountDialog"]]},
+        {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteComment", ".uno:PreviousAnnotation"], [".uno:ShowAnnotations", ".uno:NextAnnotation"]]},
+        {"L": [".uno:TrackChanges"], "R": [[".uno:ShowTrackedChanges"], [".uno:AcceptTrackedChanges"]]},
+        {"L": [".uno:AcceptTrackedChange", ".uno:RejectTrackedChange"], "R": [[".uno:PreviousTrackedChange"], [".uno:NextTrackedChange"]]},
+        {"L": [".uno:CompareDocuments", ".uno:ProtectTraceChangeMode"]}
+      ]],
+      ["View", [
+        {"L": [".uno:PrintLayout", ".uno:BrowseView", ".uno:FullScreen"]},
+        {"R": [[".uno:Ruler", ".uno:ShowBoundaries"], [".uno:ControlCodes", ".uno:Navigator"]]},
+        {"L": [".uno:Zoom"], "R": [[".uno:Zoom100Percent", ".uno:ZoomPageWidth"], [".uno:ShowMultiplePages", ".uno:ZoomPage"]]},
+        {"L": [".uno:Sidebar"]}
+      ]]
+    ]
+  },
+  "spreadsheets": {
+    "file": "sc/uiconfig/scalc/ui/notebookbar.ui",
+    "compact": "sc/uiconfig/scalc/ui/notebookbar_compact.ui",
+    "context": "TabbedCalc",
+    "suppr": "solenv/sanitizers/ui/modules/scalc.suppr",
+    "tabs": [
+      ["Home", [
+        {"R": [[".uno:Undo"], [".uno:Redo"]]},
+        {"L": [".uno:Paste"], "R": [[".uno:Cut", ".uno:Copy"], [".uno:FormatPaintbrush"]]},
+        {"R": [[".uno:CharFontName", ".uno:FontHeight", ".uno:Grow|o", ".uno:Shrink|o"],
+               [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:SetBorderStyle", ".uno:BackgroundColor", ".uno:Color"]]},
+        {"R": [[".uno:AlignLeft", ".uno:AlignHorizontalCenter", ".uno:AlignRight", ".uno:WrapText"],
+               [".uno:AlignTop", ".uno:AlignVCenter", ".uno:AlignBottom", ".uno:ToggleMergeCells"]]},
+        {"R": [[".uno:NumberFormatType"], [".uno:NumberFormatCurrency", ".uno:NumberFormatPercent", ".uno:NumberFormatIncDecimals|o", ".uno:NumberFormatDecDecimals|o"]]},
+        {"L": [".uno:ConditionalFormatMenu"], "R": [[".uno:StyleApply"]]},
+        {"L": [".uno:InsertCell", ".uno:DeleteCell"]},
+        {"R": [[".uno:AutoSum", ".uno:DataSort"], [".uno:DataFilterAutoFilter", ".uno:SearchDialog"]]}
+      ]],
+      ["Insert", [
+        {"L": [".uno:DataDataPilotRun"]},
+        {"L": [".uno:InsertGraphic", ".uno:BasicShapes", ".uno:InsertObjectChart"]},
+        {"R": [[".uno:HyperlinkDialog"], [".uno:InsertAnnotation"]]},
+        {"L": [".uno:DrawText"], "R": [[".uno:EditHeaderAndFooter"]]},
+        {"R": [[".uno:FunctionDialog"], [".uno:CharmapControl"]]}
+      ]],
+      ["Formulas", [
+        {"L": [".uno:FunctionDialog", ".uno:AutoSum"]},
+        {"L": [".uno:AddName"], "R": [[".uno:DefineName"], [".uno:InsertName"]]},
+        {"R": [[".uno:ShowPrecedents", ".uno:ShowDependents"], [".uno:ClearArrows", ".uno:ShowErrors"]]},
+        {"L": [".uno:Calculate"]}
+      ]],
+      ["Data", [
+        {"L": [".uno:DataSort", ".uno:DataFilterAutoFilter"], "R": [[".uno:DataFilterStandardFilter"], [".uno:DataFilterRemoveFilter"]]},
+        {"L": [".uno:TextToColumns", ".uno:Validation"], "R": [[".uno:HandleDuplicateRecords"], [".uno:DataAreaRefresh"]]},
+        {"L": [".uno:Group", ".uno:Ungroup"], "R": [[".uno:DataSubTotals"]]},
+        {"L": [".uno:DataDataPilotRun", ".uno:InsertExternalDataSource"]}
+      ]],
+      ["Review", [
+        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog"], [".uno:SpellOnline"]]},
+        {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteNote", ".uno:ShowAllNotes"], [".uno:HideAllNotes", ".uno:DeleteAllNotes"]]},
+        {"L": [".uno:TraceChangeMode"], "R": [[".uno:AcceptChanges"]]},
+        {"L": [".uno:Protect", ".uno:ToolProtectionDocument"]}
+      ]],
+      ["View", [
+        {"L": [".uno:NormalViewMode", ".uno:PagebreakMode"]},
+        {"R": [[".uno:ToggleSheetGrid", ".uno:ViewRowColumnHeaders"], [".uno:InputLineVisible", ".uno:Sidebar"]]},
+        {"L": [".uno:FreezePanes", ".uno:SplitWindow"]},
+        {"L": [".uno:Zoom"], "R": [[".uno:Zoom100Percent"]]}
+      ]]
+    ]
+  },
+  "presentations": {
+    "file": "sd/uiconfig/simpress/ui/notebookbar.ui",
+    "compact": "sd/uiconfig/simpress/ui/notebookbar_compact.ui",
+    "context": "TabbedImpress",
+    "suppr": "solenv/sanitizers/ui/modules/simpress.suppr",
+    "tabs": [
+      ["Home", [
+        {"R": [[".uno:Undo"], [".uno:Redo"]]},
+        {"L": [".uno:Paste"], "R": [[".uno:Cut", ".uno:Copy"], [".uno:FormatPaintbrush"]]},
+        {"L": [".uno:InsertSlide"], "R": [[".uno:AssignLayout"], [".uno:DuplicateSlide"]]},
+        {"R": [[".uno:CharFontName", ".uno:FontHeight", ".uno:Grow|o", ".uno:Shrink|o"],
+               [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:Strikeout|o", ".uno:Color"]]},
+        {"R": [[".uno:DefaultBullet", ".uno:DefaultNumbering", ".uno:DecrementIndent|o", ".uno:IncrementIndent|o"],
+               [".uno:LeftPara", ".uno:CenterPara", ".uno:RightPara", ".uno:LineSpacing"]]},
+        {"L": [".uno:BasicShapes", ".uno:ObjectPosition"], "R": [[".uno:XLineColor"], [".uno:FillShadow"]]},
+        {"R": [[".uno:SearchDialog"]]}
+      ]],
+      ["Insert", [
+        {"L": [".uno:InsertSlide"]},
+        {"L": [".uno:InsertTable"]},
+        {"L": [".uno:InsertGraphic", ".uno:BasicShapes", ".uno:InsertObjectChart"]},
+        {"L": [".uno:InsertAVMedia"]},
+        {"L": [".uno:Text"], "R": [[".uno:HeaderAndFooter"]]},
+        {"R": [[".uno:HyperlinkDialog"], [".uno:InsertAnnotation"]]},
+        {"R": [[".uno:InsertObjectStarMath"], [".uno:CharmapControl"]]}
+      ]],
+      ["Design", [
+        {"L": [".uno:ThemeDialog", ".uno:SlideSetup", ".uno:SelectBackground", ".uno:SlideMasterPage"]}
+      ]],
+      ["Transitions", [
+        {"L": [".uno:SlideChangeWindow"]}
+      ]],
+      ["Animations", [
+        {"L": [".uno:CustomAnimation"]}
+      ]],
+      ["Slide Show", [
+        {"L": [".uno:Presentation", ".uno:PresentationCurrentSlide"]},
+        {"L": [".uno:RehearseTimings", ".uno:PresentationDialog"]},
+        {"R": [[".uno:HideSlide", ".uno:ShowSlide"], [".uno:CustomShowDialog"]]}
+      ]],
+      ["Review", [
+        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog"], [".uno:SpellOnline"]]},
+        {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteAnnotation", ".uno:PreviousAnnotation"], [".uno:ShowAnnotations", ".uno:NextAnnotation"]]}
+      ]],
+      ["View", [
+        {"L": [".uno:NormalMultiPaneGUI", ".uno:DiaMode", ".uno:NotesMode", ".uno:OutlineMode"]},
+        {"L": [".uno:SlideMasterPage"]},
+        {"R": [[".uno:Ruler", ".uno:GridVisible"], [".uno:Sidebar"]]},
+        {"L": [".uno:Zoom"]}
+      ]]
+    ]
+  }
+}

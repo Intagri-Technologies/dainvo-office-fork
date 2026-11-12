@@ -48,7 +48,7 @@
 
 using namespace ::com::sun::star;
 
-constexpr tools::Long gnBorder = 1;
+constexpr tools::Long gnBorder = 6; // Dainvo: roomier list rows (was 1)
 
 void ImplInitDropDownButton( PushButton* pButton )
 {
@@ -1632,7 +1632,11 @@ void ImplListBoxWindow::ImplPaint(vcl::RenderContext& rRenderContext, sal_Int32 
         rRenderContext.SetTextColor(!IsEnabled() ? rStyleSettings.GetDisableTextColor() : rStyleSettings.GetListBoxWindowHighlightTextColor());
         rRenderContext.SetFillColor(rStyleSettings.GetListBoxWindowHighlightColor());
         rRenderContext.SetLineColor();
-        rRenderContext.DrawRect(aRect);
+        // Dainvo: rounded, inset selection like native macOS menus
+        tools::Rectangle aSelRect(aRect);
+        aSelRect.AdjustLeft(3);
+        aSelRect.AdjustRight(-3);
+        rRenderContext.DrawRect(aSelRect, 5, 5);
     }
     else
     {

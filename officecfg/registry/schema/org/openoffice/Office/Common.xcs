@@ -1401,7 +1401,7 @@
             <desc>Specifies that the names of the selectable fonts will be
             displayed with this font.</desc>
           </info>
-          <value>true</value>
+          <value>false</value>
         </prop>
       </group>
       <group oor:name="SourceViewFont">
@@ -2904,7 +2904,7 @@
         <info>
           <desc>Name of selected palette</desc>
         </info>
-        <value>Standard</value>
+        <value>Dainvo</value>
       </prop>
       <prop oor:name="CustomColor" oor:type="oor:int-list" oor:nillable="false">
         <info>
@@ -5067,7 +5067,7 @@
         <info>
           <desc>Determines whether the Tip-of-the-Day dialog is shown on startup.</desc>
         </info>
-        <value>true</value>
+        <value>false</value>
       </prop>
       <prop oor:name="LastTipOfTheDayShown" oor:type="xs:int" oor:nillable="false">
           <info>
@@ -5128,7 +5128,7 @@
         <info>
           <desc>Determines whether to show a donation button in the start center or extension.</desc>
         </info>
-        <value>true</value>
+        <value>false</value>
       </prop>
       <prop oor:name="UseOpenCL" oor:type="xs:boolean" oor:nillable="false">
         <info>
@@ -5245,7 +5245,7 @@
           <desc>Specifies which transparency at which module and dialog color are merged for
           the notebookbar. Use 0 for full module and 255 for full dialog.</desc>
         </info>
-        <value>150</value>
+        <value>255</value>
       </prop>
       <prop oor:name="SymbolStyle" oor:type="xs:string" oor:nillable="false">
         <!-- UIHints: Tools  Options General View -->

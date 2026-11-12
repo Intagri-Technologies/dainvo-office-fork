@@ -419,6 +419,59 @@ CommandLineArgs& Desktop::GetCommandLineArgs()
     return theCommandLineArgs;
 }
 
+// Dainvo Office: show Writer, Calc and Impress as Documents, Spreadsheets and
+// Presentations in every UI string, in all languages, without touching the
+// translation files.
+namespace
+{
+bool IsWordChar(sal_Unicode c) { return rtl::isAsciiAlphanumeric(c); }
+
+// Replace whole-word occurrences of rFrom with rTo.
+OUString ReplaceWord(const OUString& rStr, std::u16string_view rFrom, std::u16string_view rTo)
+{
+    OUStringBuffer aBuf(rStr.getLength());
+    sal_Int32 nPos = 0;
+    for (;;)
+    {
+        sal_Int32 nFound = rStr.indexOf(rFrom, nPos);
+        if (nFound == -1)
+            break;
+        sal_Int32 nEnd = nFound + rFrom.size();
+        bool bWord = (nFound == 0 || !IsWordChar(rStr[nFound - 1]))
+                     && (nEnd == rStr.getLength() || !IsWordChar(rStr[nEnd]));
+        aBuf.append(rStr.subView(nPos, nFound - nPos));
+        aBuf.append(bWord ? rTo : rFrom);
+        nPos = nEnd;
+    }
+    if (nPos == 0)
+        return rStr;
+    aBuf.append(rStr.subView(nPos));
+    return aBuf.makeStringAndClear();
+}
+
+OUString DainvoRenameApps(const OUString& rStr)
+{
+    if (rStr.indexOf("Writer") == -1 && rStr.indexOf("Calc") == -1
+        && rStr.indexOf("Impress") == -1)
+        return rStr;
+
+    OUString sRet(rStr);
+    // "Writer Document" would otherwise become "Documents Document".
+    static constexpr std::pair<std::u16string_view, std::u16string_view> aPhrases[] = {
+        { u"Writer Document", u"Document" },       { u"Writer document", u"document" },
+        { u"Calc Spreadsheet", u"Spreadsheet" },   { u"Calc spreadsheet", u"spreadsheet" },
+        { u"Impress Presentation", u"Presentation" }, { u"Impress presentation", u"presentation" },
+    };
+    for (const auto & [ rFrom, rTo ] : aPhrases)
+        sRet = sRet.replaceAll(rFrom, rTo);
+
+    sRet = ReplaceWord(sRet, u"Writer", u"Documents");
+    sRet = ReplaceWord(sRet, u"Calc", u"Spreadsheets");
+    sRet = ReplaceWord(sRet, u"Impress", u"Presentations");
+    return sRet;
+}
+}
+
 OUString ReplaceStringHookProc( const OUString& rStr )
 {
     const static OUString sBuildId(utl::Bootstrap::getBuildIdData(u"development"_ustr)),
@@ -445,7 +498,7 @@ OUString ReplaceStringHookProc( const OUString& rStr )
         sRet = sRet.replaceAll( "%OOOVENDOR", sOOOVendor );
     }
 
-    return sRet;
+    return DainvoRenameApps(sRet);
 }
 
 Desktop::Desktop()

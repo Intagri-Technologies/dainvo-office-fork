@@ -133,6 +133,8 @@ void PaletteManager::LoadPalettes()
                                 aFNameWithoutExt = SvxResId(RID_SVXSTR_COLOR_PALETTE_MATERIAL);
                             else if (aFNameWithoutExt == "libreoffice")
                                 aFNameWithoutExt = "LibreOffice";
+                            else if (aFNameWithoutExt == "dainvo")
+                                aFNameWithoutExt = "Dainvo";
                             else if (aFNameWithoutExt == "freecolour-hlc")
                                 aFNameWithoutExt = SvxResId(RID_SVXSTR_COLOR_PALETTE_FREECOLOURHLC);
                             pPalette.reset(new PaletteSOC(aFileStat.getFileURL(), aFNameWithoutExt));
@@ -475,6 +477,8 @@ static OUString lcl_convertUINameToFileName(OUString& rStr)
         return u"material"_ustr;
     else if (rStr == "LibreOffice")
         return u"libreoffice"_ustr;
+    else if (rStr == "Dainvo")
+        return u"dainvo"_ustr;
     else if (rStr == SvxResId(RID_SVXSTR_COLOR_PALETTE_FREECOLOURHLC))
        return u"freecolour-hlc"_ustr;
     return rStr;

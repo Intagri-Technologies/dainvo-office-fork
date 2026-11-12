@@ -343,6 +343,10 @@ void StyleItemController::DrawEntry(vcl::RenderContext& rRenderContext)
         Size aFontSize(0, pFontHeightItem->GetHeight());
         aFontSize /= rRenderContext.GetDPIScaleFactor();
         Size aPixelSize(rRenderContext.LogicToPixel(aFontSize, MapMode(pShell->GetMapUnit())));
+        // Dainvo: keep large styles (Title, Heading 1) inside the preview box.
+        const tools::Long nMaxPixelHeight = aSize.Height() * 25 / 100;
+        if (aPixelSize.Height() > nMaxPixelHeight)
+            aPixelSize.setHeight(nMaxPixelHeight);
 
         SvxFont aFont = GetFontFromItems(pFontItem, aPixelSize, pItemSet);
         rRenderContext.SetFont(aFont);
@@ -415,18 +419,38 @@ void StyleItemController::DrawHighlight(vcl::RenderContext& rRenderContext, Colo
 
 void StyleItemController::DrawText(vcl::RenderContext& rRenderContext)
 {
-    const SalLayoutGlyphs* layoutGlyphs = SalLayoutGlyphsCache::self()->GetLayoutGlyphs(
-        &rRenderContext, m_aStyleName.translatedName);
-    tools::Rectangle aTextRect;
-    rRenderContext.GetTextBoundRect(aTextRect, m_aStyleName.translatedName, 0, 0, -1, 0, {}, {},
-                                    layoutGlyphs);
+    // Dainvo: Word-style swatch - a sample in the style's own font on top,
+    // the style name in small UI text underneath.
+    const Size aOut(rRenderContext.GetOutputSizePixel());
+    const tools::Long nNameHeight = aOut.Height() * 30 / 100;
+    const tools::Long nSampleBottom = aOut.Height() - nNameHeight;
+    static constexpr OUString aSample = u"AaBbCcDdE"_ustr;
 
-    Point aPos(0, 0);
-    aPos.AdjustX(LEFT_MARGIN);
-    aPos.AdjustY((rRenderContext.GetOutputHeightPixel() - aTextRect.Bottom()) / 2);
+    tools::Rectangle aSampleRect;
+    rRenderContext.GetTextBoundRect(aSampleRect, aSample);
+    Point aSamplePos((aOut.Width() - aSampleRect.GetWidth()) / 2 - aSampleRect.Left(),
+                     (nSampleBottom - aSampleRect.GetHeight()) / 2 - aSampleRect.Top() + 2);
+    rRenderContext.DrawText(aSamplePos, aSample);
 
-    rRenderContext.DrawText(aPos, m_aStyleName.translatedName, 0, -1, nullptr, nullptr,
-                            layoutGlyphs);
+    const vcl::Font aStyleFont(rRenderContext.GetFont());
+    const Color aStyleTextColor(rRenderContext.GetTextColor());
+    vcl::Font aNameFont(Application::GetSettings().GetStyleSettings().GetLabelFont());
+    aNameFont.SetFontHeight(nNameHeight * 70 / 100);
+    aNameFont.SetColor(COL_GRAY);
+    rRenderContext.SetFont(aNameFont);
+    rRenderContext.SetTextColor(COL_GRAY);
+
+    OUString aName = m_aStyleName.translatedName;
+    aName = rRenderContext.GetEllipsisString(aName, aOut.Width() - 4);
+    tools::Rectangle aNameRect;
+    rRenderContext.GetTextBoundRect(aNameRect, aName);
+    Point aNamePos((aOut.Width() - aNameRect.GetWidth()) / 2 - aNameRect.Left(),
+                   nSampleBottom + (nNameHeight - aNameRect.GetHeight()) / 2 - aNameRect.Top()
+                       - 2);
+    rRenderContext.DrawText(aNamePos, aName);
+
+    rRenderContext.SetFont(aStyleFont);
+    rRenderContext.SetTextColor(aStyleTextColor);
 }
 
 StylesPreviewWindow_Base::StylesPreviewWindow_Base(
@@ -543,7 +567,7 @@ Bitmap StylesPreviewWindow_Base::GetCachedPreview(const StylePreviewDescriptor& 
     else
     {
         ScopedVclPtrInstance<VirtualDevice> pImg;
-        const Size aSize(100, 24);
+        const Size aSize(84, 52); // Dainvo: Word-style swatch
         pImg->SetOutputSizePixel(aSize);
 
         StyleItemController aStyleController(rStyle);

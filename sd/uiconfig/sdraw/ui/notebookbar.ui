@@ -2285,714 +2285,6 @@
             <property name="can-focus">True</property>
             <property name="hexpand">True</property>
             <child>
-              <object class="sfxlo-PriorityHBox" id="File">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="valign">center</property>
-                <property name="vexpand">True</property>
-                <child>
-                  <object class="sfxlo-PriorityMergedHBox" id="pmhbFile">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <!-- n-columns=3 n-rows=3 -->
-                      <object class="GtkGrid" id="gdFileNew">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-start">6</property>
-                        <property name="margin-end">3</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="row-spacing">3</property>
-                        <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbFileNew">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFileNew">New</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFileNew"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileAddDirect">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkMenuToolButton" id="btnFileAddDirect">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:AddDirect</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">False</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSearchDialog">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileNewDoc">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:NewDoc</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">2</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFileNew"/>
-                        </accessibility>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <!-- n-columns=5 n-rows=3 -->
-                      <object class="GtkGrid" id="gdFileFile">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-start">3</property>
-                        <property name="margin-end">3</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="row-spacing">3</property>
-                        <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbFileFile">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFileFile">Document</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFileFile"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileOpen">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileOpen">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:Open</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSave">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileSave">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:Save</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileExportTo">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="margin-start">3</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileExportTo">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:ExportTo</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">2</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileExportDirectToPDF">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileExportDirectToPDF">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:ExportDirectToPDF</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">3</property>
-                            <property name="top-attach">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">4</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSendMail">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileSendMail">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:SendMail</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">3</property>
-                            <property name="top-attach">1</property>
-                          </packing>
-                        </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFileFile"/>
-                        </accessibility>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <!-- n-columns=3 n-rows=3 -->
-                      <object class="GtkGrid" id="gdFilePrint">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-start">3</property>
-                        <property name="margin-end">3</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="row-spacing">3</property>
-                        <property name="column-spacing">3</property>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFilePrint">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btFilePrint">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:Print</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="lbFilePrint">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFilePrint">Print</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFilePrint"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFilePrintDefault">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFilePrintDefault">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:PrintDefault</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileWebHtml">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileWebHtml">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:WebHtml</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">2</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFilePrint"/>
-                        </accessibility>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <!-- n-columns=3 n-rows=3 -->
-                      <object class="GtkGrid" id="gdFileProperties">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-start">3</property>
-                        <property name="margin-end">6</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="row-spacing">3</property>
-                        <property name="column-spacing">3</property>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSetDocumentProperties">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileSetDocumentProperties">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:SetDocumentProperties</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSignature">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileSignature">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:Signature</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxFileSignPDF">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnFileSignPDF">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:SignPDF</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparator">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">2</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="lbFileProperties">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFileProperties">Properties</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFileProperties"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFileProperties"/>
-                        </accessibility>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="sfxlo-DropdownBox" id="File-Menu">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkBox" id="GroupB8">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="vexpand">True</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="SectionBottom80">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="halign">end</property>
-                            <property name="hexpand">True</property>
-                            <property name="toolbar-style">icons</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">1</property>
-                            <child>
-                              <object class="GtkToolButton" id="File-CloseDoc">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:CloseDoc</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="SectionBottom1">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="halign">end</property>
-                            <property name="hexpand">True</property>
-                            <property name="toolbar-style">icons</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">1</property>
-                            <child>
-                              <object class="GtkToolButton" id="File-HelpIndex">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:HelpIndex</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="GroupB7">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="margin-end">5</property>
-                        <property name="vexpand">True</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="svtlo-ManagedMenuButton" id="File-FileButton:Menu File">
-                            <property name="label" translatable="yes" context="TabbedDraw|FileMenuButton">_File</property>
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="focus-on-click">False</property>
-                            <property name="receives-default">False</property>
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="relief">none</property>
-                            <property name="use-underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="svtlo-ManagedMenuButton" id="File-HelpButton:Menu Help">
-                            <property name="label" translatable="yes" context="TabbedDraw|FileHelpMenuButton">_Help</property>
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="focus-on-click">False</property>
-                            <property name="receives-default">False</property>
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="relief">none</property>
-                            <property name="use-underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="pack-type">end</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="FileLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes" context="TabbedDraw|FileTabLabel">~File</property>
-                <property name="use-underline">True</property>
-              </object>
-              <packing>
-                <property name="tab-fill">False</property>
-              </packing>
-            </child>
-            <child>
               <object class="sfxlo-PriorityHBox" id="Home">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
@@ -3005,6 +2297,76 @@
                     <property name="valign">center</property>
                     <property name="vexpand">True</property>
                     <child>
+                      <!-- Dainvo: Undo / Redo at the start of Home, like Word -->
+                      <object class="GtkGrid" id="gdDainvoUndo">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">3</property>
+                        <property name="valign">center</property>
+                        <property name="row-spacing">3</property>
+                        <child>
+                          <object class="sfxlo-NotebookbarToolBox" id="bxDainvoUndo">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="toolbar-style">icons</property>
+                            <property name="show-arrow">False</property>
+                            <child>
+                              <object class="GtkMenuToolButton" id="btnDainvoUndo">
+                                <property name="visible">True</property>
+                                <property name="action-name">.uno:Undo</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left-attach">0</property>
+                            <property name="top-attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="sfxlo-NotebookbarToolBox" id="bxDainvoRedo">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="toolbar-style">icons</property>
+                            <property name="show-arrow">False</property>
+                            <child>
+                              <object class="GtkMenuToolButton" id="btnDainvoRedo">
+                                <property name="visible">True</property>
+                                <property name="action-name">.uno:Redo</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left-attach">0</property>
+                            <property name="top-attach">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSeparator" id="sepDainvoUndo">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+                    <child>
                       <!-- n-columns=3 n-rows=3 -->
                       <object class="GtkGrid" id="gdHomeClipboard">
                         <property name="visible">True</property>
@@ -3015,27 +2377,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbHomeClipboard">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelHomeClipboard">Clipboard</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdHomeClipboard"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="sfxlo-NotebookbarToolBox" id="bxHomePaste">
                             <property name="visible">True</property>
@@ -3118,9 +2459,6 @@
                             <property name="height">3</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbHomeClipboard"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3139,27 +2477,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbHomePage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelHomePage">Page</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdHomePage"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -3244,9 +2561,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbHomePage"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3265,27 +2579,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbHomeFont">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelHomeFont">Font</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdHomeFont"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">5</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="sfxlo-NotebookbarToolBox" id="bxHomeFormatPaintbrush">
                             <property name="visible">True</property>
@@ -3563,9 +2856,6 @@
                             <property name="height">3</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbHomeFont"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3584,27 +2874,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbHomeParagraph">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelHomeParagraph">Paragraph</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdHomeParagraph"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -3843,9 +3112,6 @@
                         <child>
                           <placeholder/>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbHomeParagraph"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3862,7 +3128,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Home-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -3991,27 +3257,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbInsertPage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertPage">Page</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertPage"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -4093,9 +3338,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertPage"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4114,27 +3356,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbInsertData">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertData">Data</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertData"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -4217,9 +3438,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertData"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4238,27 +3456,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbInsertGraphic">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertGraphic">Graphic</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertGraphic"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -4341,9 +3538,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertGraphic"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4362,27 +3556,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbInsertText">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertText">Text</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertText"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -4495,9 +3668,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertText"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4516,27 +3686,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbInsertFontwork">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertFontwork">Fontwork</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertFontwork"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -4643,9 +3792,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertFontwork"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4664,27 +3810,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbInsertDrawingObjects">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelInsertDrawingObjects">Drawing Objects</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdInsertDrawingObjects"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -4907,9 +4032,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbInsertDrawingObjects"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4926,7 +4048,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Insert-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -5059,27 +4181,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbLayoutFormat">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelLayoutFormat">Format</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdLayoutFormat"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -5162,9 +4263,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbLayoutFormat"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5183,27 +4281,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbLayoutPage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelLayoutPage">Page</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdLayoutPage"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -5331,9 +4408,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbLayoutPage"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5352,26 +4426,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbLayoutMaster">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelLayoutMaster">Master</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdLayoutMaster"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -5410,9 +4464,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbLayoutMaster"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5431,27 +4482,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbLayoutBackground">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelLayoutBackground">Background</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdLayoutBackground"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -5534,9 +4564,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbLayoutBackground"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5553,7 +4580,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Layout-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -5667,25 +4694,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbReviewSpelling">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelReviewSpelling">Spelling</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdReviewSpelling"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -5777,9 +4785,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbReviewSpelling"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5798,25 +4803,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbReviewComments">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelReviewComments">Comments</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdReviewComments"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">4</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -5977,9 +4963,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbReviewComments"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5998,25 +4981,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbReviewRedact">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelReviewRedact">Redact</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdReviewRedact"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -6081,9 +5045,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbReviewRedact"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -6100,7 +5061,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Reference-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -6212,24 +5173,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbViewMode">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelViewMode">View Mode</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdViewMode"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -6278,9 +5221,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbViewMode"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -6299,25 +5239,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbViewZoom">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelViewZoom">Zoom</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdViewZoom"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -6444,9 +5365,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbViewZoom"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -6465,25 +5383,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbViewOptions">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelViewOptions">Options</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdViewOptions"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">5</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -6670,9 +5569,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbViewOptions"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -6691,25 +5587,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbViewGluepoints">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelViewGluepoints">Gluepoints</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdViewGluepoints"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -6924,9 +5801,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbViewGluepoints"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -6943,7 +5817,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="View-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -7057,25 +5931,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbTable">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelTable">Table</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdTable"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -7168,9 +6023,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbTable"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -7189,25 +6041,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbTableCells">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelTableCells">Cells</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdTableCells"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -7369,9 +6202,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbTableCells"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -7390,25 +6220,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbTableLayout">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelTableLayout">Layout</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdTableLayout"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">4</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -7573,9 +6384,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbTableLayout"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -7592,7 +6400,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Table-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -7707,27 +6515,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelImage">Image</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdImage"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -7860,9 +6647,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbImage"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -7881,27 +6665,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbImageFillBorder">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelImageFillBorder">Fill &amp; Border</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdImageFillBorder"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -8060,9 +6823,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbImageFillBorder"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -8081,26 +6841,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbImagePositioning">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelImagePositioning">Positioning</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdImagePositioning"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -8244,9 +6984,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbImagePositioning"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -8265,27 +7002,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbImageModify">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelImageModify">Modify</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdImageModify"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">4</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -8467,9 +7183,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbImageModify"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -8486,7 +7199,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Image-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -8627,27 +7340,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbDraw">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDraw">Drawing Object</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDraw"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -8777,9 +7469,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDraw"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -8798,27 +7487,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbDrawFillBorder">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDrawFillBorder">Fill &amp; Border</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDrawFillBorder"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -8978,9 +7646,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDrawFillBorder"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -8999,26 +7664,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbDrawPositioning">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDrawPositioning">Positioning</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDrawPositioning"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -9162,9 +7807,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDrawPositioning"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -9183,27 +7825,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbDrawCombination">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDrawCombination">Combination</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDrawCombination"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -9337,9 +7958,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDrawCombination"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -9358,27 +7976,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbDrawGrouping">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDrawGrouping">Grouping</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDrawGrouping"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -9479,9 +8076,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDrawGrouping"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -9500,26 +8094,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbDraw3D">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelDraw3D">3D</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdDraw3D"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -9609,9 +8183,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbDraw3D"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -9628,7 +8199,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Draw-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -9767,27 +8338,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbObject">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelObject">Object</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdObject"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -9898,9 +8448,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbObject"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -9919,27 +8466,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbObjectFillBorder">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelObjectFillBorder">Fill &amp; Border</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdObjectFillBorder"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -10098,9 +8624,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbObjectFillBorder"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -10119,26 +8642,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbObjectPositioning">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelObjectPositioning">Positioning</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdObjectPositioning"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -10282,9 +8785,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbObjectPositioning"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -10301,7 +8801,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Object-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -10439,26 +8939,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbMedia">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMedia">Media</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdMedia"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -10501,9 +8981,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMedia"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -10522,26 +8999,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMediaPositioning">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMediaPositioning">Positioning</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdMediaPositioning"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -10685,9 +9142,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMediaPositioning"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -10706,26 +9160,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMediaPlayer">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMediaPlayer">Media Player</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdMediaPlayer"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -10785,9 +9219,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMediaPlayer"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -10804,7 +9235,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Media-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -10938,24 +9369,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lb3DObject">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|label3DObject">3D Object</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -11085,9 +9498,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lb3DObject"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -11106,24 +9516,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lb3DFillBorder">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|label3DFillBorder">Fill &amp; Border</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -11283,9 +9675,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lb3DFillBorder"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -11304,23 +9693,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lb3DPositioning">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|label3DPositioning">Positioning</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -11464,9 +9836,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lb3DPositioning"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -11485,23 +9854,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lb3D">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|label3D">3D</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -11545,9 +9897,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lb3D"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -11564,7 +9913,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="3D-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -11700,22 +10049,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMaster">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMaster">Master</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">4</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -11876,9 +10209,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMaster"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -11897,22 +10227,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMasterSlide">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMasterSlide">Slide</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -12047,9 +10361,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMasterSlide"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -12068,25 +10379,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMasterColor">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelMasterColor">Color</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdMasterColor"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -12173,9 +10465,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMasterColor"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -12194,20 +10483,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbMasterClose">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -12246,9 +10521,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbMasterClose"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -12265,7 +10537,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="MasterPage-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -12379,27 +10651,6 @@
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
                         <child>
-                          <object class="GtkLabel" id="lbFormMode">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFormMode">Mode</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFormMode"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator" id="separator46">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
@@ -12488,9 +10739,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFormMode"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -12509,27 +10757,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbFormProperties">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFormProperties">Properties</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFormProperties"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator" id="separator47">
                             <property name="visible">True</property>
@@ -12677,9 +10904,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFormProperties"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -12698,27 +10922,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbFormControls">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelFormControls">Controls</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdFormControls"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">3</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator" id="separator48">
                             <property name="visible">True</property>
@@ -12986,9 +11189,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbFormControls"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -13005,7 +11205,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Form-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
@@ -13098,134 +11298,6 @@
               </packing>
             </child>
             <child>
-              <object class="sfxlo-PriorityHBox" id="Extension Tab">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <child>
-                  <object class="sfxlo-PriorityMergedHBox" id="Extension">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="NotebookBarAddonsToolMergePoint" id="AddonCommand">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="vexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="sfxlo-DropdownBox" id="Extension-Menu">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkBox" id="Extension-Section">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="vexpand">True</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="svtlo-ManagedMenuButton" id="Extension-ExtensionButton:Menu Addons">
-                            <property name="label" translatable="yes" context="TabbedDraw|ExtensionMenuButton">E_xtension</property>
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="focus-on-click">False</property>
-                            <property name="receives-default">False</property>
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="relief">none</property>
-                            <property name="use-underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="SectionBottom68">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="halign">end</property>
-                            <property name="hexpand">True</property>
-                            <property name="toolbar-style">both-horiz</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">1</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="pack-type">end</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator" id="separator50">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="margin-top">5</property>
-                    <property name="margin-bottom">5</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">5</property>
-                    <property name="pack-type">end</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="position">14</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="ExtensionLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes" context="TabbedDraw|ExtensionTabLabel">E~xtension</property>
-                <property name="use-underline">True</property>
-              </object>
-              <packing>
-                <property name="position">14</property>
-                <property name="tab-fill">False</property>
-              </packing>
-            </child>
-            <child>
               <object class="sfxlo-PriorityHBox" id="Tools Tab">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
@@ -13248,27 +11320,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbToolsMacro">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelToolsMacro">Macro</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdToolsMacro"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -13353,9 +11404,6 @@
                             <property name="top-attach">1</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbToolsMacro"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -13374,27 +11422,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbToolsAutoCorrection">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelToolsAutoCorrection">AutoCorrection</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdToolsAutoCorrection"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">1</property>
-                            <property name="width">1</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -13435,9 +11462,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbToolsAutoCorrection"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -13456,26 +11480,6 @@
                         <property name="margin-bottom">6</property>
                         <property name="row-spacing">3</property>
                         <property name="column-spacing">3</property>
-                        <child>
-                          <object class="GtkLabel" id="lbTools">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">end</property>
-                            <property name="vexpand">True</property>
-                            <property name="label" translatable="yes" context="TabbedDraw|labelTools">Tools</property>
-                            <attributes>
-                              <attribute name="style" value="italic"/>
-                              <attribute name="scale" value="0.9"/>
-                            </attributes>
-                            <accessibility>
-                              <relation type="label-for" target="gdTools"/>
-                            </accessibility>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">2</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkSeparator">
                             <property name="visible">True</property>
@@ -13517,9 +11521,6 @@
                             <property name="height">2</property>
                           </packing>
                         </child>
-                        <accessibility>
-                          <relation type="labelled-by" target="lbTools"/>
-                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -13536,7 +11537,7 @@
                 </child>
                 <child>
                   <object class="sfxlo-DropdownBox" id="Tools-Menu">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>

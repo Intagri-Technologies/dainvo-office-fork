@@ -336,7 +336,10 @@ bool AquaSalMenu::ShowNativePopupMenu(FloatingWindow * pWin, const tools::Rectan
         ];
 
     [AquaA11yWrapper setPopupMenuOpen: YES];
-    [NSMenu popUpContextMenu:mpMenu withEvent:fakeMouseEvent forView:pParentNSView];
+    // Dainvo: show as a plain popup menu, not a context menu, so AppKit
+    // doesn't add its own items (AutoFill, Services) to our menus
+    (void)fakeMouseEvent;
+    [mpMenu popUpMenuPositioningItem:nil atLocation:displayPopupFrame.origin inView:pParentNSView];
     [AquaA11yWrapper setPopupMenuOpen: NO];
 
     return true;

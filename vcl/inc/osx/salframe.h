@@ -75,6 +75,7 @@ public:
     NSRect                          maTrackingRect;
 
     CGMutablePathRef                mrClippingPath;         // used for "shaping"
+    bool                            mbExplicitClip = false; // Dainvo: a caller set its own shape
     std::vector< CGRect >           maClippingRects;
 
     tools::Rectangle                       maInvalidRect;
@@ -205,6 +206,11 @@ public:
     NSCursor* getCurrentCursor();
 
     CGMutablePathRef getClipPath() const { return mrClippingPath; }
+    // Dainvo: popups (FLOAT frames) get the 8px card radius
+    void updateRoundedPopupShape();
+    bool isRoundedPopup() const { return mrClippingPath && !mbExplicitClip
+                                         && (mnStyle & SalFrameStyleFlags::FLOAT)
+                                         && !(mnStyle & SalFrameStyleFlags::TOOLTIP); }
 
     // called by VCL_NSApplication to indicate screen settings have changed
     void screenParametersChanged();

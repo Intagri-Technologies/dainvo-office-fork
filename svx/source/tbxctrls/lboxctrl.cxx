@@ -19,6 +19,8 @@
 
 #include <sal/config.h>
 
+#include <algorithm>
+
 #include <sal/types.h>
 #include <vcl/event.hxx>
 #include <vcl/toolbox.hxx>
@@ -77,7 +79,8 @@ SvxPopupWindowListBox::SvxPopupWindowListBox(SvxUndoRedoControl* pControl, weld:
     : WeldToolbarPopup(pControl->getFrameInterface(), pParent, u"svx/ui/floatingundoredo.ui"_ustr, u"FloatingUndoRedo"_ustr)
     , m_xControl(pControl)
     , m_xListBox(m_xBuilder->weld_tree_view(u"treeview"_ustr))
-    , m_nVisRows(10)
+    // Dainvo: fit the list to its actions (up to 10 rows) instead of always 10
+    , m_nVisRows(std::clamp(static_cast<int>(rUndoRedoList.size()), 1, 10))
 {
     m_xListBox->set_selection_mode(SelectionMode::Multiple);
 
@@ -92,7 +95,7 @@ SvxPopupWindowListBox::SvxPopupWindowListBox(SvxUndoRedoControl* pControl, weld:
     else
         m_nSelectedRows = 0;
 
-    m_xListBox->set_size_request(m_xListBox->get_approximate_digit_width() * 25,
+    m_xListBox->set_size_request(m_xListBox->get_approximate_digit_width() * 32,
                                  m_xListBox->get_height_rows(m_nVisRows) + 2);
 
     m_xListBox->connect_item_activated(LINK(this, SvxPopupWindowListBox, ActivateHdl));

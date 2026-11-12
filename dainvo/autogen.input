@@ -1,0 +1,20 @@
+--with-lang=en-US
+--without-java
+--without-help
+--without-doxygen
+--enable-ccache
+--with-parallelism=14
+PKG_CONFIG=/opt/homebrew/bin/pkg-config
+--with-product-name=Dainvo Office
+--with-vendor=Dainvo
+--with-macosx-bundle-identifier=com.dainvo.office
+--enable-release-build
+--with-branding=<repo>/dainvo/branding
+--with-theme=colibre colibre_svg colibre_dark colibre_dark_svg
+# Base app is hidden; keep the database core for mail merge, drop unused drivers
+--disable-postgresql-sdbc
+--disable-mariadb-sdbc
+--disable-firebird-sdbc
+# No bundled Python (~84 MB). Loses email mail merge, Letter/Fax/Agenda
+# wizards, LibreLogo and Python macros. Build scripts use Homebrew python3.
+--enable-python=no

@@ -843,7 +843,8 @@ SvxStyleBox_Base::SvxStyleBox_Base(std::unique_ptr<weld::ComboBox> xWidget,
 
     m_xWidget->connect_custom_get_size(LINK(this, SvxStyleBox_Base, CustomGetSizeHdl));
     m_xWidget->connect_custom_render(LINK(this, SvxStyleBox_Base, CustomRenderHdl));
-    m_xWidget->set_custom_renderer(true);
+    // Dainvo: plain, readable style names (UI font) instead of tiny scaled previews
+    m_xWidget->set_custom_renderer(false);
 
     m_xWidget->set_entry_width_chars(COMBO_WIDTH_IN_CHARS + 3);
 }

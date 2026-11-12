@@ -1665,7 +1665,7 @@ SAL_WNODEPRECATED_DECLARATIONS_POP
     bool bUseDarkMode(GetUseDarkMode());
     if (!ThemeColors::VclPluginCanUseThemeColors())
     {
-        OUString sThemeName(!bUseDarkMode ? u"sukapura_svg" : u"sukapura_dark_svg");
+        OUString sThemeName(!bUseDarkMode ? u"colibre_svg" : u"colibre_dark_svg");
         aStyleSettings.SetPreferredIconTheme(sThemeName, bUseDarkMode);
     }
     else
@@ -2142,6 +2142,7 @@ void AquaSalFrame::UpdateFrameGeometry()
         maGeometry.setBottomDecoration(static_cast<sal_uInt32>((aFrameRect.origin.y + aFrameRect.size.height) -
                                        (aContentRect.origin.y + aContentRect.size.height)));
     }
+    updateRoundedPopupShape();
 }
 
 void AquaSalFrame::CaptureMouse( bool bCapture )
@@ -2191,6 +2192,30 @@ void AquaSalFrame::doResetClipRegion()
         [mpNSView setNeedsDisplay: YES];
     [mpNSWindow setOpaque: YES];
     [mpNSWindow invalidateShadow];
+
+    mbExplicitClip = false;
+    updateRoundedPopupShape();
+}
+
+void AquaSalFrame::updateRoundedPopupShape()
+{
+    // Dainvo: give dropdowns and popup panels rounded corners matching
+    // Dainvo's popup card radius (8px). Tooltips and shaped windows are left alone.
+    if (mbHeadlessMode || mbExplicitClip || !mpNSWindow
+        || !(mnStyle & SalFrameStyleFlags::FLOAT) || (mnStyle & SalFrameStyleFlags::TOOLTIP))
+        return;
+    const CGFloat fWidth = maGeometry.width(), fHeight = maGeometry.height();
+    if (fWidth < 4 || fHeight < 4)
+        return;
+    const CGFloat fRadius = std::min<CGFloat>(8.0, std::min(fWidth, fHeight) / 2 - 1);
+    if (mrClippingPath)
+        CGPathRelease(mrClippingPath);
+    mrClippingPath = CGPathCreateMutable();
+    CGPathAddRoundedRect(mrClippingPath, nullptr, CGRectMake(0, 0, fWidth, fHeight), fRadius, fRadius);
+    [mpNSWindow setOpaque: NO];
+    [mpNSWindow setBackgroundColor: [NSColor clearColor]];
+    if (mpNSView && mbShown)
+        [mpNSView setNeedsDisplay: YES];
 }
 
 void AquaSalFrame::BeginSetClipRegion( sal_uInt32 nRects )
@@ -2199,6 +2224,8 @@ void AquaSalFrame::BeginSetClipRegion( sal_uInt32 nRects )
         return;
 
     OSX_RUNINMAIN(BeginSetClipRegion(nRects))
+
+    mbExplicitClip = true;
 
     // release old path
     if( mrClippingPath )

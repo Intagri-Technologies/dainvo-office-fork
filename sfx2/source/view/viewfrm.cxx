@@ -1775,7 +1775,7 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
 
                     if (nLastGetInvolvedShown == 0)
                         bUpdateLastTimeGetInvolvedShown = true;
-                    else if (!bIsInfobarShown && nPeriodSec < nNow && nLastGetInvolvedShown < (nNow + nPeriodSec/2) - nPeriodSec) // 90d alternating with donation
+                    else if (false /* Dainvo: no LibreOffice community prompts */ && !bIsInfobarShown && nPeriodSec < nNow && nLastGetInvolvedShown < (nNow + nPeriodSec/2) - nPeriodSec) // 90d alternating with donation
                     {
                         bUpdateLastTimeGetInvolvedShown = true;
 
@@ -1803,7 +1803,7 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
 
                     if (nLastDonateShown == 0)
                         bUpdateLastTimeDonateShown = true;
-                    else if (!bIsInfobarShown && nPeriodSec < nNow && nLastDonateShown < nNow - nPeriodSec) // 90d alternating with getinvolved
+                    else if (false /* Dainvo: no LibreOffice community prompts */ && !bIsInfobarShown && nPeriodSec < nNow && nLastDonateShown < nNow - nPeriodSec) // 90d alternating with getinvolved
                     {
                         bUpdateLastTimeDonateShown = true;
 

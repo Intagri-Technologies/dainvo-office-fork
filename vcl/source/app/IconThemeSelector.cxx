@@ -81,9 +81,9 @@ IconThemeSelector::IconThemeSelector()
     else if (eDesktop == DesktopType::macOS)
     {
         if (!bPreferDarkIconTheme)
-            r = "sukapura_svg";
+            r = "colibre_svg";
         else
-            r = "sukapura_dark_svg";
+            r = "colibre_dark_svg";
     }
     else if (eDesktop == DesktopType::GNOME || eDesktop == DesktopType::MATE
              || eDesktop == DesktopType::Unity)

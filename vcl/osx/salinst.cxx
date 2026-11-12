@@ -225,6 +225,9 @@ VCLPLUG_OSX_PUBLIC SalInstance* create_SalInstance()
 
     // this one is for outside AquaSalInstance::Yield
     SalData::ensureThreadAutoreleasePool();
+    // Dainvo: stop macOS adding its "AutoFill" item to our menus
+    [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSAutoFillHeuristicControllerEnabled": @NO }];
+
     // no focus rects on NWF
     ImplGetSVData()->maNWFData.mbNoFocusRects = true;
     ImplGetSVData()->maNWFData.mbNoActiveTabTextRaise = true;

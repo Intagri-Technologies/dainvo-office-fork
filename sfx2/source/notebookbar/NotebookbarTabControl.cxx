@@ -268,10 +268,8 @@ void NotebookbarTabControl::StateChanged(StateChangedType nStateChange)
     SfxViewFrame* pViewFrm = SfxViewFrame::Current();
     if (!m_bInitialized && pViewFrm)
     {
-        VclPtr<ShortcutsToolBox> pShortcuts = VclPtr<ShortcutsToolBox>::Create( this );
-        pShortcuts->Show();
-
-        SetToolBox(pShortcuts.get());
+        // Dainvo: no quick-access icons (Open, Save, Undo...) beside the tabs;
+        // those commands live in the File and Edit menus.
         SetIconClickHdl( LINK( this, NotebookbarTabControl, OpenNotebookbarPopupMenu ) );
 
         m_pListener = new ChangedUIEventListener( this );

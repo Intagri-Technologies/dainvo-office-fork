@@ -596,7 +596,7 @@
             <desc>Indicates whether to show the template selection when creating a new presentation.</desc>
             <label>Start with Template Manager</label>
           </info>
-          <value>true</value>
+          <value>false</value>
         </prop>
         <prop oor:name="Layout" oor:type="xs:boolean" oor:nillable="false">
           <!-- UIHints: Tools - Options - Impress - Other  [Section] New document -->

@@ -246,6 +246,10 @@ Size TabControl::ImplGetItemSize( ImplTabItem* pItem, tools::Long nMaxWidth )
                                                       aSize.Width() - TAB_ITEM_OFFSET_X * 2,
                                                       aSize.Height() - TAB_ITEM_OFFSET_Y * 2),
                                      TabBarPosition::Top);
+    // Dainvo: flat ribbon tabs are text plus 10px each side (TAB_ITEM_OFFSET_X),
+    // not the much wider native segmented-control size.
+    if (dynamic_cast<const NotebookbarTabControlBase*>(this))
+        return aSize;
     if(GetNativeControlRegion( ControlType::TabItem, ControlPart::Entire, aCtrlRegion,
                                            ControlState::ENABLED, aControlValue,
                                            aBoundingRgn, aContentRgn ) )
@@ -873,8 +877,13 @@ void TabControl::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplTabItem co
         assert(nState & ControlState::ROLLOVER);
     }
 
-    bNativeOK = rRenderContext.IsNativeControlSupported(ControlType::TabItem, ControlPart::Entire);
-    if ( bNativeOK )
+    // Dainvo: flat, Word-style tabs in the tabbed bar (text plus an underline).
+    const bool bFlatTabs = dynamic_cast<const NotebookbarTabControlBase*>(this) != nullptr;
+    bNativeOK = !bFlatTabs
+                && rRenderContext.IsNativeControlSupported(ControlType::TabItem, ControlPart::Entire);
+    if (bFlatTabs)
+        bNativeOK = true; // skip the bevelled fallback below
+    else if ( bNativeOK )
     {
         TabitemValue tiValue(tools::Rectangle(pItem->maRect.Left() + TAB_ITEM_OFFSET_X,
                                               pItem->maRect.Top() + TAB_ITEM_OFFSET_Y,
@@ -970,7 +979,9 @@ void TabControl::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplTabItem co
             nStyle |= DrawTextFlags::Disable;
 
         Color aColor(rStyleSettings.GetTabTextColor());
-        if (nState & ControlState::SELECTED)
+        if (bFlatTabs)
+            aColor = rStyleSettings.GetDialogTextColor();
+        else if (nState & ControlState::SELECTED)
             aColor = rStyleSettings.GetTabHighlightTextColor();
         else if (nState & ControlState::ROLLOVER)
             aColor = rStyleSettings.GetTabRolloverTextColor();
@@ -982,6 +993,20 @@ void TabControl::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplTabItem co
                                  nXPos + aImageSize.Width() + nTextWidth, nYPos + nTextHeight);
         DrawControlText(rRenderContext, aOutRect, pItem->maFormatText, nStyle,
                         nullptr, nullptr);
+
+        if (bFlatTabs && (nState & (ControlState::SELECTED | ControlState::ROLLOVER)))
+        {
+            // underline the selected tab in the accent colour; a faint one on hover
+            const tools::Long nBarHeight = 2;
+            const tools::Long nBarTop = aOutRect.Bottom() + 4;
+            Color aBar = rStyleSettings.GetAccentColor();
+            if (!(nState & ControlState::SELECTED))
+                aBar = rStyleSettings.GetShadowColor();
+            rRenderContext.SetLineColor();
+            rRenderContext.SetFillColor(aBar);
+            rRenderContext.DrawRect(tools::Rectangle(aOutRect.Left(), nBarTop, aOutRect.Right(),
+                                                     nBarTop + nBarHeight - 1));
+        }
 
         rRenderContext.SetTextColor(aOldColor);
     }
@@ -1129,7 +1154,13 @@ void TabControl::Paint( vcl::RenderContext& rRenderContext, const tools::Rectang
         aRect.AdjustRight(10 );
     }
 
-    if (rRenderContext.IsNativeControlSupported(ControlType::TabPane, ControlPart::Entire))
+    // Dainvo: the tabbed bar uses flat, Word-style tabs with no pane border;
+    // its background is painted by NotebookBar.
+    const bool bFlatTabs = dynamic_cast<const NotebookbarTabControlBase*>(this) != nullptr;
+    if (bFlatTabs)
+    {
+    }
+    else if (rRenderContext.IsNativeControlSupported(ControlType::TabPane, ControlPart::Entire))
     {
         const bool bPaneWithHeader = mbShowTabs && rRenderContext.IsNativeControlSupported(ControlType::TabPane, ControlPart::TabPaneWithHeader);
         tools::Rectangle aHeaderRect(aRect.Left(), 0, aRect.Right(), aRect.Top());
@@ -2297,7 +2328,7 @@ bool NotebookbarTabControlBase::ImplPlaceTabs( tools::Long nWidth )
     tools::Long nShortcutsWidth = m_pShortcuts != nullptr ? m_pShortcuts->GetSizePixel().getWidth() + 1 : 0;
     tools::Long nFullWidth = nShortcutsWidth;
 
-    const tools::Long nOffsetX = 2 + nShortcutsWidth;
+    const tools::Long nOffsetX = 12 + nShortcutsWidth; // Dainvo: left margin before the first tab
     const tools::Long nOffsetY = 2;
 
     //fdo#66435 throw Knuth/Tex minimum raggedness algorithm at the problem
@@ -2309,8 +2340,7 @@ bool NotebookbarTabControlBase::ImplPlaceTabs( tools::Long nWidth )
         if (item.m_bVisible)
         {
             nTabWidth = ImplGetItemSize(&item, nMaxWidth).getWidth();
-            if (!item.maText.isEmpty() && nTabWidth < 100)
-                nTabWidth = 100;
+            // Dainvo: tabs are as wide as their text, like Word
         }
         nFullWidth += nTabWidth;
     }
@@ -2328,9 +2358,7 @@ bool NotebookbarTabControlBase::ImplPlaceTabs( tools::Long nWidth )
 
         Size aSize = ImplGetItemSize( &item, nMaxWidth );
 
-        // set minimum tab size
-        if( nFullWidth < nMaxWidth && !item.maText.isEmpty() && aSize.getWidth() < 100)
-            aSize.setWidth( 100 );
+        // Dainvo: no 100px minimum; tabs hug their text
 
         if( !item.maText.isEmpty() && aSize.getHeight() < 28 )
             aSize.setHeight( 28 );
@@ -2347,9 +2375,7 @@ bool NotebookbarTabControlBase::ImplPlaceTabs( tools::Long nWidth )
         nX += aSize.Width();
     }
 
-    // we always have only one line of tabs
-    // tdf#127610 subtract width of shortcuts from width available for tab items
-    lcl_AdjustSingleLineTabs(nMaxWidth - nShortcutsWidth, mpTabCtrlData.get());
+    // Dainvo: ribbon tabs stay left-aligned (macOS would centre them, like dialog tabs)
 
     // position the shortcutbox
     if (m_pShortcuts)

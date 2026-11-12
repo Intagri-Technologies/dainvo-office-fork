@@ -383,6 +383,21 @@ void AquaSalGraphics::UpdateWindow( NSRect& rRect )
         // any necessary colorspace conversion in CGContextDrawImage().
         CGContextDrawImage(rCGContextHolder.get(), aRect, img);
 
+        // Dainvo: the rounded clip cuts the corners off VCL's square popup
+        // border, so draw a matching rounded border along the clip path
+        if (rClip && maShared.mpFrame->isRoundedPopup())
+        {
+            CGContextSetBlendMode(rCGContextHolder.get(), kCGBlendModeNormal);
+            const CGRect aBounds = CGPathGetBoundingBox(rClip);
+            const CGFloat fRadius = std::min<CGFloat>(8.0, std::min(aBounds.size.width, aBounds.size.height) / 2 - 1);
+            CGPathRef aBorder = CGPathCreateWithRoundedRect(CGRectInset(aBounds, 0.5, 0.5), fRadius - 0.5, fRadius - 0.5, nullptr);
+            CGContextAddPath(rCGContextHolder.get(), aBorder);
+            CGContextSetStrokeColorWithColor(rCGContextHolder.get(), [NSColor separatorColor].CGColor);
+            CGContextSetLineWidth(rCGContextHolder.get(), 1.0);
+            CGContextStrokePath(rCGContextHolder.get());
+            CGPathRelease(aBorder);
+        }
+
         rCGContextHolder.restoreState();
 
         CGImageRelease(img);

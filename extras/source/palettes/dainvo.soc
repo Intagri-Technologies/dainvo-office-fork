@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:color-table xmlns:office="http://openoffice.org/2000/office" xmlns:style="http://openoffice.org/2000/style" xmlns:text="http://openoffice.org/2000/text" xmlns:table="http://openoffice.org/2000/table" xmlns:draw="http://openoffice.org/2000/drawing" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="http://openoffice.org/2000/meta" xmlns:number="http://openoffice.org/2000/datastyle" xmlns:svg="http://www.w3.org/2000/svg" xmlns:chart="http://openoffice.org/2000/chart" xmlns:dr3d="http://openoffice.org/2000/dr3d" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="http://openoffice.org/2000/form" xmlns:script="http://openoffice.org/2000/script">
+ <draw:color draw:name="White" draw:color="#ffffff"/>
+ <draw:color draw:name="Black" draw:color="#000000"/>
+ <draw:color draw:name="Light Grey" draw:color="#e7e6e6"/>
+ <draw:color draw:name="Slate" draw:color="#44546a"/>
+ <draw:color draw:name="Indigo" draw:color="#4f46e5"/>
+ <draw:color draw:name="Blue" draw:color="#2563eb"/>
+ <draw:color draw:name="Teal" draw:color="#0d9488"/>
+ <draw:color draw:name="Green" draw:color="#16a34a"/>
+ <draw:color draw:name="Amber" draw:color="#d97706"/>
+ <draw:color draw:name="Red" draw:color="#dc2626"/>
+ <draw:color draw:name="White, Darker 5%" draw:color="#f2f2f2"/>
+ <draw:color draw:name="Black, Lighter 50%" draw:color="#808080"/>
+ <draw:color draw:name="Light Grey, Lighter 80%" draw:color="#fafafa"/>
+ <draw:color draw:name="Slate, Lighter 80%" draw:color="#dadde1"/>
+ <draw:color draw:name="Indigo, Lighter 80%" draw:color="#dcdafa"/>
+ <draw:color draw:name="Blue, Lighter 80%" draw:color="#d3e0fb"/>
+ <draw:color draw:name="Teal, Lighter 80%" draw:color="#cfeae7"/>
+ <draw:color draw:name="Green, Lighter 80%" draw:color="#d0eddb"/>
+ <draw:color draw:name="Amber, Lighter 80%" draw:color="#f7e4cd"/>
+ <draw:color draw:name="Red, Lighter 80%" draw:color="#f8d4d4"/>
+ <draw:color draw:name="White, Darker 15%" draw:color="#d9d9d9"/>
+ <draw:color draw:name="Black, Lighter 35%" draw:color="#595959"/>
+ <draw:color draw:name="Light Grey, Lighter 60%" draw:color="#f5f5f5"/>
+ <draw:color draw:name="Slate, Lighter 60%" draw:color="#b4bbc3"/>
+ <draw:color draw:name="Indigo, Lighter 60%" draw:color="#b9b5f5"/>
+ <draw:color draw:name="Blue, Lighter 60%" draw:color="#a8c1f7"/>
+ <draw:color draw:name="Teal, Lighter 60%" draw:color="#9ed4cf"/>
+ <draw:color draw:name="Green, Lighter 60%" draw:color="#a2dab7"/>
+ <draw:color draw:name="Amber, Lighter 60%" draw:color="#f0c99b"/>
+ <draw:color draw:name="Red, Lighter 60%" draw:color="#f1a8a8"/>
+ <draw:color draw:name="White, Darker 25%" draw:color="#bfbfbf"/>
+ <draw:color draw:name="Black, Lighter 25%" draw:color="#404040"/>
+ <draw:color draw:name="Light Grey, Lighter 40%" draw:color="#f1f0f0"/>
+ <draw:color draw:name="Slate, Lighter 40%" draw:color="#8f98a6"/>
+ <draw:color draw:name="Indigo, Lighter 40%" draw:color="#9590ef"/>
+ <draw:color draw:name="Blue, Lighter 40%" draw:color="#7ca1f3"/>
+ <draw:color draw:name="Teal, Lighter 40%" draw:color="#6ebfb8"/>
+ <draw:color draw:name="Green, Lighter 40%" draw:color="#73c892"/>
+ <draw:color draw:name="Amber, Lighter 40%" draw:color="#e8ad6a"/>
+ <draw:color draw:name="Red, Lighter 40%" draw:color="#ea7d7d"/>
+ <draw:color draw:name="White, Darker 35%" draw:color="#a6a6a6"/>
+ <draw:color draw:name="Black, Lighter 15%" draw:color="#262626"/>
+ <draw:color draw:name="Light Grey, Darker 25%" draw:color="#adacac"/>
+ <draw:color draw:name="Slate, Darker 25%" draw:color="#333f50"/>
+ <draw:color draw:name="Indigo, Darker 25%" draw:color="#3b34ac"/>
+ <draw:color draw:name="Blue, Darker 25%" draw:color="#1c4ab0"/>
+ <draw:color draw:name="Teal, Darker 25%" draw:color="#0a6f66"/>
+ <draw:color draw:name="Green, Darker 25%" draw:color="#107a38"/>
+ <draw:color draw:name="Amber, Darker 25%" draw:color="#a35904"/>
+ <draw:color draw:name="Red, Darker 25%" draw:color="#a51c1c"/>
+ <draw:color draw:name="White, Darker 50%" draw:color="#808080"/>
+ <draw:color draw:name="Black, Lighter 5%" draw:color="#0d0d0d"/>
+ <draw:color draw:name="Light Grey, Darker 50%" draw:color="#747373"/>
+ <draw:color draw:name="Slate, Darker 50%" draw:color="#222a35"/>
+ <draw:color draw:name="Indigo, Darker 50%" draw:color="#282372"/>
+ <draw:color draw:name="Blue, Darker 50%" draw:color="#123276"/>
+ <draw:color draw:name="Teal, Darker 50%" draw:color="#064a44"/>
+ <draw:color draw:name="Green, Darker 50%" draw:color="#0b5225"/>
+ <draw:color draw:name="Amber, Darker 50%" draw:color="#6c3c03"/>
+ <draw:color draw:name="Red, Darker 50%" draw:color="#6e1313"/>
+ <draw:color draw:name="Dark Red" draw:color="#c00000"/>
+ <draw:color draw:name="Bright Red" draw:color="#ff0000"/>
+ <draw:color draw:name="Orange" draw:color="#ffc000"/>
+ <draw:color draw:name="Yellow" draw:color="#ffff00"/>
+ <draw:color draw:name="Light Green" draw:color="#92d050"/>
+ <draw:color draw:name="Bright Green" draw:color="#00b050"/>
+ <draw:color draw:name="Light Blue" draw:color="#00b0f0"/>
+ <draw:color draw:name="Bright Blue" draw:color="#0070c0"/>
+ <draw:color draw:name="Dark Blue" draw:color="#002060"/>
+ <draw:color draw:name="Purple" draw:color="#7030a0"/>
+</office:color-table>

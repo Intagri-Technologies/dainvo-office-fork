@@ -621,3 +621,5 @@ sd/uiconfig/sdraw/ui/notebookbar.ui://GtkToolButton[@id='btnHomeInsertPage'] but
 sd/uiconfig/sdraw/ui/notebookbar.ui://GtkToolButton[@id='btnHomeDuplicatePage'] button-no-label
 sd/uiconfig/sdraw/ui/notebookbar.ui://GtkToolButton[@id='btnHomeDrawingLayout'] button-no-label
 sd/uiconfig/sdraw/ui/notebookbar.ui://GtkToolButton[@id='btnToolsAutoCorrectDlg'] button-no-label
+sd/uiconfig/sdraw/ui/notebookbar.ui://GtkMenuToolButton[@id='btnDainvoUndo'] button-no-label
+sd/uiconfig/sdraw/ui/notebookbar.ui://GtkMenuToolButton[@id='btnDainvoRedo'] button-no-label

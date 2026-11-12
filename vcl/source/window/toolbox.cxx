@@ -2528,8 +2528,9 @@ void ToolBox::ImplDrawButton(vcl::RenderContext& rRenderContext, const tools::Re
     }
 
     if (!bNativeOk) {
+        // Dainvo: 6px control radius (Dainvo's --radius-control)
         rRenderContext.DrawSelectionBackground(rRect, GetBackgroundColor(), bIsWindow ? 3 : highlight,
-                                               bChecked, true, bIsWindow, nullptr, 2);
+                                               bChecked, true, bIsWindow, nullptr, 6);
     }
 }
 
