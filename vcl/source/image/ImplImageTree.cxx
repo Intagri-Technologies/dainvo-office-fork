@@ -345,6 +345,12 @@ OUString ImplImageTree::fallbackStyle(std::u16string_view rsStyle)
 
     if (rsStyle == u"colibre" || rsStyle == u"helpimg")
         sResult = "";
+    // Dainvo: only the SVG Colibre themes ship; each is self-contained, and the
+    // dark one borrows from the light one rather than from a missing PNG theme
+    else if (rsStyle == u"colibre_svg")
+        sResult = "";
+    else if (rsStyle == u"colibre_dark_svg")
+        sResult = "colibre_svg";
     else if (rsStyle == u"sifr" || rsStyle == u"breeze_dark")
         sResult = "breeze";
     else if (rsStyle == u"sifr_dark" )
