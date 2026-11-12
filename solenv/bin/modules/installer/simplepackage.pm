@@ -414,7 +414,7 @@ sub create_package
             # application
             if ( $ENV{'MACOSX_CODESIGNING_IDENTITY'} || !$ENV{'ENABLE_RELEASE_BUILD'} )
             {
-                $systemcall = "$ENV{'SRCDIR'}/solenv/bin/macosx-codesign-app-bundle $localtempdir/$folder/$volume_name_classic_app.app";
+                $systemcall = "$ENV{'SRCDIR'}/solenv/bin/macosx-codesign-app-bundle '$localtempdir/$folder/$volume_name_classic_app.app'";
                 print "... $systemcall ...\n";
                 my $infoline = "Systemcall: $systemcall\n";
                 push( @installer::globals::logfileinfo, $infoline);
@@ -477,9 +477,10 @@ sub create_package
         # bzip2 should be smaller than with lzfse. A .dmg built from a debug
         # build was 262M with bzip2 and 273MB for lzfse. So it appears that
         # lzfse creates .dmg files that are only 4% or 5% larger than bzip2.
-        $systemcall = "cd $localtempdir && hdiutil create -megabytes $megabytes -srcfolder $folder $archive -ov -fs HFS+ -volname \"$volume_name\" -format ULFO";
+        # Quote paths: product names may contain spaces ("Dainvo Office")
+        $systemcall = "cd '$localtempdir' && hdiutil create -megabytes $megabytes -srcfolder '$folder' '$archive' -ov -fs HFS+ -volname \"$volume_name\" -format ULFO";
         if (( $ref ne "" ) && ( $$ref ne "" ) && system("hdiutil 2>&1 | grep unflatten") == 0) {
-            $systemcall .= " && hdiutil unflatten $archive && Rez -a $$ref -o $archive && hdiutil flatten $archive &&";
+            $systemcall .= " && hdiutil unflatten '$archive' && Rez -a $$ref -o '$archive' && hdiutil flatten '$archive' &&";
         }
     }
     else

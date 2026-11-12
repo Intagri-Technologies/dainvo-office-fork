@@ -49,6 +49,10 @@ sub _need_to_strip
 
     if (( $fileoutput =~ /not stripped/i ) && ( $fileoutput =~ /\bELF\b/ )) { $strip = 1; }
 
+    # macOS libraries and loadable bundles (not the small launcher
+    # executables, whose signatures cover the app bundle)
+    if (( $fileoutput =~ /Mach-O/ ) && ( $fileoutput =~ /(shared library|bundle)/ )) { $strip = 2; }
+
     return $strip
 }
 
@@ -58,9 +62,11 @@ sub _need_to_strip
 
 sub _do_strip
 {
-    my ( $filename ) = @_;
+    my ( $filename, $kind ) = @_;
 
-    my $systemcall = "strip" . " " . $filename;
+    # Mach-O: "-x" removes only local symbols; exported symbols needed for
+    # dynamic loading stay. strip re-signs linker-signed (ad hoc) binaries.
+    my $systemcall = ( $kind == 2 ? "strip -x" : "strip" ) . " '" . $filename . "'";
 
     my $returnvalue = system($systemcall);
 
@@ -96,11 +102,21 @@ sub strip_libraries
         push(@installer::globals::removedirs, $strippeddirbase);
     }
 
+    # On macOS, keep the unstripped libraries next to the package: they have
+    # the same UUIDs as the shipped ones, so crash reports can be symbolicated
+    # with them (e.g. atos -o <symbols>/libswlo.dylib -l <load address> <address>).
+    my $symbolsdirbase = "";
+    if ( $installer::globals::ismacbuild )
+    {
+        $symbolsdirbase = installer::systemactions::create_directories("symbols", $languagestringref);
+    }
+
     for ( my $i = 0; $i <= $#{$filelist}; $i++ )
     {
         my $sourcefilename = ${$filelist}[$i]->{'sourcepath'};
 
-        if ( _need_to_strip($sourcefilename) )
+        my $kind = _need_to_strip($sourcefilename);
+        if ( $kind )
         {
             my $shortfilename = $sourcefilename;
             installer::pathanalyzer::make_absolute_filename_to_relative_filename(\$shortfilename);
@@ -126,9 +142,14 @@ sub strip_libraries
 
             ${$filelist}[$i]->{'sourcepath'} = $destfilename;
 
+            if ( $kind == 2 && $symbolsdirbase ne "" )
+            {
+                installer::systemactions::copy_one_file($sourcefilename, $symbolsdirbase . $installer::globals::separator . $shortfilename);
+            }
+
             # strip file
 
-            _do_strip($destfilename);
+            _do_strip($destfilename, $kind);
         }
     }
 }

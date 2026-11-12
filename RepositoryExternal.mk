@@ -2316,7 +2316,7 @@ endef
 else # !MSC
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo, \
-	libwpd \
+	$(call gb_Helper_optional,WPD,libwpd) \
 ))
 
 define gb_LinkTarget__use_wpd
@@ -2376,7 +2376,7 @@ endef
 else # !MSC
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo, \
-	libwpg \
+	$(call gb_Helper_optional,WPG,libwpg) \
 ))
 
 define gb_LinkTarget__use_wpg
@@ -2432,7 +2432,7 @@ endef
 else # !MSC
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo, \
-	libwps \
+	$(call gb_Helper_optional,WPS,libwps) \
 ))
 
 define gb_LinkTarget__use_wps
@@ -2487,7 +2487,7 @@ endef
 else # !MSC
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo,\
-	libmwaw \
+	$(call gb_Helper_optional,MWAW,libmwaw) \
 ))
 
 define gb_LinkTarget__use_mwaw
@@ -2541,7 +2541,7 @@ endef
 else # !MSC
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo,\
-	libstaroffice \
+	$(call gb_Helper_optional,STAROFFICE,libstaroffice) \
 ))
 
 define gb_LinkTarget__use_staroffice

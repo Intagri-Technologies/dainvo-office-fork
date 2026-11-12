@@ -73,6 +73,51 @@ LibreOffice
     }
 }
 
+DainvoOffice
+{
+    Settings
+    {
+        variables
+        {
+            PRODUCTNAME @PRODUCTNAME@
+            PRODUCTVERSION @LIBO_VERSION_MAJOR@.@LIBO_VERSION_MINOR@
+            PRODUCTEXTENSION .@LIBO_VERSION_MICRO@.@LIBO_VERSION_PATCH@@LIBO_VERSION_SUFFIX@
+            POSTVERSIONEXTENSION
+            BUNDLEIDENTIFIER @MACOSX_BUNDLE_IDENTIFIER@
+            BRANDPACKAGEVERSION @LIBO_VERSION_MAJOR@.@LIBO_VERSION_MINOR@
+            USERDIRPRODUCTVERSION 4
+            BASEPRODUCTVERSION @LIBO_VERSION_MAJOR@.@LIBO_VERSION_MINOR@
+            UPDATEURL
+            ADD_INCLUDE_FILES cli_ure/version/version.txt,unoil/climaker/version.txt
+            ADDSYSTEMINTEGRATION 1
+            PACKAGEVERSION @LIBO_VERSION_MAJOR@.@LIBO_VERSION_MINOR@.@LIBO_VERSION_MICRO@.@LIBO_VERSION_PATCH@@LIBO_VERSION_SUFFIX@
+            PACKAGEREVISION {buildid}
+            LICENSENAME @LICENSE@
+            ROOTMODULEGID gid_Module_Root
+            GLOBALPATCHFILEGID gid_File_Txt_Patchfiles
+            SPELLCHECKERFILE spellchecker_selection.txt
+            CHANGETARGETDIR 1
+            PATCHCODEFILE ooo_patchcodes.txt
+            NATIVEPROGRESS false
+            PROGRESSBARCOLOR 139,147,255
+            PROGRESSFRAMECOLOR 51,51,51
+            PROGRESSPOSITION 180,292
+            PROGRESSSIZE 200,4
+            PROGRESSPOSITIONHIGH 360,584
+            PROGRESSSIZEHIGH 400,8
+            PROGRESSTEXTBASELINE 320
+            PROGRESSTEXTCOLOR 163,163,163
+        }
+        active          1
+        compression     5
+        script          setup_osl
+        downloadname    DainvoOffice_{productversion}_{os}_install_{languages}
+        langpackdownloadname    DainvoOffice_{productversion}_languagepack_{os}_install_{languages}
+        helppackdownloadname    DainvoOffice_{productversion}_helppack_{os}_install_{languages}
+        include         {installscriptdir},{customtargetpath}/readlicense_oo/readme,{customtargetpath}/sysui/{pkgtype},{customtargetpath}/setup_native,{filelistpath}/PackageSet,{filelistpath}/GeneratedPackage,{filelistpath}/Package,{filelistpath}/ExtensionPackage,{filelistpath}/CustomTarget/helpcontent2/help3xsl/filelists,{extensionsdir},{licensepath},{packinfopath}
+    }
+}
+
 LibreOfficeDev
 {
     Settings

@@ -38,8 +38,179 @@ End
 
 #if defined (WITH_GALLERY_BUILD)
 
-GALLERY_FILELIST(sounds)
 GALLERY_FILELIST(backgrounds)
+
+// Dainvo: Phosphor icon themes (Gallery_phosphor-*). Their ids contain
+// hyphens, so the entries are written out instead of using GALLERY_FILELIST.
+// The Gallery sounds theme is not shipped.
+
+File gid_File_Extra_Gallphosphor_office
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-office.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_office
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-office.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_business
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-business.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_business
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-business.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_arrows
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-arrows.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_arrows
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-arrows.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_communication
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-communication.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_communication
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-communication.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_people
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-people.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_people
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-people.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_technology
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-technology.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_technology
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-technology.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_design
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-design.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_design
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-design.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_media
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-media.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_media
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-media.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_travel
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-travel.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_travel
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-travel.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_nature
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-nature.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_nature
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-nature.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_signs
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-signs.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_signs
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-signs.filelist";
+End
+
+File gid_File_Extra_Gallphosphor_leisure
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/phosphor-leisure.filelist";
+End
+
+File gid_File_Extra_GallFilesphosphor_leisure
+    Dir = FILELIST_DIR;
+    TXT_FILE_BODY;
+    Styles = (FILELIST, WORKSTATION);
+    Name = "Gallery/Files/phosphor-leisure.filelist";
+End
 
 #endif
 
