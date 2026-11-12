@@ -201,6 +201,25 @@ Sequence< Locale > SAL_CALL Thesaurus::getLocales()
     return aSuppLocales;
 }
 
+void SAL_CALL Thesaurus::refresh()
+{
+    MutexGuard  aGuard( GetLinguMutex() );
+    // closes the MyThes files; getLocales() reads the dictionaries again
+    mvThesInfo.clear();
+    aSuppLocales.realloc(0);
+    prevMeanings.realloc(0);
+    prevTerm.clear();
+    prevLocale = LANGUAGE_DONTKNOW;
+}
+
+void SAL_CALL Thesaurus::addRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
+}
+
+void SAL_CALL Thesaurus::removeRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
+}
+
 sal_Bool SAL_CALL Thesaurus::hasLocale(const Locale& rLocale)
 {
     MutexGuard  aGuard( GetLinguMutex() );

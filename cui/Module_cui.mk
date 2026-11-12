@@ -19,6 +19,10 @@ $(eval $(call gb_Module_add_l10n_targets,cui,\
     AllLangMoTarget_cui \
 ))
 
+$(eval $(call gb_Module_add_check_targets,cui,\
+    CppunitTest_cui_dainvolanguages \
+))
+
 # screenshots
 $(eval $(call gb_Module_add_screenshot_targets,cui,\
     CppunitTest_cui_dialogs_test \

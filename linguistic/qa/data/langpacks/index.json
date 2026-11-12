@@ -1,0 +1,30 @@
+{
+ "schema": 1,
+ "sequence": 5,
+ "generated": "2026-11-12T00:00:00Z",
+ "min_app_build": 0,
+ "languages": [
+  {
+   "tag": "qaa",
+   "name": "Test language",
+   "autonym": "Test",
+   "components": [
+    "qaa.hyph"
+   ]
+  }
+ ],
+ "components": {
+  "qaa.hyph": {
+   "kind": "hyph",
+   "version": "1.0",
+   "url": "qaa-hyph.zip",
+   "size": 558,
+   "installed_size": 643,
+   "sha256": "8582ab2d6c99e847f2954648a6bc1dc59e14fab84a21468181db6e48fc9c98ee",
+   "locales": [
+    "qaa"
+   ],
+   "license": "MPL-2.0"
+  }
+ }
+}

@@ -13,8 +13,9 @@ $(eval $(call gb_Module_add_targets,linguistic,\
 	Library_lng \
 ))
 
-#$(eval $(call gb_Module_add_check_targets,linguistic,\
-#))
+$(eval $(call gb_Module_add_check_targets,linguistic,\
+    CppunitTest_linguistic_dainvolangpacks \
+))
 
 ifeq ($(OS),LINUX)
 $(eval $(call gb_Module_add_subsequentcheck_targets,linguistic,\

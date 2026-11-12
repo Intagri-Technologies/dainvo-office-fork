@@ -22,6 +22,7 @@
 
 #include <comphelper/interfacecontainer3.hxx>
 #include <cppuhelper/implbase.hxx>
+#include <com/sun/star/util/XRefreshable.hpp>
 #include <com/sun/star/lang/XComponent.hpp>
 #include <com/sun/star/lang/XInitialization.hpp>
 #include <com/sun/star/lang/XServiceDisplayName.hpp>
@@ -49,7 +50,8 @@ class SpellChecker :
         XInitialization,
         XComponent,
         XServiceInfo,
-        XServiceDisplayName
+        XServiceDisplayName,
+        css::util::XRefreshable
     >
 {
     struct DictItem
@@ -108,6 +110,11 @@ public:
     virtual void SAL_CALL dispose() override;
     virtual void SAL_CALL addEventListener( const Reference< XEventListener >& rxListener ) override;
     virtual void SAL_CALL removeEventListener( const Reference< XEventListener >& rxListener ) override;
+
+    // XRefreshable: re-read the dictionaries (Dainvo language packs)
+    virtual void SAL_CALL refresh() override;
+    virtual void SAL_CALL addRefreshListener( const Reference< css::util::XRefreshListener >& ) override;
+    virtual void SAL_CALL removeRefreshListener( const Reference< css::util::XRefreshListener >& ) override;
 
     // XServiceInfo
     virtual OUString SAL_CALL getImplementationName() override;

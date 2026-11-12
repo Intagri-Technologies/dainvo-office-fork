@@ -225,6 +225,22 @@ Sequence< Locale > SAL_CALL SpellChecker::getLocales()
     return m_aSuppLocales;
 }
 
+void SAL_CALL SpellChecker::refresh()
+{
+    MutexGuard  aGuard( GetLinguMutex() );
+    // getLocales() reads the dictionaries again on next use
+    m_DictItems.clear();
+    m_aSuppLocales.realloc(0);
+}
+
+void SAL_CALL SpellChecker::addRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
+}
+
+void SAL_CALL SpellChecker::removeRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
+}
+
 sal_Bool SAL_CALL SpellChecker::hasLocale(const Locale& rLocale)
 {
     MutexGuard  aGuard( GetLinguMutex() );

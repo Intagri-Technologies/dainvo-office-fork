@@ -457,7 +457,7 @@
                 </child>
                 <child>
                   <object class="GtkLinkButton" id="moredictslink">
-                    <property name="label" translatable="yes" context="optlingupage|moredictslink">Get more dictionaries online...</property>
+                    <property name="label" translatable="yes" context="optlingupage|moredictslink">Download more languages...</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>

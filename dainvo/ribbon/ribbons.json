@@ -39,7 +39,7 @@
         {"L": [".uno:InsertIndexesEntry"], "R": [[".uno:UpdateCurIndex"]]}
       ]],
       ["Review", [
-        {"L": [".uno:SpellingAndGrammarDialog"], "R": [[".uno:ThesaurusDialog", ".uno:SpellOnline"], [".uno:WordCountDialog"]]},
+        {"L": [".uno:SpellingAndGrammarDialog"], "R": [[".uno:ThesaurusDialog", ".uno:SpellOnline"], [".uno:WordCountDialog", ".uno:MoreDictionaries"]]},
         {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteComment", ".uno:PreviousAnnotation"], [".uno:ShowAnnotations", ".uno:NextAnnotation"]]},
         {"L": [".uno:TrackChanges"], "R": [[".uno:ShowTrackedChanges"], [".uno:AcceptTrackedChanges"]]},
         {"L": [".uno:AcceptTrackedChange", ".uno:RejectTrackedChange"], "R": [[".uno:PreviousTrackedChange"], [".uno:NextTrackedChange"]]},
@@ -91,7 +91,7 @@
         {"L": [".uno:DataDataPilotRun", ".uno:InsertExternalDataSource"]}
       ]],
       ["Review", [
-        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog"], [".uno:SpellOnline"]]},
+        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog", ".uno:SpellOnline"], [".uno:MoreDictionaries"]]},
         {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteNote", ".uno:ShowAllNotes"], [".uno:HideAllNotes", ".uno:DeleteAllNotes"]]},
         {"L": [".uno:TraceChangeMode"], "R": [[".uno:AcceptChanges"]]},
         {"L": [".uno:Protect", ".uno:ToolProtectionDocument"]}
@@ -147,7 +147,7 @@
         {"R": [[".uno:HideSlide", ".uno:ShowSlide"], [".uno:CustomShowDialog"]]}
       ]],
       ["Review", [
-        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog"], [".uno:SpellOnline"]]},
+        {"L": [".uno:SpellDialog"], "R": [[".uno:ThesaurusDialog", ".uno:SpellOnline"], [".uno:MoreDictionaries"]]},
         {"L": [".uno:InsertAnnotation"], "R": [[".uno:DeleteAnnotation", ".uno:PreviousAnnotation"], [".uno:ShowAnnotations", ".uno:NextAnnotation"]]}
       ]],
       ["View", [

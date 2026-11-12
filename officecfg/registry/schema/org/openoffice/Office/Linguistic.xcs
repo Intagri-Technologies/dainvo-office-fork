@@ -352,6 +352,40 @@
         <value>false</value>
       </prop>
     </group>
+    <group oor:name="DainvoLanguagePacks">
+      <info>
+        <desc>Dainvo Office: downloadable language packs (spelling, hyphenation
+        and thesaurus data). See dainvo/docs/LANGUAGE_TOOLS.md.</desc>
+      </info>
+      <prop oor:name="AllowDownloads" oor:type="xs:boolean" oor:nillable="false">
+        <info>
+          <desc>Whether the Languages dialog may download packs. Administrators
+          can set this to false and lock it.</desc>
+        </info>
+        <value>true</value>
+      </prop>
+      <prop oor:name="IndexURL" oor:type="xs:string" oor:nillable="false">
+        <info>
+          <desc>URL of the signed index.json listing the available packs.
+          index.json.sig must be next to it. https: or file: only.</desc>
+        </info>
+        <value>https://github.com/Intagri-Technologies/dainvo-office-languages/releases/latest/download/index.json</value>
+      </prop>
+      <prop oor:name="PublicKey" oor:type="xs:string" oor:nillable="false">
+        <info>
+          <desc>Base64 Ed25519 public key that index.json is signed with. The
+          private key is "dainvo-languages" in the release owner's keychain.</desc>
+        </info>
+        <value>6CDsCCtcugNsLEyShLzl55T4wP4HNb2zBL55ONYSWqk=</value>
+      </prop>
+      <prop oor:name="LastSequence" oor:type="xs:long" oor:nillable="false">
+        <info>
+          <desc>Highest index sequence number accepted so far; older indexes
+          are refused (rollback protection).</desc>
+        </info>
+        <value>0</value>
+      </prop>
+    </group>
     <group oor:name="GrammarChecking">
       <info>
         <desc>Contains grammar checking relevant settings.</desc>

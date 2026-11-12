@@ -39,6 +39,8 @@
 #include <rtl/ustring.hxx>
 #include <rtl/string.hxx>
 #include <rtl/tencinfo.h>
+#include <comphelper/sequence.hxx>
+#include <linguistic/dainvolangpacks.hxx>
 #include <linguistic/misc.hxx>
 
 #include <set>
@@ -200,10 +202,17 @@ std::vector< SvtLinguConfigDictionaryEntry > GetOldStyleDics( const char *pDicTy
     if (aFormatName.isEmpty() || aDicExtension.isEmpty())
         return aRes;
 
+    // Dainvo language packs (user downloads, then the ones bundled with the
+    // app) come first; see dainvo/docs/LANGUAGE_TOOLS.md
+    aRes = linguistic::langpacks::GetDictionaryEntries(aFormatName);
+
 #if defined SYSTEM_DICTS || defined IOS
     // set of languages to remember the language where it is already
     // decided to make use of the dictionary.
     std::set< OUString > aDicLangInUse;
+    for (auto const& rEntry : aRes)
+        for (auto const& rLocale : rEntry.aLocaleNames)
+            aDicLangInUse.insert(rLocale);
 
 #ifndef IOS
     // follow the hunspell tool's example and check DICPATH for preferred dictionaries
@@ -267,29 +276,27 @@ void MergeNewStyleDicsAndOldStyleDics(
     }
 
     // now check all old style dictionaries if they will add a not yet
-    // added language. If so add them to the resulting vector
+    // added language. If so add them to the resulting vector, with only the
+    // languages that are not covered yet (Dainvo language packs can list
+    // several languages per dictionary)
     for (auto const& oldStyleDic : rOldStyleDics)
     {
-        sal_Int32 nOldStyleDics = oldStyleDic.aLocaleNames.getLength();
-
-        // old style dics should only have one language listed...
-        DBG_ASSERT( nOldStyleDics, "old style dictionary with more than one language found!");
-        if (nOldStyleDics > 0)
+        std::vector<OUString> aNewLocales;
+        for (auto const& rLocale : oldStyleDic.aLocaleNames)
         {
-            if (linguistic::LinguIsUnspecified( oldStyleDic.aLocaleNames[0]))
+            if (linguistic::LinguIsUnspecified(rLocale))
             {
                 OSL_FAIL( "old style dictionary with invalid language found!" );
                 continue;
             }
-
-            // language not yet added?
-            if (aNewStyleLanguages.find( oldStyleDic.aLocaleNames[0] ) == aNewStyleLanguages.end())
-                rNewStyleDics.push_back(oldStyleDic);
+            if (aNewStyleLanguages.insert(rLocale).second)
+                aNewLocales.push_back(rLocale);
         }
-        else
-        {
-            OSL_FAIL( "old style dictionary with no language found!" );
-        }
+        if (aNewLocales.empty())
+            continue;
+        SvtLinguConfigDictionaryEntry aEntry(oldStyleDic);
+        aEntry.aLocaleNames = comphelper::containerToSequence(aNewLocales);
+        rNewStyleDics.push_back(std::move(aEntry));
     }
 }
 

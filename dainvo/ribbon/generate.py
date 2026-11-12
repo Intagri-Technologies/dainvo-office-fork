@@ -333,7 +333,7 @@ DROP = re.compile(r'\.uno:(ImageMapDialog|Repaginate|\w*DDE\w*|SwitchControlDesi
                   r'|FormProperties|ShowFmExplorer|FormDesignTools|Config:\w*[Ff]orm\w*|MacroDialog|RunMacro'
                   r'|BasicIDEAppear|MacroRecorder|MacroOrganizer|ScriptOrganizer|MacroSignature|ExtensionManager'
                   r'|OpenRemote|SaveAsRemote|VersionDialog|SendViaBluetooth|Twain\w+|CheckOut|CancelCheckOut|CheckIn'
-                  r'|SignPDF|MoreDictionaries|Remote|ShareDocument|ManageXMLSource|DataProvider\w*|TableEvents'
+                  r'|SignPDF|Remote|ShareDocument|ManageXMLSource|DataProvider\w*|TableEvents'
                   r'|GetInvolved|Donation|QuestionAnswers|ExtendedHelp|HelpIndex|TipOfTheDay|\w*Classification\w*'
                   r'|ToolbarModeUI|AvailableToolbars|UIPicker|Notebookbar'
                   r'|AssignMacro|TableBoundaries|Menubar)\b'

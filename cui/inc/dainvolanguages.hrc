@@ -1,0 +1,32 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+// Strings of the Dainvo Office Languages dialog (cui/source/dialogs/dainvolanguages.cxx)
+
+#pragma once
+
+#define NC_(Context, String) TranslateId(Context, u8##String)
+
+#define RID_CUISTR_DAINVOLANG_NOT_INSTALLED     NC_("RID_CUISTR_DAINVOLANG_NOT_INSTALLED", "Not installed")
+#define RID_CUISTR_DAINVOLANG_BUILT_IN          NC_("RID_CUISTR_DAINVOLANG_BUILT_IN", "built in")
+#define RID_CUISTR_DAINVOLANG_UPDATE            NC_("RID_CUISTR_DAINVOLANG_UPDATE", "update available")
+#define RID_CUISTR_DAINVOLANG_LOADING           NC_("RID_CUISTR_DAINVOLANG_LOADING", "Getting the list of languages…")
+#define RID_CUISTR_DAINVOLANG_OFFLINE           NC_("RID_CUISTR_DAINVOLANG_OFFLINE", "Could not get the list of languages: %1")
+#define RID_CUISTR_DAINVOLANG_CACHED            NC_("RID_CUISTR_DAINVOLANG_CACHED", "Showing the list from the last time it could be downloaded.")
+#define RID_CUISTR_DAINVOLANG_DISABLED          NC_("RID_CUISTR_DAINVOLANG_DISABLED", "Downloading languages is turned off. Only installed languages are shown.")
+#define RID_CUISTR_DAINVOLANG_DOWNLOADING       NC_("RID_CUISTR_DAINVOLANG_DOWNLOADING", "Downloading %1…")
+#define RID_CUISTR_DAINVOLANG_REMOVING          NC_("RID_CUISTR_DAINVOLANG_REMOVING", "Removing %1…")
+#define RID_CUISTR_DAINVOLANG_DONE              NC_("RID_CUISTR_DAINVOLANG_DONE", "Done. The changes are already in use.")
+#define RID_CUISTR_DAINVOLANG_FAILED            NC_("RID_CUISTR_DAINVOLANG_FAILED", "%1: %2")
+#define RID_CUISTR_DAINVOLANG_STOPPED           NC_("RID_CUISTR_DAINVOLANG_STOPPED", "Stopped.")
+#define RID_CUISTR_DAINVOLANG_MACOS_SPELL       NC_("RID_CUISTR_DAINVOLANG_MACOS_SPELL", "Spelling for this language is provided by macOS. Tick Spelling only if you want Dainvo's own word list as well.")
+#define RID_CUISTR_DAINVOLANG_LICENSE           NC_("RID_CUISTR_DAINVOLANG_LICENSE", "%1 %2, licence: %3")
+#define RID_CUISTR_DAINVOLANG_BUILTIN_NOTE      NC_("RID_CUISTR_DAINVOLANG_BUILTIN_NOTE", "%1 comes with Dainvo Office and can't be removed.")
+
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

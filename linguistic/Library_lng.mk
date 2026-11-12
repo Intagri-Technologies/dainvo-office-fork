@@ -56,10 +56,13 @@ $(eval $(call gb_Library_use_externals,lng,\
 	icuuc \
 	icu_headers \
 	$(if $(ENABLE_CURL),curl) \
+	openssl \
+	openssl_headers \
 ))
 
 $(eval $(call gb_Library_add_exception_objects,lng,\
 	linguistic/source/convdic \
+	linguistic/source/dainvolangpacks \
 	linguistic/source/convdiclist \
 	linguistic/source/convdicxml \
 	linguistic/source/dicimp \

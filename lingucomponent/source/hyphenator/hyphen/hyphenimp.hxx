@@ -22,6 +22,7 @@
 
 #include <comphelper/interfacecontainer3.hxx>
 #include <cppuhelper/implbase.hxx>
+#include <com/sun/star/util/XRefreshable.hpp>
 #include <com/sun/star/lang/XComponent.hpp>
 #include <com/sun/star/lang/XInitialization.hpp>
 #include <com/sun/star/lang/XServiceDisplayName.hpp>
@@ -62,11 +63,14 @@ class Hyphenator :
         XInitialization,
         XComponent,
         XServiceInfo,
-        XServiceDisplayName
+        XServiceDisplayName,
+        css::util::XRefreshable
     >
 {
     Sequence< Locale >                      aSuppLocales;
     std::vector< HDInfo >                   mvDicts;
+    // dictionaries replaced by refresh(); hyphenate() may still use them
+    std::vector< std::vector< HDInfo > >    maRetiredDicts;
 
     ::comphelper::OInterfaceContainerHelper3<XEventListener> aEvtListeners;
     std::unique_ptr<linguistic::PropertyHelper_Hyphenation> pPropHelper;
@@ -109,6 +113,11 @@ public:
     virtual void SAL_CALL dispose() override;
     virtual void SAL_CALL addEventListener( const Reference< XEventListener >& rxListener ) override;
     virtual void SAL_CALL removeEventListener( const Reference< XEventListener >& rxListener ) override;
+
+    // XRefreshable: re-read the dictionaries (Dainvo language packs)
+    virtual void SAL_CALL refresh() override;
+    virtual void SAL_CALL addRefreshListener( const Reference< css::util::XRefreshListener >& ) override;
+    virtual void SAL_CALL removeRefreshListener( const Reference< css::util::XRefreshListener >& ) override;
 
     // XServiceInfo
     virtual OUString SAL_CALL getImplementationName() override;

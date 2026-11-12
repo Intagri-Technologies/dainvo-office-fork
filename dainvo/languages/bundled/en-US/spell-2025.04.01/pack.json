@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "en-US.spell",
+  "kind": "spell",
+  "version": "2025.04.01",
+  "license": "LicenseRef-SCOWL",
+  "source": "https://git.libreoffice.org/dictionaries/+/refs/heads/master/en/",
+  "dictionaries": [
+    { "format": "DICT_SPELL", "files": ["en_US.aff", "en_US.dic"],
+      "locales": ["en-US", "en-IL", "en-PH"] }
+  ]
+}

@@ -317,7 +317,7 @@ ICONS = {
     'MoveDown': 'arrow-down', 'MoveUp': 'arrow-up', 'MoveDownSubItems': 'arrow-down-to-line',
     'MoveUpSubItems': 'arrow-up-to-line', 'MoveSlideDown': 'arrow-down', 'MoveSlideUp': 'arrow-up',
     'LoadStyles': 'file-input', 'StyleNewByExample': 'plus', 'MailMergeWizard': 'mails', 'Marks': 'highlighter',
-    'MoreDictionaries': 'book-plus', 'NewGlobalDoc': 'files', 'NewWindow': 'app-window',
+    'MoreDictionaries': 'languages', 'NewGlobalDoc': 'files', 'NewWindow': 'app-window',
     'NumberFormatScientific': 'superscript', 'NumberFormatStandard': 'hash', 'NumberFormatTime': 'clock',
     'ObjectMirrorHorizontal': 'flip-horizontal-2', 'ObjectMirrorVertical': 'flip-vertical-2',
     'OpenXMLFilterSettings': 'file-code', 'OptionsTreeDialog': 'settings', 'PageNumberWizard': 'file-digit',

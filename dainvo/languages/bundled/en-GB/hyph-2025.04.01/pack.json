@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "en-GB.hyph",
+  "kind": "hyph",
+  "version": "2025.04.01",
+  "license": "LicenseRef-hyph-en-GB-BSD-style",
+  "source": "https://git.libreoffice.org/dictionaries/+/refs/heads/master/en/",
+  "dictionaries": [
+    { "format": "DICT_HYPH", "files": ["hyph_en_GB.dic"],
+      "locales": ["en-GB", "en-ZA", "en-NA", "en-ZW", "en-AU", "en-CA", "en-IE", "en-IN", "en-BZ", "en-BS", "en-GH", "en-JM", "en-MW", "en-NZ", "en-TT"] }
+  ]
+}

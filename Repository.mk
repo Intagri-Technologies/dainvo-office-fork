@@ -933,6 +933,7 @@ endif
 $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	$(if $(SYSTEM_LIBEXTTEXTCAT),,libexttextcat_fingerprint) \
 	officecfg_misc \
+	$(if $(ENABLE_WASM_STRIP_HUNSPELL),,dainvo_languages) \
 	$(if $(filter $(OS),MACOSX), \
 		extensions_mdibundle \
 		extensions_OOoSpotlightImporter \

@@ -90,6 +90,10 @@ Hyphenator::~Hyphenator()
         if (rInfo.aPtr)
             hnj_hyphen_free(rInfo.aPtr);
     }
+    for (auto & rDicts : maRetiredDicts)
+        for (auto & rInfo : rDicts)
+            if (rInfo.aPtr)
+                hnj_hyphen_free(rInfo.aPtr);
 
     if (pPropHelper)
     {
@@ -221,6 +225,26 @@ Sequence< Locale > SAL_CALL Hyphenator::getLocales()
     MutexGuard aGuard(GetLinguMutex());
     ensureLocales();
     return aSuppLocales;
+}
+
+void SAL_CALL Hyphenator::refresh()
+{
+    MutexGuard aGuard(GetLinguMutex());
+    // hyphenate() keeps using an HDInfo after releasing the mutex, so the old
+    // dictionaries stay alive (moving the vector keeps its elements in place)
+    // until the service is destroyed; ensureLocales() reads them again.
+    if (!mvDicts.empty())
+        maRetiredDicts.push_back(std::move(mvDicts));
+    mvDicts.clear();
+    aSuppLocales.realloc(0);
+}
+
+void SAL_CALL Hyphenator::addRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
+}
+
+void SAL_CALL Hyphenator::removeRefreshListener( const Reference< css::util::XRefreshListener >& )
+{
 }
 
 sal_Bool SAL_CALL Hyphenator::hasLocale(const Locale& rLocale)

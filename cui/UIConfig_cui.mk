@@ -63,6 +63,7 @@ $(eval $(call gb_UIConfig_add_uifiles,cui,\
 	cui/uiconfig/ui/diagramdialog \
 	cui/uiconfig/ui/dimensionlinestabpage \
 	cui/uiconfig/ui/editdictionarydialog \
+	cui/uiconfig/ui/dainvolanguagesdialog \
 	cui/uiconfig/ui/editmodulesdialog \
 	cui/uiconfig/ui/embossdialog \
 	cui/uiconfig/ui/entrycontextmenu \

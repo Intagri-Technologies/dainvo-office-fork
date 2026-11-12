@@ -14,6 +14,8 @@ void AdditionsDialogHelper::RunAdditionsDialog(weld::Window* pParent, const OUSt
 {
     VclAbstractDialogFactory* pFact = VclAbstractDialogFactory::Create();
     VclPtr<AbstractAdditionsDialog> pDialog = pFact->CreateAdditionsDialog(pParent, rAdditionsTag);
+    if (!pDialog) // no extension support (Dainvo Office) and no replacement for this tag
+        return;
     pDialog->StartExecuteAsync(
         [pDialog](sal_Int32 /*nResult*/) -> void { pDialog->disposeOnce(); });
 }

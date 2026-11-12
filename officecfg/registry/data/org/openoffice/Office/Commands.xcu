@@ -68,11 +68,6 @@
           <value>SignPDF</value>
         </prop>
       </node>
-      <node oor:name="DainvoMoreDictionaries" oor:op="replace">
-        <prop oor:name="Command">
-          <value>MoreDictionaries</value>
-        </prop>
-      </node>
       <node oor:name="DainvoRemote" oor:op="replace">
         <prop oor:name="Command">
           <value>Remote</value>

@@ -28,6 +28,7 @@
 #include <about.hxx>
 #include <securityoptions.hxx>
 #include <AdditionsDialog.hxx>
+#include <dainvolanguages.hxx>
 #include <sfx2/app.hxx>
 #include <sfx2/pageids.hxx>
 #include <svtools/dlgname.hxx>
@@ -1479,6 +1480,15 @@ VclPtr<AbstractQrCodeGenDialog> AbstractDialogFactory_Impl::CreateQrCodeGenDialo
 VclPtr<AbstractAdditionsDialog> AbstractDialogFactory_Impl::CreateAdditionsDialog(
     weld::Window* pParent, const OUString& sAdditionsTag)
 {
+    // Dainvo Office: "Get more dictionaries" (.uno:MoreDictionaries and the
+    // Writing Aids links) opens the Languages dialog, which downloads Dainvo
+    // language packs instead of dictionary extensions.
+    if (sAdditionsTag == "Dictionary")
+    {
+        using AbstractDainvoLanguagesDialog_Impl
+            = vcl::AbstractDialogImpl_Async<AbstractAdditionsDialog, DainvoLanguagesDialog>;
+        return VclPtr<AbstractDainvoLanguagesDialog_Impl>::Create(pParent, sAdditionsTag);
+    }
 #if HAVE_FEATURE_EXTENSIONS
     using AbstractAdditionsDialog_Impl
         = vcl::AbstractDialogImpl_Async<AbstractAdditionsDialog, AdditionsDialog>;
