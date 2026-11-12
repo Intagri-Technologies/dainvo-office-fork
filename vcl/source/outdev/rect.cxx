@@ -676,10 +676,11 @@ Color OutputDevice::DrawSelectionBackground(const tools::Rectangle& rRect,
         aSelectionTextColor = (nHLDiff >= nTextDiff) ? aHLTextColor : aTextColor;
     }
 
-    if (bDark && bRoundEdges)
+    if (bRoundEdges && !bBright)
     {
-        // Dainvo: dark mode gets a soft rounded white overlay (like light mode's
-        // rounded tint) instead of a square solid grey block
+        // Dainvo: ribbon buttons get a soft rounded neutral overlay in both modes
+        // (white over dark, black over light) instead of a square grey block in
+        // dark mode and a heavy accent tint in light mode
         sal_uInt16 nOverlay;
         if (!nHighlight)
             nOverlay = 88;                       // checked
@@ -687,8 +688,10 @@ Color OutputDevice::DrawSelectionBackground(const tools::Rectangle& rRect,
             nOverlay = bChecked ? 82 : 90;       // hover
         else
             nOverlay = 84;                       // pressed / open popup / selected
+        if (!bDark)
+            nOverlay += 4;                       // black reads stronger on light grey
         SetLineColor();
-        SetFillColor(COL_WHITE);
+        SetFillColor(bDark ? COL_WHITE : COL_BLACK);
         tools::PolyPolygon aPolyPoly(tools::Polygon(aRect, nCornerRadius, nCornerRadius));
         DrawTransparent(aPolyPoly, nOverlay);
         return pWinControlForeground ? *pWinControlForeground : rStyles.GetButtonTextColor();
