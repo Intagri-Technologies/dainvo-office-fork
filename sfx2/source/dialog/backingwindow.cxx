@@ -205,6 +205,7 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     , mxBrandImageWeld(new weld::CustomWeld(*m_xBuilder, u"daBrand"_ustr, *mxBrandImage))
     , mxHelpButton(m_xBuilder->weld_button(u"help"_ustr))
     , mxExtensionsButton(m_xBuilder->weld_button(u"extensions"_ustr))
+    , mxSettingsButton(m_xBuilder->weld_button(u"dv_settings"_ustr))
     , mxDonateButton(m_xBuilder->weld_button(u"donate"_ustr))
     , mxAllButtonsBox(m_xBuilder->weld_container(u"all_buttons_box"_ustr))
     , mxButtonsBox(m_xBuilder->weld_container(u"buttons_box"_ustr))
@@ -375,6 +376,7 @@ void BackingWindow::dispose()
     mxHelpButton.reset();
     mxDonateButton.reset();
     mxExtensionsButton.reset();
+    mxSettingsButton.reset();
     mxAllButtonsBox.reset();
     mxButtonsBox.reset();
     mxSmallButtonsBox.reset();
@@ -433,6 +435,7 @@ void BackingWindow::initControls()
     checkInstalledModules();
 
     mxExtensionsButton->connect_clicked(LINK(this, BackingWindow, ExtLinkClickHdl));
+    mxSettingsButton->connect_clicked(LINK(this, BackingWindow, ClickHdl));
     mxDonateButton->connect_clicked(LINK(this, BackingWindow, ExtLinkClickHdl));
 
     mxOpenButton->connect_clicked(LINK(this, BackingWindow, ClickHdl));
@@ -492,10 +495,6 @@ void BackingWindow::ApplyStyleSettings()
     const vcl::Font& aLabelFont(rStyleSettings.GetLabelFont());
 
     // setup larger fonts
-    setLargerFont(mxOpenButton, aButtonFont);
-    setLargerFont(mxRemoteButton, aButtonFont);
-    setLargerFont(mxRecentButton, aButtonFont);
-    setLargerFont(mxTemplateButton, aButtonFont);
     setLargerFont(mxWriterAllButton, aButtonFont);
     setLargerFont(mxDrawAllButton, aButtonFont);
     setLargerFont(mxCalcAllButton, aButtonFont);
@@ -998,6 +997,11 @@ IMPL_LINK( BackingWindow, ClickHdl, weld::Button&, rButton, void )
         dispatchURL( u"private:factory/sdatabase?Interactive"_ustr );
     else if( &rButton == mxMathAllButton.get() )
         dispatchURL( u"private:factory/smath"_ustr );
+    else if (&rButton == mxSettingsButton.get())
+    {
+        Reference<XDispatchProvider> xFrame(mxFrame, UNO_QUERY);
+        dispatchURL(u".uno:OptionsTreeDialog"_ustr, OUString(), xFrame);
+    }
     else if( &rButton == mxOpenButton.get() )
     {
         Reference< XDispatchProvider > xFrame( mxFrame, UNO_QUERY );
