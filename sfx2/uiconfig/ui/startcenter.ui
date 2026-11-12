@@ -313,7 +313,7 @@
                         <property name="always-show-image">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes" context="stock">_Help</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="relief">none</property>
