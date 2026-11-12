@@ -747,6 +747,8 @@ sw/uiconfig/swriter/ui/optfonttabpage.ui://GtkLabel[@id='font_label'] orphan-lab
 
 
 
+
+
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ToggleObjectBezierMode'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltDown'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltUp'] button-no-label

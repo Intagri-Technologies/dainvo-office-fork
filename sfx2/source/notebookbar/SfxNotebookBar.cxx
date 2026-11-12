@@ -136,21 +136,29 @@ static void lcl_setNotebookbarFileName( vcl::EnumContext::Application eApp, cons
 
 static OUString lcl_getNotebookbarFileName( vcl::EnumContext::Application eApp )
 {
+    OUString sFile;
     switch ( eApp )
     {
         case vcl::EnumContext::Application::Writer:
-            return officecfg::Office::UI::ToolbarMode::ActiveWriter::get();
+            sFile = officecfg::Office::UI::ToolbarMode::ActiveWriter::get();
+            break;
         case vcl::EnumContext::Application::Calc:
-            return officecfg::Office::UI::ToolbarMode::ActiveCalc::get();
+            sFile = officecfg::Office::UI::ToolbarMode::ActiveCalc::get();
+            break;
         case vcl::EnumContext::Application::Impress:
-            return officecfg::Office::UI::ToolbarMode::ActiveImpress::get();
+            sFile = officecfg::Office::UI::ToolbarMode::ActiveImpress::get();
+            break;
         case vcl::EnumContext::Application::Draw:
-            return officecfg::Office::UI::ToolbarMode::ActiveDraw::get();
+            sFile = officecfg::Office::UI::ToolbarMode::ActiveDraw::get();
+            break;
 
         default:
-            break;
+            return OUString();
     }
-    return OUString();
+    // Dainvo: ribbon-only; a profile saved with any other layout gets the labelled ribbon
+    if (sFile != "notebookbar.ui" && sFile != "notebookbar_compact.ui")
+        sFile = u"notebookbar.ui"_ustr;
+    return sFile;
 }
 
 static utl::OConfigurationTreeRoot lcl_getCurrentImplConfigRoot()
@@ -252,6 +260,9 @@ bool SfxNotebookBar::IsActive(bool bConsiderSingleToolbar)
     if (appName.isEmpty())
         return false;
 
+    // Dainvo: the ribbon is the only layout for the document apps
+    if (eApp != vcl::EnumContext::Application::Formula)
+        return true;
 
     OUString aPath = "org.openoffice.Office.UI.ToolbarMode/Applications/" + appName;
 

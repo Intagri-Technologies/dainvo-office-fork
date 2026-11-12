@@ -49,7 +49,7 @@
         {"L": [".uno:PrintLayout", ".uno:BrowseView", ".uno:FullScreen"]},
         {"R": [[".uno:Ruler", ".uno:ControlCodes"], [".uno:Navigator"]]},
         {"L": [".uno:Zoom"], "R": [[".uno:Zoom100Percent", ".uno:ZoomPageWidth"], [".uno:ShowMultiplePages", ".uno:ZoomPage"]]},
-        {"L": [".uno:Sidebar"]}
+        {"L": [".uno:Sidebar", "@layout"]}
       ]]
     ]
   },
@@ -64,11 +64,11 @@
         {"L": [".uno:Paste"], "R": [[".uno:Cut", ".uno:Copy"], [".uno:FormatPaintbrush"]]},
         {"R": [[".uno:CharFontName", ".uno:FontHeight", ".uno:Grow|o", ".uno:Shrink|o"],
                [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:SetBorderStyle", ".uno:BackgroundColor", ".uno:Color"]]},
-        {"R": [[".uno:AlignLeft", ".uno:AlignHorizontalCenter", ".uno:AlignRight", ".uno:WrapText"],
+        {"R": [[".uno:AlignLeft", ".uno:AlignHorizontalCenter", ".uno:AlignRight", ".uno:WrapText", ".uno:DecrementIndent|o", ".uno:IncrementIndent|o"],
                [".uno:AlignTop", ".uno:AlignVCenter", ".uno:AlignBottom", ".uno:ToggleMergeCells"]]},
-        {"R": [[".uno:NumberFormatType"], [".uno:NumberFormatCurrency", ".uno:NumberFormatPercent", ".uno:NumberFormatIncDecimals|o", ".uno:NumberFormatDecDecimals|o"]]},
+        {"R": [[".uno:NumberFormatType"], [".uno:NumberFormatCurrency", ".uno:NumberFormatPercent", ".uno:NumberFormatDate|o", ".uno:NumberFormatIncDecimals|o", ".uno:NumberFormatDecDecimals|o"]]},
         {"L": [".uno:ConditionalFormatMenu"], "R": [[".uno:StyleApply"]]},
-        {"L": [".uno:InsertCell", ".uno:DeleteCell"]},
+        {"L": [".uno:InsertCell", ".uno:DeleteCell"], "R": [[".uno:RowOperations|o"], [".uno:ColumnOperations|o"]]},
         {"R": [[".uno:AutoSum", ".uno:DataSort"], [".uno:DataFilterAutoFilter", ".uno:SearchDialog"]]}
       ]],
       ["Insert", [
@@ -85,7 +85,7 @@
         {"L": [".uno:Calculate"]}
       ]],
       ["Data", [
-        {"L": [".uno:DataSort", ".uno:DataFilterAutoFilter"], "R": [[".uno:DataFilterStandardFilter"], [".uno:DataFilterRemoveFilter"]]},
+        {"L": [".uno:DataSort", ".uno:DataFilterAutoFilter"], "R": [[".uno:SortAscending", ".uno:DataFilterStandardFilter"], [".uno:SortDescending", ".uno:DataFilterRemoveFilter"]]},
         {"L": [".uno:TextToColumns", ".uno:Validation"], "R": [[".uno:HandleDuplicateRecords"], [".uno:DataAreaRefresh"]]},
         {"L": [".uno:Group", ".uno:Ungroup"], "R": [[".uno:DataSubTotals"]]},
         {"L": [".uno:DataDataPilotRun", ".uno:InsertExternalDataSource"]}
@@ -97,10 +97,11 @@
         {"L": [".uno:Protect", ".uno:ToolProtectionDocument"]}
       ]],
       ["View", [
-        {"L": [".uno:NormalViewMode", ".uno:PagebreakMode"]},
+        {"L": [".uno:NormalViewMode", ".uno:PagebreakMode"], "R": [[".uno:DefinePrintArea|o"], [".uno:DeletePrintArea|o"]]},
         {"R": [[".uno:ToggleSheetGrid", ".uno:ViewRowColumnHeaders"], [".uno:InputLineVisible", ".uno:Sidebar"]]},
         {"L": [".uno:FreezePanes", ".uno:SplitWindow"]},
-        {"L": [".uno:Zoom"], "R": [[".uno:Zoom100Percent"]]}
+        {"L": [".uno:Zoom"], "R": [[".uno:Zoom100Percent"]]},
+        {"L": ["@layout"]}
       ]]
     ]
   },
@@ -115,9 +116,9 @@
         {"L": [".uno:Paste"], "R": [[".uno:Cut", ".uno:Copy"], [".uno:FormatPaintbrush"]]},
         {"L": [".uno:InsertSlide"], "R": [[".uno:AssignLayout"], [".uno:DuplicateSlide"]]},
         {"R": [[".uno:CharFontName", ".uno:FontHeight", ".uno:Grow|o", ".uno:Shrink|o"],
-               [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:Strikeout|o", ".uno:Color"]]},
-        {"R": [[".uno:DefaultBullet", ".uno:DefaultNumbering", ".uno:DecrementIndent|o", ".uno:IncrementIndent|o"],
-               [".uno:LeftPara", ".uno:CenterPara", ".uno:RightPara", ".uno:LineSpacing"]]},
+               [".uno:Bold", ".uno:Italic", ".uno:Underline", ".uno:Strikeout|o", ".uno:SuperScript|o", ".uno:SubScript|o", ".uno:Shadowed|o", ".uno:CharBackColor", ".uno:Color"]]},
+        {"R": [[".uno:DefaultBullet", ".uno:DefaultNumbering", ".uno:DecrementIndent|o", ".uno:IncrementIndent|o", ".uno:ParaspaceIncrease|o", ".uno:ParaspaceDecrease|o"],
+               [".uno:LeftPara", ".uno:CenterPara", ".uno:RightPara", ".uno:JustifyPara", ".uno:LineSpacing"]]},
         {"L": [".uno:BasicShapes", ".uno:ObjectPosition"], "R": [[".uno:XLineColor"], [".uno:FillShadow"]]},
         {"R": [[".uno:SearchDialog"]]}
       ]],
@@ -125,6 +126,7 @@
         {"L": [".uno:InsertSlide"]},
         {"L": [".uno:InsertTable"]},
         {"L": [".uno:InsertGraphic", ".uno:BasicShapes", ".uno:InsertObjectChart"]},
+        {"R": [[".uno:ArrowShapes", ".uno:FlowChartShapes", ".uno:CalloutShapes|o"], [".uno:StarShapes", ".uno:SymbolShapes|o", ".uno:ConnectorToolbox|o"]]},
         {"L": [".uno:InsertAVMedia"]},
         {"L": [".uno:Text"], "R": [[".uno:HeaderAndFooter"]]},
         {"R": [[".uno:HyperlinkDialog"], [".uno:InsertAnnotation"]]},
@@ -152,7 +154,8 @@
         {"L": [".uno:NormalMultiPaneGUI", ".uno:DiaMode", ".uno:NotesMode", ".uno:OutlineMode"]},
         {"L": [".uno:SlideMasterPage"]},
         {"R": [[".uno:Ruler", ".uno:GridVisible"], [".uno:Sidebar"]]},
-        {"L": [".uno:Zoom"]}
+        {"L": [".uno:Zoom"]},
+        {"L": ["@layout"]}
       ]]
     ]
   }

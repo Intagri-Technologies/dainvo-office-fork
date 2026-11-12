@@ -2034,3 +2034,9 @@ cmd/sc_objecttitledescription-oleobjects.png cmd/sc_objecttitledescription.png
 cmd/lc_objecttitledescription-oleobjects.png cmd/lc_objecttitledescription.png
 cmd/sc_objecttitledescription-drawingobjects.png cmd/sc_objecttitledescription.png
 cmd/lc_objecttitledescription-drawingobjects.png cmd/lc_objecttitledescription.png
+cmd/sc_toolbarmode%3fmode%3astring=notebookbar_compact.ui.png cmd/sc_dvribboniconsonly.png
+cmd/lc_toolbarmode%3fmode%3astring=notebookbar_compact.ui.png cmd/lc_dvribboniconsonly.png
+cmd/32/toolbarmode%3fmode%3astring=notebookbar_compact.ui.png cmd/32/dvribboniconsonly.png
+cmd/sc_toolbarmode%3fmode%3astring=notebookbar.ui.png cmd/sc_dvribbonlabels.png
+cmd/lc_toolbarmode%3fmode%3astring=notebookbar.ui.png cmd/lc_dvribbonlabels.png
+cmd/32/toolbarmode%3fmode%3astring=notebookbar.ui.png cmd/32/dvribbonlabels.png

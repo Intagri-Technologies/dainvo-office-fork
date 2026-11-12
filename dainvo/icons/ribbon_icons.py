@@ -345,6 +345,9 @@ ICONS = {
     'ViewDataSourceBrowser': 'database', 'ViewTrackChanges': 'file-diff', 'ViewValueHighlighting': 'highlighter',
     'Watermark': 'droplet', 'WebHtml': 'globe', 'WrapAnchorOnly': 'anchor',
     'WrapThroughTransparent': 'd:wrapthrough',
+    # ribbon layout toggle on the View tab (linked from the argument commands, see LINKS)
+    'DvRibbonIconsOnly': 'panel-top-close', 'DvRibbonLabels': 'panel-top-open',
+    'DefinePrintArea': 'printer-check', 'DeletePrintArea': 'printer-x',
     # Draw ribbon menus
     'AutoPilotMenu': 'wand', 'CalculateSel': 'calculator', 'CancelCheckOut': 'circle-x', 'ChangeTheme': 'palette',
     'CheckIn': 'cloud-upload', 'CheckOut': 'cloud-download', 'ConvertInto3DLathe': 'cylinder',
@@ -366,6 +369,11 @@ ICONS = {
     'SaveAll': 'save-all', 'SaveAsTemplate': 'layout-template', 'VersionDialog': 'history',
     'Zoom150Percent': 'zoom-in', 'Zoom200Percent': 'zoom-in', 'Zoom50Percent': 'zoom-out',
     'Zoom75Percent': 'zoom-out', 'ZoomNext': 'redo-dot', 'ZoomObjects': 'scan', 'ZoomOptimal': 'scan-search',
+}
+# argument commands whose escaped image names would upset make: linked to our files
+LINKS = {
+    'toolbarmode%3fmode%3astring=notebookbar_compact.ui': 'dvribboniconsonly',
+    'toolbarmode%3fmode%3astring=notebookbar.ui': 'dvribbonlabels',
 }
 # other images by path (without extension) -> (icon, size)
 FILES = {
@@ -436,7 +444,13 @@ def main():
             src = line.split(' ')[0]
             m = re.match(r'cmd/(?:32/)?(?:[\w-]+/)?(?:sc_|lc_)?([\w.-]+)\.(?:png|svg)$', src)
             return bool(m) and m.group(1) in names
-        keep = [l for l in lines if not ours(l)]
+        keep = [l for l in lines if not ours(l) and not any(f'_{k}.png ' in l or f'/{k}.png ' in l for k in LINKS)]
+        while keep and not keep[-1]:
+            keep.pop()
+        for src, dst in LINKS.items():
+            for pre in ('cmd/sc_', 'cmd/lc_', 'cmd/32/'):
+                keep.append(f'{pre}{src}.png {pre}{dst}.png')
+        keep.append('')
         open(links, 'w', encoding='utf-8').write('\n'.join(keep))
     print(f'{written} icons written, {removed} language variants removed')
 

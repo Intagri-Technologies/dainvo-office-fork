@@ -81,6 +81,7 @@ class Xml:
 class Generator:
     def __init__(self, app, spec, commands):
         self.app, self.spec, self.commands = app, spec, commands
+        self.compact = False
         self.uid = 0
         self.menu_ids = []
         self.overflow = []      # commands hidden in the icons-only layout (current tab)
@@ -92,6 +93,8 @@ class Generator:
 
     def parse(self, item):
         cmd, *flags = item.split('|')
+        if cmd == '@layout':
+            return LAYOUT_TOGGLE[self.compact], 'o' in flags
         if cmd not in self.commands:
             sys.exit(f'{self.app}: unknown command {cmd}')
         return cmd, 'o' in flags
@@ -294,6 +297,7 @@ def build(app, spec, commands):
 
     for compact, path in ((False, spec['file']), (True, spec['compact'])):
         gen = Generator(app, spec, commands)
+        gen.compact = compact
         x = Xml(len(child_pad))
         pos = 0
         for n, (name, groups) in enumerate(spec['tabs']):
@@ -327,8 +331,16 @@ def build(app, spec, commands):
 SKIP_CONTEXTS = {'Form'}
 DROP = re.compile(r'\.uno:(ImageMapDialog|Repaginate|\w*DDE\w*|SwitchControlDesignMode|ControlProperties'
                   r'|FormProperties|ShowFmExplorer|FormDesignTools|Config:\w*[Ff]orm\w*|MacroDialog|RunMacro'
-                  r'|BasicIDEAppear|MacroRecorder|MacroOrganizer|ScriptOrganizer|MacroSignature|ExtensionManager)\b'
+                  r'|BasicIDEAppear|MacroRecorder|MacroOrganizer|ScriptOrganizer|MacroSignature|ExtensionManager'
+                  r'|OpenRemote|SaveAsRemote|VersionDialog|SendViaBluetooth|Twain\w+|CheckOut|CancelCheckOut|CheckIn'
+                  r'|SignPDF|MoreDictionaries|Remote|ShareDocument|ManageXMLSource|DataProvider\w*|TableEvents'
+                  r'|GetInvolved|Donation|QuestionAnswers|ExtendedHelp|HelpIndex|TipOfTheDay|\w*Classification\w*'
+                  r'|ToolbarModeUI|AvailableToolbars|UIPicker|Notebookbar)\b'
                   r'|private:factory/sdraw')
+# Dainvo Office is ribbon-only: the View tab switches between the labelled and
+# icons-only ribbon instead of a toolbar-mode picker
+LAYOUT_TOGGLE = {False: '.uno:ToolbarMode?Mode:string=notebookbar_compact.ui',
+                 True: '.uno:ToolbarMode?Mode:string=notebookbar.ui'}
 
 
 def drop_commands(lines):

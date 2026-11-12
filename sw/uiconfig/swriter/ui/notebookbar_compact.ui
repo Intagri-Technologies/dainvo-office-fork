@@ -8,56 +8,56 @@
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkMenuItem" id="dvmi185">
+      <object class="GtkMenuItem" id="dvmi186">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:Grow</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi186">
+      <object class="GtkMenuItem" id="dvmi187">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:Shrink</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi187">
+      <object class="GtkMenuItem" id="dvmi188">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:SubScript</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi188">
+      <object class="GtkMenuItem" id="dvmi189">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:SuperScript</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi189">
+      <object class="GtkMenuItem" id="dvmi190">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:SetOutline</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi190">
+      <object class="GtkMenuItem" id="dvmi191">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:ControlCodes</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi191">
+      <object class="GtkMenuItem" id="dvmi192">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:BackgroundColor</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi192">
+      <object class="GtkMenuItem" id="dvmi193">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:SetBorderStyle</property>
@@ -68,14 +68,14 @@
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkMenuItem" id="dvmi193">
+      <object class="GtkMenuItem" id="dvmi194">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:LineNumberingDialog</property>
       </object>
     </child>
     <child>
-      <object class="GtkMenuItem" id="dvmi194">
+      <object class="GtkMenuItem" id="dvmi195">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:Hyphenate</property>
@@ -2891,6 +2891,16 @@
                           <object class="GtkToolButton" id="dvbtn184">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:Sidebar</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="homogeneous">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkToolButton" id="dvbtn185">
+                            <property name="visible">True</property>
+                            <property name="action-name">.uno:ToolbarMode?Mode:string=notebookbar.ui</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>

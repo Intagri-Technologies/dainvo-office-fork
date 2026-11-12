@@ -359,6 +359,8 @@ sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='btnPrintClosePreview'
 
 
 
+
+
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label
@@ -465,6 +467,7 @@ sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn242'] button-no-
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn244'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn245'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn249'] button-no-label
+sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn251'] button-no-label
 
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='btnTableInsertCaptionDialog'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='btnTableInsertColumnsBefore'] button-no-label
@@ -746,7 +749,7 @@ sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='dvbtn178'] bu
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='dvbtn179'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='dvbtn180'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='dvbtn184'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi185'] button-no-label
+sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='dvbtn185'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi186'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi187'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi188'] button-no-label
@@ -756,3 +759,4 @@ sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi191'] butto
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi192'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi193'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi194'] button-no-label
+sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='dvmi195'] button-no-label
