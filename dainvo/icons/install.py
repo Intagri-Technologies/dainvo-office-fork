@@ -38,6 +38,19 @@ def resized_png(tile, size, tmp):
     return out
 
 
+def write_tile(tile, size, path, tmp):
+    if path.endswith('.png'):
+        with open(resized_png(tile, size, tmp), 'rb') as source, open(path, 'wb') as output:
+            output.write(source.read())
+    else:
+        with open(resized_png(tile, size * 2, tmp), 'rb') as source:
+            data = base64.b64encode(source.read()).decode()
+        with open(path, 'w', encoding='utf-8') as output:
+            output.write(f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+                         f'width="{size}" height="{size}" viewBox="0 0 {size} {size}">'
+                         f'<image width="{size}" height="{size}" xlink:href="data:image/png;base64,{data}"/></svg>\n')
+
+
 def main():
     count = 0
     with tempfile.TemporaryDirectory() as tmp:
@@ -50,17 +63,7 @@ def main():
                     continue
                 prefix = next(g for g in (m.group(1), m.group(3), m.group(5)) if g)
                 size = int(next(g for g in (m.group(2), m.group(4), m.group(6)) if g))
-                tile = TILES[prefix]
-                path = os.path.join(res, fname)
-                if ext == '.png':
-                    with open(resized_png(tile, size, tmp), 'rb') as f, open(path, 'wb') as o:
-                        o.write(f.read())
-                else:
-                    data = base64.b64encode(open(resized_png(tile, size * 2, tmp), 'rb').read()).decode()
-                    with open(path, 'w', encoding='utf-8') as o:
-                        o.write(f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-                                f'width="{size}" height="{size}" viewBox="0 0 {size} {size}">'
-                                f'<image width="{size}" height="{size}" xlink:href="data:image/png;base64,{data}"/></svg>\n')
+                write_tile(TILES[prefix], size, os.path.join(res, fname), tmp)
                 count += 1
     print(f'replaced {count} icons in {len(THEMES)} themes')
 

@@ -1222,6 +1222,12 @@
     <string>@MACOSX_BUNDLE_SHORTVERSION@</string>
     <key>CFBundleVersion</key>
     <string>@MACOSX_BUNDLE_VERSION@</string>
+    <key>SUFeedURL</key>
+    <string>@DAINVO_UPDATE_FEED@</string>
+    <key>SUPublicEDKey</key>
+    <string>@DAINVO_UPDATE_KEY@</string>
+    <key>SUScheduledCheckInterval</key>
+    <integer>86400</integer>
     <key>CFBundleIdentifier</key>
     <string>@MACOSX_BUNDLE_IDENTIFIER@</string>
     <key>CFBundleInfoDictionaryVersion</key>

@@ -1,0 +1,7 @@
+WinSparkle, the Windows software update library: https://winsparkle.org/
+
+Used by Dainvo Office (--enable-dainvo-updater on Windows). sfx2 loads
+WinSparkle.dll at run time (sfx2/source/appl/dainvoupdate.cxx), so nothing links
+against it. License: MIT.
+
+Not yet built or tested: Dainvo Office has no Windows build host so far.

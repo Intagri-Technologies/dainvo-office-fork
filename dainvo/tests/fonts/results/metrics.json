@@ -1,0 +1,1490 @@
+[
+  {
+    "file": "Intos-Bold.ttf",
+    "reference": "Aptos-Bold.ttf",
+    "family": "Intos",
+    "subfamily": "Bold",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 38.10693359375,
+        "intos_em": 38.10693359375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 29.185546875,
+        "intos_em": 29.185546875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.57177734375,
+        "intos_em": 30.57177734375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 32.3974609375,
+        "intos_em": 32.3974609375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 19.85986328125,
+        "intos_em": 19.85986328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 33.7158203125,
+        "intos_em": 33.7158203125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 37.82275390625,
+        "intos_em": 37.82275390625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 35.4306640625,
+        "intos_em": 35.4306640625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.443359375,
+        "intos_em": 15.443359375,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "Intos-BoldItalic.ttf",
+    "reference": "Aptos-Bold-Italic.ttf",
+    "family": "Intos",
+    "subfamily": "Bold Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 38.09228515625,
+        "intos_em": 38.09228515625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 29.03564453125,
+        "intos_em": 29.03564453125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.58349609375,
+        "intos_em": 30.58349609375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 32.47021484375,
+        "intos_em": 32.47021484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 19.8544921875,
+        "intos_em": 19.8544921875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 34.154296875,
+        "intos_em": 34.154296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 37.84912109375,
+        "intos_em": 37.84912109375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 35.4384765625,
+        "intos_em": 35.4384765625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.46435546875,
+        "intos_em": 15.46435546875,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "Intos-Italic.ttf",
+    "reference": "Aptos-Italic.ttf",
+    "family": "Intos",
+    "subfamily": "Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 35.96337890625,
+        "intos_em": 35.96337890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 27.017578125,
+        "intos_em": 27.017578125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.13134765625,
+        "intos_em": 30.13134765625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 30.81103515625,
+        "intos_em": 30.81103515625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 18.83544921875,
+        "intos_em": 18.83544921875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 32.2451171875,
+        "intos_em": 32.2451171875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 35.71240234375,
+        "intos_em": 35.71240234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 33.9208984375,
+        "intos_em": 33.9208984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.76416015625,
+        "intos_em": 14.76416015625,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "Intos-Regular.ttf",
+    "reference": "Aptos.ttf",
+    "family": "Intos",
+    "subfamily": "Regular",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 36.0458984375,
+        "intos_em": 36.0458984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 27.31591796875,
+        "intos_em": 27.31591796875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.16015625,
+        "intos_em": 30.16015625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 30.82470703125,
+        "intos_em": 30.82470703125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 18.79248046875,
+        "intos_em": 18.79248046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 31.8896484375,
+        "intos_em": 31.8896484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 35.7734375,
+        "intos_em": 35.7734375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 33.9365234375,
+        "intos_em": 33.9365234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.77490234375,
+        "intos_em": 14.77490234375,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "Intos-Semibold.ttf",
+    "reference": "Aptos-SemiBold.ttf",
+    "family": "Intos Semibold",
+    "subfamily": "Regular",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 37.072265625,
+        "intos_em": 37.072265625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 28.248046875,
+        "intos_em": 28.318359375,
+        "delta_em": 0.0703125
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.36669921875,
+        "intos_em": 30.36669921875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 31.6083984375,
+        "intos_em": 31.6083984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 19.32568359375,
+        "intos_em": 19.32568359375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 32.80322265625,
+        "intos_em": 32.80322265625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 36.79736328125,
+        "intos_em": 36.79736328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 34.68212890625,
+        "intos_em": 34.68212890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.1083984375,
+        "intos_em": 15.1318359375,
+        "delta_em": 0.0234375
+      }
+    ]
+  },
+  {
+    "file": "Intos-SemiboldItalic.ttf",
+    "reference": "Aptos-SemiBold-Italic.ttf",
+    "family": "Intos Semibold",
+    "subfamily": "Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 37.02587890625,
+        "intos_em": 37.02587890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 28.02490234375,
+        "intos_em": 28.09814453125,
+        "delta_em": 0.0732421875
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.3564453125,
+        "intos_em": 30.3564453125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 31.638671875,
+        "intos_em": 31.638671875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 19.3427734375,
+        "intos_em": 19.3427734375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 33.20068359375,
+        "intos_em": 33.20068359375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 36.78125,
+        "intos_em": 36.78125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 34.67919921875,
+        "intos_em": 34.67919921875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.11328125,
+        "intos_em": 15.1376953125,
+        "delta_em": 0.0244140625
+      }
+    ]
+  },
+  {
+    "file": "IntosDisplay-Bold.ttf",
+    "reference": "Aptos-Display-Bold.ttf",
+    "family": "Intos Display",
+    "subfamily": "Bold",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 35.6162109375,
+        "intos_em": 35.6162109375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 27.58203125,
+        "intos_em": 27.58203125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.39892578125,
+        "intos_em": 30.39892578125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 30.2734375,
+        "intos_em": 30.2734375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 18.68505859375,
+        "intos_em": 18.68505859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 31.71240234375,
+        "intos_em": 31.71240234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 35.32373046875,
+        "intos_em": 35.32373046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 34.04150390625,
+        "intos_em": 34.04150390625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.81787109375,
+        "intos_em": 14.81787109375,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosDisplay-BoldItalic.ttf",
+    "reference": "Aptos-Display-Bold-Italic.ttf",
+    "family": "Intos Display",
+    "subfamily": "Bold Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 35.62451171875,
+        "intos_em": 35.62451171875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 27.55615234375,
+        "intos_em": 27.55615234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 30.423828125,
+        "intos_em": 30.423828125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 30.3330078125,
+        "intos_em": 30.3330078125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 18.63720703125,
+        "intos_em": 18.63720703125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 32.05908203125,
+        "intos_em": 32.05908203125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 35.39111328125,
+        "intos_em": 35.39111328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 34.02099609375,
+        "intos_em": 34.02099609375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.88330078125,
+        "intos_em": 14.88330078125,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosDisplay-Italic.ttf",
+    "reference": "Aptos-Display-Italic.ttf",
+    "family": "Intos Display",
+    "subfamily": "Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 33.63330078125,
+        "intos_em": 33.63330078125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 25.72021484375,
+        "intos_em": 25.72021484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 29.21435546875,
+        "intos_em": 29.21435546875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 28.783203125,
+        "intos_em": 28.783203125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.64404296875,
+        "intos_em": 17.64404296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 30.17529296875,
+        "intos_em": 30.17529296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 33.3896484375,
+        "intos_em": 33.3896484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 32.45166015625,
+        "intos_em": 32.45166015625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.1884765625,
+        "intos_em": 14.1884765625,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosDisplay-Regular.ttf",
+    "reference": "Aptos-Display.ttf",
+    "family": "Intos Display",
+    "subfamily": "Regular",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 33.67333984375,
+        "intos_em": 33.67333984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 25.82373046875,
+        "intos_em": 25.82373046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 29.2392578125,
+        "intos_em": 29.2392578125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 28.83984375,
+        "intos_em": 28.83984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.67333984375,
+        "intos_em": 17.67333984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 29.89111328125,
+        "intos_em": 29.89111328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 33.42529296875,
+        "intos_em": 33.42529296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 32.4716796875,
+        "intos_em": 32.4716796875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.1318359375,
+        "intos_em": 14.1318359375,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosNarrow-Bold.ttf",
+    "reference": "Aptos-Narrow-Bold.ttf",
+    "family": "Intos Narrow",
+    "subfamily": "Bold",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 34.44287109375,
+        "intos_em": 34.44287109375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 26.4501953125,
+        "intos_em": 26.4501953125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 28.58837890625,
+        "intos_em": 28.58837890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 29.279296875,
+        "intos_em": 29.279296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.8896484375,
+        "intos_em": 17.8896484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 30.46875,
+        "intos_em": 30.46875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 34.1220703125,
+        "intos_em": 34.1220703125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 32.13623046875,
+        "intos_em": 32.13623046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.08203125,
+        "intos_em": 14.08203125,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosNarrow-BoldItalic.ttf",
+    "reference": "Aptos-Narrow-Bold-Italic.ttf",
+    "family": "Intos Narrow",
+    "subfamily": "Bold Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 34.10009765625,
+        "intos_em": 34.10009765625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 26.00927734375,
+        "intos_em": 26.00927734375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 28.505859375,
+        "intos_em": 28.505859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 29.02685546875,
+        "intos_em": 29.02685546875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.70703125,
+        "intos_em": 17.70703125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 30.654296875,
+        "intos_em": 30.654296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 33.888671875,
+        "intos_em": 33.888671875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 31.91943359375,
+        "intos_em": 31.91943359375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 14.03125,
+        "intos_em": 14.03125,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosNarrow-Italic.ttf",
+    "reference": "Aptos-Narrow-Italic.ttf",
+    "family": "Intos Narrow",
+    "subfamily": "Italic",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 32.9560546875,
+        "intos_em": 32.9560546875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 24.77490234375,
+        "intos_em": 24.77490234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 28.3251953125,
+        "intos_em": 28.3251953125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 28.2109375,
+        "intos_em": 28.2109375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.2060546875,
+        "intos_em": 17.2060546875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 29.59521484375,
+        "intos_em": 29.59521484375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 32.7119140625,
+        "intos_em": 32.7119140625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 31.1923828125,
+        "intos_em": 31.1923828125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 13.6689453125,
+        "intos_em": 13.6689453125,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosNarrow-Regular.ttf",
+    "reference": "Aptos-Narrow.ttf",
+    "family": "Intos Narrow",
+    "subfamily": "Regular",
+    "common_characters": 987,
+    "different_advances": 0,
+    "max_advance_delta_em": 0.0,
+    "missing_reference_characters": 99,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 33.12353515625,
+        "intos_em": 33.12353515625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 25.1298828125,
+        "intos_em": 25.1298828125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 28.37255859375,
+        "intos_em": 28.37255859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 28.306640625,
+        "intos_em": 28.306640625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 17.232421875,
+        "intos_em": 17.232421875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 29.2900390625,
+        "intos_em": 29.2900390625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 32.8125,
+        "intos_em": 32.8125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 31.255859375,
+        "intos_em": 31.255859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 13.7099609375,
+        "intos_em": 13.7099609375,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosSerif-Bold.ttf",
+    "reference": "Aptos-Serif-Bold.ttf",
+    "family": "Intos Serif",
+    "subfamily": "Bold",
+    "common_characters": 782,
+    "different_advances": 2,
+    "max_advance_delta_em": 0.267578125,
+    "missing_reference_characters": 296,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 40.8857421875,
+        "intos_em": 40.8857421875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 30.85986328125,
+        "intos_em": 30.85986328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 32.27880859375,
+        "intos_em": 32.27880859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 34.09423828125,
+        "intos_em": 34.09423828125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 20.79150390625,
+        "intos_em": 20.79150390625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 36.24609375,
+        "intos_em": 36.24609375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 39.40234375,
+        "intos_em": 39.40234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 37.97607421875,
+        "intos_em": 37.97607421875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 16.31494140625,
+        "intos_em": 16.31494140625,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosSerif-BoldItalic.ttf",
+    "reference": "Aptos-Serif-Bold-Italic.ttf",
+    "family": "Intos Serif",
+    "subfamily": "Bold Italic",
+    "common_characters": 611,
+    "different_advances": 1,
+    "max_advance_delta_em": 0.14208984375,
+    "missing_reference_characters": 476,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 40.56103515625,
+        "intos_em": 40.56103515625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 30.82861328125,
+        "intos_em": 30.82861328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 32.3212890625,
+        "intos_em": 32.3212890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 34.47119140625,
+        "intos_em": 34.47119140625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 39.6640625,
+        "intos_em": 39.6640625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 37.77880859375,
+        "intos_em": 37.77880859375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 16.2314453125,
+        "intos_em": 16.2314453125,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosSerif-Italic.ttf",
+    "reference": "Aptos-Serif-Italic.ttf",
+    "family": "Intos Serif",
+    "subfamily": "Italic",
+    "common_characters": 611,
+    "different_advances": 1,
+    "max_advance_delta_em": 0.14794921875,
+    "missing_reference_characters": 476,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 37.76904296875,
+        "intos_em": 37.76904296875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 28.744140625,
+        "intos_em": 28.744140625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 31.0361328125,
+        "intos_em": 31.0361328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 32.27978515625,
+        "intos_em": 32.27978515625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 37.10986328125,
+        "intos_em": 37.10986328125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 35.83984375,
+        "intos_em": 35.83984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.29638671875,
+        "intos_em": 15.29638671875,
+        "delta_em": 0.0
+      }
+    ]
+  },
+  {
+    "file": "IntosSerif-Regular.ttf",
+    "reference": "Aptos-Serif.ttf",
+    "family": "Intos Serif",
+    "subfamily": "Regular",
+    "common_characters": 782,
+    "different_advances": 2,
+    "max_advance_delta_em": 0.21044921875,
+    "missing_reference_characters": 296,
+    "missing_ascii": [],
+    "metrics_equal": true,
+    "aptos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "intos_metrics": {
+      "ascender": 0.93896484375,
+      "descender": -0.28173828125,
+      "line_gap": 0.0,
+      "typo_ascender": 0.93896484375,
+      "typo_descender": -0.28173828125,
+      "typo_line_gap": 0.0
+    },
+    "shaped_samples": [
+      {
+        "text": "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+        "aptos_em": 38.46240234375,
+        "intos_em": 38.46240234375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "AVATAR To WA Yo fi fl ffi ffl office efficient affinity difficult flowers",
+        "aptos_em": 29.02587890625,
+        "intos_em": 29.02587890625,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Invoice 2026-11-12: $1,234.56 / €789.00 / £42.99 — 0123456789 (25%)",
+        "aptos_em": 31.02001953125,
+        "intos_em": 31.02001953125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Résumé naïve façade café Ångström Straße über déjà vu São Paulo Łódź",
+        "aptos_em": 32.26123046875,
+        "intos_em": 32.26123046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Ελληνικά: Αθήνα κόσμος άλφα βήτα Γειά σου",
+        "aptos_em": 19.73046875,
+        "intos_em": 19.73046875,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Кириллица: Съешь ещё этих мягких французских булок, да выпей чаю.",
+        "aptos_em": 34.1455078125,
+        "intos_em": 34.1455078125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "“Quoted text”, apostrophe’s, hyphen-ated, en–dash, em—dash; [brackets] {braces}.",
+        "aptos_em": 37.32958984375,
+        "intos_em": 37.32958984375,
+        "delta_em": 0.0
+      },
+      {
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+        "aptos_em": 36.18017578125,
+        "intos_em": 36.18017578125,
+        "delta_em": 0.0
+      },
+      {
+        "text": "Á ë ô ñ fi fl ffi ffl a/b + c=d → ← ∑ √ ∞",
+        "aptos_em": 15.46826171875,
+        "intos_em": 15.46826171875,
+        "delta_em": 0.0
+      }
+    ]
+  }
+]

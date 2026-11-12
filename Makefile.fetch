@@ -250,6 +250,10 @@ $(WORKDIR)/download: $(BUILDDIR)/config_$(gb_Side).mk $(SRCDIR)/download.lst $(S
 		$(call fetch_Optional,OFFICEOTRON,OFFICEOTRON_JAR) \
 		$(call fetch_Optional,VERAPDF,VERAPDF_JAR) \
 	,$(call fetch_Download_item,https://dev-www.libreoffice.org/extern,$(item)))
+	$(if $(call fetch_Optional,SPARKLE,1),\
+		$(call fetch_Download_item,https://github.com/sparkle-project/Sparkle/releases/download/$(SPARKLE_VERSION),SPARKLE_TARBALL))
+	$(if $(call fetch_Optional,WINSPARKLE,1),\
+		$(call fetch_Download_item,https://github.com/vslavik/winsparkle/releases/download/v$(WINSPARKLE_VERSION),WINSPARKLE_TARBALL))
 	-@mkdir -p $(TARFILE_LOCATION)/cargo
 	$(if $(call fetch_Optional,YRS,1),\
 		CARGO_HOME=$(TARFILE_LOCATION)/cargo cargo fetch $(if $(verbose),--verbose,) --locked --manifest-path $(SRCDIR)/external/y-crdt/Cargo.toml)

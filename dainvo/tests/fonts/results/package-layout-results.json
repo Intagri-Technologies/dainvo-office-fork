@@ -1,0 +1,65 @@
+{
+  "aptos_substitution": [
+    {
+      "document": "Aptos.docx",
+      "pages": 12,
+      "identical_line_breaks": true,
+      "max_character_origin_delta_pt": 0.0,
+      "fonts": [
+        "Intos-Bold",
+        "Intos-BoldItalic",
+        "Intos-Italic",
+        "Intos-Regular"
+      ],
+      "passed": true
+    },
+    {
+      "document": "AptosDisplay.docx",
+      "pages": 11,
+      "identical_line_breaks": true,
+      "max_character_origin_delta_pt": 0.0,
+      "fonts": [
+        "IntosDisplay-Bold",
+        "IntosDisplay-BoldItalic",
+        "IntosDisplay-Italic",
+        "IntosDisplay-Regular"
+      ],
+      "passed": true
+    },
+    {
+      "document": "AptosNarrow.docx",
+      "pages": 11,
+      "identical_line_breaks": true,
+      "max_character_origin_delta_pt": 0.0,
+      "fonts": [
+        "IntosNarrow-Bold",
+        "IntosNarrow-BoldItalic",
+        "IntosNarrow-Italic",
+        "IntosNarrow-Regular"
+      ],
+      "passed": true
+    },
+    {
+      "document": "AptosSerif.docx",
+      "pages": 13,
+      "identical_line_breaks": true,
+      "max_character_origin_delta_pt": 0.0,
+      "fonts": [
+        "IntosSerif-Bold",
+        "IntosSerif-BoldItalic",
+        "IntosSerif-Italic",
+        "IntosSerif-Regular"
+      ],
+      "passed": true
+    }
+  ],
+  "gelasio": {
+    "fonts": [
+      "Gelasio-Bold",
+      "Gelasio-BoldItalic",
+      "Gelasio-Italic",
+      "Gelasio-Regular"
+    ],
+    "passed": true
+  }
+}

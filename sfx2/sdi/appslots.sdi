@@ -149,6 +149,11 @@ interface Application
     [
         ExecMethod = MiscExec_Impl ;
     ]
+    SID_DAINVO_CHECK_UPDATES
+    [
+        ExecMethod = MiscExec_Impl ;
+        StateMethod = MiscState_Impl ;
+    ]
     SID_CREDITS
     [
         ExecMethod = MiscExec_Impl ;

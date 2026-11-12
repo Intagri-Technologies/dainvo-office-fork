@@ -15,6 +15,16 @@ Version settings
 #undef LIBO_VERSION_PATCH
 #undef LIBO_THIS_YEAR
 
+/* Dainvo Office user-facing version ("0.1.0") and build number (100);
+   undefined in builds without --with-dainvo-version. */
+#undef DAINVO_VERSION
+#undef DAINVO_BUILD
+
+/* Dainvo Office updater: appcast feed URL and EdDSA public key. */
+#undef ENABLE_DAINVO_UPDATER
+#undef DAINVO_UPDATE_FEED
+#undef DAINVO_UPDATE_KEY
+
 #define LIBO_VERSION_DOTTED_2 \
     LIBO_VERSION_STRINGIFY(LIBO_VERSION_MAJOR) "." \
     LIBO_VERSION_STRINGIFY(LIBO_VERSION_MINOR)

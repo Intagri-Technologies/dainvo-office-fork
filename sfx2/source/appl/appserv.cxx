@@ -118,6 +118,7 @@
 #include <memory>
 
 #include <openuriexternally.hxx>
+#include <sfx2/dainvoupdate.hxx>
 
 #include "getbasctlfunction.hxx"
 
@@ -651,6 +652,12 @@ void SfxApplication::MiscExec_Impl( SfxRequest& rReq )
             OUString sURL(officecfg::Office::Common::Menus::DonationURL::get() + //https://hub.libreoffice.org/donation/
                 "?BCP47=" + aBcp47 + "&LOlang=" + aLang );
             sfx2::openUriExternally(sURL, false, rReq.GetFrameWeld());
+            break;
+        }
+        case SID_DAINVO_CHECK_UPDATES:
+        {
+            sfx2::DainvoUpdater::CheckNow(rReq.GetFrameWeld());
+            rReq.Done();
             break;
         }
         case SID_WHATSNEW:
@@ -1302,6 +1309,10 @@ void SfxApplication::MiscState_Impl(SfxItemSet &rSet)
         {
             switch(nWhich)
             {
+                case SID_DAINVO_CHECK_UPDATES:
+                    if (!sfx2::DainvoUpdater::IsAvailable())
+                        rSet.Put(SfxVisibilityItem(nWhich, false));
+                    break;
                 case SID_TEMPLATE_ADDRESSBOOKSOURCE:
                     if (!SvtModuleOptions().IsDataBaseInstalled())
                         rSet.Put(SfxVisibilityItem(nWhich, false));

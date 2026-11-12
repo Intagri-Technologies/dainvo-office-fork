@@ -20,6 +20,7 @@ $(eval $(call gb_Module_add_targets,extras,\
 	Package_autotextuser \
 	Package_cfgusr \
 	Package_fonts \
+	Package_dainvo_fonts \
 	Package_resource_fonts \
 	Package_gallbullets \
 	Package_gallmytheme \

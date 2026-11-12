@@ -30,9 +30,15 @@ $(eval $(call gb_CppunitTest_use_libraries,sfx2_view, \
     unotest \
     utl \
     tl \
+    tk \
     sfx \
     svl \
     vcl \
+))
+
+$(eval $(call gb_CppunitTest_set_include,sfx2_view, \
+    $$(INCLUDE) \
+    -I$(SRCDIR)/sfx2/inc \
 ))
 
 $(eval $(call gb_CppunitTest_use_sdk_api,sfx2_view))
@@ -49,6 +55,8 @@ $(eval $(call gb_CppunitTest_use_custom_headers,sfx2_view,\
 $(eval $(call gb_CppunitTest_use_configuration,sfx2_view))
 
 $(eval $(call gb_CppunitTest_use_executable,sfx2_view,xpdfimport))
+$(eval $(call gb_CppunitTest_use_executable,sfx2_view,recentfilemetadata))
+$(eval $(call gb_CppunitTest_use_executable,sfx2_view,sfx2_metadatastall))
 
 $(eval $(call gb_CppunitTest_use_uiconfigs,sfx2_view, \
     modules/simpress \

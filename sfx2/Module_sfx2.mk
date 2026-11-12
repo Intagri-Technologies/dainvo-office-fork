@@ -25,11 +25,18 @@ $(eval $(call gb_Module_add_targets,sfx2,\
     UIConfig_sfx \
 ))
 
+ifneq ($(ENABLE_WASM_STRIP_RECENT),TRUE)
+ifneq ($(filter LINUX MACOSX WNT FREEBSD NETBSD OPENBSD DRAGONFLY SOLARIS,$(OS)),)
+$(eval $(call gb_Module_add_targets,sfx2,Executable_recentfilemetadata))
+endif
+endif
+
 $(eval $(call gb_Module_add_l10n_targets,sfx2,\
     AllLangMoTarget_sfx2 \
 ))
 
 $(eval $(call gb_Module_add_check_targets,sfx2,\
+    Executable_sfx2_metadatastall \
     CppunitTest_sfx2_metadatable \
     CppunitTest_sfx2_misc \
     CppunitTest_sfx2_controlleritem \

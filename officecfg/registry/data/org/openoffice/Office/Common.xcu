@@ -130,17 +130,8 @@
           <value>_default</value>
         </prop>
       </node>
-      <node oor:name="m3" oor:op="replace" install:module="draw">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>private:factory/sdraw</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">~Drawing</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_default</value>
-        </prop>
-      </node>
+      <!-- Dainvo: hide standalone Draw from File > New while retaining its engine. -->
+      <!-- Dainvo: hide standalone Math from File > New; embedded equations remain available. -->
       <node oor:name="m6" oor:op="replace">
         <prop oor:name="URL" oor:type="xs:string">
           <value>private:separator</value>

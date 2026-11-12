@@ -100,6 +100,7 @@ $(eval $(call gb_Module_add_moduledirs,external,\
 	$(call gb_Helper_optional,REVENGE,librevenge) \
 	$(call gb_Helper_optional,RHINO,rhino) \
 	$(call gb_Helper_optional,SKIA,skia) \
+	$(call gb_Helper_optional,SPARKLE,sparkle) \
 	$(call gb_Helper_optional,SQLITE3,sqlite3) \
 	$(call gb_Helper_optional,STAROFFICE,libstaroffice) \
 	$(if $(filter WNT,$(OS)),twain_dsm) \
@@ -107,6 +108,7 @@ $(eval $(call gb_Module_add_moduledirs,external,\
 	$(call gb_Helper_optional,WPD,libwpd) \
 	$(call gb_Helper_optional,WPG,libwpg) \
 	$(call gb_Helper_optional,WPS,libwps) \
+	$(call gb_Helper_optional,WINSPARKLE,winsparkle) \
 	$(call gb_Helper_optional,XSLTML,xsltml) \
 	$(call gb_Helper_optional,YRS,y-crdt) \
 	$(call gb_Helper_optional,ZLIB,zlib) \

@@ -1,0 +1,6 @@
+Sparkle 2, the macOS software update framework: https://sparkle-project.org/
+
+Used by Dainvo Office (--enable-dainvo-updater on macOS). sfx2 loads the
+framework at run time (sfx2/source/appl/dainvoupdate_mac.mm), so nothing links
+against it. The tarball's bin/ tools (generate_keys, sign_update) are used by
+dainvo/tools/release.sh. License: MIT, see the LICENSE file in the tarball.

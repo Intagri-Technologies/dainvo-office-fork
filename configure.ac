@@ -607,6 +607,30 @@ else
     MACOSX_BUNDLE_VERSION=$MACOSX_BUNDLE_SHORTVERSION$LIBO_VERSION_SUFFIX
 fi
 
+dnl Dainvo Office: own user-facing version and build number, separate from LIBO_VERSION_*
+AC_MSG_CHECKING([for Dainvo version])
+DAINVO_VERSION=
+DAINVO_BUILD=
+if test -n "$with_dainvo_version" -a "$with_dainvo_version" != no; then
+    if ! printf %s "$with_dainvo_version" | grep -Eq '^[[0-9]]+\.[[0-9]]+\.[[0-9]]+$'; then
+        AC_MSG_ERROR([--with-dainvo-version must look like 1.2.3, got '$with_dainvo_version'])
+    fi
+    if ! printf %s "$with_dainvo_build" | grep -Eq '^[[1-9]][[0-9]]*$'; then
+        AC_MSG_ERROR([--with-dainvo-version needs --with-dainvo-build=<positive integer>, got '$with_dainvo_build'])
+    fi
+    DAINVO_VERSION=$with_dainvo_version
+    DAINVO_BUILD=$with_dainvo_build
+    MACOSX_BUNDLE_SHORTVERSION=$DAINVO_VERSION
+    MACOSX_BUNDLE_VERSION=$DAINVO_BUILD
+    AC_MSG_RESULT([$DAINVO_VERSION (build $DAINVO_BUILD)])
+    AC_DEFINE_UNQUOTED(DAINVO_VERSION,"$DAINVO_VERSION")
+    AC_DEFINE_UNQUOTED(DAINVO_BUILD,$DAINVO_BUILD)
+else
+    AC_MSG_RESULT([none])
+fi
+AC_SUBST(DAINVO_VERSION)
+AC_SUBST(DAINVO_BUILD)
+
 AC_SUBST(LIBO_VERSION_MAJOR)
 AC_SUBST(LIBO_VERSION_MINOR)
 AC_SUBST(LIBO_VERSION_MICRO)
@@ -2260,6 +2284,36 @@ AC_ARG_WITH(product-name,
 AC_ARG_WITH(package-version,
     AS_HELP_STRING([--with-package-version='3.1.4.5'],
         [Define the package version. Default is AC_PACKAGE_VERSION. Use only if you distribute an own build for macOS.]),
+,)
+
+AC_ARG_WITH(dainvo-version,
+    AS_HELP_STRING([--with-dainvo-version='0.1.0'],
+        [Dainvo Office: the user-facing semantic version shown in About, Info.plist
+         and installer names. The LibreOffice version (LIBO_VERSION_*) is unchanged.]),
+,)
+
+AC_ARG_ENABLE(dainvo-updater,
+    AS_HELP_STRING([--enable-dainvo-updater],
+        [Dainvo Office: check the Dainvo releases feed for updates. Uses Sparkle 2 on
+         macOS, WinSparkle on Windows and a built-in notice elsewhere. Needs
+         --with-dainvo-version, --with-dainvo-update-feed and --with-dainvo-update-key.]),
+,)
+
+AC_ARG_WITH(dainvo-update-feed,
+    AS_HELP_STRING([--with-dainvo-update-feed=URL],
+        [Dainvo Office: URL of the signed appcast.xml the updater reads.]),
+,)
+
+AC_ARG_WITH(dainvo-update-key,
+    AS_HELP_STRING([--with-dainvo-update-key=BASE64],
+        [Dainvo Office: base64 EdDSA (ed25519) public key that update packages are signed with
+         (the output of Sparkle's generate_keys).]),
+,)
+
+AC_ARG_WITH(dainvo-build,
+    AS_HELP_STRING([--with-dainvo-build='100'],
+        [Dainvo Office: the always-increasing build number used by the updater
+         (CFBundleVersion, appcast sparkle:version). Requires --with-dainvo-version.]),
 ,)
 
 libo_FUZZ_ARG_ENABLE(readonly-installset,
@@ -10024,6 +10078,12 @@ if test "$enable_legacy_import_filters" != "no"; then
 fi
 AC_SUBST(ENABLE_LEGACY_IMPORT_FILTERS)
 
+ENABLE_DRAW_APP=
+if test "$enable_draw_app" != "no"; then
+    ENABLE_DRAW_APP="TRUE"
+fi
+AC_SUBST(ENABLE_DRAW_APP)
+
 dnl ===================================================================
 dnl Check for building ODK
 dnl ===================================================================
@@ -10102,12 +10162,6 @@ else
     BUILD_TYPE="$BUILD_TYPE FUZZERS"
 fi
 AC_SUBST(LIB_FUZZING_ENGINE)
-
-ENABLE_DRAW_APP=
-if test "$enable_draw_app" != "no"; then
-    ENABLE_DRAW_APP="TRUE"
-fi
-AC_SUBST(ENABLE_DRAW_APP)
 
 dnl ===================================================================
 dnl Check for system zlib
@@ -10561,6 +10615,18 @@ if test "$enable_legacy_import_filters" = "no"; then
     BUILD_TYPE="${legacy_build_type# }"
 fi
 
+if test "$enable_draw_app" = "no"; then
+    # Don't build or ship the Draw-only import libraries
+    draw_build_type=
+    for i in $BUILD_TYPE; do
+        case "$i" in
+        VISIO|CDR|MSPUB|FREEHAND|PAGEMAKER|QXP|ZMF) ;;
+        *) draw_build_type="$draw_build_type $i" ;;
+        esac
+    done
+    BUILD_TYPE="${draw_build_type# }"
+fi
+
 dnl ===================================================================
 dnl Check for system lcms2
 dnl ===================================================================
@@ -10582,18 +10648,6 @@ dnl Check for system cppunit
 dnl ===================================================================
 if test "$_os" != "Android" ; then
     libo_CHECK_SYSTEM_MODULE([cppunit],[CPPUNIT],[cppunit >= 1.14.0])
-fi
-
-if test "$enable_draw_app" = "no"; then
-    # Don't build or ship the Draw-only import libraries
-    draw_build_type=
-    for i in $BUILD_TYPE; do
-        case "$i" in
-        VISIO|CDR|MSPUB|FREEHAND|PAGEMAKER|QXP|ZMF) ;;
-        *) draw_build_type="$draw_build_type $i" ;;
-        esac
-    done
-    BUILD_TYPE="${draw_build_type# }"
 fi
 
 dnl ===================================================================
@@ -14771,6 +14825,44 @@ else
     fi
 fi
 AC_SUBST(ENABLE_ONLINE_UPDATE)
+
+dnl ===================================================================
+dnl Dainvo Office updater (Sparkle 2 / WinSparkle / built-in notice)
+dnl ===================================================================
+AC_MSG_CHECKING([whether to enable the Dainvo updater])
+ENABLE_DAINVO_UPDATER=
+DAINVO_UPDATE_FEED=
+DAINVO_UPDATE_KEY=
+if test "$enable_dainvo_updater" = yes; then
+    if test -z "$DAINVO_VERSION"; then
+        AC_MSG_ERROR([--enable-dainvo-updater needs --with-dainvo-version and --with-dainvo-build])
+    fi
+    if test -z "$with_dainvo_update_feed" -o "$with_dainvo_update_feed" = no; then
+        AC_MSG_ERROR([--enable-dainvo-updater needs --with-dainvo-update-feed=URL])
+    fi
+    if ! printf %s "$with_dainvo_update_key" | grep -Eq '^[[A-Za-z0-9+/]]{43}=$'; then
+        AC_MSG_ERROR([--enable-dainvo-updater needs --with-dainvo-update-key=<base64 ed25519 public key>])
+    fi
+    if test "$enable_curl" = no; then
+        AC_MSG_ERROR([--enable-dainvo-updater needs curl])
+    fi
+    ENABLE_DAINVO_UPDATER=TRUE
+    DAINVO_UPDATE_FEED=$with_dainvo_update_feed
+    DAINVO_UPDATE_KEY=$with_dainvo_update_key
+    AC_DEFINE(ENABLE_DAINVO_UPDATER)
+    AC_DEFINE_UNQUOTED(DAINVO_UPDATE_FEED,"$DAINVO_UPDATE_FEED")
+    AC_DEFINE_UNQUOTED(DAINVO_UPDATE_KEY,"$DAINVO_UPDATE_KEY")
+    case "$_os" in
+    Darwin) BUILD_TYPE="$BUILD_TYPE SPARKLE" ;;
+    WINNT) BUILD_TYPE="$BUILD_TYPE WINSPARKLE" ;;
+    esac
+    AC_MSG_RESULT([yes ($DAINVO_UPDATE_FEED)])
+else
+    AC_MSG_RESULT([no])
+fi
+AC_SUBST(ENABLE_DAINVO_UPDATER)
+AC_SUBST(DAINVO_UPDATE_FEED)
+AC_SUBST(DAINVO_UPDATE_KEY)
 
 
 dnl ===================================================================

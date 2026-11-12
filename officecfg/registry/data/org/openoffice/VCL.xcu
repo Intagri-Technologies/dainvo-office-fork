@@ -1334,6 +1334,38 @@
           <value>Decorative,Special</value>
         </prop>
       </node>
+      <node oor:name="aptos" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>intos</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
+      <node oor:name="aptosdisplay" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>intosdisplay</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
+      <node oor:name="aptosnarrow" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>intosnarrow</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
+      <node oor:name="aptosserif" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>intosserif</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,Serif</value>
+        </prop>
+      </node>
       <node oor:name="calibri" oor:op="replace">
         <prop oor:name="SubstFonts">
           <value>carlito;hiraginomarugothicpronw3;hiraginomarugothicprow3</value>
@@ -5669,7 +5701,7 @@
       </node>
       <node oor:name="georgia" oor:op="replace">
         <prop oor:name="SubstFonts">
-          <value>bell;bitstreamcharter;charter;timesnewroman</value>
+          <value>gelasio;bell;bitstreamcharter;charter;timesnewroman</value>
         </prop>
         <prop oor:name="FontWeight">
           <value>Normal</value>

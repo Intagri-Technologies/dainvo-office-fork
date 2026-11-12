@@ -1,0 +1,4 @@
+fonttools
+uharfbuzz
+pymupdf
+python-docx

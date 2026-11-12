@@ -4902,6 +4902,33 @@
         <value>Tiled</value>
       </prop>
     </group>
+    <group oor:name="DainvoUpdate">
+      <info>
+        <desc>Dainvo Office update check. Used by the built-in checker (Linux and
+        other platforms without Sparkle or WinSparkle); Sparkle and WinSparkle
+        keep their own settings.</desc>
+      </info>
+      <prop oor:name="AutoCheck" oor:type="xs:boolean" oor:nillable="false">
+        <info>
+          <desc>Check for a new Dainvo Office release once a day.</desc>
+          <label>Check for updates automatically</label>
+        </info>
+        <value>true</value>
+      </prop>
+      <prop oor:name="LastCheck" oor:type="xs:long" oor:nillable="false">
+        <info>
+          <desc>Time of the last automatic check, in seconds since the epoch.</desc>
+        </info>
+        <value>0</value>
+      </prop>
+      <prop oor:name="SkippedBuild" oor:type="xs:long" oor:nillable="false">
+        <info>
+          <desc>Build number the user chose to skip; it is not offered again
+          automatically. 0 means none.</desc>
+        </info>
+        <value>0</value>
+      </prop>
+    </group>
     <group oor:name="Misc">
       <info>
         <desc>Determines the miscellaneous entries for the common group.</desc>

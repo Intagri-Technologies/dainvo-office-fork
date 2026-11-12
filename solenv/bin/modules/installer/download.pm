@@ -458,6 +458,14 @@ sub set_download_filename
 {
     my ($languagestringref, $allvariables) = @_;
 
+    # Dainvo Office: Dainvo-Office-<version>-<os>-<arch>[-<content>][-<functionality>],
+    # matching the Dainvo app (Dainvo-0.19.8-mac-arm64.dmg).
+    if ( $ENV{'DAINVO_VERSION'} )
+    {
+        $installer::globals::ooodownloadfilename = get_dainvo_download_filename($allvariables, $languagestringref);
+        return $installer::globals::ooodownloadfilename;
+    }
+
     my $start = get_downloadname_productname($allvariables);
     my $versionstring = get_download_version($allvariables);
     my $platform = get_download_platformname();
@@ -480,6 +488,43 @@ sub set_download_filename
     return $filename;
 }
 
+
+#########################################################
+# Dainvo Office download file name
+#########################################################
+
+sub get_dainvo_download_filename
+{
+    my ($allvariables, $languagestringref) = @_;
+
+    my $product = $allvariables->{'PRODUCTNAME'};
+    $product =~ s/\s+/-/g;
+
+    my $os = "";
+    if ( $installer::globals::ismacbuild ) { $os = "mac"; }
+    elsif ( $installer::globals::iswindowsbuild ) { $os = "win"; }
+    elsif ( $installer::globals::islinuxbuild ) { $os = "linux"; }
+    else { $os = lc($installer::globals::os); }
+
+    # Package-manager conventions for Linux (amd64 for deb, x86_64 for rpm),
+    # Electron-builder style elsewhere, as used by the Dainvo app releases.
+    my $cpu = $installer::globals::cpuname;
+    my $arch = "";
+    if ( $cpu eq 'X86_64' ) { $arch = ( $os eq "linux" && ! $installer::globals::isdebbuild ) ? "x86_64" : ( $os eq "linux" ? "amd64" : "x64" ); }
+    elsif ( $cpu eq 'AARCH64' ) { $arch = ( $os eq "linux" && $installer::globals::isrpmbuild ) ? "aarch64" : "arm64"; }
+    elsif ( $cpu eq 'INTEL' ) { $arch = "ia32"; }
+    else { $arch = lc($cpu); }
+
+    my @parts = ( $product, $ENV{'DAINVO_VERSION'}, $os, $arch );
+    my $content = get_download_content($allvariables);
+    push(@parts, $content) if ( $content ne "" );
+    my $functionality = get_download_functionality($allvariables);
+    push(@parts, $functionality) if ( $functionality ne "" );
+    my $language = get_downloadname_language($languagestringref);
+    push(@parts, $language) if ( $functionality ne "" && $language ne "" );
+
+    return join("-", @parts);
+}
 
 #########################################################
 # Creating a tar.gz file

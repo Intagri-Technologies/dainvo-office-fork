@@ -5213,6 +5213,22 @@ SfxVoidItem GetInvolved SID_GETINVOLVED
     MenuConfig = TRUE,
     GroupId = SfxGroupId::Application;
 ]
+SfxVoidItem DainvoCheckForUpdates SID_DAINVO_CHECK_UPDATES
+()
+[
+    AutoUpdate = FALSE,
+    FastCall = FALSE,
+    ReadOnlyDoc = TRUE,
+    Toggle = FALSE,
+    Container = FALSE,
+    RecordAbsolute = FALSE,
+    RecordPerSet;
+
+    AccelConfig = TRUE,
+    MenuConfig = TRUE,
+    GroupId = SfxGroupId::Application;
+]
+
 SfxVoidItem WhatsNew SID_WHATSNEW
 ()
 [

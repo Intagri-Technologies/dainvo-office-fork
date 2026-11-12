@@ -1,0 +1,78 @@
+[
+  {
+    "family": "Intos",
+    "aptos_pages": 12,
+    "intos_pages": 12,
+    "identical_line_breaks": true,
+    "max_character_origin_delta_pt": 0.0,
+    "reference_fonts": [
+      "Aptos",
+      "Aptos-Bold",
+      "Aptos-BoldItalic",
+      "Aptos-Italic"
+    ],
+    "candidate_fonts": [
+      "Intos-Bold",
+      "Intos-BoldItalic",
+      "Intos-Italic",
+      "Intos-Regular"
+    ]
+  },
+  {
+    "family": "IntosDisplay",
+    "aptos_pages": 11,
+    "intos_pages": 11,
+    "identical_line_breaks": true,
+    "max_character_origin_delta_pt": 0.0,
+    "reference_fonts": [
+      "AptosDisplay",
+      "AptosDisplay-Bold",
+      "AptosDisplay-BoldItalic",
+      "AptosDisplay-Italic"
+    ],
+    "candidate_fonts": [
+      "IntosDisplay-Bold",
+      "IntosDisplay-BoldItalic",
+      "IntosDisplay-Italic",
+      "IntosDisplay-Regular"
+    ]
+  },
+  {
+    "family": "IntosNarrow",
+    "aptos_pages": 11,
+    "intos_pages": 11,
+    "identical_line_breaks": true,
+    "max_character_origin_delta_pt": 0.0,
+    "reference_fonts": [
+      "Aptos-Narrow",
+      "Aptos-Narrow-Bold",
+      "Aptos-Narrow-Bold-Italic",
+      "Aptos-Narrow-Italic"
+    ],
+    "candidate_fonts": [
+      "IntosNarrow-Bold",
+      "IntosNarrow-BoldItalic",
+      "IntosNarrow-Italic",
+      "IntosNarrow-Regular"
+    ]
+  },
+  {
+    "family": "IntosSerif",
+    "aptos_pages": 13,
+    "intos_pages": 13,
+    "identical_line_breaks": true,
+    "max_character_origin_delta_pt": 0.0,
+    "reference_fonts": [
+      "AptosSerif-Bold",
+      "AptosSerif-BoldItalic",
+      "AptosSerif-Italic",
+      "AptosSerif-Regular"
+    ],
+    "candidate_fonts": [
+      "IntosSerif-Bold",
+      "IntosSerif-BoldItalic",
+      "IntosSerif-Italic",
+      "IntosSerif-Regular"
+    ]
+  }
+]

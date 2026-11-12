@@ -55,6 +55,7 @@ $(eval $(call gb_Helper_register_executables,NONE, \
 	makedepend \
 	mbsdiff \
 	osl_process_child \
+	sfx2_metadatastall \
 	pdf2xml \
 	pdfunzip \
 	pdfverify \
@@ -239,6 +240,7 @@ $(eval $(call gb_Helper_register_executables_for_install,OOO,writer_brand, \
 
 $(eval $(call gb_Helper_register_executables_for_install,OOO,ooo, \
 	gengal \
+	$(if $(filter TRUE,$(ENABLE_WASM_STRIP_RECENT)),,$(if $(filter LINUX MACOSX WNT FREEBSD NETBSD OPENBSD DRAGONFLY SOLARIS,$(OS)),recentfilemetadata)) \
 	$(if $(filter WNT,$(OS)),,uri-encode) \
 	$(if $(filter WNT,$(OS)), \
 		senddoc \
@@ -934,6 +936,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	$(if $(SYSTEM_LIBEXTTEXTCAT),,libexttextcat_fingerprint) \
 	officecfg_misc \
 	$(if $(ENABLE_WASM_STRIP_HUNSPELL),,dainvo_languages) \
+	$(call gb_Helper_optional,WINSPARKLE,winsparkle) \
 	$(if $(filter $(OS),MACOSX), \
 		extensions_mdibundle \
 		extensions_OOoSpotlightImporter \
@@ -1018,6 +1021,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo_fonts,\
 	extras_fonts \
+	dainvo_fonts \
 	$(if $(USE_HEADLESS_CODE)$(USING_UNIX_DESKTOP)$(DISABLE_GUI)$(filter FONTCONFIG,$(BUILD_TYPE))$(filter ANDROID EMSCRIPTEN,$(OS)), \
 		postprocess_fontconfig) \
 	$(call gb_Helper_optional,MORE_FONTS,\

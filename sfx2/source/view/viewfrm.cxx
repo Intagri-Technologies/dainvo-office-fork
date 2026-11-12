@@ -26,6 +26,7 @@
 #include <sfx2/infobar.hxx>
 #include <sfx2/sfxdlg.hxx>
 #include <sfx2/sfxsids.hrc>
+#include <sfx2/dainvoupdate.hxx>
 #include <sfx2/viewfrm.hxx>
 #include <sfx2/classificationhelper.hxx>
 #include <sfx2/notebookbar/SfxNotebookBar.hxx>
@@ -1704,6 +1705,9 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
                 if (!SfxApplication::IsHeadlessOrUITest()) //uitest.uicheck fails when the dialog is open
                 {
                     bool bIsWhatsNewShown = false; //suppress tipoftheday if whatsnew was shown
+
+                    // Dainvo Office: a newer release found by the built-in update check
+                    sfx2::DainvoUpdater::ShowPendingNotice(*this);
 
                     static const bool bRunningUnitTest = o3tl::IsRunningUnitTest() || o3tl::IsRunningUITest();
                     //what's new dialog

@@ -567,7 +567,7 @@
                         <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|draw_all">_Draw Drawing</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="image">draw_all_image</property>
@@ -588,7 +588,7 @@
                         <property name="width-request">96</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|math_all">_Math Formula</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="image">math_all_image</property>
@@ -644,7 +644,7 @@
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes" context="startcenter|all_recent_label">Recent Files List</property>
                 <property name="use-underline">True</property>
-                <property name="mnemonic-widget">all_recent</property>
+                <property name="mnemonic-widget">dv_recent_list</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -894,37 +894,6 @@
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScrolledWindow" id="scrollrecent">
-                <property name="visible">False</property>
-                <property name="can-focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="shadow-type">in</property>
-                <child>
-                  <object class="GtkViewport">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkDrawingArea" id="all_recent">
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="events">GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
               </packing>
             </child>
             <child>

@@ -160,4 +160,27 @@
       </node>
     </node>
   </node>
+  <!-- Dainvo Office: Help > Check for Updates..., only in builds with
+       the Dainvo updater enabled (see postprocess/CustomTarget_registry.mk) -->
+  <node oor:name="AddonUI" install:module="dainvoupdate">
+    <node oor:name="OfficeHelp">
+      <node oor:name="DainvoCheckForUpdates" oor:op="replace">
+        <prop oor:name="URL" oor:type="xs:string">
+          <value>.uno:DainvoCheckForUpdates</value>
+        </prop>
+        <prop oor:name="ImageIdentifier" oor:type="xs:string">
+          <value/>
+        </prop>
+        <prop oor:name="Title" oor:type="xs:string">
+          <value xml:lang="en-US">~Check for Updates...</value>
+        </prop>
+        <prop oor:name="Target" oor:type="xs:string">
+          <value>_self</value>
+        </prop>
+        <prop oor:name="Context" oor:type="xs:string">
+          <value/>
+        </prop>
+      </node>
+    </node>
+  </node>
 </oor:component-data>

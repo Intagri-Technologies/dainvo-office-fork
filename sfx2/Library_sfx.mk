@@ -79,6 +79,7 @@ $(eval $(call gb_Library_use_externals,sfx,\
     icui18n \
     icuuc \
     libxml2 \
+    $(if $(ENABLE_DAINVO_UPDATER),curl) \
 ))
 
 ifneq ($(ENABLE_WASM_STRIP_RECENT),TRUE)
@@ -87,6 +88,7 @@ $(eval $(call gb_Library_add_exception_objects,sfx,\
     sfx2/source/dialog/backingwindow \
     sfx2/source/control/recentdocsview \
     sfx2/source/control/recentdocsviewitem \
+    sfx2/source/control/recentfilemetadataloader \
 ))
 endif
 
@@ -108,6 +110,7 @@ $(eval $(call gb_Library_add_exception_objects,sfx,\
     sfx2/source/appl/appquit \
     sfx2/source/appl/appreg \
     sfx2/source/appl/appserv \
+    sfx2/source/appl/dainvoupdate \
     sfx2/source/appl/appuno \
     sfx2/source/appl/childwin \
     sfx2/source/appl/fileobj \
@@ -337,6 +340,7 @@ $(eval $(call gb_Library_add_cxxflags,sfx,\
 ))
 $(eval $(call gb_Library_add_objcxxobjects,sfx,\
     sfx2/source/appl/shutdowniconaqua \
+    sfx2/source/appl/dainvoupdate_mac \
 ))
 $(eval $(call gb_Library_add_libs,sfx,\
     -lobjc \

@@ -125,6 +125,8 @@ postprocess_FILES_lingucomponent := \
 	$(SRCDIR)/lingucomponent/config/Linguistic-lingucomponent-thesaurus.xcu \
 
 postprocess_FILES_main := \
+	$(if $(ENABLE_DAINVO_UPDATER), \
+		$(postprocess_MOD)/org/openoffice/Office/Addons-dainvoupdate.xcu) \
 	$(postprocess_XCS)/Inet.xcs \
 	$(postprocess_XCS)/Interaction.xcs \
 	$(postprocess_XCS)/LDAP.xcs \

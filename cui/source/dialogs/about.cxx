@@ -35,6 +35,7 @@
 #include <unotools/resmgr.hxx> //Translate
 
 #include <config_buildid.h> //EXTRA_BUILDID
+#include <config_version.h> //DAINVO_VERSION, DAINVO_BUILD
 #include <config_features.h>
 #include <dialmgr.hxx> //CuiResId
 #include <i18nlangtag/languagetag.hxx>
@@ -156,8 +157,16 @@ OUString AboutDialog::GetVersionString()
     auto const ok = rtl::Bootstrap::get(u"_ARCH"_ustr, arch);
     assert(ok);
     (void)ok;
-    return CuiResId(TranslateId(nullptr, "%ABOUTBOXPRODUCTVERSION%ABOUTBOXPRODUCTVERSIONSUFFIX"))
-           + " (" + arch + ")";
+    OUString sLibreOfficeVersion
+        = CuiResId(TranslateId(nullptr, "%ABOUTBOXPRODUCTVERSION%ABOUTBOXPRODUCTVERSIONSUFFIX"));
+#ifdef DAINVO_VERSION
+    // Dainvo Office has its own version and build number; the LibreOffice
+    // version underneath stays visible for bug reports and extensions.
+    return u"" DAINVO_VERSION " (build " LIBO_VERSION_STRINGIFY(DAINVO_BUILD) ", "_ustr + arch
+           + ")\nBased on LibreOffice " + sLibreOfficeVersion;
+#else
+    return sLibreOfficeVersion + " (" + arch + ")";
+#endif
 }
 
 OUString AboutDialog::GetBuildString()

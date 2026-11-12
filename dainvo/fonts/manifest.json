@@ -1,0 +1,236 @@
+[
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/Intos-Bold.ttf",
+    "file": "intos/Intos-Bold.ttf",
+    "sha256": "8afd148fff67d6426d0d6906d4c6232886aedc81a7832544806e6c93c44340ab",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/Intos-Bold.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/Intos-BoldItalic.ttf",
+    "file": "intos/Intos-BoldItalic.ttf",
+    "sha256": "dec13afb35718df39f5a422d7ecb2f69bd719c9ae3196508c17021a428578a11",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/Intos-BoldItalic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/Intos-Italic.ttf",
+    "file": "intos/Intos-Italic.ttf",
+    "sha256": "8ca602e312af876190610b0416fdfc67f58ee38bcf9e01ce2f0fcc1094d8fbe4",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/Intos-Italic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/Intos-Regular.ttf",
+    "file": "intos/Intos-Regular.ttf",
+    "sha256": "4de204b6414d30f9f49b9375dc9b71ccea1683e55ac37de6c8d541abbc760eea",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/Intos-Regular.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosDisplay-Bold.ttf",
+    "file": "intos/IntosDisplay-Bold.ttf",
+    "sha256": "5055714a7215331b7786b10538138baa4dc969a8afe018bbf459f8b5395026d8",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosDisplay-Bold.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosDisplay-BoldItalic.ttf",
+    "file": "intos/IntosDisplay-BoldItalic.ttf",
+    "sha256": "1d9e18845be66b00793b8142581898b70ca72425f4d9f498fe4c35f88c39014d",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosDisplay-BoldItalic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosDisplay-Italic.ttf",
+    "file": "intos/IntosDisplay-Italic.ttf",
+    "sha256": "2741bd21a8904acf3ce28aff7a896c0c87777e3d459e1e10ffe085057471bc28",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosDisplay-Italic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosDisplay-Regular.ttf",
+    "file": "intos/IntosDisplay-Regular.ttf",
+    "sha256": "b652fdab5e8939540f084529a507ddd158629985b8eee1b553ef05c46d131877",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosDisplay-Regular.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosNarrow-Bold.ttf",
+    "file": "intos/IntosNarrow-Bold.ttf",
+    "sha256": "59fd6e53b61ae483809ce1d8fc396357ec33d7beedef2e81f87da11551a99e51",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosNarrow-Bold.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosNarrow-BoldItalic.ttf",
+    "file": "intos/IntosNarrow-BoldItalic.ttf",
+    "sha256": "6e1cb55b955539301ffc51b1a602a3fb9c8411b9082383fd29f555492eb9d079",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosNarrow-BoldItalic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosNarrow-Italic.ttf",
+    "file": "intos/IntosNarrow-Italic.ttf",
+    "sha256": "f2b4745a51b0c0c13d9768caf14017014c299e11a19031f83c1d8c77f4e23c6b",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosNarrow-Italic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosNarrow-Regular.ttf",
+    "file": "intos/IntosNarrow-Regular.ttf",
+    "sha256": "ea91acdb933f2f1919df688f154140b851191adf4ecb77f7d931724198ea23c1",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosNarrow-Regular.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosSerif-Bold.ttf",
+    "file": "intos/IntosSerif-Bold.ttf",
+    "sha256": "ad994397ce37c29f8881e9fe6e7fcdc743b643465a96ab4d1e2a02d95784a79f",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosSerif-Bold.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosSerif-BoldItalic.ttf",
+    "file": "intos/IntosSerif-BoldItalic.ttf",
+    "sha256": "f99eb0845ab26e305ffe58f3baa9c920d676d2204a222d925d4fa001573f53f2",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosSerif-BoldItalic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosSerif-Italic.ttf",
+    "file": "intos/IntosSerif-Italic.ttf",
+    "sha256": "eed3fa7449ce0fc31fe51569ce056ce483e25ce8f6e2fdda16d6cd36ff231327",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosSerif-Italic.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "fonts/IntosSerif-Regular.ttf",
+    "file": "intos/IntosSerif-Regular.ttf",
+    "sha256": "56351ac7a9d0b66a5d9a0b6c656cefa6fa5cf9fb5e3ee7e44bd1e4e327828d35",
+    "url": "https://media.githubusercontent.com/media/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/fonts/IntosSerif-Regular.ttf"
+  },
+  {
+    "family": "intos",
+    "repository": "muglug/intos",
+    "revision": "fef9315c14da9e4b23b4c3cac8e718998d4e4736",
+    "path": "LICENSE.txt",
+    "file": "intos/LICENSE.txt",
+    "sha256": "3b4a605d1a6305360d8dbabf203465bee9b1287f9fba97718e5f3d260813801e",
+    "url": "https://raw.githubusercontent.com/muglug/intos/fef9315c14da9e4b23b4c3cac8e718998d4e4736/LICENSE.txt"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-Bold.ttf",
+    "file": "gelasio/Gelasio-Bold.ttf",
+    "sha256": "e0ef3addf1acf35f5c6aef2be00d0a2c01363bf70a5950e16650976051a0c462",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-Bold.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-BoldItalic.ttf",
+    "file": "gelasio/Gelasio-BoldItalic.ttf",
+    "sha256": "aa87e21b46aef3dcb50a68dc6e1946f0c0a9819d067e4be6a98a6daa8f5b3c16",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-BoldItalic.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-Italic.ttf",
+    "file": "gelasio/Gelasio-Italic.ttf",
+    "sha256": "1d8bda4ff258bb8251eae4f7d7500c8d97d084136192bb264bc2305168765d1b",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-Italic.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-Medium.ttf",
+    "file": "gelasio/Gelasio-Medium.ttf",
+    "sha256": "dd316254b3de799f14148e83179450cf600cee3ce9f059fc931a0443c116ab44",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-Medium.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-MediumItalic.ttf",
+    "file": "gelasio/Gelasio-MediumItalic.ttf",
+    "sha256": "414a89e3ef8bf1cf0e4c32ff755d57beca26e1fdd06e0d971069eb445f8d697c",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-MediumItalic.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-Regular.ttf",
+    "file": "gelasio/Gelasio-Regular.ttf",
+    "sha256": "48c797fbe0e07c48a18cb962e7bdfa23f19618327dddf54093265328dc9eb39d",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-Regular.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-SemiBold.ttf",
+    "file": "gelasio/Gelasio-SemiBold.ttf",
+    "sha256": "f5eb3f3e395d1958bef5449bacda5e815aeab40cf40a24f71c2ad163c196a6ba",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-SemiBold.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "fonts/ttf/Gelasio-SemiBoldItalic.ttf",
+    "file": "gelasio/Gelasio-SemiBoldItalic.ttf",
+    "sha256": "9ab9c9363546116bea8296a66e0bde426cdcecebafc406c417cd4ade4188f48c",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/fonts/ttf/Gelasio-SemiBoldItalic.ttf"
+  },
+  {
+    "family": "gelasio",
+    "repository": "SorkinType/Gelasio",
+    "revision": "7ab20e7e5c42791e603b9ee3201a0b49849cfdb2",
+    "path": "OFL.txt",
+    "file": "gelasio/OFL.txt",
+    "sha256": "b393cb01867c919b44381512120dc3e4c954c7b47e2035c405f3a324799a4d29",
+    "url": "https://raw.githubusercontent.com/SorkinType/Gelasio/7ab20e7e5c42791e603b9ee3201a0b49849cfdb2/OFL.txt"
+  }
+]

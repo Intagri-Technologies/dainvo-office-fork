@@ -26,6 +26,9 @@
 #include <config_folders.h>
 #include <config_extensions.h>
 #include <config_wasm_strip.h>
+#if !ENABLE_WASM_STRIP_RECENT
+#include <sfx2/recentfilemetadata.hxx>
+#endif
 
 #include <sal/config.h>
 
@@ -105,6 +108,7 @@
 #include <officecfg/Office/Recovery.hxx>
 #include <officecfg/Office/Update.hxx>
 #include <officecfg/Setup.hxx>
+#include <sfx2/dainvoupdate.hxx>
 #include <osl/file.hxx>
 #include <osl/process.h>
 #include <rtl/byteseq.hxx>
@@ -661,6 +665,7 @@ void Desktop::InitFinished()
 
 void Desktop::DeInit()
 {
+    sfx2::DainvoUpdater::Stop();
     try {
         // instead of removing of the configManager just let it commit all the changes
         utl::ConfigManager::storeConfigItems();
@@ -1830,6 +1835,9 @@ int Desktop::doShutdown()
     pExecGlobals->pCTLLanguageOptions.reset();
     pExecGlobals->pPathOptions.reset();
 
+#if !ENABLE_WASM_STRIP_RECENT
+    sfx2::cancelRecentFileMetadataRequests();
+#endif
     comphelper::ThreadPool::getSharedOptimalPool().shutdown();
 
     bool bRR = pExecGlobals->bRestartRequested;
@@ -2038,6 +2046,7 @@ IMPL_LINK_NOARG(Desktop, OpenClients_Impl, void*, void)
     CloseSplashScreen();
     CheckFirstRun( );
     DainvoAskDefaultFileFormats();
+    sfx2::DainvoUpdater::Start();
 #ifdef _WIN32
     bool bDontShowDialogs
         = Application::IsHeadlessModeEnabled(); // uitest.uicheck fails when the dialog is open

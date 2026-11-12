@@ -79,6 +79,7 @@ $(eval $(call gb_Configuration_add_spool_modules,registry,officecfg/registry/dat
 	$(call gb_Helper_optional,LIBRELOGO, \
 		org/openoffice/Office/Addons-librelogo.xcu \
 	) \
+	org/openoffice/Office/Addons-dainvoupdate.xcu \
 	org/openoffice/Office/Common-writer.xcu \
 	org/openoffice/Office/Common-calc.xcu \
 	org/openoffice/Office/Common-draw.xcu \

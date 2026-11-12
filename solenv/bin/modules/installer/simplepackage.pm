@@ -290,6 +290,27 @@ sub create_package
 
         my $localtempdir = $tempdir;
 
+        # Dainvo Office: add the Sparkle 2 updater (external/sparkle) to the app
+        # before it is signed. ditto keeps the framework's symlinks and signatures.
+        if ( $ENV{'ENABLE_DAINVO_UPDATER'} && ! $installer::globals::languagepack && ! $installer::globals::helppack && $allvariables->{'POSTVERSIONEXTENSION'} ne "SDK" )
+        {
+            my $sparkle = "$ENV{'WORKDIR'}/UnpackedTarball/sparkle/Sparkle.framework";
+            if ( ! -d $sparkle ) { installer::exiter::exit_program("ERROR: Sparkle.framework not found at $sparkle!", "create_package"); }
+            my $appparent = "$localtempdir/$folder";
+            opendir(my $dh, $appparent) or installer::exiter::exit_program("ERROR: Could not open $appparent!", "create_package");
+            my @apps = grep { /\.app$/ && -d "$appparent/$_/Contents/Frameworks" } readdir($dh);
+            closedir($dh);
+            if ( ! @apps ) { installer::exiter::exit_program("ERROR: No app bundle found in $appparent for Sparkle!", "create_package"); }
+            foreach my $app ( @apps )
+            {
+                my $dest = "$appparent/$app/Contents/Frameworks/Sparkle.framework";
+                my $sparklecall = "rm -rf '$dest' && ditto '$sparkle' '$dest'";
+                print "... $sparklecall ...\n";
+                push( @installer::globals::logfileinfo, "Systemcall: $sparklecall\n");
+                if ( system($sparklecall) != 0 ) { installer::exiter::exit_program("ERROR: Could not copy Sparkle.framework into $app!", "create_package"); }
+            }
+        }
+
         if (( $installer::globals::languagepack ) || ( $installer::globals::helppack ))
         {
             # LanguagePack and HelpPack files are collected in $srcfolder, packaged into

@@ -632,6 +632,12 @@ RHINO_TARBALL := rhino-1.7.15.1.zip
 # three static lines
 # so that git cherry-pick
 # will not run into conflicts
+SPARKLE_SHA256SUM := 1a856d2a9edb8e628de88121d7be04cf0e2167f8641650b78fca00b14244cf27
+SPARKLE_VERSION := 2.10.1
+SPARKLE_TARBALL := Sparkle-$(SPARKLE_VERSION).tar.xz
+# three static lines
+# so that git cherry-pick
+# will not run into conflicts
 SKIA_SHA256SUM := d8ae87d86ac1cd665777ac83fdcd5d162712806511bad475182261f92fbe1ce9
 SKIA_TARBALL := skia-m150-31238c6efe24011a423df82c2816876f700cf58b.tar.xz
 # three static lines
@@ -655,6 +661,12 @@ TWAIN_DSM_TARBALL := twaindsm_2.4.1.orig.tar.gz
 # will not run into conflicts
 VISIO_SHA256SUM := 2a6efd40b6d9dbcb70fba3be53112366882ba97b57151df3698dfa478c8d8dd3
 VISIO_TARBALL := libvisio-0.1.11.tar.xz
+# three static lines
+# so that git cherry-pick
+# will not run into conflicts
+WINSPARKLE_SHA256SUM := 6037df37fc263bd1650a1c4949681a9d40ffe991d01f35892a406cb5d103c976
+WINSPARKLE_VERSION := 0.9.4
+WINSPARKLE_TARBALL := WinSparkle-$(WINSPARKLE_VERSION).zip
 # three static lines
 # so that git cherry-pick
 # will not run into conflicts

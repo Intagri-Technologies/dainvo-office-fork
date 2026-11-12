@@ -35,11 +35,14 @@
 #include <unotools/cmdoptions.hxx>
 #include <unotools/configmgr.hxx>
 #include <svtools/openfiledroptargetlistener.hxx>
+#include <svtools/confirmationdlg.hxx>
 #include <svtools/colorcfg.hxx>
 #include <svtools/langhelp.hxx>
 #include <templateviewitem.hxx>
+#include <recentdocsview.hxx>
 
 #include <comphelper/processfactory.hxx>
+#include <comphelper/DirectoryHelper.hxx>
 #include <comphelper/propertysequence.hxx>
 #include <comphelper/propertyvalue.hxx>
 #include <sfx2/app.hxx>
@@ -221,8 +224,6 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     , mxButtonsBox(m_xBuilder->weld_container(u"buttons_box"_ustr))
     , mxSmallButtonsBox(m_xBuilder->weld_container(u"small_buttons_box"_ustr))
     , mxRightBox(m_xBuilder->weld_container(u"box2"_ustr))
-    , mxAllRecentThumbnails(new sfx2::RecentDocsView(m_xBuilder->weld_scrolled_window(u"scrollrecent"_ustr, true)))
-    , mxAllRecentThumbnailsWin(new weld::CustomWeld(*m_xBuilder, u"all_recent"_ustr, *mxAllRecentThumbnails))
     , mxLocalView(new TemplateDefaultView(m_xBuilder->weld_scrolled_window(u"scrolllocal"_ustr, true),
                                           m_xBuilder->weld_menu(u"localmenu"_ustr)))
     , mxLocalViewWin(new weld::CustomWeld(*m_xBuilder, u"local_view"_ustr, *mxLocalView))
@@ -271,7 +272,7 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
         mxDonateButton->set_label(sDonate);
     }
 
-    mxDropTarget = mxAllRecentThumbnails->GetDropTarget();
+    mxDropTarget = mxRecentBox->get_drop_target();
 
     try
     {
@@ -348,6 +349,8 @@ BackingWindow::~BackingWindow()
 
 void BackingWindow::dispose()
 {
+    // Cancels queued delivery; never waits for an in-progress drive query.
+    mxRecentMetadataLoader.reset();
     // deregister drag&drop helper
     if (mxDropTargetListener.is())
     {
@@ -392,8 +395,6 @@ void BackingWindow::dispose()
     mxAllButtonsBox.reset();
     mxButtonsBox.reset();
     mxSmallButtonsBox.reset();
-    mxAllRecentThumbnailsWin.reset();
-    mxAllRecentThumbnails.reset();
     mxLocalViewWin.reset();
     mxLocalView.reset();
     InterimItemWindow::dispose();
@@ -405,31 +406,6 @@ void BackingWindow::initControls()
         return;
 
     mbInitControls = true;
-
-    // collect the URLs of the entries in the File/New menu
-    SvtModuleOptions    aModuleOptions;
-
-    if (aModuleOptions.IsWriterInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_WRITER;
-
-    if (aModuleOptions.IsCalcInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_CALC;
-
-    if (aModuleOptions.IsImpressInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_IMPRESS;
-
-    if (aModuleOptions.IsDrawInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_DRAW;
-
-    if (aModuleOptions.IsDataBaseInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_DATABASE;
-
-    if (aModuleOptions.IsMathInstalled())
-        mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_MATH;
-
-    mxAllRecentThumbnails->mnFileTypes |= sfx2::ApplicationType::TYPE_OTHER;
-    mxAllRecentThumbnails->Reload();
-    mxAllRecentThumbnails->ShowTooltips( true );
 
     mxRecentList->connect_custom_get_size(LINK(this, BackingWindow, RecentGetSizeHdl));
     mxRecentList->connect_custom_render(LINK(this, BackingWindow, RecentRenderHdl));
@@ -595,8 +571,10 @@ void BackingWindow::checkInstalledModules()
     mxWriterAllButton->set_sensitive(aModuleOpt.IsWriterInstalled());
     mxCalcAllButton->set_sensitive(aModuleOpt.IsCalcInstalled());
     mxImpressAllButton->set_sensitive(aModuleOpt.IsImpressInstalled());
-    mxDrawAllButton->set_sensitive(aModuleOpt.IsDrawInstalled());
-    mxMathAllButton->set_sensitive(aModuleOpt.IsMathInstalled());
+    // Dainvo: hide standalone Draw while retaining shared presentation support.
+    mxDrawAllButton->hide();
+    // Dainvo: hide standalone Math; retain the engine for embedded equations.
+    mxMathAllButton->hide();
     // Dainvo: the Base app is not offered to users. The database core stays
     // installed because mail merge (Calc sheets, macOS Contacts) needs it.
     mxDBAllButton->hide();
@@ -609,14 +587,14 @@ bool BackingWindow::PreNotify(NotifyEvent& rNEvt)
         const KeyEvent* pEvt = rNEvt.GetKeyEvent();
         const vcl::KeyCode& rKeyCode(pEvt->GetKeyCode());
 
-        bool bThumbnailHasFocus = mxAllRecentThumbnails->HasFocus() || mxLocalView->HasFocus();
+        bool bDocumentViewHasFocus = mxRecentBox->has_child_focus() || mxLocalView->HasFocus();
 
-        // Subwindows of BackingWindow: Sidebar and Thumbnail view
+        // Subwindows of BackingWindow: sidebar and recent files/templates
         if( rKeyCode.GetCode() == KEY_F6 )
         {
             if( rKeyCode.IsShift() ) // Shift + F6
             {
-                if (bThumbnailHasFocus)
+                if (bDocumentViewHasFocus)
                 {
                     mxOpenButton->grab_focus();
                     return true;
@@ -624,9 +602,9 @@ bool BackingWindow::PreNotify(NotifyEvent& rNEvt)
             }
             else if ( rKeyCode.IsMod1() ) // Ctrl + F6
             {
-                if(mxAllRecentThumbnails->IsVisible())
+                if(mxRecentBox->get_visible())
                 {
-                    mxAllRecentThumbnails->GrabFocus();
+                    mxRecentSearch->grab_focus();
                     return true;
                 }
                 else if(mxLocalView->IsVisible())
@@ -637,11 +615,11 @@ bool BackingWindow::PreNotify(NotifyEvent& rNEvt)
             }
             else // F6
             {
-                if (!bThumbnailHasFocus)
+                if (!bDocumentViewHasFocus)
                 {
-                    if(mxAllRecentThumbnails->IsVisible())
+                    if(mxRecentBox->get_visible())
                     {
-                        mxAllRecentThumbnails->GrabFocus();
+                        mxRecentSearch->grab_focus();
                         return true;
                     }
                     else if(mxLocalView->IsVisible())
@@ -679,8 +657,8 @@ void BackingWindow::GetFocus()
         }
         else // Shift + F6 or Ctrl + F6
         {
-            if(mxAllRecentThumbnails->IsVisible())
-                mxAllRecentThumbnails->GrabFocus();
+            if(mxRecentBox->get_visible())
+                mxRecentSearch->grab_focus();
             else if(mxLocalView->IsVisible())
                 mxLocalView->GrabFocus();
             return;
@@ -745,12 +723,6 @@ void BackingWindow::applyFilter()
     }
     else
     {
-        sfx2::ApplicationType aFilter;
-        if (nFilter == 0)
-            aFilter = sfx2::ApplicationType::TYPE_NONE;
-        else
-            aFilter = static_cast<sfx2::ApplicationType>(1 << (nFilter - 1));
-        mxAllRecentThumbnails->setFilter(aFilter);
         fillRecentList();
     }
 }
@@ -775,40 +747,24 @@ OUString lcl_RecentIcon(std::u16string_view rExt)
 }
 }
 
-void BackingWindow::fillRecentList()
+void BackingWindow::reloadRecentList()
 {
-    if (!mxRecentList)
-        return;
-
-    const OUString aQuery = mxRecentSearch->get_text().trim().toAsciiLowerCase();
+    // History is copied on the UI thread; only the worker queries file metadata.
+    // Search, filtering, painting and resizing consume this bounded snapshot.
     OUString aHomeURL, aHome;
     if (osl::Security().getHomeDir(aHomeURL))
         osl::FileBase::getSystemPathFromFileURL(aHomeURL, aHome);
-    const LocaleDataWrapper& rLocale = SvtSysLocale().GetLocaleData();
-    const Date aToday(Date::SYSTEM);
 
-    mxRecentList->freeze();
-    mxRecentList->clear();
-    maRecentRows.clear();
-    if (!mbRecentRendererOn)
+    std::map<OUString, RecentRow> aRows;
+    std::vector<OUString> aOrder, aLocalURLs;
+    for (const auto& rItem : SvtHistoryOptions::GetList(EHistoryType::PickList))
     {
-        // must be enabled while the list is empty; the first fill can happen
-        // during construction, before the rest of the setup runs
-        mxRecentList->set_column_custom_renderer(1, true); // column 0 is the icon slot
-        mbRecentRendererOn = true;
-    }
-    for (const SvtHistoryOptions::HistoryItem& rItem : SvtHistoryOptions::GetList(EHistoryType::PickList))
-    {
-        if (!mxAllRecentThumbnails->acceptsURL(rItem.sURL))
-            continue;
         const INetURLObject aURL(rItem.sURL);
         const OUString aName = aURL.GetLastName(INetURLObject::DecodeMechanism::WithCharset);
-        if (!aQuery.isEmpty() && aName.toAsciiLowerCase().indexOf(aQuery) == -1)
-            continue;
-
         OUString aLocation, aFolder;
         if (aURL.GetProtocol() == INetProtocol::File)
         {
+            aLocalURLs.push_back(rItem.sURL);
             INetURLObject aDir(aURL);
             aDir.removeSegment();
             aLocation = aDir.getFSysPath(FSysStyle::Detect);
@@ -816,7 +772,6 @@ void BackingWindow::fillRecentList()
                 aLocation = aLocation.copy(0, aLocation.getLength() - 1);
             if (!aHome.isEmpty() && aLocation.startsWith(aHome))
                 aLocation = "~" + aLocation.copy(aHome.getLength());
-            // show just the folder name; the full path is in the tooltip
             aFolder = aLocation == "~" ? aLocation : aLocation.copy(aLocation.lastIndexOf('/') + 1);
             if (aFolder.isEmpty())
                 aFolder = aLocation;
@@ -824,31 +779,79 @@ void BackingWindow::fillRecentList()
         else
             aLocation = aFolder = aURL.GetHost();
 
-        OUString aModified;
-        osl::DirectoryItem aDirItem;
-        osl::FileStatus aStatus(osl_FileStatus_Mask_ModifyTime);
+        aRows[rItem.sURL] = { aName, aName.toAsciiLowerCase(), aURL.getExtension(), aFolder,
+                             aLocation, {}, lcl_RecentIcon(aURL.getExtension()), rItem.isReadOnly };
+        aOrder.push_back(rItem.sURL);
+    }
+    // Retain cached dates for surviving URLs while the new metadata is pending.
+    // This refresh only reads memory; new entries have no timestamp yet.
+    maRecentMetadata.refresh(aLocalURLs, [this](const OUString& rURL) {
+        return maRecentMetadata.lookup(rURL);
+    });
+    maRecentRows.swap(aRows);
+    maRecentOrder.swap(aOrder);
+    maRecentHoverId.clear();
+    fillRecentList();
+    if (!mxRecentMetadataLoader)
+    {
+        mxRecentMetadataLoader = std::make_unique<sfx2::RecentFileMetadataLoader>(
+            [this](sfx2::RecentFileMetadataCache aMetadata) {
+                maRecentMetadata = std::move(aMetadata);
+                fillRecentList();
+            });
+    }
+    mxRecentMetadataLoader->refresh(std::move(aLocalURLs));
+}
+
+void BackingWindow::fillRecentList()
+{
+    if (!mxRecentList)
+        return;
+
+    const OUString aQuery = mxRecentSearch->get_text().trim().toAsciiLowerCase();
+    const int nFilter = mxFilter->get_active();
+    const auto eFilter = nFilter > 0 ? static_cast<sfx2::ApplicationType>(1 << (nFilter - 1))
+                                    : sfx2::ApplicationType::TYPE_NONE;
+    const LocaleDataWrapper& rLocale = SvtSysLocale().GetLocaleData();
+    const Date aToday(Date::SYSTEM);
+    const OUString aSelected = mxRecentList->get_selected_id();
+    const int nScroll = mxRecentList->vadjustment_get_value();
+
+    mxRecentList->freeze();
+    mxRecentList->clear();
+    if (!mbRecentRendererOn)
+    {
+        mxRecentList->set_column_custom_renderer(1, true); // column 0 is the icon slot
+        mbRecentRendererOn = true;
+    }
+    for (const OUString& rURL : maRecentOrder)
+    {
+        auto& rRow = maRecentRows.at(rURL);
+        if (eFilter != sfx2::ApplicationType::TYPE_NONE
+            && !sfx2::RecentDocsView::typeMatchesExtension(eFilter, rRow.aExtension))
+            continue;
+        if (!aQuery.isEmpty() && rRow.aSearchName.indexOf(aQuery) == -1)
+            continue;
+
+        // Keep raw timestamps in the cache so locale/day changes need no new stat.
+        rRow.aModified.clear();
+        const auto aUtc = maRecentMetadata.lookup(rURL);
         TimeValue aLocal;
         oslDateTime aDT;
-        if (aURL.GetProtocol() == INetProtocol::File
-            && osl::DirectoryItem::get(rItem.sURL, aDirItem) == osl::FileBase::E_None
-            && aDirItem.getFileStatus(aStatus) == osl::FileBase::E_None)
+        if (aUtc && osl_getLocalTimeFromSystemTime(&*aUtc, &aLocal)
+            && osl_getDateTimeFromTimeValue(&aLocal, &aDT))
         {
-            TimeValue aUtc = aStatus.getModifyTime();
-            if (osl_getLocalTimeFromSystemTime(&aUtc, &aLocal) && osl_getDateTimeFromTimeValue(&aLocal, &aDT))
-            {
-                const Date aDate(aDT.Day, aDT.Month, aDT.Year);
-                if (aDate == aToday)
-                    aModified = rLocale.getTime(tools::Time(aDT.Hours, aDT.Minutes), false);
-                else
-                    aModified = rLocale.getDate(aDate);
-            }
+            const Date aDate(aDT.Day, aDT.Month, aDT.Year);
+            rRow.aModified = aDate == aToday
+                ? rLocale.getTime(tools::Time(aDT.Hours, aDT.Minutes), false)
+                : rLocale.getDate(aDate);
         }
-
-        maRecentRows[rItem.sURL] = { aName, aFolder, aLocation, aModified,
-                                     lcl_RecentIcon(aURL.getExtension()) };
-        mxRecentList->append(rItem.sURL, aName);
+        mxRecentList->append(rURL, rRow.aName);
     }
+    if (!aSelected.isEmpty() && mxRecentList->find_id(aSelected) != -1)
+        mxRecentList->select_id(aSelected);
     mxRecentList->thaw();
+    mxRecentList->vadjustment_set_value(nScroll);
     const bool bEmpty = mxRecentList->n_children() == 0;
     // the scrolled window is merged into the list by the builder, so hide the list itself
     mxRecentList->set_visible(!bEmpty);
@@ -986,8 +989,22 @@ IMPL_LINK_NOARG(BackingWindow, RecentSearchHdl, weld::TextWidget&, void)
 IMPL_LINK_NOARG(BackingWindow, RecentActivatedHdl, const weld::TreeIter&, bool)
 {
     const OUString aURL = mxRecentList->get_selected_id();
-    if (!aURL.isEmpty())
-        mxAllRecentThumbnails->openURL(aURL);
+    const auto it = maRecentRows.find(aURL);
+    if (it == maRecentRows.end())
+        return true;
+
+    Sequence<PropertyValue> aArgs{
+        comphelper::makePropertyValue(u"Referer"_ustr, u"private:user"_ustr),
+        comphelper::makePropertyValue(u"AsTemplate"_ustr, false)
+    };
+    if (it->second.bReadOnly) // tdf#149170: only specify ReadOnly when true
+    {
+        aArgs.realloc(aArgs.getLength() + 1);
+        aArgs.getArray()[aArgs.getLength() - 1]
+            = comphelper::makePropertyValue(u"ReadOnly"_ustr, true);
+    }
+    // dispatchURL posts an event: opening the document can destroy this window.
+    dispatchURL(aURL, u"_default"_ustr, {}, aArgs);
     return true;
 }
 
@@ -1001,16 +1018,15 @@ IMPL_LINK( BackingWindow, ToggleHdl, weld::Toggleable&, rButton, void )
     if (&rButton == mxRecentButton.get())
     {
         mxLocalView->Hide();
-        // Dainvo: the recent files list replaces the thumbnail grid
-        mxAllRecentThumbnails->Hide();
         mxRecentBox->show();
         mxRecentList->grab_focus();
         mxTemplateButton->set_active(false);
         mxActions->show();
+        reloadRecentList();
+        return;
     }
     else
     {
-        mxAllRecentThumbnails->Hide();
         mxRecentBox->hide();
         initializeLocalView();
         mxLocalView->Show();
@@ -1066,12 +1082,23 @@ IMPL_LINK (BackingWindow, MenuSelectHdl, const OUString&, rId, void)
     if (rId == "clear_all")
     {
         SvtHistoryOptions::Clear(EHistoryType::PickList, false);
-        mxAllRecentThumbnails->Reload();
+        reloadRecentList();
         return;
     }
     else if(rId == "clear_unavailable")
     {
-        mxAllRecentThumbnails->clearUnavailableFiles();
+        if (ConfirmationDlg::Query<officecfg::Office::Common::Misc::QueryClearUnavailableDocuments>(
+                Application::GetDefDialogParent(), SfxResId(STR_QUERY_CLR_UNAVAILABLE_DOCS_TITLE),
+                SfxResId(STR_QUERY_CLR_UNAVAILABLE_DOCS_TEXT),
+                SfxResId(STR_QUERY_CLR_UNAVAILABLE_DOCS_QUESTION)))
+        {
+            for (const auto& rItem : SvtHistoryOptions::GetList(EHistoryType::PickList))
+            {
+                if (!comphelper::DirectoryHelper::fileExists(rItem.sURL))
+                    SvtHistoryOptions::DeleteItem(EHistoryType::PickList, rItem.sURL, false);
+            }
+            reloadRecentList();
+        }
     }
 }
 
@@ -1205,8 +1232,7 @@ void BackingWindow::dispatchURL( const OUString& i_rURL,
 
 void BackingWindow::clearRecentFileList()
 {
-    mxAllRecentThumbnails->Clear();
     // tdf#166349 - reload recent documents to show pinned items
-    mxAllRecentThumbnails->Reload();
+    reloadRecentList();
 }
 /* vim:set shiftwidth=4 softtabstop=4 expandtab:*/

@@ -22,6 +22,8 @@
 
 #include <rtl/ustring.hxx>
 #include <map>
+#include <recentfilemetadatacache.hxx>
+#include <recentfilemetadataloader.hxx>
 
 #include <vcl/InterimItemWindow.hxx>
 #include <vcl/weld/Button.hxx>
@@ -35,7 +37,6 @@
 #include <vcl/weld/ToggleButton.hxx>
 #include <vcl/weld/TreeView.hxx>
 
-#include <recentdocsview.hxx>
 #include <templatedefaultview.hxx>
 
 #include <svtools/acceleratorexecute.hxx>
@@ -79,9 +80,13 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Button> mxBrowseTemplates;
     struct RecentRow
     {
-        OUString aName, aFolder, aPath, aModified, aIcon;
+        OUString aName, aSearchName, aExtension, aFolder, aPath, aModified, aIcon;
+        bool bReadOnly;
     };
     std::map<OUString, RecentRow> maRecentRows; // keyed by URL (the row id)
+    std::vector<OUString> maRecentOrder; // preserve history order, including pins
+    sfx2::RecentFileMetadataCache maRecentMetadata;
+    std::unique_ptr<sfx2::RecentFileMetadataLoader> mxRecentMetadataLoader;
     bool mbRecentNarrow = false;
     bool mbRecentRendererOn = false;
     OUString maRecentHoverId; // row under the mouse, drawn with a hover highlight
@@ -107,8 +112,6 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Container> mxSmallButtonsBox;
     std::unique_ptr<weld::Container> mxRightBox;
 
-    std::unique_ptr<sfx2::RecentDocsView> mxAllRecentThumbnails;
-    std::unique_ptr<weld::CustomWeld> mxAllRecentThumbnailsWin;
     std::unique_ptr<TemplateDefaultView> mxLocalView;
     std::unique_ptr<weld::CustomWeld> mxLocalViewWin;
     std::unique_ptr<weld::Image> mxDonationLeft;
@@ -163,6 +166,7 @@ class BackingWindow : public InterimItemWindow
 
 private:
     void applyFilter();
+    void reloadRecentList();
     void fillRecentList();
 
 public:
