@@ -1708,7 +1708,7 @@
       </node>
       <node oor:name=".uno:ShowTwoPages" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
-          <value xml:lang="en-US">Two Pages Preview</value>
+          <value xml:lang="en-US">Two Pages</value>
         </prop>
         <prop oor:name="Properties" oor:type="xs:int">
           <value>1</value>
@@ -1716,7 +1716,7 @@
       </node>
       <node oor:name=".uno:ShowSinglePage" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
-          <value xml:lang="en-US">Single Page Preview</value>
+          <value xml:lang="en-US">One Page</value>
         </prop>
         <prop oor:name="Properties" oor:type="xs:int">
           <value>1</value>
@@ -1732,7 +1732,7 @@
       </node>
       <node oor:name=".uno:ShowMultiplePages" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
-          <value xml:lang="en-US">Multiple Pages Preview</value>
+          <value xml:lang="en-US">Multiple Pages</value>
         </prop>
         <prop oor:name="Properties" oor:type="xs:int">
           <value>1</value>
@@ -3309,7 +3309,7 @@
       </node>
       <node oor:name=".uno:ShowBookview" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
-          <value xml:lang="en-US">Book Preview</value>
+          <value xml:lang="en-US">Book</value>
         </prop>
         <prop oor:name="Properties" oor:type="xs:int">
           <value>9</value>

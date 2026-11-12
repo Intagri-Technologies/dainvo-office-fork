@@ -44,7 +44,7 @@
           <value xml:lang="en-US">Standard</value>
         </prop>
         <prop oor:name="Visible" oor:type="xs:boolean">
-          <value>true</value>
+          <value>false</value>
         </prop>
       </node>
       <node oor:name="private:resource/toolbar/toolbar" oor:op="replace">

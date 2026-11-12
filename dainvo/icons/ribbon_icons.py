@@ -348,6 +348,14 @@ ICONS = {
     # ribbon layout toggle on the View tab (linked from the argument commands, see LINKS)
     'DvRibbonIconsOnly': 'panel-top-close', 'DvRibbonLabels': 'panel-top-open',
     'DefinePrintArea': 'printer-check', 'DeletePrintArea': 'printer-x',
+    # media player controls on the Media tab (avmedia/res images link to these)
+    # chart editing toolbar (no ribbon tab for charts; its Standard bar is hidden)
+    'FormatSelection': 'square-pen', 'DiagramType': 'chart-column-big', 'DiagramArea': 'chart-area',
+    'DiagramWall': 'square-dashed', 'View3D': 'rotate-3d', 'DataRanges': 'table-properties', 'DiagramData': 'table',
+    'InsertMenuTitles': 'heading', 'ToggleLegend': 'list', 'Legend': 'panel-top', 'ToggleGridHorizontal': 'rows-3',
+    'ToggleGridVertical': 'columns-3', 'DiagramAxisX': 'move-horizontal', 'DiagramAxisY': 'move-vertical',
+    'DiagramAxisZ': 'move-diagonal', 'DiagramAxisAll': 'axis-3d', 'ScaleText': 'scaling', 'NewArrangement': 'layout-grid',
+    'RunBasic': 'play', 'MediaPause': 'pause', 'BasicStop': 'square', 'MediaRepeat': 'repeat', 'MediaMute': 'volume-x',
     # Draw ribbon menus
     'AutoPilotMenu': 'wand', 'CalculateSel': 'calculator', 'CancelCheckOut': 'circle-x', 'ChangeTheme': 'palette',
     'CheckIn': 'cloud-upload', 'CheckOut': 'cloud-download', 'ConvertInto3DLathe': 'cylinder',
@@ -378,6 +386,7 @@ LINKS = {
 # other images by path (without extension) -> (icon, size)
 FILES = {
     'sfx2/res/symphony/sidebar-a11y-large': ('accessibility', 24),
+    'avmedia/res/av02048': ('folder-open', 16), 'avmedia/res/av02053': ('check', 16),
 }
 # large buttons that carry the accent colour on the ribbon
 ACCENT = {'Paste', 'InsertTable', 'InsertGraphic', 'InsertObjectChart', 'InsertAnnotation', 'TrackChanges',

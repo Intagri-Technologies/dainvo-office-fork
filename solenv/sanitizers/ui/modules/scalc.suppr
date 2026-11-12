@@ -327,6 +327,7 @@ sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='btnTogglePrintZeroValue
 
 
 
+
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label

@@ -319,6 +319,7 @@ sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawFormatUngroup
 
 
 
+
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label

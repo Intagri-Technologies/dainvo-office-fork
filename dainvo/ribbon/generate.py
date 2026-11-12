@@ -365,6 +365,22 @@ def drop_commands(lines):
                 del lines[i - 1:block_end(lines, i - 1) + 1]
                 continue
         i += 1
+    # ... and a group left holding nothing but its leading separator
+    i = 0
+    while i < len(lines):
+        start = i - 1
+        while start > 0 and lines[start].strip().startswith('<!--'):  # glade's n-columns comments
+            start -= 1
+        if re.search(r'<object class="(GtkGrid|GtkBox)"', lines[i]) and lines[start].strip() == '<child>':
+            end = block_end(lines, i)
+            pad = ' ' * (ind(lines[i]) + 2)
+            kids = [k for j in range(i + 1, end) if lines[j] == pad + '<child>'
+                    for k in [next(l for l in lines[j + 1:end] if not l.strip().startswith('<!--'))]]
+            if kids and all('class="GtkSeparator"' in k for k in kids):
+                del lines[start:block_end(lines, start) + 1]
+                i = start
+                continue
+        i += 1
     return lines
 
 
