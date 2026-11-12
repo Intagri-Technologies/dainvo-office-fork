@@ -345,6 +345,27 @@ ICONS = {
     'ViewDataSourceBrowser': 'database', 'ViewTrackChanges': 'file-diff', 'ViewValueHighlighting': 'highlighter',
     'Watermark': 'droplet', 'WebHtml': 'globe', 'WrapAnchorOnly': 'anchor',
     'WrapThroughTransparent': 'd:wrapthrough',
+    # Draw ribbon menus
+    'AutoPilotMenu': 'wand', 'CalculateSel': 'calculator', 'CancelCheckOut': 'circle-x', 'ChangeTheme': 'palette',
+    'CheckIn': 'cloud-upload', 'CheckOut': 'cloud-download', 'ConvertInto3DLathe': 'cylinder',
+    'CrookRotate': 'rotate-3d', 'DeleteAllAnnotation': 'message-square-x', 'DeletePage': 'trash-2',
+    'DevelopmentToolsDockingWindow': 'bug', 'DuplicatePage': 'copy-plus', 'FieldMenu': 'braces',
+    'GetInvolved': 'users', 'GlueEscapeDirectionBottom': 'arrow-down', 'GlueEscapeDirectionLeft': 'arrow-left',
+    'GlueEscapeDirectionRight': 'arrow-right', 'GlueEscapeDirectionTop': 'arrow-up',
+    'GlueHorzAlignCenter': 'align-horizontal-justify-center', 'GlueHorzAlignLeft': 'align-horizontal-justify-start',
+    'GlueHorzAlignRight': 'align-horizontal-justify-end', 'GluePercent': 'percent',
+    'GlueVertAlignBottom': 'align-vertical-justify-end', 'GlueVertAlignCenter': 'align-vertical-justify-center',
+    'GlueVertAlignTop': 'align-vertical-justify-start', 'HangingIndent': 'list-indent-increase',
+    'HidePage': 'eye-off', 'ShowPage': 'eye', 'InsertDateFieldVar': 'calendar', 'InsertTimeFieldFix': 'clock',
+    'InsertTimeFieldVar': 'clock', 'InsertPage': 'd:newslide', 'InsertPageField': 'hash',
+    'InsertPagesField': 'list-ordered', 'InsertSymbol': 'omega', 'InteractiveGradient': 'blend',
+    'InteractiveTransparence': 'droplet', 'LeftPaneDraw': 'panel-left-open', 'MacroDialog': 'square-code',
+    'MasterPage': 'layout-panel-top', 'Mirror': 'flip-horizontal-2', 'MovePageDown': 'arrow-down',
+    'MovePageUp': 'arrow-up', 'OpenRemote': 'cloud', 'OpenTemplate': 'layout-template',
+    'OutputQualityBlackWhite': 'contrast', 'PageSetup': 'file-cog', 'RenamePage': 'pencil-line',
+    'SaveAll': 'save-all', 'SaveAsTemplate': 'layout-template', 'VersionDialog': 'history',
+    'Zoom150Percent': 'zoom-in', 'Zoom200Percent': 'zoom-in', 'Zoom50Percent': 'zoom-out',
+    'Zoom75Percent': 'zoom-out', 'ZoomNext': 'redo-dot', 'ZoomObjects': 'scan', 'ZoomOptimal': 'scan-search',
 }
 # other images by path (without extension) -> (icon, size)
 FILES = {
