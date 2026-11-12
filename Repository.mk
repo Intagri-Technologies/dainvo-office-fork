@@ -985,7 +985,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	wizards_basicsrvtools \
 	wizards_basicusr \
 	wizards_wizardshare \
-	toolbarmode_images \
 	vcl_theme_definitions \
 	$(if $(filter WNT,$(OS)), \
 		vcl_opengl_denylist \
