@@ -3912,7 +3912,9 @@ namespace
                     ++nAll;
                 if ( bShow )
                 {
-                    m_xCurrencyLb->append_text(rItem);
+                    // Dainvo: the UI font has no full-width yen (U+FFE5); show the
+                    // regular yen sign in the list (the number format is unchanged)
+                    m_xCurrencyLb->append_text(rItem.replace(u'\uFFE5', u'\u00A5'));
 
                     if (rItem.getLength() > sLongestString.getLength())
                         sLongestString = rItem;
