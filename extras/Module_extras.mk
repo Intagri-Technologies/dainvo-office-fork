@@ -43,10 +43,12 @@ $(eval $(call gb_Module_add_l10n_targets,extras,\
 	AllLangPackage_autotextshare \
 ))
 
+# Dainvo: no Gallery_sound. The bundled slide transition sounds are dated;
+# users can still pick their own sound files, and PowerPoint imports keep
+# their embedded sounds.
 ifneq ($(WITH_GALLERY_BUILD),)
 $(eval $(call gb_Module_add_targets,extras,\
 	Gallery_backgrounds \
-    $(call gb_Helper_optional,AVMEDIA,Gallery_sound) \
 	Gallery_phosphor-office \
 	Gallery_phosphor-business \
 	Gallery_phosphor-arrows \
