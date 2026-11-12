@@ -84,6 +84,7 @@ class BackingWindow : public InterimItemWindow
     std::map<OUString, RecentRow> maRecentRows; // keyed by URL (the row id)
     bool mbRecentNarrow = false;
     bool mbRecentRendererOn = false;
+    OUString maRecentHoverId; // row under the mouse, drawn with a hover highlight
     tools::Long mnRecentWidth = 800; // current list width; rows are drawn this wide
     std::unique_ptr<weld::MenuButton> mxActions;
 
@@ -138,6 +139,7 @@ class BackingWindow : public InterimItemWindow
     DECL_LINK(RecentRenderHdl, weld::TreeView::render_args, void);
     DECL_LINK(RecentTooltipHdl, const weld::TreeIter&, OUString);
     DECL_LINK(RecentSizeAllocHdl, const Size&, void);
+    DECL_LINK(RecentMouseMoveHdl, const MouseEvent&, bool);
     DECL_LINK(ClickHdl, weld::Button&, void);
     DECL_LINK(ClickHelpHdl, weld::Button&, void);
     DECL_LINK(MenuSelectHdl, const OUString&, void);

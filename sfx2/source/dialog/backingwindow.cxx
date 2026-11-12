@@ -435,6 +435,7 @@ void BackingWindow::initControls()
     mxRecentList->connect_custom_render(LINK(this, BackingWindow, RecentRenderHdl));
     mxRecentList->connect_query_tooltip(LINK(this, BackingWindow, RecentTooltipHdl));
     mxRecentList->connect_size_allocate(LINK(this, BackingWindow, RecentSizeAllocHdl));
+    mxRecentList->connect_mouse_move(LINK(this, BackingWindow, RecentMouseMoveHdl));
     mxRecentButton->set_active(true);
     ToggleHdl(*mxRecentButton);
 
@@ -882,11 +883,20 @@ IMPL_LINK(BackingWindow, RecentRenderHdl, weld::TreeView::render_args, rArgs, vo
               | vcl::PushFlags::LINECOLOR);
 
     const tools::Long nLeft = rRect.Left(), nWidth = rRect.GetWidth();
-    if (bSelected)
+    const bool bHover = !bSelected && std::get<3>(rArgs) == maRecentHoverId;
+    if (bSelected || bHover)
     {
         rDev.SetLineColor();
-        rDev.SetFillColor(rStyle.GetHighlightColor());
+        Color aFill(rStyle.GetHighlightColor());
+        if (bHover)
+        {
+            aFill = rStyle.GetWindowColor();
+            aFill.Merge(rStyle.GetWindowTextColor(), 232); // a soft tint, unlike the selection
+        }
+        rDev.SetFillColor(aFill);
         tools::Rectangle aSel(rRect);
+        aSel.SetRight(mnRecentWidth - 8);
+        aSel.AdjustLeft(-8);
         aSel.AdjustTop(2);
         aSel.AdjustBottom(-2);
         rDev.DrawRect(aSel, 6, 6);
@@ -930,6 +940,20 @@ IMPL_LINK(BackingWindow, RecentRenderHdl, weld::TreeView::render_args, rArgs, vo
     drawCell(rRow.aModified, bNarrow ? nNameEnd : nLocEnd, mnRecentWidth, aMuted);
 
     rDev.Pop();
+}
+
+IMPL_LINK(BackingWindow, RecentMouseMoveHdl, const MouseEvent&, rMEvt, bool)
+{
+    OUString aHover;
+    if (!rMEvt.IsLeaveWindow())
+        if (std::unique_ptr<weld::TreeIter> xIter = mxRecentList->get_dest_row_at_pos(rMEvt.GetPosPixel(), false, false))
+            aHover = mxRecentList->get_id(*xIter);
+    if (aHover != maRecentHoverId)
+    {
+        maRecentHoverId = aHover;
+        mxRecentList->queue_draw();
+    }
+    return false;
 }
 
 IMPL_LINK(BackingWindow, RecentTooltipHdl, const weld::TreeIter&, rIter, OUString)
