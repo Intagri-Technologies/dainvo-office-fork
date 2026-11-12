@@ -710,7 +710,7 @@ void aqua_init_systray()
                 { SvtModuleOptions::EModule::CALC,      MI_CALC,    CALC_URL },
                 { SvtModuleOptions::EModule::IMPRESS,   MI_IMPRESS, IMPRESS_WIZARD_URL },
                 { SvtModuleOptions::EModule::DRAW,      MI_DRAW,    DRAW_URL },
-                { SvtModuleOptions::EModule::DATABASE,  MI_BASE,    BASE_URL },
+                // Dainvo: no Base entry; the database core stays for mail merge
                 { SvtModuleOptions::EModule::MATH,      MI_MATH,    MATH_URL }
             };
 

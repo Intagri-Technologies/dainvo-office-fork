@@ -27,7 +27,9 @@
 #include <osl/diagnose.h>
 #include <comphelper/diagnose_ex.hxx>
 #include <rtl/ref.hxx>
+#include <com/sun/star/mail/MailServiceProvider.hpp>
 #include <com/sun/star/mail/XSmtpService.hpp>
+#include <comphelper/processfactory.hxx>
 #include <vcl/idle.hxx>
 #include <vcl/svapp.hxx>
 #include <vcl/weld/Builder.hxx>
@@ -58,6 +60,25 @@ SwMailMergeOutputTypePage::SwMailMergeOutputTypePage(weld::Container* pPage,
     m_xMailRB->connect_toggled(aLink);
 
     SwMailMergeConfigItem& rConfigItem = m_pWizard->GetConfigItem();
+
+    // Sending email needs a mail service; the bundled one is written in Python.
+    // Without it, only offer letters (print, PDF, files).
+    bool bHaveMailService = false;
+    try
+    {
+        bHaveMailService
+            = mail::MailServiceProvider::create(comphelper::getProcessComponentContext()).is();
+    }
+    catch (const uno::Exception&)
+    {
+    }
+    if (!bHaveMailService)
+    {
+        m_xMailRB->hide();
+        m_xMailHint->hide();
+        rConfigItem.SetOutputToLetter(true);
+    }
+
     if (rConfigItem.IsOutputToLetter())
         m_xLetterRB->set_active(true);
     else

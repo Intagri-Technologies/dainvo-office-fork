@@ -529,7 +529,9 @@ void BackingWindow::checkInstalledModules()
     mxImpressAllButton->set_sensitive(aModuleOpt.IsImpressInstalled());
     mxDrawAllButton->set_sensitive(aModuleOpt.IsDrawInstalled());
     mxMathAllButton->set_sensitive(aModuleOpt.IsMathInstalled());
-    mxDBAllButton->set_sensitive(aModuleOpt.IsDataBaseInstalled());
+    // Dainvo: the Base app is not offered to users. The database core stays
+    // installed because mail merge (Calc sheets, macOS Contacts) needs it.
+    mxDBAllButton->hide();
 }
 
 bool BackingWindow::PreNotify(NotifyEvent& rNEvt)

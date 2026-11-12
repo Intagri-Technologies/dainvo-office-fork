@@ -152,20 +152,6 @@
           <value>_default</value>
         </prop>
       </node>
-      <node oor:name="m5" oor:op="replace" install:module="base">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>private:factory/sdatabase?Interactive</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">Database</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_default</value>
-        </prop>
-        <prop oor:name="ImageIdentifier" oor:type="xs:string">
-          <value>private:image/3245</value>
-        </prop>
-      </node>
       <node oor:name="m6" oor:op="replace">
         <prop oor:name="URL" oor:type="xs:string">
           <value>private:separator</value>
@@ -264,39 +250,9 @@
       </node>
     </node>
     <node oor:name="Wizard">
-      <node oor:name="m0" oor:op="replace" install:module="writer">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>service:com.sun.star.wizards.letter.CallWizard?insert</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">~Letter...</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
-      <node oor:name="m1" oor:op="replace" install:module="writer">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>service:com.sun.star.wizards.fax.CallWizard?insert</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">~Fax...</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
-      <node oor:name="m2" oor:op="replace" install:module="writer">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>service:com.sun.star.wizards.agenda.CallWizard?insert</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">~Agenda...</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
+      <!-- Dainvo: Letter (m0), Fax (m1) and Agenda (m2) wizards removed; they
+           need Python, which Dainvo does not ship. Restore from upstream if
+           Python is re-enabled. -->
       <node oor:name="m10" oor:op="replace">
         <prop oor:name="URL" oor:type="xs:string">
           <value>private:separator</value>

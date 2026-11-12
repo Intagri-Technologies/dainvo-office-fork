@@ -41,11 +41,17 @@ $(eval $(call gb_Module_add_targets,wizards,\
 	Package_usr \
 	Package_wizards \
 	Package_wizards_properties \
+))
+
+# Letter, Fax and Agenda wizards are written in Python
+ifneq ($(DISABLE_PYTHON),TRUE)
+$(eval $(call gb_Module_add_targets,wizards,\
 	Pyuno_fax \
 	Pyuno_letter \
 	Pyuno_agenda \
 	Pyuno_commonwizards \
 ))
+endif
 
 $(eval $(call gb_Module_add_l10n_targets,wizards,\
 	AllLangMoTarget_wiz \
