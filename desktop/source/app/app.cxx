@@ -452,7 +452,8 @@ OUString ReplaceWord(const OUString& rStr, std::u16string_view rFrom, std::u16st
 OUString DainvoRenameApps(const OUString& rStr)
 {
     if (rStr.indexOf("Writer") == -1 && rStr.indexOf("Calc") == -1
-        && rStr.indexOf("Impress") == -1)
+        && rStr.indexOf("Impress") == -1 && rStr.indexOf("Draw Drawing") == -1
+        && rStr.indexOf("Math Formula") == -1)
         return rStr;
 
     OUString sRet(rStr);
@@ -461,6 +462,7 @@ OUString DainvoRenameApps(const OUString& rStr)
         { u"Writer Document", u"Document" },       { u"Writer document", u"document" },
         { u"Calc Spreadsheet", u"Spreadsheet" },   { u"Calc spreadsheet", u"spreadsheet" },
         { u"Impress Presentation", u"Presentation" }, { u"Impress presentation", u"presentation" },
+        { u"Draw Drawing", u"Drawing" }, { u"Math Formula", u"Formula" },
     };
     for (const auto & [ rFrom, rTo ] : aPhrases)
         sRet = sRet.replaceAll(rFrom, rTo);

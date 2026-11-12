@@ -94,8 +94,9 @@ void RecentDocsView::UpdateColors(const StyleSettings& rSettings)
 {
     ThumbnailView::UpdateColors(rSettings);
 
-    maFillColor = Color(ColorTransparency, officecfg::Office::Common::Help::StartCenter::StartCenterThumbnailsBackgroundColor::get());
-    maTextColor = Color(ColorTransparency, officecfg::Office::Common::Help::StartCenter::StartCenterThumbnailsTextColor::get());
+    // Dainvo: follow the light/dark window colours instead of a fixed grey
+    maFillColor = rSettings.GetWindowColor();
+    maTextColor = rSettings.GetWindowTextColor();
 
     maHighlightColor = rSettings.GetHighlightColor();
     maHighlightTextColor = rSettings.GetHighlightTextColor();
