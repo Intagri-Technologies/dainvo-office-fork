@@ -2529,8 +2529,9 @@ void ToolBox::ImplDrawButton(vcl::RenderContext& rRenderContext, const tools::Re
 
     if (!bNativeOk) {
         // Dainvo: 6px control radius (Dainvo's --radius-control)
+        // Dainvo: filled highlight only - no outline box around checked buttons
         rRenderContext.DrawSelectionBackground(rRect, GetBackgroundColor(), bIsWindow ? 3 : highlight,
-                                               bChecked, true, bIsWindow, nullptr, 6);
+                                               bChecked, bIsWindow, bIsWindow, nullptr, 6);
     }
 }
 
