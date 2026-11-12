@@ -95,6 +95,14 @@ using namespace ::com::sun::star::frame;
 using namespace ::com::sun::star::uno;
 using namespace ::com::sun::star::document;
 
+// Dainvo: the sidebar is a shade apart from the main area, in light and dark
+static Color lcl_SidebarColor(const StyleSettings& rStyle)
+{
+    Color aColor(rStyle.GetWindowColor());
+    aColor.Merge(rStyle.GetWindowTextColor(), 242);
+    return aColor;
+}
+
 class BrandImage final : public weld::CustomWidgetController
 {
 private:
@@ -111,7 +119,7 @@ public:
 
         const StyleSettings& rStyleSettings = Application::GetSettings().GetStyleSettings();
         OutputDevice& rDevice = pDrawingArea->get_ref_device();
-        rDevice.SetBackground(Wallpaper(rStyleSettings.GetWindowColor()));
+        rDevice.SetBackground(Wallpaper(lcl_SidebarColor(rStyleSettings)));
 
         SetPointer(PointerStyle::RefHand);
     }
@@ -144,7 +152,7 @@ public:
 
         // tdf#141857 update background to current theme
         OutputDevice& rDevice = GetDrawingArea()->get_ref_device();
-        rDevice.SetBackground(Wallpaper(rStyleSettings.GetWindowColor()));
+        rDevice.SetBackground(Wallpaper(lcl_SidebarColor(rStyleSettings)));
 
         const bool bIsDark = rStyleSettings.GetDialogColor().IsDark();
         if (bIsDark != mbIsDark)
@@ -529,8 +537,7 @@ void BackingWindow::ApplyStyleSettings()
     }
 
     // Dainvo: sidebar a shade apart from the main area (works in light and dark)
-    Color aSidebar(aButtonsBackground);
-    aSidebar.Merge(rStyleSettings.GetWindowTextColor(), 242);
+    const Color aSidebar(lcl_SidebarColor(rStyleSettings));
     mxAllButtonsBox->set_background(aSidebar);
     mxSmallButtonsBox->set_background(aSidebar);
     SetBackground(aButtonsBackground);

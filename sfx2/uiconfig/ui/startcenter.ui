@@ -66,22 +66,22 @@
   <object class="GtkImage" id="open_all_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_open.png</property>
+    <property name="icon-name">res/dainvo_open.png</property>
   </object>
   <object class="GtkImage" id="open_all_image1">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_recentfilelist.png</property>
+    <property name="icon-name">res/dainvo_home.png</property>
   </object>
   <object class="GtkImage" id="open_all_image2">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_openremote.png</property>
+    <property name="icon-name">res/dainvo_remote.png</property>
   </object>
   <object class="GtkImage" id="templates_all_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_templatemanager.png</property>
+    <property name="icon-name">res/dainvo_templates.png</property>
   </object>
   <object class="GtkImage" id="writer_all_image">
     <property name="visible">True</property>
@@ -91,17 +91,17 @@
   <object class="GtkImage" id="dv_help_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_helpindex.png</property>
+    <property name="icon-name">res/dainvo_help.png</property>
   </object>
   <object class="GtkImage" id="dv_ext_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_insertplugin.png</property>
+    <property name="icon-name">res/dainvo_extensions.png</property>
   </object>
   <object class="GtkImage" id="dv_settings_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">cmd/sc_optionstreedialog.png</property>
+    <property name="icon-name">res/dainvo_settings.png</property>
   </object>
   <object class="GtkBox" id="StartCenter">
     <property name="visible">True</property>
