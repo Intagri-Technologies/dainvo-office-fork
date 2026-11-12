@@ -24,7 +24,6 @@
             <menu:menuitem menu:id=".uno:OpenRemote" menu:style="text"/>
             <menu:menuitem menu:id=".uno:RecentFileList" menu:style="text"/>
             <menu:menuseparator/>
-            <menu:menuitem menu:id=".uno:AutoPilotMenu" menu:style="text"/>
             <menu:menu menu:id=".uno:TemplateMenu" menu:style="text">
                 <menu:menupopup>
                     <menu:menuitem menu:id=".uno:OpenTemplate" menu:style="text"/>

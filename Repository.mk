@@ -271,9 +271,9 @@ $(eval $(call gb_Helper_register_executables_for_install,UREBIN,ure,\
 ))
 
 $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,base, \
-	abp \
-	dbp \
-	dbu \
+	$(call gb_Helper_optional,DBCONNECTIVITY,abp) \
+	$(call gb_Helper_optional,DBCONNECTIVITY,dbp) \
+	$(call gb_Helper_optional,DBCONNECTIVITY,dbu) \
 ))
 
 $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,calc, \
@@ -398,7 +398,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 		basprov \
 	) \
 	basegfx \
-	bib \
+	$(call gb_Helper_optional,DBCONNECTIVITY,bib) \
 	chart2 \
 	chart2api \
 	$(call gb_Helper_optional,OPENCL,clew) \
@@ -447,20 +447,20 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	$(if $(MERGELIBS),merged) \
 	migrationoo2 \
 	migrationoo3 \
-	mozbootstrap \
+	$(call gb_Helper_optional,DBCONNECTIVITY,mozbootstrap) \
 	msfilter \
 	$(call gb_Helper_optional,SCRIPTING,msforms) \
 	mtfrenderer \
 	$(call gb_Helper_optional,DBCONNECTIVITY,mysql_jdbc) \
 	$(call gb_Helper_optional,MARIADBC,$(call gb_Helper_optional,DBCONNECTIVITY,mysqlc)) \
 	numbertext \
-	odbc \
+	$(call gb_Helper_optional,DBCONNECTIVITY,odbc) \
 	odfflatxml \
 	offacc \
 	oox \
 	$(call gb_Helper_optional,OPENCL,opencl) \
 	passwordcontainer \
-	pcr \
+	$(call gb_Helper_optional,DBCONNECTIVITY,pcr) \
 	pdffilter \
 	$(if $(ENABLE_RUST_UNO),rust_uno-cpp) \
 	$(call gb_Helper_optional,SCRIPTING,protocolhandler) \
@@ -706,10 +706,10 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
 	xmlsecurity \
 	xsec_xmlsec \
 	xstor \
-	$(if $(filter $(OS),MACOSX), \
+	$(if $(filter $(OS),MACOSX),$(call gb_Helper_optional,DBCONNECTIVITY, \
 		macab1 \
 		macabdrv1 \
-	) \
+	)) \
 	$(if $(filter WNT,$(OS)), \
 		fps \
 		inprocserv \
@@ -1246,7 +1246,7 @@ $(eval $(call gb_Helper_register_uiconfigs,\
 		modules/dbtable \
 		modules/dbtdata \
 	) \
-	modules/sabpilot \
+	$(call gb_Helper_optional,DBCONNECTIVITY,modules/sabpilot) \
 	$(call gb_Helper_optional,DBCONNECTIVITY,modules/sbibliography) \
 	modules/scalc \
 	modules/scanner \

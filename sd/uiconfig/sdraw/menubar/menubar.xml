@@ -25,7 +25,6 @@
       <menu:menuitem menu:id=".uno:RecentFileList" menu:style="text"/>
       <menu:menuitem menu:id=".uno:CloseDoc" menu:style="text"/>
       <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:AutoPilotMenu" menu:style="text"/>
       <menu:menu menu:id=".uno:TemplateMenu" menu:style="text">
           <menu:menupopup>
               <menu:menuitem menu:id=".uno:OpenTemplate" menu:style="text"/>
@@ -583,10 +582,6 @@
       <menu:menu menu:id=".uno:ToolsFormsMenu" menu:style="text">
         <menu:menupopup>
           <menu:menuitem menu:id=".uno:SwitchControlDesignMode" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:UseWizards" menu:style="text"/>
-          <menu:menuseparator/>
-          <menu:menuitem menu:id=".uno:ControlProperties" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:FormProperties" menu:style="text"/>
           <menu:menuseparator/>
           <menu:menuitem menu:id=".uno:ShowFmExplorer" menu:style="text"/>
           <menu:menuitem menu:id=".uno:TabDialog" menu:style="text"/>

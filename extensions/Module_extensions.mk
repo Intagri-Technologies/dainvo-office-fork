@@ -15,13 +15,13 @@ $(eval $(call gb_Module_add_l10n_targets,extensions,\
 
 ifeq (,$(DISABLE_DYNLOADING))
 $(eval $(call gb_Module_add_targets,extensions,\
-	Library_abp \
+	$(call gb_Helper_optional,DBCONNECTIVITY,Library_abp) \
 	Library_scn \
 	$(if $(filter WNT,$(OS)), \
 		Library_WinUserInfoBe \
 		$(if $(CXX_X86_BINARY),Executable_twain32shim) \
 	) \
-	UIConfig_sabpilot \
+	$(call gb_Helper_optional,DBCONNECTIVITY,UIConfig_sabpilot) \
 	UIConfig_scanner \
 ))
 endif
@@ -38,6 +38,8 @@ $(eval $(call gb_Module_add_targets,extensions,\
 ))
 endif
 
+# The bibliography database viewer needs the database layer.
+ifneq (,$(filter DBCONNECTIVITY,$(BUILD_TYPE)))
 $(eval $(call gb_Module_add_targets,extensions,\
 	Library_bib \
 ))
@@ -45,6 +47,7 @@ $(eval $(call gb_Module_add_targets,extensions,\
 $(eval $(call gb_Module_add_check_targets,extensions,\
     CppunitTest_extensions_bibliography \
 ))
+endif
 
 ifneq (,$(filter DBCONNECTIVITY,$(BUILD_TYPE)))
 $(eval $(call gb_Module_add_targets,extensions,\

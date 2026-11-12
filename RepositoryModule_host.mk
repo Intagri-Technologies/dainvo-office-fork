@@ -83,7 +83,7 @@ $(eval $(call gb_Module_add_moduledirs,libreoffice,\
 	external \
 	extras \
 	filter \
-	$(call gb_Helper_optional,DBCONNECTIVITY,forms) \
+	forms \
 	formula \
 	$(call gb_Helper_optional,DESKTOP,fpicker) \
 	framework \

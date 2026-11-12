@@ -57,8 +57,7 @@ $(eval $(call gb_Library_use_libraries,swui,\
     comphelper \
     cppu \
     cppuhelper \
-    $(call gb_Helper_optional,DBCONNECTIVITY, \
-        dbtools) \
+    dbtools \
     editeng \
     i18nlangtag \
     i18nutil \
@@ -117,8 +116,6 @@ $(eval $(call gb_Library_add_exception_objects,swui,\
     sw/source/ui/fldui/DateFormFieldDialog \
     sw/source/ui/fldui/DropDownFieldDialog \
     sw/source/ui/fldui/DropDownFormFieldDialog \
-    sw/source/ui/fldui/changedb \
-    sw/source/ui/fldui/flddb \
     sw/source/ui/fldui/flddinf \
     sw/source/ui/fldui/flddok \
     sw/source/ui/fldui/fldedt \
@@ -183,6 +180,8 @@ $(eval $(call gb_Library_add_exception_objects,swui,\
     sw/source/ui/dbui/mmoutputtypepage \
     sw/source/ui/dbui/mmresultdialogs \
     sw/source/ui/dbui/selectdbtabledialog \
+    sw/source/ui/fldui/changedb \
+    sw/source/ui/fldui/flddb \
 ))
 endif
 

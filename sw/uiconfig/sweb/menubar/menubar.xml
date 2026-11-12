@@ -142,7 +142,6 @@
       <menu:menuitem menu:id=".uno:ViewSidebarStyles" menu:style="text"/>
       <menu:menuitem menu:id=".uno:Gallery" menu:style="text"/>
       <menu:menuitem menu:id=".uno:Navigator" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:ViewDataSourceBrowser" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menuitem menu:id=".uno:FullScreen" menu:style="text"/>
       <menu:menu menu:id=".uno:ZoomMenu" menu:style="text">
@@ -529,7 +528,6 @@
   <menu:menu menu:id=".uno:FormatFormMenu">
     <menu:menupopup>
       <menu:menuitem menu:id=".uno:SwitchControlDesignMode" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:UseWizards" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menuitem menu:id=".uno:Label" menu:style="text"/>
       <menu:menuitem menu:id=".uno:Edit" menu:style="text"/>
@@ -559,9 +557,6 @@
       <menu:menuseparator/>
       <menu:menuitem menu:id=".uno:Grid" menu:style="text"/>
       <menu:menuitem menu:id=".uno:NavigationBar" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:ControlProperties" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:FormProperties" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menuitem menu:id=".uno:ShowFmExplorer" menu:style="text"/>
       <menu:menuitem menu:id=".uno:TabDialog" menu:style="text"/>
@@ -605,10 +600,6 @@
       <menu:menuitem menu:id=".uno:ChapterNumberingDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:LineNumberingDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:FootnoteDialog" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:MailMergeWizard" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:BibliographyComponent" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:AddressBookSource" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menu menu:id=".uno:UpdateMenu" menu:style="text">
         <menu:menupopup>
