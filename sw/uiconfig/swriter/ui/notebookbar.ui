@@ -2676,41 +2676,6 @@
                         <property name="fill">True</property>
                       </packing>
                     </child>
-                    <child>
-                      <object class="GtkBox" id="dvrows160">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">2</property>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb161">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="toolbar-style">icons</property>
-                            <property name="show-arrow">False</property>
-                            <child>
-                              <object class="GtkToolButton" id="dvbtn162">
-                                <property name="visible">True</property>
-                                <property name="action-name">.uno:BibliographyComponent</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">False</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                      </packing>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2718,7 +2683,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp163">
+                  <object class="VclOptionalBox" id="dvgrp160">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -2727,7 +2692,7 @@
                       <class name="priority-2"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep164">
+                      <object class="GtkSeparator" id="dvsep161">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -2740,14 +2705,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb165">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb162">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn166">
+                          <object class="GtkToolButton" id="dvbtn163">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:InsertCaptionDialog</property>
                           </object>
@@ -2763,20 +2728,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows167">
+                      <object class="GtkBox" id="dvrows164">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb168">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb165">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn169">
+                              <object class="GtkToolButton" id="dvbtn166">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:InsertReferenceField</property>
                               </object>
@@ -2804,7 +2769,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp170">
+                  <object class="VclOptionalBox" id="dvgrp167">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -2813,7 +2778,7 @@
                       <class name="priority-1"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep171">
+                      <object class="GtkSeparator" id="dvsep168">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -2826,14 +2791,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb172">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb169">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn173">
+                          <object class="GtkToolButton" id="dvbtn170">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:InsertIndexesEntry</property>
                           </object>
@@ -2849,20 +2814,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows174">
+                      <object class="GtkBox" id="dvrows171">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb175">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb172">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn176">
+                              <object class="GtkToolButton" id="dvbtn173">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:UpdateCurIndex</property>
                               </object>
@@ -2913,7 +2878,7 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp177">
+                  <object class="VclOptionalBox" id="dvgrp174">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -2922,14 +2887,14 @@
                       <class name="priority-5"/>
                     </style>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb178">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb175">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn179">
+                          <object class="GtkToolButton" id="dvbtn176">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:SpellingAndGrammarDialog</property>
                           </object>
@@ -2945,20 +2910,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows180">
+                      <object class="GtkBox" id="dvrows177">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb181">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb178">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn182">
+                              <object class="GtkToolButton" id="dvbtn179">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ThesaurusDialog</property>
                               </object>
@@ -2968,7 +2933,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn183">
+                              <object class="GtkToolButton" id="dvbtn180">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:SpellOnline</property>
                               </object>
@@ -2984,13 +2949,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb184">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb181">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn185">
+                              <object class="GtkToolButton" id="dvbtn182">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:WordCountDialog</property>
                               </object>
@@ -3018,7 +2983,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp186">
+                  <object class="VclOptionalBox" id="dvgrp183">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3027,7 +2992,7 @@
                       <class name="priority-4"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep187">
+                      <object class="GtkSeparator" id="dvsep184">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3040,14 +3005,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb188">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb185">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn189">
+                          <object class="GtkToolButton" id="dvbtn186">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:InsertAnnotation</property>
                           </object>
@@ -3063,20 +3028,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows190">
+                      <object class="GtkBox" id="dvrows187">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb191">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb188">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn192">
+                              <object class="GtkToolButton" id="dvbtn189">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:DeleteComment</property>
                               </object>
@@ -3086,7 +3051,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn193">
+                              <object class="GtkToolButton" id="dvbtn190">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:PreviousAnnotation</property>
                               </object>
@@ -3102,13 +3067,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb194">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb191">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn195">
+                              <object class="GtkToolButton" id="dvbtn192">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ShowAnnotations</property>
                               </object>
@@ -3118,7 +3083,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn196">
+                              <object class="GtkToolButton" id="dvbtn193">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:NextAnnotation</property>
                               </object>
@@ -3146,7 +3111,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp197">
+                  <object class="VclOptionalBox" id="dvgrp194">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3155,7 +3120,7 @@
                       <class name="priority-3"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep198">
+                      <object class="GtkSeparator" id="dvsep195">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3168,14 +3133,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb199">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb196">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn200">
+                          <object class="GtkToolButton" id="dvbtn197">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:TrackChanges</property>
                           </object>
@@ -3191,20 +3156,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows201">
+                      <object class="GtkBox" id="dvrows198">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb202">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb199">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn203">
+                              <object class="GtkToolButton" id="dvbtn200">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ShowTrackedChanges</property>
                               </object>
@@ -3220,13 +3185,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb204">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb201">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn205">
+                              <object class="GtkToolButton" id="dvbtn202">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:AcceptTrackedChanges</property>
                               </object>
@@ -3254,7 +3219,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp206">
+                  <object class="VclOptionalBox" id="dvgrp203">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3263,7 +3228,7 @@
                       <class name="priority-2"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep207">
+                      <object class="GtkSeparator" id="dvsep204">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3276,14 +3241,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb208">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb205">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn209">
+                          <object class="GtkToolButton" id="dvbtn206">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:AcceptTrackedChange</property>
                           </object>
@@ -3299,14 +3264,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb210">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb207">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn211">
+                          <object class="GtkToolButton" id="dvbtn208">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:RejectTrackedChange</property>
                           </object>
@@ -3322,20 +3287,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows212">
+                      <object class="GtkBox" id="dvrows209">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb213">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb210">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn214">
+                              <object class="GtkToolButton" id="dvbtn211">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:PreviousTrackedChange</property>
                               </object>
@@ -3351,13 +3316,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb215">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb212">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn216">
+                              <object class="GtkToolButton" id="dvbtn213">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:NextTrackedChange</property>
                               </object>
@@ -3385,7 +3350,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp217">
+                  <object class="VclOptionalBox" id="dvgrp214">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3394,7 +3359,7 @@
                       <class name="priority-1"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep218">
+                      <object class="GtkSeparator" id="dvsep215">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3407,14 +3372,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb219">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb216">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn220">
+                          <object class="GtkToolButton" id="dvbtn217">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:CompareDocuments</property>
                           </object>
@@ -3430,14 +3395,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb221">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb218">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn222">
+                          <object class="GtkToolButton" id="dvbtn219">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:ProtectTraceChangeMode</property>
                           </object>
@@ -3482,7 +3447,7 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp223">
+                  <object class="VclOptionalBox" id="dvgrp220">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3491,14 +3456,14 @@
                       <class name="priority-4"/>
                     </style>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb224">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb221">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn225">
+                          <object class="GtkToolButton" id="dvbtn222">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:PrintLayout</property>
                           </object>
@@ -3514,14 +3479,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb226">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb223">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn227">
+                          <object class="GtkToolButton" id="dvbtn224">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:BrowseView</property>
                           </object>
@@ -3537,14 +3502,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb228">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb225">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn229">
+                          <object class="GtkToolButton" id="dvbtn226">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:FullScreen</property>
                           </object>
@@ -3566,7 +3531,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp230">
+                  <object class="VclOptionalBox" id="dvgrp227">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3575,7 +3540,7 @@
                       <class name="priority-3"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep231">
+                      <object class="GtkSeparator" id="dvsep228">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3588,20 +3553,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows232">
+                      <object class="GtkBox" id="dvrows229">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb233">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb230">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn234">
+                              <object class="GtkToolButton" id="dvbtn231">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:Ruler</property>
                               </object>
@@ -3611,7 +3576,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn235">
+                              <object class="GtkToolButton" id="dvbtn232">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ControlCodes</property>
                               </object>
@@ -3627,13 +3592,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb236">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb233">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn237">
+                              <object class="GtkToolButton" id="dvbtn234">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:Navigator</property>
                               </object>
@@ -3661,7 +3626,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp238">
+                  <object class="VclOptionalBox" id="dvgrp235">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3670,7 +3635,7 @@
                       <class name="priority-2"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep239">
+                      <object class="GtkSeparator" id="dvsep236">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3683,14 +3648,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb240">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb237">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn241">
+                          <object class="GtkToolButton" id="dvbtn238">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:Zoom</property>
                           </object>
@@ -3706,20 +3671,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="dvrows242">
+                      <object class="GtkBox" id="dvrows239">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb243">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb240">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn244">
+                              <object class="GtkToolButton" id="dvbtn241">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:Zoom100Percent</property>
                               </object>
@@ -3729,7 +3694,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn245">
+                              <object class="GtkToolButton" id="dvbtn242">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ZoomPageWidth</property>
                               </object>
@@ -3745,13 +3710,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="dvtb246">
+                          <object class="sfxlo-NotebookbarToolBox" id="dvtb243">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="toolbar-style">icons</property>
                             <property name="show-arrow">False</property>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn247">
+                              <object class="GtkToolButton" id="dvbtn244">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ShowMultiplePages</property>
                               </object>
@@ -3761,7 +3726,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolButton" id="dvbtn248">
+                              <object class="GtkToolButton" id="dvbtn245">
                                 <property name="visible">True</property>
                                 <property name="action-name">.uno:ZoomPage</property>
                               </object>
@@ -3789,7 +3754,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="VclOptionalBox" id="dvgrp249">
+                  <object class="VclOptionalBox" id="dvgrp246">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
@@ -3798,7 +3763,7 @@
                       <class name="priority-1"/>
                     </style>
                     <child>
-                      <object class="GtkSeparator" id="dvsep250">
+                      <object class="GtkSeparator" id="dvsep247">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
@@ -3811,14 +3776,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="sfxlo-NotebookbarToolBox" id="dvtb251">
+                      <object class="sfxlo-NotebookbarToolBox" id="dvtb248">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="toolbar-style">both</property>
                         <property name="show-arrow">False</property>
                         <property name="icon_size">3</property>
                         <child>
-                          <object class="GtkToolButton" id="dvbtn252">
+                          <object class="GtkToolButton" id="dvbtn249">
                             <property name="visible">True</property>
                             <property name="action-name">.uno:Sidebar</property>
                           </object>

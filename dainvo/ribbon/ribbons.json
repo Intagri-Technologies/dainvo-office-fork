@@ -34,7 +34,7 @@
       ["References", [
         {"L": [".uno:InsertMultiIndex"], "R": [[".uno:UpdateAllIndexes"]]},
         {"L": [".uno:InsertFootnote", ".uno:InsertEndnote"]},
-        {"L": [".uno:InsertAuthoritiesEntry"], "R": [[".uno:BibliographyComponent"]]},
+        {"L": [".uno:InsertAuthoritiesEntry"]},
         {"L": [".uno:InsertCaptionDialog"], "R": [[".uno:InsertReferenceField"]]},
         {"L": [".uno:InsertIndexesEntry"], "R": [[".uno:UpdateCurIndex"]]}
       ]],
