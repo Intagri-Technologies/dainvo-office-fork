@@ -2201,13 +2201,15 @@ void AquaSalFrame::updateRoundedPopupShape()
 {
     // Dainvo: give dropdowns and popup panels rounded corners matching
     // Dainvo's popup card radius (8px). Tooltips and shaped windows are left alone.
+    // The loading screen (INTRO) gets the 12px corners of its card artwork.
+    const bool bIntro(mnStyle & SalFrameStyleFlags::INTRO);
     if (mbHeadlessMode || mbExplicitClip || !mpNSWindow
-        || !(mnStyle & SalFrameStyleFlags::FLOAT) || (mnStyle & SalFrameStyleFlags::TOOLTIP))
+        || !((mnStyle & SalFrameStyleFlags::FLOAT) || bIntro) || (mnStyle & SalFrameStyleFlags::TOOLTIP))
         return;
     const CGFloat fWidth = maGeometry.width(), fHeight = maGeometry.height();
     if (fWidth < 4 || fHeight < 4)
         return;
-    const CGFloat fRadius = std::min<CGFloat>(8.0, std::min(fWidth, fHeight) / 2 - 1);
+    const CGFloat fRadius = std::min<CGFloat>(bIntro ? 12.0 : 8.0, std::min(fWidth, fHeight) / 2 - 1);
     if (mrClippingPath)
         CGPathRelease(mrClippingPath);
     mrClippingPath = CGPathCreateMutable();

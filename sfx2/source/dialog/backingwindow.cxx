@@ -469,7 +469,16 @@ void BackingWindow::ApplyStyleSettings()
     setLargerFont(mxDBAllButton, aButtonFont);
     setLargerFont(mxImpressAllButton, aButtonFont);
     setLargerFont(mxMathAllButton, aButtonFont);
-    setLargerFont(mxCreateLabel, aLabelFont);
+    // Dainvo: "Create" is a section heading above the app cards
+    {
+        vcl::Font aHeading(aLabelFont);
+        aHeading.SetFontSize(Size(0, aHeading.GetFontSize().Height() * 1.6));
+        aHeading.SetWeight(WEIGHT_SEMIBOLD);
+        mxCreateLabel->set_font(aHeading);
+        OUString aCreate = mxCreateLabel->get_label();
+        if (aCreate.endsWith(":"))
+            mxCreateLabel->set_label(aCreate.copy(0, aCreate.getLength() - 1));
+    }
 
     mxAllButtonsBox->set_background(aButtonsBackground);
     mxSmallButtonsBox->set_background(aButtonsBackground);
