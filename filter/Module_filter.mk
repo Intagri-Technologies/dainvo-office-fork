@@ -33,7 +33,6 @@ $(eval $(call gb_Module_add_targets,filter,\
 	Library_textfd \
 	Library_xmlfa \
 	Library_xmlfd \
-	Library_xsltdlg \
 	Library_xsltfilter \
 	Package_xhtml \
 	Package_xslt \

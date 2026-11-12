@@ -16,13 +16,11 @@ $(eval $(call gb_Module_add_l10n_targets,extensions,\
 ifeq (,$(DISABLE_DYNLOADING))
 $(eval $(call gb_Module_add_targets,extensions,\
 	$(call gb_Helper_optional,DBCONNECTIVITY,Library_abp) \
-	Library_scn \
 	$(if $(filter WNT,$(OS)), \
 		Library_WinUserInfoBe \
 		$(if $(CXX_X86_BINARY),Executable_twain32shim) \
 	) \
 	$(call gb_Helper_optional,DBCONNECTIVITY,UIConfig_sabpilot) \
-	UIConfig_scanner \
 ))
 endif
 

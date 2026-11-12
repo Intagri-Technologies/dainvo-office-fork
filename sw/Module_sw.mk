@@ -36,8 +36,6 @@ $(eval $(call gb_Module_add_targets,sw,\
     Library_sw_writerfilter \
 	UIConfig_sglobal \
 	UIConfig_sweb \
-	UIConfig_swform \
-	UIConfig_swreport \
 	UIConfig_swriter \
 	UIConfig_swxform \
 ))

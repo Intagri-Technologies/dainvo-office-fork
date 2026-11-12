@@ -831,8 +831,9 @@ SvxLinguTabPage::SvxLinguTabPage(weld::Container* pPage, weld::DialogController*
     m_xLinguOptionsCLB->connect_item_activated(LINK(this, SvxLinguTabPage, BoxDoubleClickHdl_Impl));
 
     m_xMoreDictsLink->connect_activate_link(LINK(this, SvxLinguTabPage, OnLinkClick));
-    if (officecfg::Office::Security::Hyperlinks::Open::get() == SvtExtendedSecurityOptions::OPEN_NEVER)
-        m_xMoreDictsBox->hide();
+    // Dainvo: the "Get more dictionaries online" link installs extensions,
+    // which Dainvo doesn't support
+    m_xMoreDictsBox->hide();
 
     if (comphelper::LibreOfficeKit::isActive())
     {

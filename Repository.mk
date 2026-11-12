@@ -463,7 +463,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	sax \
 	sb \
 	$(call gb_Helper_optional,DBCONNECTIVITY,sdbt) \
-	scn \
 	sd \
 	sdd \
 	sfx \
@@ -505,7 +504,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	xmlfd \
 	xo \
 	xof \
-	xsltdlg \
 	xsltfilter \
 	$(if $(filter $(OS),WNT), \
 		ado \
@@ -946,14 +944,12 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	extras_autocorr \
 	extras_autotext \
 	extras_autotextuser \
-	extras_cfgsrvnolang \
 	extras_cfgusr \
 	extras_gallbullets \
 	extras_gallmytheme \
 	$(if $(WITH_GALLERY_BUILD),extras_gallphosphor) \
 	extras_gallsystem \
 	extras_gallsystemstr \
-	extras_glade \
 	extras_labels \
 	$(if $(filter WNT,$(OS)),extras_newfiles) \
 	extras_palettes \
@@ -988,7 +984,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	wizards_basicsrvtemplate \
 	wizards_basicsrvtools \
 	wizards_basicusr \
-	wizards_properties \
 	wizards_wizardshare \
 	toolbarmode_images \
 	vcl_theme_definitions \
@@ -1004,7 +999,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 		Pyuno/agenda \
 		Pyuno/mailmerge \
 	) \
-	sfx2_classification \
 	svx_document_themes \
     $(if $(filter OPENCL,$(BUILD_TYPE)),sc_opencl_runtimetest) \
 	$(if $(ENABLE_HTMLHELP),\
@@ -1032,10 +1026,8 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo_fonts,\
 		fonts_caladea \
 		fonts_carlito \
 		$(if $(MPL_SUBSET),,fonts_culmus) \
-		fonts_dejavu \
 		fonts_liberation \
 		fonts_liberation_narrow \
-		fonts_libertineg \
 		fonts_libre_hebrew \
 		fonts_noto_kufi_arabic \
 		fonts_noto_naskh_arabic \
@@ -1224,7 +1216,6 @@ $(eval $(call gb_Helper_register_uiconfigs,\
 	$(call gb_Helper_optional,DBCONNECTIVITY,modules/sabpilot) \
 	$(call gb_Helper_optional,DBCONNECTIVITY,modules/sbibliography) \
 	modules/scalc \
-	modules/scanner \
 	modules/schart \
 	modules/sdraw \
 	modules/sglobal \
@@ -1233,8 +1224,6 @@ $(eval $(call gb_Helper_register_uiconfigs,\
 	$(call gb_Helper_optional,DBCONNECTIVITY,modules/spropctrlr) \
 	modules/StartModule \
 	modules/sweb \
-	modules/swform \
-	modules/swreport \
 	modules/swriter \
 	modules/swxform \
 	sfx \

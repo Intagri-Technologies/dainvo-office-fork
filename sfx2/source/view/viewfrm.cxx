@@ -1615,7 +1615,11 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
                     bIsInfobarShown = true;
                 }
 
-                if (!bEmbedded && m_xObjSh->Get_Impl()->getCurrentMacroExecMode() == css::document::MacroExecMode::NEVER_EXECUTE)
+                // Dainvo: macros are off by default (DisableMacrosExecution), which
+                // makes every document NEVER_EXECUTE; only warn when the document
+                // actually contains macros
+                if (!bEmbedded && m_xObjSh->Get_Impl()->getCurrentMacroExecMode() == css::document::MacroExecMode::NEVER_EXECUTE
+                    && (!SvtSecurityOptions::IsMacroDisabled() || m_xObjSh->Get_Impl()->aMacroMode.hasMacros()))
                 {
                     AppendContainsMacrosInfobar();
                     bIsInfobarShown = true;

@@ -22,7 +22,6 @@ $(eval $(call gb_Module_Module,sfx2))
 $(eval $(call gb_Module_add_targets,sfx2,\
     CustomTarget_classification \
     Library_sfx \
-    Package_classification \
     UIConfig_sfx \
 ))
 

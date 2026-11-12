@@ -9,6 +9,9 @@
 
 $(eval $(call gb_UIConfig_UIConfig,modules/sdraw))
 
+# Dainvo: the Draw app's own menus, context menus, status bar and toolbars
+# only exist with the Draw app; its dialogs (below) are shared with Impress.
+ifneq ($(ENABLE_DRAW_APP),)
 $(eval $(call gb_UIConfig_add_menubarfiles,modules/sdraw,\
 	sd/uiconfig/sdraw/menubar/menubar \
 ))
@@ -96,6 +99,7 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/sdraw,\
 	sd/uiconfig/sdraw/toolbar/viewerbar \
 	sd/uiconfig/sdraw/toolbar/zoombar \
 ))
+endif
 
 $(eval $(call gb_UIConfig_add_uifiles,modules/sdraw,\
 	sd/uiconfig/sdraw/ui/breakdialog \

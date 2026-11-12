@@ -18,7 +18,6 @@ $(eval $(call gb_Module_add_targets,extras,\
 	Package_autocorr \
 	Package_autotext \
 	Package_autotextuser \
-	Package_cfgsrvnolang \
 	Package_cfgusr \
 	Package_fonts \
 	Package_resource_fonts \
@@ -26,7 +25,6 @@ $(eval $(call gb_Module_add_targets,extras,\
 	Package_gallmytheme \
 	Package_gallsystem \
 	Package_gallsystemstr \
-	Package_glade \
 	Package_labels \
 	$(if $(filter WNT,$(OS)),Package_newfiles) \
 	Package_palettes \

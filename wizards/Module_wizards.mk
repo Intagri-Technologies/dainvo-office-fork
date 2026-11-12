@@ -28,7 +28,6 @@ $(eval $(call gb_Module_add_targets,wizards,\
 	Package_tools \
 	Package_usr \
 	Package_wizards \
-	Package_wizards_properties \
 ))
 
 # Dainvo: not shipped - Depot (Euro Converter), ImportWizard (Document
