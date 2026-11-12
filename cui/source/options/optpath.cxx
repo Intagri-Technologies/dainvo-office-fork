@@ -253,6 +253,9 @@ void SvxPathTabPage::Reset( const SfxItemSet* )
         if ( static_cast<SvtPathOptions::Paths>(i) == SvtPathOptions::Paths::AutoText
             && !SvtModuleOptions().IsWriterInstalled())
             continue;
+        // Dainvo: no document classification feature
+        if (static_cast<SvtPathOptions::Paths>(i) == SvtPathOptions::Paths::Classification)
+            continue;
 
         TranslateId pId;
 

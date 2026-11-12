@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <officecfg/Office/Common.hxx>
 #include <sal/config.h>
 #include <sal/log.hxx>
 
@@ -216,15 +217,18 @@ SvxConfigDialog::SvxConfigDialog(weld::Window * pParent, const SfxItemSet* pInSe
                CreateSvxContextMenuConfigPage, RID_L + RID_TAB_CONTEXTMENUS_IMG);
     AddTabPage(u"keyboard"_ustr, TabResId(RID_TAB_CUICUST_KEYBOARD), CreateKeyboardConfigPage,
                RID_L + RID_TAB_KEYBOARD_IMG);
-    AddTabPage(u"events"_ustr, TabResId(RID_TAB_CUICUST_EVENTS), CreateSvxEventConfigPage,
-               RID_L + RID_TAB_EVENTS_IMG);
+    // Dainvo: events only run macros, so the tab shows only with macros on
+    const bool bMacros = officecfg::Office::Common::Misc::DainvoMacrosEnabled::get();
+    if (bMacros)
+        AddTabPage(u"events"_ustr, TabResId(RID_TAB_CUICUST_EVENTS), CreateSvxEventConfigPage,
+                   RID_L + RID_TAB_EVENTS_IMG);
 
     if (const SfxStringItem* pItem = pInSet->GetItem(SID_CONFIG))
     {
         OUString text = pItem->GetValue();
         if (text.startsWith( ITEM_TOOLBAR_URL ) )
             SetCurPageId(u"toolbars"_ustr);
-        else if (text.startsWith( ITEM_EVENT_URL) )
+        else if (bMacros && text.startsWith( ITEM_EVENT_URL) )
             SetCurPageId(u"events"_ustr);
     }
 #if HAVE_FEATURE_SCRIPTING

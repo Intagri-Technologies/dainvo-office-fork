@@ -505,6 +505,10 @@ SvxSecurityTabPage::SvxSecurityTabPage(weld::Container* pPage, weld::DialogContr
     m_xMasterPasswordCB->connect_toggled( LINK( this, SvxSecurityTabPage, MasterPasswordCBHdl ) );
     m_xShowConnectionsPB->connect_clicked( LINK( this, SvxSecurityTabPage, ShowPasswordsHdl ) );
     m_xMacroSecPB->connect_clicked( LINK( this, SvxSecurityTabPage, MacroSecPBHdl ) );
+    // Dainvo: macro security only matters once macros are turned on
+    // (Options > Advanced > Enable macros)
+    if (!officecfg::Office::Common::Misc::DainvoMacrosEnabled::get())
+        m_xMacroSecFrame->hide();
     m_xCertPathPB->connect_clicked( LINK( this, SvxSecurityTabPage, CertPathPBHdl ) );
     m_xTSAURLsPB->connect_clicked( LINK( this, SvxSecurityTabPage, TSAURLsPBHdl ) );
     m_xCertMgrPathLB->connect_clicked( LINK( this, SvxSecurityTabPage, CertMgrPBHdl ) );
