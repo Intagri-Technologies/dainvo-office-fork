@@ -68,6 +68,12 @@ D = {
     'wrapleft': 'M3 5h18M3 19h18M13 9h8v6h-8zM3 9h6M3 12h6M3 15h6',
     'wrapright': 'M3 5h18M3 19h18M3 9h8v6H3zM15 9h6M15 12h6M15 15h6',
     'wrapthrough': 'M3 6h18M3 12h18M3 18h18M8 8h8v8H8z',
+    'overline': 'M4 3h16M6 7v5a6 6 0 0 0 12 0V7',
+    'underlinedouble': 'M6 3v6a6 6 0 0 0 12 0V3M4 18h16M4 21h16',
+    'paraspacedec': 'M11 6h10M11 12h10M11 18h10M5 3v6M3 7l2 2 2-2M5 21v-6M3 17l2-2 2 2',
+    'paraspaceinc': 'M11 6h10M11 12h10M11 18h10M5 9V3M3 5l2-2 2 2M5 15v6M3 19l2 2 2-2',
+    'verticaltext': 'M6 4h8M10 4v10M17 6v14M15 18l2 2 2-2',
+    'wrapcontour': 'M3 5h18M3 19h18M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM3 12h4M17 12h4',
 }
 
 # command -> icon: a Lucide name, 'd:<key in D>', with '^' to keep the glyph out
@@ -221,6 +227,40 @@ ICONS = {
     'TogglePrintZeroValues': 'circle-off',
     'WrapOff': 'd:wrapoff', 'WrapOn': 'd:wrapon', 'WrapIdeal': 'd:wrapideal', 'WrapLeft': 'd:wrapleft',
     'WrapRight': 'd:wrapright', 'WrapThrough': 'd:wrapthrough',
+    # buttons on the Spreadsheets/Presentations ribbons and the Draw/Fontwork tabs
+    'AcceptAllTrackedChanges': 'list-checks', 'AcceptTrackedChangeToNext': 'circle-check',
+    'RejectTrackedChangeToNext': 'circle-x', 'RejectAllTrackedChanges': 'list-x',
+    'AddTextBox': 'type-outline', 'ArrowShapes': 'arrow-big-right', 'ArrowsToolbox': 'arrow-big-right',
+    'BasicShapes.ellipse': 'circle', 'BasicShapes.rectangle': 'square', 'BasicShapes.round-rectangle': 'square-round-corner',
+    'Bezier_Unfilled': 'spline', 'Polygon_Unfilled': 'hexagon', 'CalloutShapes': 'message-square',
+    'FlowChartShapes': 'workflow', 'StarShapes': 'star', 'SymbolShapes': 'smile', 'ConnectorToolbox': 'waypoints',
+    'LineToolbox': 'slash', 'CloseDoc': 'x',
+    'CommonAlignTop': 'align-vertical-justify-start', 'CommonAlignVerticalCenter': 'align-vertical-justify-center',
+    'CommonAlignBottom': 'align-vertical-justify-end', 'AlignVerticalCenter': 'align-vertical-justify-center',
+    'AlignBlock': 'text-align-justify', 'DecrementSubLevels': 'chevrons-left', 'IncrementSubLevels': 'chevrons-right',
+    'DrawCaption': 'message-square-quote', 'EditStyle': 'square-pen', 'ExportDirectToEPUB': 'book-down',
+    'ExportTo': 'file-output', 'ExportToPDF': 'file-down', 'ExtensionManager': 'blocks',
+    'ExtrusionLightingFloater': 'lightbulb', 'FontDialog': 'case-sensitive', 'FontworkAlignmentFloater': 'text-align-center',
+    'FontworkCharacterSpacingFloater': 'letter-text', 'FontworkGalleryFloater': 'wand-sparkles',
+    'FontworkSameLetterHeights': 'baseline', 'FontworkShapeType': 'rainbow', 'HelpIndex': 'circle-help',
+    'HelplinesMove': 'move', 'InsertDraw': 'brush', 'InsertObject': 'package', 'MergeDocuments': 'merge',
+    'NewDoc': 'file-plus', 'Open': 'folder-open', 'Save': 'save', 'SaveAs': 'save-all', 'PrintDefault': 'printer',
+    'PrintPreview': 'printer-check', 'OutlineBullet': 'list', 'OutlineFont': 'type-outline', 'Overline': 'd:overline',
+    'UnderlineDouble': 'd:underlinedouble', 'Shadowed': 'd:shadow', 'PageDialog': 'file-cog',
+    'ParagraphDialog': 'square-pilcrow', 'ParaLeftToRight': 'arrow-right-to-line',
+    'ParaspaceDecrease': 'd:paraspacedec', 'ParaspaceIncrease': 'd:paraspaceinc', 'ReplyComment': 'reply',
+    'SetDocumentProperties': 'info', 'StyleUpdateByExample': 'paintbrush-vertical',
+    'ColumnOperations': 'columns-2', 'RowOperations': 'rows-2', 'NumberFormatCurrencySimple': 'banknote',
+    'Backward': 'send-to-back', 'Forward': 'bring-to-front', 'BeforeObject': 'arrow-up-from-line',
+    'BehindObject': 'arrow-down-from-line', 'ReverseOrder': 'arrow-down-up', 'CapturePoint': 'locate',
+    'DeleteSlide': 'trash-2', 'DisplayMasterBackground': 'wallpaper', 'DisplayMasterObjects': 'shapes',
+    'DrawingLayout': 'layout-list', 'FillColor': '^paint-bucket', 'InsertAuthorField': 'user',
+    'InsertDateFieldFix': 'calendar', 'InsertFileField': 'file-text', 'InsertSlideField': 'hash',
+    'InsertSlideTitleField': 'heading', 'InsertSlidesField': 'list-ordered', 'ModifyPage': 'layout-template',
+    'Objects3DToolbox': 'box', 'PageMode': 'presentation', 'SelectObject': 'mouse-pointer-2',
+    'SetDefault': 'remove-formatting', 'SnapBorder': 'square-dashed', 'SnapFrame': 'frame',
+    'SnapPoints': 'circle-dot-dashed', 'VerticalText': 'd:verticaltext', 'ViewMenu': 'eye',
+    'WrapContour': 'd:wrapcontour', 'ZoomMode': 'search', 'ZoomPrevious': 'history',
 }
 # other images by path (without extension) -> (icon, size)
 FILES = {
@@ -289,7 +329,7 @@ def main():
         lines = open(links, encoding='utf-8').read().split('\n')
         def ours(line):
             src = line.split(' ')[0]
-            m = re.match(r'cmd/(?:32/)?(?:[\w-]+/)?(?:sc_|lc_)?(\w+)\.(?:png|svg)$', src)
+            m = re.match(r'cmd/(?:32/)?(?:[\w-]+/)?(?:sc_|lc_)?([\w.-]+)\.(?:png|svg)$', src)
             return bool(m) and m.group(1) in names
         keep = [l for l in lines if not ours(l)]
         open(links, 'w', encoding='utf-8').write('\n'.join(keep))
