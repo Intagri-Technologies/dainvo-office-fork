@@ -76,7 +76,6 @@ cmd/32/charactermenu.png cmd/32/fontdialog.png
 cmd/32/fieldmenu.png cmd/32/addfield.png
 cmd/32/graphicmenu.png cmd/32/avmediaplayer.png
 cmd/32/insertauthorfield.png cmd/32/dbviewaliases.png
-cmd/32/insertavmedia.png cmd/32/avmediaplayer.png
 cmd/32/insertcolumns.png cmd/32/insertcolumnsafter.png
 cmd/32/insertctrl.png cmd/32/inserttable.png
 cmd/32/insertcurrencyfield.png cmd/32/currencyfield.png
@@ -99,11 +98,7 @@ cmd/32/insertframeinteractnocolumns.png cmd/32/insertframe.png
 cmd/32/insertimagecontrol.png cmd/32/imagecontrol.png
 cmd/32/insertlistbox.png cmd/32/listbox.png
 cmd/32/insertnumericfield.png cmd/32/numberformatstandard.png
-cmd/32/insertobjectchart.png cmd/32/drawchart.png
 cmd/32/insertobjectdialog.png cmd/32/insertobject.png
-cmd/32/insertobjectstarmath.png cmd/32/insertmath.png
-cmd/32/insertpagefooter.png cmd/32/insertfooter.png
-cmd/32/insertpageheader.png cmd/32/insertheader.png
 cmd/32/insertpatternfield.png cmd/32/patternfield.png
 cmd/32/insertpushbutton.png cmd/32/pushbutton.png
 cmd/32/insertrows.png cmd/32/insertrowsafter.png
@@ -116,7 +111,6 @@ cmd/lc_charactermenu.png cmd/lc_fontdialog.png
 cmd/lc_fieldmenu.png cmd/lc_addfield.png
 cmd/lc_graphicmenu.png cmd/lc_avmediaplayer.png
 cmd/lc_insertauthorfield.png cmd/lc_dbviewaliases.png
-cmd/lc_insertavmedia.png cmd/lc_avmediaplayer.png
 cmd/lc_insertcolumns.png cmd/lc_insertcolumnsafter.png
 cmd/lc_insertctrl.png cmd/lc_inserttable.png
 cmd/lc_insertcurrencyfield.png cmd/lc_currencyfield.png
@@ -139,11 +133,7 @@ cmd/lc_insertframeinteractnocolumns.png cmd/lc_insertframe.png
 cmd/lc_insertimagecontrol.png cmd/lc_imagecontrol.png
 cmd/lc_insertlistbox.png cmd/lc_listbox.png
 cmd/lc_insertnumericfield.png cmd/lc_numberformatstandard.png
-cmd/lc_insertobjectchart.png cmd/lc_drawchart.png
 cmd/lc_insertobjectdialog.png cmd/lc_insertobject.png
-cmd/lc_insertobjectstarmath.png cmd/lc_insertmath.png
-cmd/lc_insertpagefooter.png cmd/lc_insertfooter.png
-cmd/lc_insertpageheader.png cmd/lc_insertheader.png
 cmd/lc_insertpatternfield.png cmd/lc_patternfield.png
 cmd/lc_insertpushbutton.png cmd/lc_pushbutton.png
 cmd/lc_insertrows.png cmd/lc_insertrowsafter.png
@@ -156,7 +146,6 @@ cmd/sc_charactermenu.png cmd/sc_fontdialog.png
 cmd/sc_fieldmenu.png cmd/sc_addfield.png
 cmd/sc_graphicmenu.png cmd/sc_avmediaplayer.png
 cmd/sc_insertauthorfield.png cmd/sc_dbviewaliases.png
-cmd/sc_insertavmedia.png cmd/sc_avmediaplayer.png
 cmd/sc_insertcolumns.png cmd/sc_insertcolumnsafter.png
 cmd/sc_insertctrl.png cmd/sc_inserttable.png
 cmd/sc_insertcurrencyfield.png cmd/sc_currencyfield.png
@@ -179,11 +168,7 @@ cmd/sc_insertframeinteractnocolumns.png cmd/sc_insertframe.png
 cmd/sc_insertimagecontrol.png cmd/sc_imagecontrol.png
 cmd/sc_insertlistbox.png cmd/sc_listbox.png
 cmd/sc_insertnumericfield.png cmd/sc_numberformatstandard.png
-cmd/sc_insertobjectchart.png cmd/sc_drawchart.png
 cmd/sc_insertobjectdialog.png cmd/sc_insertobject.png
-cmd/sc_insertobjectstarmath.png cmd/sc_insertmath.png
-cmd/sc_insertpagefooter.png cmd/sc_insertfooter.png
-cmd/sc_insertpageheader.png cmd/sc_insertheader.png
 cmd/sc_insertpatternfield.png cmd/sc_patternfield.png
 cmd/sc_insertpushbutton.png cmd/sc_pushbutton.png
 cmd/sc_insertrows.png cmd/sc_insertrowsafter.png
@@ -229,19 +214,16 @@ cmd/lc_savegraphic.png cmd/lc_save.png
 cmd/sc_savegraphic.png cmd/sc_save.png
 
 # Text
-cmd/32/drawtext.png cmd/32/text.png
 cmd/32/fontheight.png cmd/32/scaletext.png
 cmd/32/fontworkcharacterspacingfloater.png cmd/32/spacing.png
 cmd/32/textfittosizetool.png cmd/32/text_marquee.png
 cmd/32/texttoolbox.png cmd/32/text.png
 
-cmd/lc_drawtext.png cmd/lc_text.png
 cmd/lc_fontheight.png cmd/lc_scaletext.png
 cmd/lc_fontworkcharacterspacingfloater.png cmd/lc_spacing.png
 cmd/lc_textfittosizetool.png cmd/lc_text_marquee.png
 cmd/lc_texttoolbox.png cmd/lc_text.png
 
-cmd/sc_drawtext.png cmd/sc_text.png
 cmd/sc_fontheight.png cmd/sc_scaletext.png
 cmd/sc_fontworkcharacterspacingfloater.png cmd/sc_spacing.png
 cmd/sc_textfittosizetool.png cmd/sc_text_marquee.png
@@ -272,7 +254,6 @@ cmd/sc_config.png cmd/sc_choosecontrols.png
 
 # Formatmenu
 cmd/32/anchormenu.png cmd/32/toggleanchortype.png
-cmd/32/conditionalformatmenu.png cmd/32/conditionalformatdialog.png
 cmd/32/formatbulletsmenu.png cmd/32/defaultbullet.png
 cmd/32/formatframemenu.png cmd/32/framedialog.png
 cmd/32/formatimagemenu.png cmd/32/graphic.png
@@ -282,7 +263,6 @@ cmd/32/spacepara115.png cmd/32/spacepara1.png
 cmd/32/textalign.png cmd/32/alignblock.png
 
 cmd/lc_anchormenu.png cmd/lc_toggleanchortype.png
-cmd/lc_conditionalformatmenu.png cmd/lc_conditionalformatdialog.png
 cmd/lc_formatbulletsmenu.png cmd/lc_defaultbullet.png
 cmd/lc_formatframemenu.png cmd/lc_framedialog.png
 cmd/lc_formatimagemenu.png cmd/lc_graphicdialog.png
@@ -292,7 +272,6 @@ cmd/lc_spacepara115.png cmd/lc_spacepara1.png
 cmd/lc_textalign.png cmd/lc_alignblock.png
 
 cmd/sc_anchormenu.png cmd/sc_toggleanchortype.png
-cmd/sc_conditionalformatmenu.png cmd/sc_conditionalformatdialog.png
 cmd/sc_formatbulletsmenu.png cmd/sc_defaultbullet.png
 cmd/sc_formatframemenu.png cmd/sc_framedialog.png
 cmd/sc_formatimagemenu.png cmd/sc_graphicdialog.png
@@ -337,38 +316,20 @@ cmd/sc_languagemenu.png cmd/sc_managelanguage.png
 
 
 # Annotations
-cmd/32/acceptchanges.png cmd/32/accepttrackedchanges.png
 cmd/32/accepttracedchange.png cmd/32/accepttrackedchange.png
 cmd/32/commentchange.png cmd/32/commentchangetracking.png
-cmd/32/deleteallnotes.png cmd/32/deleteallannotation.png
-cmd/32/deletecomment.png cmd/32/deleteannotation.png
-cmd/32/deletenote.png cmd/32/deleteannotation.png
-cmd/32/insertannotation.png cmd/32/shownote.png
 cmd/32/notevisible.png cmd/32/shownote.png
-cmd/32/showallnotes.png cmd/32/showannotations.png
 cmd/32/showchanges.png cmd/32/showtrackedchanges.png
 
-cmd/lc_acceptchanges.png cmd/lc_accepttrackedchanges.png
 cmd/lc_accepttracedchange.png cmd/lc_accepttrackedchange.png
 cmd/lc_commentchange.png cmd/lc_commentchangetracking.png
-cmd/lc_deleteallnotes.png cmd/lc_deleteallannotation.png
-cmd/lc_deletecomment.png cmd/lc_deleteannotation.png
-cmd/lc_deletenote.png cmd/lc_deleteannotation.png
-cmd/lc_insertannotation.png cmd/lc_shownote.png
 cmd/lc_notevisible.png cmd/lc_shownote.png
-cmd/lc_showallnotes.png cmd/lc_showannotations.png
 cmd/lc_showchanges.png cmd/lc_showtrackedchanges.png
 
-cmd/sc_acceptchanges.png cmd/sc_accepttrackedchanges.png
 cmd/sc_accepttracedchange.png cmd/sc_accepttrackedchange.png
 cmd/sc_commentchange.png cmd/sc_commentchangetracking.png
-cmd/sc_deleteallnotes.png cmd/sc_deleteallannotation.png
-cmd/sc_deletecomment.png cmd/sc_deleteannotation.png
-cmd/sc_deletenote.png cmd/sc_deleteannotation.png
 cmd/sc_formatallnotes.png cmd/sc_editannotation.png
-cmd/sc_insertannotation.png cmd/sc_shownote.png
 cmd/sc_notevisible.png cmd/sc_shownote.png
-cmd/sc_showallnotes.png cmd/sc_showannotations.png
 cmd/sc_showchanges.png cmd/sc_showtrackedchanges.png
 
 # Locale language support
@@ -376,12 +337,7 @@ cmd/32/ar/bulletliststyle.png cmd/rltb/32/defaultbullet.png
 cmd/32/ar/linenumberdialog.png cmd/32/ar/linenumberingdialog.png
 cmd/32/ar/numberliststyle.png cmd/rltb/32/defaultnumbering.png
 cmd/32/ar/recundo.png cmd/32/redo.png
-cmd/32/ar/redo.png cmd/32/undo.png
-cmd/32/ar/undo.png cmd/32/redo.png
-cmd/32/es/italic.png cmd/32/de/italic.png
-cmd/32/es/numberformatdecdecimals.png cmd/32/de/numberformatdecdecimals.png
 cmd/32/es/numberformatdecimal.png cmd/32/de/numberformatdecimal.png
-cmd/32/es/numberformatincdecimals.png cmd/32/de/numberformatincdecimals.png
 cmd/32/es/numberformatthousands.png cmd/32/de/numberformatthousands.png
 cmd/32/es/underlinesimple.png cmd/32/es/underline.png
 cmd/32/es/underlinesingle.png cmd/32/es/underline.png
@@ -393,20 +349,14 @@ cmd/32/fa/chapternumberingdialog.png cmd/32/ar/chapternumberingdialog.png
 cmd/32/fa/continuenumbering.png cmd/32/ar/continuenumbering.png
 cmd/32/fa/deleterecord.png cmd/32/ar/deleterecord.png
 cmd/32/fa/linenumberdialog.png cmd/32/ar/linenumberingdialog.png
-cmd/32/fa/linenumberingdialog.png cmd/32/ar/linenumberingdialog.png
 cmd/32/fa/newrecord.png cmd/32/ar/newrecord.png
 cmd/32/fa/numberliststyle.png cmd/rltb/32/defaultnumbering.png
 cmd/32/fa/recsave.png cmd/32/ar/recsave.png
 cmd/32/fa/recundo.png cmd/32/redo.png
-cmd/32/fa/redo.png cmd/32/undo.png
 cmd/32/fa/romanliststyle.png cmd/32/ar/romanliststyle.png
 cmd/32/fa/romanlowliststyle.png cmd/32/ar/romanlowliststyle.png
-cmd/32/fa/undo.png cmd/32/redo.png
-cmd/32/fr/numberformatdecdecimals.png cmd/32/de/numberformatdecdecimals.png
 cmd/32/fr/numberformatdecimal.png cmd/32/de/numberformatdecimal.png
-cmd/32/fr/numberformatincdecimals.png cmd/32/de/numberformatincdecimals.png
 cmd/32/fr/numberformatthousands.png cmd/32/de/numberformatthousands.png
-cmd/32/fr/underline.png cmd/32/es/underline.png
 cmd/32/fr/underlinedouble.png cmd/32/es/underlinedouble.png
 cmd/32/fr/underlinesimple.png cmd/32/es/underline.png
 cmd/32/fr/underlinesingle.png cmd/32/es/underline.png
@@ -418,31 +368,22 @@ cmd/32/he/chapternumberingdialog.png cmd/32/ar/chapternumberingdialog.png
 cmd/32/he/continuenumbering.png cmd/32/ar/continuenumbering.png
 cmd/32/he/deleterecord.png cmd/32/ar/deleterecord.png
 cmd/32/he/linenumberdialog.png cmd/32/ar/linenumberingdialog.png
-cmd/32/he/linenumberingdialog.png cmd/32/ar/linenumberingdialog.png
 cmd/32/he/newrecord.png cmd/32/ar/newrecord.png
 cmd/32/he/numberliststyle.png cmd/rltb/32/defaultnumbering.png
 cmd/32/he/recsave.png cmd/32/ar/recsave.png
 cmd/32/he/recundo.png cmd/32/redo.png
-cmd/32/he/redo.png cmd/32/undo.png
 cmd/32/he/romanliststyle.png cmd/32/ar/romanliststyle.png
 cmd/32/he/romanlowliststyle.png cmd/32/ar/romanlowliststyle.png
-cmd/32/he/undo.png cmd/32/redo.png
-cmd/32/hu/bold.png cmd/32/de/bold.png
 cmd/32/hu/underlinesimple.png cmd/32/hu/underline.png
 cmd/32/hu/underlinesingle.png cmd/32/hu/underline.png
-cmd/32/id/numberformatdecdecimals.png cmd/32/de/numberformatdecdecimals.png
 cmd/32/id/numberformatdecimal.png cmd/32/de/numberformatdecimal.png
-cmd/32/id/numberformatincdecimals.png cmd/32/de/numberformatincdecimals.png
 cmd/32/id/numberformatthousands.png cmd/32/de/numberformatthousands.png
-cmd/32/it/bold.png cmd/32/fr/bold.png
-cmd/32/it/underline.png cmd/32/es/underline.png
 cmd/32/it/underlinedouble.png cmd/32/es/underlinedouble.png
 cmd/32/it/underlinesimple.png cmd/32/es/underline.png
 cmd/32/it/underlinesingle.png cmd/32/es/underline.png
 cmd/32/km/underlinesimple.png cmd/32/km/underline.png
 cmd/32/km/underlinesingle.png cmd/32/km/underline.png
 cmd/32/ko/charactermenu.png cmd/32/ko/fontdialog.png
-cmd/32/ko/drawtext.png cmd/32/ko/text.png
 cmd/32/ko/editstyled.png cmd/32/ko/editstyle.png
 cmd/32/ko/fontcolor.png cmd/32/ko/color.png
 cmd/32/ko/fontheight.png cmd/32/ko/scaletext.png
@@ -456,34 +397,21 @@ cmd/32/ko/texttoolbox.png cmd/32/ko/text.png
 cmd/32/ko/underlinesimple.png cmd/32/ko/underline.png
 cmd/32/ko/underlinesingle.png cmd/32/ko/underline.png
 cmd/32/ko/viewsidebarstyles.png cmd/32/ko/designerdialog.png
-cmd/32/nl/italic.png cmd/32/it/italic.png
 cmd/32/nl/underlinesimple.png cmd/32/nl/underline.png
 cmd/32/nl/underlinesingle.png cmd/32/nl/underline.png
-cmd/32/pl/bold.png cmd/32/fr/bold.png
-cmd/32/pl/italic.png cmd/32/de/italic.png
 cmd/32/pl/underlinesimple.png cmd/32/pl/underline.png
 cmd/32/pl/underlinesingle.png cmd/32/pl/underline.png
-cmd/32/pt-BR/bold.png cmd/32/es/bold.png
-cmd/32/pt-BR/underline.png cmd/32/es/underline.png
 cmd/32/pt-BR/underlinedouble.png cmd/32/es/underlinedouble.png
 cmd/32/pt-BR/underlinesimple.png cmd/32/es/underline.png
 cmd/32/pt-BR/underlinesingle.png cmd/32/es/underline.png
-cmd/32/pt/bold.png cmd/32/es/bold.png
-cmd/32/pt/underline.png cmd/32/es/underline.png
 cmd/32/pt/underlinedouble.png cmd/32/es/underlinedouble.png
 cmd/32/pt/underlinesimple.png cmd/32/es/underline.png
 cmd/32/pt/underlinesingle.png cmd/32/es/underline.png
-cmd/32/ru/italic.png cmd/32/de/italic.png
 cmd/32/ru/underlinesimple.png cmd/32/ru/underline.png
 cmd/32/ru/underlinesingle.png cmd/32/ru/underline.png
-cmd/32/sl/underline.png cmd/32/pl/underline.png
 cmd/32/sl/underlinedouble.png cmd/32/pl/underlinedouble.png
 cmd/32/sl/underlinesimple.png cmd/32/pl/underline.png
 cmd/32/sl/underlinesingle.png cmd/32/pl/underline.png
-cmd/32/sv/bold.png cmd/32/de/bold.png
-cmd/32/sv/italic.png cmd/32/de/italic.png
-cmd/32/tr/bold.png cmd/32/sl/bold.png
-cmd/32/tr/underline.png cmd/32/hu/underline.png
 cmd/32/tr/underlinedouble.png cmd/32/hu/underlinedouble.png
 cmd/32/tr/underlinesimple.png cmd/32/hu/underline.png
 cmd/32/tr/underlinesingle.png cmd/32/hu/underline.png
@@ -497,34 +425,21 @@ cmd/32/ur/chapternumberingdialog.png cmd/32/ar/chapternumberingdialog.png
 cmd/32/ur/continuenumbering.png cmd/32/ar/continuenumbering.png
 cmd/32/ur/deleterecord.png cmd/32/ar/deleterecord.png
 cmd/32/ur/linenumberdialog.png cmd/32/ar/linenumberingdialog.png
-cmd/32/ur/linenumberingdialog.png cmd/32/ar/linenumberingdialog.png
 cmd/32/ur/newrecord.png cmd/32/ar/newrecord.png
 cmd/32/ur/numberliststyle.png cmd/rltb/32/defaultnumbering.png
 cmd/32/ur/recsave.png cmd/32/ar/recsave.png
 cmd/32/ur/recundo.png cmd/32/redo.png
-cmd/32/ur/redo.png cmd/32/undo.png
 cmd/32/ur/romanliststyle.png cmd/32/ar/romanliststyle.png
 cmd/32/ur/romanlowliststyle.png cmd/32/ar/romanlowliststyle.png
-cmd/32/ur/undo.png cmd/32/redo.png
 cmd/ar/lc_bulletliststyle.png cmd/rltb/lc_defaultbullet.png
 cmd/ar/lc_numberliststyle.png cmd/rltb/lc_defaultnumbering.png
-cmd/ar/lc_redo.png cmd/lc_undo.png
-cmd/ar/lc_undo.png cmd/lc_redo.png
 cmd/ar/sc_bulletliststyle.png cmd/rltb/sc_defaultbullet.png
 cmd/ar/sc_numberliststyle.png cmd/rltb/sc_defaultnumbering.png
-cmd/ar/sc_redo.png cmd/sc_undo.png
-cmd/ar/sc_undo.png cmd/sc_redo.png
-cmd/es/lc_italic.png cmd/de/lc_italic.png
-cmd/es/lc_numberformatdecdecimals.png cmd/de/lc_numberformatdecdecimals.png
 cmd/es/lc_numberformatdecimal.png cmd/de/lc_numberformatdecimal.png
-cmd/es/lc_numberformatincdecimals.png cmd/de/lc_numberformatincdecimals.png
 cmd/es/lc_numberformatthousands.png cmd/de/lc_numberformatthousands.png
 cmd/es/lc_underlinesimple.png cmd/es/lc_underline.png
 cmd/es/lc_underlinesingle.png cmd/es/lc_underline.png
-cmd/es/sc_italic.png cmd/de/sc_italic.png
-cmd/es/sc_numberformatdecdecimals.png cmd/de/sc_numberformatdecdecimals.png
 cmd/es/sc_numberformatdecimal.png cmd/de/sc_numberformatdecimal.png
-cmd/es/sc_numberformatincdecimals.png cmd/de/sc_numberformatincdecimals.png
 cmd/es/sc_numberformatthousands.png cmd/de/sc_numberformatthousands.png
 cmd/es/sc_underlinesimple.png cmd/es/sc_underline.png
 cmd/es/sc_underlinesingle.png cmd/es/sc_underline.png
@@ -536,15 +451,12 @@ cmd/fa/lc_chapternumberingdialog.png cmd/ar/lc_chapternumberingdialog.png
 cmd/fa/lc_continuenumbering.png cmd/ar/lc_continuenumbering.png
 cmd/fa/lc_deleterecord.png cmd/ar/lc_deleterecord.png
 cmd/fa/lc_linenumberdialog.png cmd/ar/lc_linenumberingdialog.png
-cmd/fa/lc_linenumberingdialog.png cmd/ar/sc_linenumberingdialog.png
 cmd/fa/lc_newrecord.png cmd/ar/lc_newrecord.png
 cmd/fa/lc_numberliststyle.png cmd/rltb/lc_defaultnumbering.png
 cmd/fa/lc_recsave.png cmd/ar/lc_recsave.png
 cmd/fa/lc_recundo.png cmd/lc_redo.png
-cmd/fa/lc_redo.png cmd/lc_undo.png
 cmd/fa/lc_romanliststyle.png cmd/ar/lc_romanliststyle.png
 cmd/fa/lc_romanlowliststyle.png cmd/ar/lc_romanlowliststyle.png
-cmd/fa/lc_undo.png cmd/lc_redo.png
 cmd/fa/sc_absoluterecord.png cmd/ar/sc_absoluterecord.png
 cmd/fa/sc_alphaliststyle.png cmd/ar/sc_alphaliststyle.png
 cmd/fa/sc_alphalowliststyle.png cmd/ar/sc_alphalowliststyle.png
@@ -553,28 +465,19 @@ cmd/fa/sc_chapternumberingdialog.png cmd/ar/sc_chapternumberingdialog.png
 cmd/fa/sc_continuenumbering.png cmd/ar/sc_continuenumbering.png
 cmd/fa/sc_deleterecord.png cmd/ar/sc_deleterecord.png
 cmd/fa/sc_linenumberdialog.png cmd/ar/sc_linenumberingdialog.png
-cmd/fa/sc_linenumberingdialog.png cmd/ar/sc_linenumberingdialog.png
 cmd/fa/sc_newrecord.png cmd/ar/sc_newrecord.png
 cmd/fa/sc_numberliststyle.png cmd/rltb/sc_defaultnumbering.png
 cmd/fa/sc_recsave.png cmd/ar/sc_recsave.png
 cmd/fa/sc_recundo.png cmd/sc_redo.png
-cmd/fa/sc_redo.png cmd/sc_undo.png
 cmd/fa/sc_romanliststyle.png cmd/ar/sc_romanliststyle.png
 cmd/fa/sc_romanlowliststyle.png cmd/ar/sc_romanlowliststyle.png
-cmd/fa/sc_undo.png cmd/sc_redo.png
-cmd/fr/lc_numberformatdecdecimals.png cmd/de/lc_numberformatdecdecimals.png
 cmd/fr/lc_numberformatdecimal.png cmd/de/lc_numberformatdecimal.png
-cmd/fr/lc_numberformatincdecimals.png cmd/de/lc_numberformatincdecimals.png
 cmd/fr/lc_numberformatthousands.png cmd/de/lc_numberformatthousands.png
-cmd/fr/lc_underline.png cmd/es/lc_underline.png
 cmd/fr/lc_underlinedouble.png cmd/es/lc_underlinedouble.png
 cmd/fr/lc_underlinesimple.png cmd/es/lc_underline.png
 cmd/fr/lc_underlinesingle.png cmd/es/lc_underline.png
-cmd/fr/sc_numberformatdecdecimals.png cmd/de/sc_numberformatdecdecimals.png
 cmd/fr/sc_numberformatdecimal.png cmd/de/sc_numberformatdecimal.png
-cmd/fr/sc_numberformatincdecimals.png cmd/de/sc_numberformatincdecimals.png
 cmd/fr/sc_numberformatthousands.png cmd/de/sc_numberformatthousands.png
-cmd/fr/sc_underline.png cmd/es/sc_underline.png
 cmd/fr/sc_underlinedouble.png cmd/es/sc_underlinedouble.png
 cmd/fr/sc_underlinesimple.png cmd/es/sc_underline.png
 cmd/fr/sc_underlinesingle.png cmd/es/sc_underline.png
@@ -586,15 +489,12 @@ cmd/he/lc_chapternumberingdialog.png cmd/ar/lc_chapternumberingdialog.png
 cmd/he/lc_continuenumbering.png cmd/ar/lc_continuenumbering.png
 cmd/he/lc_deleterecord.png cmd/ar/lc_deleterecord.png
 cmd/he/lc_linenumberdialog.png cmd/ar/lc_linenumberingdialog.png
-cmd/he/lc_linenumberingdialog.png cmd/ar/lc_linenumberingdialog.png
 cmd/he/lc_newrecord.png cmd/ar/lc_newrecord.png
 cmd/he/lc_numberliststyle.png cmd/rltb/lc_defaultnumbering.png
 cmd/he/lc_recsave.png cmd/ar/lc_recsave.png
 cmd/he/lc_recundo.png cmd/lc_redo.png
-cmd/he/lc_redo.png cmd/lc_undo.png
 cmd/he/lc_romanliststyle.png cmd/ar/lc_romanliststyle.png
 cmd/he/lc_romanlowliststyle.png cmd/ar/lc_romanlowliststyle.png
-cmd/he/lc_undo.png cmd/lc_redo.png
 cmd/he/sc_absoluterecord.png cmd/ar/sc_absoluterecord.png
 cmd/he/sc_alphaliststyle.png cmd/ar/sc_alphaliststyle.png
 cmd/he/sc_alphalowliststyle.png cmd/ar/sc_alphalowliststyle.png
@@ -603,36 +503,23 @@ cmd/he/sc_chapternumberingdialog.png cmd/ar/sc_chapternumberingdialog.png
 cmd/he/sc_continuenumbering.png cmd/ar/sc_continuenumbering.png
 cmd/he/sc_deleterecord.png cmd/ar/sc_deleterecord.png
 cmd/he/sc_linenumberdialog.png cmd/ar/sc_linenumberingdialog.png
-cmd/he/sc_linenumberingdialog.png cmd/ar/sc_linenumberingdialog.png
 cmd/he/sc_newrecord.png cmd/ar/sc_newrecord.png
 cmd/he/sc_numberliststyle.png cmd/rltb/sc_defaultnumbering.png
 cmd/he/sc_recsave.png cmd/ar/sc_recsave.png
 cmd/he/sc_recundo.png cmd/sc_redo.png
-cmd/he/sc_redo.png cmd/sc_undo.png
 cmd/he/sc_romanliststyle.png cmd/ar/sc_romanliststyle.png
 cmd/he/sc_romanlowliststyle.png cmd/ar/sc_romanlowliststyle.png
-cmd/he/sc_undo.png cmd/sc_redo.png
-cmd/hu/lc_bold.png cmd/de/lc_bold.png
 cmd/hu/lc_underlinesimple.png cmd/hu/lc_underline.png
 cmd/hu/lc_underlinesingle.png cmd/hu/lc_underline.png
-cmd/hu/sc_bold.png cmd/de/sc_bold.png
 cmd/hu/sc_underlinesimple.png cmd/hu/sc_underline.png
 cmd/hu/sc_underlinesingle.png cmd/hu/sc_underline.png
-cmd/id/lc_numberformatdecdecimals.png cmd/de/lc_numberformatdecdecimals.png
 cmd/id/lc_numberformatdecimal.png cmd/de/lc_numberformatdecimal.png
-cmd/id/lc_numberformatincdecimals.png cmd/de/lc_numberformatincdecimals.png
 cmd/id/lc_numberformatthousands.png cmd/de/lc_numberformatthousands.png
-cmd/id/sc_numberformatdecdecimals.png cmd/de/sc_numberformatdecdecimals.png
 cmd/id/sc_numberformatdecimal.png cmd/de/sc_numberformatdecimal.png
-cmd/id/sc_numberformatincdecimals.png cmd/de/sc_numberformatincdecimals.png
 cmd/id/sc_numberformatthousands.png cmd/de/sc_numberformatthousands.png
-cmd/it/lc_bold.png cmd/fr/lc_bold.png
-cmd/it/lc_underline.png cmd/es/lc_underline.png
 cmd/it/lc_underlinedouble.png cmd/es/lc_underlinedouble.png
 cmd/it/lc_underlinesimple.png cmd/es/lc_underline.png
 cmd/it/lc_underlinesingle.png cmd/es/lc_underline.png
-cmd/it/sc_bold.png cmd/fr/sc_bold.png
-cmd/it/sc_underline.png cmd/es/sc_underline.png
 cmd/it/sc_underlinedouble.png cmd/es/sc_underlinedouble.png
 cmd/it/sc_underlinesimple.png cmd/es/sc_underline.png
 cmd/it/sc_underlinesingle.png cmd/es/sc_underline.png
@@ -641,7 +528,6 @@ cmd/km/lc_underlinesingle.png cmd/km/lc_underline.png
 cmd/km/sc_underlinesimple.png cmd/km/sc_underline.png
 cmd/km/sc_underlinesingle.png cmd/km/sc_underline.png
 cmd/ko/lc_charactermenu.png cmd/ko/lc_fontdialog.png
-cmd/ko/lc_drawtext.png cmd/ko/lc_text.png
 cmd/ko/lc_editstyled.png cmd/ko/lc_editstyle.png
 cmd/ko/lc_fontcolor.png cmd/ko/lc_color.png
 cmd/ko/lc_fontheight.png cmd/ko/lc_scaletext.png
@@ -656,7 +542,6 @@ cmd/ko/lc_underlinesimple.png cmd/ko/lc_underline.png
 cmd/ko/lc_underlinesingle.png cmd/ko/lc_underline.png
 cmd/ko/lc_viewsidebarstyles.png cmd/ko/lc_designerdialog.png
 cmd/ko/sc_charactermenu.png cmd/ko/sc_fontdialog.png
-cmd/ko/sc_drawtext.png cmd/ko/sc_text.png
 cmd/ko/sc_editstyled.png cmd/ko/sc_editstyle.png
 cmd/ko/sc_fontcolor.png cmd/ko/sc_color.png
 cmd/ko/sc_fontheight.png cmd/ko/sc_scaletext.png
@@ -672,67 +557,41 @@ cmd/ko/sc_underlinesingle.png cmd/ko/sc_underline.png
 cmd/ko/sc_viewsidebarstyles.png cmd/ko/sc_designerdialog.png
 cmd/lc_underlinesimple.png cmd/lc_underline.png
 cmd/lc_underlinesingle.png cmd/lc_underline.png
-cmd/nl/lc_italic.png cmd/it/lc_italic.png
 cmd/nl/lc_underlinesimple.png cmd/nl/lc_underline.png
 cmd/nl/lc_underlinesingle.png cmd/nl/lc_underline.png
-cmd/nl/sc_italic.png cmd/it/sc_italic.png
 cmd/nl/sc_underlinesimple.png cmd/nl/sc_underline.png
 cmd/nl/sc_underlinesingle.png cmd/nl/sc_underline.png
-cmd/pl/lc_bold.png cmd/fr/lc_bold.png
-cmd/pl/lc_italic.png cmd/de/lc_italic.png
 cmd/pl/lc_underlinesimple.png cmd/pl/lc_underline.png
 cmd/pl/lc_underlinesingle.png cmd/pl/lc_underline.png
-cmd/pl/sc_bold.png cmd/fr/sc_bold.png
-cmd/pl/sc_italic.png cmd/de/sc_italic.png
 cmd/pl/sc_underlinesimple.png cmd/pl/sc_underline.png
 cmd/pl/sc_underlinesingle.png cmd/pl/sc_underline.png
-cmd/pt-BR/lc_bold.png cmd/es/lc_bold.png
-cmd/pt-BR/lc_underline.png cmd/es/lc_underline.png
 cmd/pt-BR/lc_underlinedouble.png cmd/es/lc_underlinedouble.png
 cmd/pt-BR/lc_underlinesimple.png cmd/es/lc_underline.png
 cmd/pt-BR/lc_underlinesingle.png cmd/es/lc_underline.png
-cmd/pt-BR/sc_bold.png cmd/es/sc_bold.png
-cmd/pt-BR/sc_underline.png cmd/es/sc_underline.png
 cmd/pt-BR/sc_underlinedouble.png cmd/es/sc_underlinedouble.png
 cmd/pt-BR/sc_underlinesimple.png cmd/es/sc_underline.png
 cmd/pt-BR/sc_underlinesingle.png cmd/es/sc_underline.png
-cmd/pt/lc_bold.png cmd/es/lc_bold.png
-cmd/pt/lc_underline.png cmd/es/lc_underline.png
 cmd/pt/lc_underlinedouble.png cmd/es/lc_underlinedouble.png
 cmd/pt/lc_underlinesimple.png cmd/es/lc_underline.png
 cmd/pt/lc_underlinesingle.png cmd/es/lc_underline.png
-cmd/pt/sc_bold.png cmd/es/sc_bold.png
-cmd/pt/sc_underline.png cmd/es/sc_underline.png
 cmd/pt/sc_underlinedouble.png cmd/es/sc_underlinedouble.png
 cmd/pt/sc_underlinesimple.png cmd/es/sc_underline.png
 cmd/pt/sc_underlinesingle.png cmd/es/sc_underline.png
-cmd/ru/lc_italic.png cmd/de/lc_italic.png
 cmd/ru/lc_underlinesimple.png cmd/ru/lc_underline.png
 cmd/ru/lc_underlinesingle.png cmd/ru/lc_underline.png
-cmd/ru/sc_italic.png cmd/de/sc_italic.png
 cmd/ru/sc_underlinesimple.png cmd/ru/sc_underline.png
 cmd/ru/sc_underlinesingle.png cmd/ru/sc_underline.png
 cmd/sc_underlinesimple.png cmd/sc_underline.png
 cmd/sc_underlinesingle.png cmd/sc_underline.png
-cmd/sl/lc_underline.png cmd/pl/lc_underline.png
 cmd/sl/lc_underlinedouble.png cmd/pl/lc_underlinedouble.png
 cmd/sl/lc_underlinesimple.png cmd/pl/lc_underline.png
 cmd/sl/lc_underlinesingle.png cmd/pl/lc_underline.png
-cmd/sl/sc_underline.png cmd/pl/sc_underline.png
 cmd/sl/sc_underlinedouble.png cmd/pl/sc_underlinedouble.png
 cmd/sl/sc_underlinesimple.png cmd/pl/sc_underline.png
 cmd/sl/sc_underlinesingle.png cmd/pl/sc_underline.png
-cmd/sv/lc_bold.png cmd/de/lc_bold.png
-cmd/sv/lc_italic.png cmd/de/lc_italic.png
-cmd/sv/sc_bold.png cmd/de/sc_bold.png
-cmd/sv/sc_italic.png cmd/de/sc_italic.png
-cmd/tr/lc_bold.png cmd/sl/lc_bold.png
-cmd/tr/lc_underline.png cmd/hu/lc_underline.png
 cmd/tr/lc_underlinedouble.png cmd/hu/lc_underlinedouble.png
 cmd/tr/lc_underlinesimple.png cmd/hu/lc_underline.png
 cmd/tr/lc_underlinesingle.png cmd/hu/lc_underline.png
-cmd/tr/sc_bold.png cmd/sl/sc_bold.png
-cmd/tr/sc_underline.png cmd/hu/sc_underline.png
 cmd/tr/sc_underlinedouble.png cmd/hu/sc_underlinedouble.png
 cmd/tr/sc_underlinesimple.png cmd/hu/sc_underline.png
 cmd/tr/sc_underlinesingle.png cmd/hu/sc_underline.png
@@ -744,15 +603,12 @@ cmd/ur/lc_chapternumberingdialog.png cmd/ar/lc_chapternumberingdialog.png
 cmd/ur/lc_continuenumbering.png cmd/ar/lc_continuenumbering.png
 cmd/ur/lc_deleterecord.png cmd/ar/lc_deleterecord.png
 cmd/ur/lc_linenumberdialog.png cmd/ar/lc_linenumberingdialog.png
-cmd/ur/lc_linenumberingdialog.png cmd/ar/lc_linenumberingdialog.png
 cmd/ur/lc_newrecord.png cmd/ar/lc_newrecord.png
 cmd/ur/lc_numberliststyle.png cmd/rltb/lc_defaultnumbering.png
 cmd/ur/lc_recsave.png cmd/ar/lc_recsave.png
 cmd/ur/lc_recundo.png cmd/lc_redo.png
-cmd/ur/lc_redo.png cmd/lc_undo.png
 cmd/ur/lc_romanliststyle.png cmd/ar/lc_romanliststyle.png
 cmd/ur/lc_romanlowliststyle.png cmd/ar/lc_romanlowliststyle.png
-cmd/ur/lc_undo.png cmd/lc_redo.png
 cmd/ur/sc_absoluterecord.png cmd/ar/sc_absoluterecord.png
 cmd/ur/sc_alphaliststyle.png cmd/ar/sc_alphaliststyle.png
 cmd/ur/sc_alphalowliststyle.png cmd/ar/sc_alphalowliststyle.png
@@ -761,15 +617,12 @@ cmd/ur/sc_chapternumberingdialog.png cmd/ar/sc_chapternumberingdialog.png
 cmd/ur/sc_continuenumbering.png cmd/ar/sc_continuenumbering.png
 cmd/ur/sc_deleterecord.png cmd/ar/sc_deleterecord.png
 cmd/ur/sc_linenumberdialog.png cmd/ar/sc_linenumberingdialog.png
-cmd/ur/sc_linenumberingdialog.png cmd/ar/sc_linenumberingdialog.png
 cmd/ur/sc_newrecord.png cmd/ar/sc_newrecord.png
 cmd/ur/sc_numberliststyle.png cmd/rltb/sc_defaultnumbering.png
 cmd/ur/sc_recsave.png cmd/ar/sc_recsave.png
 cmd/ur/sc_recundo.png cmd/sc_redo.png
-cmd/ur/sc_redo.png cmd/sc_undo.png
 cmd/ur/sc_romanliststyle.png cmd/ar/sc_romanliststyle.png
 cmd/ur/sc_romanlowliststyle.png cmd/ar/sc_romanlowliststyle.png
-cmd/ur/sc_undo.png cmd/sc_redo.png
 
 # Template Menu
 cmd/32/templatemenu.png cmd/32/adddirect.png
@@ -777,9 +630,6 @@ cmd/lc_templatemenu.png cmd/lc_adddirect.png
 cmd/sc_templatemenu.png cmd/sc_adddirect.png
 
 # Animation
-cmd/32/customanimation.png cmd/32/diaeffect.png
-cmd/lc_customanimation.png cmd/lc_diaeffect.png
-cmd/sc_customanimation.png cmd/sc_diaeffect.png
 
 # Media
 cmd/32/datastreamsplay.png cmd/32/runbasic.png
@@ -793,24 +643,18 @@ cmd/sc_datastreamsstop.png cmd/sc_basicstop.png
 
 # Alignment
 cmd/32/alignhorizontalceter.png cmd/32/alignhorizontalcenter.png
-cmd/32/alignvcenter.png cmd/32/alignverticalcenter.png
-cmd/32/objectalign.png cmd/32/objectalignleft.png
 cmd/32/sectionalignbottom.png cmd/32/aligndown.png
 cmd/32/sectionalignleft.png cmd/32/objectalignleft.png
 cmd/32/sectionalignright.png cmd/32/objectalignright.png
 cmd/32/sectionaligntop.png cmd/32/alignup.png
 
 cmd/lc_alignhorizontalceter.png cmd/lc_alignhorizontalcenter.png
-cmd/lc_alignvcenter.png cmd/lc_alignverticalcenter.png
-cmd/lc_objectalign.png cmd/lc_objectalignleft.png
 cmd/lc_sectionalignbottom.png cmd/lc_aligndown.png
 cmd/lc_sectionalignleft.png cmd/lc_objectalignleft.png
 cmd/lc_sectionalignright.png cmd/lc_objectalignright.png
 cmd/lc_sectionaligntop.png cmd/lc_alignup.png
 
 cmd/sc_alignhorizontalceter.png cmd/sc_alignhorizontalcenter.png
-cmd/sc_alignvcenter.png cmd/sc_alignverticalcenter.png
-cmd/sc_objectalign.png cmd/sc_objectalignleft.png
 cmd/sc_sectionalignbottom.png cmd/sc_aligndown.png
 cmd/sc_sectionalignleft.png cmd/sc_objectalignleft.png
 cmd/sc_sectionalignright.png cmd/sc_objectalignright.png
@@ -985,9 +829,6 @@ cmd/lc_bezieredge.png cmd/lc_bezierappend.png
 cmd/sc_bezieredge.png cmd/sc_bezierappend.png
 
 # Label
-cmd/32/addname.png cmd/32/label.png
-cmd/lc_addname.png cmd/lc_label.png
-cmd/sc_addname.png cmd/sc_label.png
 
 # Rotate
 cmd/32/clickchangerotation.png cmd/32/toggleobjectrotatemode.png
@@ -1124,19 +965,10 @@ cmd/sc_firstpage.png cmd/sc_firstrecord.png
 cmd/sc_gotostartofdoc.png cmd/sc_firstrecord.png
 
 # Hyperlink
-cmd/32/hyperlinkdialog.png cmd/32/inserthyperlink.png
-cmd/lc_hyperlinkdialog.png cmd/lc_inserthyperlink.png
-cmd/sc_hyperlinkdialog.png cmd/sc_inserthyperlink.png
 
 # Spellcheck
-cmd/32/spelldialog.png cmd/32/spelling.png
-cmd/32/spellingandgrammardialog.png cmd/32/spelling.png
 
-cmd/lc_spelldialog.png cmd/lc_spelling.png
-cmd/lc_spellingandgrammardialog.png cmd/lc_spelling.png
 
-cmd/sc_spelldialog.png cmd/sc_spelling.png
-cmd/sc_spellingandgrammardialog.png cmd/sc_spelling.png
 
 # Color
 cmd/32/backgroundpatterncontroller.png cmd/32/backgroundcolor.png
@@ -1166,38 +998,23 @@ cmd/sc_tablecellbackgroundcolor.png cmd/sc_backgroundcolor.png
 # Paragraph Alignment
 cmd/32/alignend.png cmd/32/alignright.png
 cmd/32/alignstart.png cmd/32/alignleft.png
-cmd/32/centerpara.png cmd/32/alignhorizontalcenter.png
 cmd/32/endpara.png cmd/32/alignright.png
 cmd/32/fontworkalignmentfloater.png cmd/32/alignhorizontalcenter.png
-cmd/32/justifypara.png cmd/32/alignblock.png
-cmd/32/leftpara.png cmd/32/alignleft.png
-cmd/32/rightpara.png cmd/32/alignright.png
 cmd/32/startpara.png cmd/32/alignleft.png
 
 cmd/lc_alignend.png cmd/lc_alignright.png
 cmd/lc_alignstart.png cmd/lc_alignleft.png
-cmd/lc_centerpara.png cmd/lc_alignhorizontalcenter.png
 cmd/lc_endpara.png cmd/lc_alignright.png
 cmd/lc_fontworkalignmentfloater.png cmd/lc_alignhorizontalcenter.png
-cmd/lc_justifypara.png cmd/lc_alignblock.png
-cmd/lc_leftpara.png cmd/lc_alignleft.png
-cmd/lc_rightpara.png cmd/lc_alignright.png
 cmd/lc_startpara.png cmd/lc_alignleft.png
 
 cmd/sc_alignend.png cmd/sc_alignright.png
 cmd/sc_alignstart.png cmd/sc_alignleft.png
-cmd/sc_centerpara.png cmd/sc_alignhorizontalcenter.png
 cmd/sc_endpara.png cmd/sc_alignright.png
 cmd/sc_fontworkalignmentfloater.png cmd/sc_alignhorizontalcenter.png
-cmd/sc_justifypara.png cmd/sc_alignblock.png
-cmd/sc_leftpara.png cmd/sc_alignleft.png
-cmd/sc_rightpara.png cmd/sc_alignright.png
 cmd/sc_startpara.png cmd/sc_alignleft.png
 
 # Thesaurus
-cmd/32/thesaurusdialog.png cmd/32/thesaurus.png
-cmd/lc_thesaurusdialog.png cmd/lc_thesaurus.png
-cmd/sc_thesaurusdialog.png cmd/sc_thesaurus.png
 
 # View
 cmd/32/availabletoolbars.png cmd/32/showtoolbar.png
@@ -1254,9 +1071,6 @@ cmd/sc_commonaligntop.png cmd/sc_aligntop.png
 cmd/sc_commonalignverticalcenter.png cmd/sc_alignverticalcenter.png
 
 # paragraph line spacing drop down
-cmd/32/linespacing.png cmd/32/spacepara15.png
-cmd/lc_linespacing.png cmd/lc_spacepara15.png
-cmd/sc_linespacing.png cmd/sc_spacepara15.png
 
 # calc menu entries
 cmd/32/cellcontentsmenu.png cmd/32/calculate.png
@@ -1264,7 +1078,6 @@ cmd/32/chartmenu.png cmd/32/diagramtype.png
 cmd/32/datapilotmenu.png cmd/32/datadatapilotrun.png
 cmd/32/editselectmenu.png cmd/32/selecttables.png
 cmd/32/functionbox.png cmd/32/dbviewfunctions.png
-cmd/32/functiondialog.png cmd/32/dbviewfunctions.png
 cmd/32/groupoutlinemenu.png cmd/32/group.png
 cmd/32/insertcolumnsmenu.png cmd/32/insertcolumnsafter.png
 cmd/32/insertrowsmenu.png cmd/32/insertrowsafter.png
@@ -1280,7 +1093,6 @@ cmd/lc_chartmenu.png cmd/lc_diagramtype.png
 cmd/lc_datapilotmenu.png cmd/lc_datadatapilotrun.png
 cmd/lc_editselectmenu.png cmd/lc_selecttables.png
 cmd/lc_functionbox.png cmd/lc_dbviewfunctions.png
-cmd/lc_functiondialog.png cmd/lc_dbviewfunctions.png
 cmd/lc_groupoutlinemenu.png cmd/lc_group.png
 cmd/lc_insertcolumnsmenu.png cmd/lc_insertcolumnsafter.png
 cmd/lc_insertrowsmenu.png cmd/lc_insertrowsafter.png
@@ -1295,7 +1107,6 @@ cmd/sc_chartmenu.png cmd/sc_diagramtype.png
 cmd/sc_datapilotmenu.png cmd/sc_datadatapilotrun.png
 cmd/sc_editselectmenu.png cmd/sc_selecttables.png
 cmd/sc_functionbox.png cmd/sc_dbviewfunctions.png
-cmd/sc_functiondialog.png cmd/sc_dbviewfunctions.png
 cmd/sc_groupoutlinemenu.png cmd/sc_group.png
 cmd/sc_insertcolumnsmenu.png cmd/sc_insertcolumnsafter.png
 cmd/sc_insertrowsmenu.png cmd/sc_insertrowsafter.png
@@ -1314,21 +1125,18 @@ cmd/sc_insertobjectchartfromfile.png cmd/sc_open.png
 
 # Shapes
 cmd/32/basicshapes.ellipse.png cmd/32/ellipse.png
-cmd/32/basicshapes.png cmd/32/graphic.png
 cmd/32/basicshapes.rectangle.png cmd/32/rect.png
 cmd/32/ellipsetoolbox.png cmd/32/ellipse.png
 cmd/32/linetoolbox.png cmd/32/freeline_unfilled.png
 cmd/32/rectangletoolbox.png cmd/32/rect.png
 
 cmd/lc_basicshapes.ellipse.png cmd/lc_ellipse.png
-cmd/lc_basicshapes.png cmd/lc_graphic.png
 cmd/lc_basicshapes.rectangle.png cmd/lc_rect.png
 cmd/lc_ellipsetoolbox.png cmd/lc_ellipse.png
 cmd/lc_linetoolbox.png cmd/lc_freeline_unfilled.png
 cmd/lc_rectangletoolbox.png cmd/lc_rect.png
 
 cmd/sc_basicshapes.ellipse.png cmd/sc_ellipse.png
-cmd/sc_basicshapes.png cmd/sc_graphic.png
 cmd/sc_basicshapes.rectangle.png cmd/sc_rect.png
 cmd/sc_ellipsetoolbox.png cmd/sc_ellipse.png
 cmd/sc_linetoolbox.png cmd/sc_freeline_unfilled.png
@@ -1352,17 +1160,14 @@ cmd/sc_pageformatdialog.png cmd/sc_pagedialog.png
 
 # Notebookbar
 cmd/32/datafilterhideautofilter.png cmd/32/removefiltersort.png
-cmd/32/headerandfooter.png cmd/32/editheaderandfooter.png
 cmd/32/insertheaderfootermenu.png cmd/32/editheaderandfooter.png
 cmd/32/insertsignatureline.png cmd/32/signaturelinedialog.png
 
 cmd/lc_datafilterhideautofilter.png cmd/lc_removefiltersort.png
-cmd/lc_headerandfooter.png cmd/lc_editheaderandfooter.png
 cmd/lc_insertheaderfootermenu.png cmd/lc_editheaderandfooter.png
 cmd/lc_insertsignatureline.png cmd/lc_signaturelinedialog.png
 
 cmd/sc_datafilterhideautofilter.png cmd/sc_removefiltersort.png
-cmd/sc_headerandfooter.png cmd/sc_editheaderandfooter.png
 cmd/sc_insertheaderfootermenu.png cmd/sc_editheaderandfooter.png
 cmd/sc_insertsignatureline.png cmd/sc_signaturelinedialog.png
 
@@ -1494,9 +1299,6 @@ cmd/lc_outputqualitycolor.png cmd/lc_insertgraphic.png
 cmd/sc_outputqualitycolor.png cmd/sc_insertgraphic.png
 
 # InputLineVisible
-cmd/32/inputlinevisible.png cmd/32/dbviewfunctions.png
-cmd/lc_inputlinevisible.png cmd/lc_dbviewfunctions.png
-cmd/sc_inputlinevisible.png cmd/sc_dbviewfunctions.png
 
 # Axis
 cmd/32/toggleaxisdescr.png cmd/32/helplinesvisible.png
@@ -1640,17 +1442,14 @@ cmd/sc_arrangeframemenu.png cmd/sc_bringtofront.png
 cmd/sc_arrangemenu.png cmd/sc_bringtofront.png
 
 # Calc
-cmd/32/insertcell.png cmd/32/insertcellsright.png
 cmd/32/mergecellsmenu.png cmd/32/mergecells.png
 cmd/32/numberformatmenu.png cmd/32/numberformatstandard.png
 cmd/32/printrangesmenu.png cmd/32/defineprintarea.png
 
-cmd/lc_insertcell.png cmd/lc_insertcellsright.png
 cmd/lc_mergecellsmenu.png cmd/lc_mergecells.png
 cmd/lc_numberformatmenu.png cmd/lc_numberformatstandard.png
 cmd/lc_printrangesmenu.png cmd/lc_defineprintarea.png
 
-cmd/sc_insertcell.png cmd/sc_insertcellsright.png
 cmd/sc_mergecellsmenu.png cmd/sc_mergecells.png
 cmd/sc_numberformatmenu.png cmd/sc_numberformatstandard.png
 cmd/sc_printrangesmenu.png cmd/sc_defineprintarea.png
@@ -1660,7 +1459,6 @@ cmd/32/draw.png cmd/32/reload.png
 cmd/32/refresh.png cmd/32/reload.png
 cmd/32/repaginate.png cmd/32/insertpagenumberfield.png
 cmd/32/updateall.png cmd/32/reload.png
-cmd/32/updateallindexes.png cmd/32/insertmultiindex.png
 cmd/32/updatealllinks.png cmd/32/inserthyperlink.png
 cmd/32/updatecharts.png cmd/32/drawchart.png
 cmd/32/updatefields.png cmd/32/addfield.png
@@ -1670,7 +1468,6 @@ cmd/lc_draw.png cmd/lc_reload.png
 cmd/lc_refresh.png cmd/lc_reload.png
 cmd/lc_repaginate.png cmd/lc_insertpagenumberfield.png
 cmd/lc_updateall.png cmd/lc_reload.png
-cmd/lc_updateallindexes.png cmd/lc_insertmultiindex.png
 cmd/lc_updatealllinks.png cmd/lc_inserthyperlink.png
 cmd/lc_updatecharts.png cmd/lc_drawchart.png
 cmd/lc_updatefields.png cmd/lc_addfield.png
@@ -1680,7 +1477,6 @@ cmd/sc_draw.png cmd/sc_reload.png
 cmd/sc_refresh.png cmd/sc_reload.png
 cmd/sc_repaginate.png cmd/sc_insertpagenumberfield.png
 cmd/sc_updateall.png cmd/sc_reload.png
-cmd/sc_updateallindexes.png cmd/sc_insertmultiindex.png
 cmd/sc_updatealllinks.png cmd/sc_inserthyperlink.png
 cmd/sc_updatecharts.png cmd/sc_drawchart.png
 cmd/sc_updatefields.png cmd/sc_addfield.png
@@ -1782,13 +1578,10 @@ cmd/sc_tablemenu.png cmd/sc_tabledialog.png
 cmd/sc_tableselectmenu.png cmd/sc_selecttable.png
 
 # text background colour Impress/Draw
-cmd/32/charbackcolor.png cmd/32/backcolor.png
 cmd/32/setdefault.png cmd/32/resetattributes.png
 
-cmd/lc_charbackcolor.png cmd/lc_backcolor.png
 cmd/lc_setdefault.png cmd/lc_resetattributes.png
 
-cmd/sc_charbackcolor.png cmd/sc_backcolor.png
 cmd/sc_setdefault.png cmd/sc_resetattributes.png
 
 # Impress
@@ -2610,7 +2403,6 @@ cmd/32/numericfield.png cmd/32/numberformatstandard.png
 cmd/32/paragraphmenu.png cmd/32/paragraphdialog.png
 cmd/32/shapesmenu.png cmd/32/insertdraw.png
 cmd/32/textattributes.png cmd/32/fontdialog.png
-cmd/32/tracechangemode.png cmd/32/trackchanges.png
 cmd/32/viewtrackchanges.png cmd/32/showtrackedchanges.png
 
 cmd/lc_com.sun.star.deployment.ui.packagemanagerdialog.png cmd/lc_insertplugin.png
@@ -2621,7 +2413,6 @@ cmd/lc_numericfield.png cmd/lc_numberformatstandard.png
 cmd/lc_paragraphmenu.png cmd/lc_paragraphdialog.png
 cmd/lc_shapesmenu.png cmd/lc_insertdraw.png
 cmd/lc_textattributes.png cmd/lc_fontdialog.png
-cmd/lc_tracechangemode.png cmd/lc_trackchanges.png
 cmd/lc_viewtrackchanges.png cmd/lc_showtrackedchanges.png
 
 cmd/sc_com.sun.star.deployment.ui.packagemanagerdialog.png cmd/sc_insertplugin.png
@@ -2632,7 +2423,6 @@ cmd/sc_numericfield.png cmd/sc_numberformatstandard.png
 cmd/sc_paragraphmenu.png cmd/sc_paragraphdialog.png
 cmd/sc_shapesmenu.png cmd/sc_insertdraw.png
 cmd/sc_textattributes.png cmd/sc_fontdialog.png
-cmd/sc_tracechangemode.png cmd/sc_trackchanges.png
 cmd/sc_viewtrackchanges.png cmd/sc_showtrackedchanges.png
 
 # Edit menu

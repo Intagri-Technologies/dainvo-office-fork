@@ -311,7 +311,7 @@ def build(app, spec, commands):
         result = src[:first] + x.out + kept + src[last_child_end(src, first, cc_end, child_pad) + 1:]
         # top-level menus for the More buttons go before the first top-level object
         top = next(i for i, l in enumerate(result) if l.startswith('  <object '))
-        result = result[:top] + gen.menu_xml() + result[top:]
+        result = prune_menus(result[:top] + gen.menu_xml() + result[top:])
         open(os.path.join(ROOT, path), 'w', encoding='utf-8').write('\n'.join(result))
         gen_ids = gen.menu_ids
         update_suppr(spec['suppr'], path, gen_ids, spec['file'] if compact else None)
@@ -319,6 +319,25 @@ def build(app, spec, commands):
         if compact and os.path.exists(os.path.join(ROOT, false_list)):
             update_suppr(false_list, path, [], spec['file'])
         print(f'{path}: {len(spec["tabs"])} tabs, {len(contextual)} contextual tabs kept')
+
+
+def prune_menus(lines):
+    """Drop top-level GtkMenus nothing refers to (upstream per-tab menus whose
+    buttons the ribbon no longer has, and the obsolete commands inside them)."""
+    while True:
+        tops = [(i, re.search(r'id="([^"]+)"', l).group(1)) for i, l in enumerate(lines)
+                if l.startswith('  <object class="GtkMenu" ')]
+        dead = []
+        for i, menu_id in tops:
+            end = block_end(lines, i)
+            rest = '\n'.join(lines[:i] + lines[end + 1:])
+            ref = escape(menu_id, {'"': '&quot;'})
+            if f'>{ref}</property>' not in rest and f':{ref}">' not in rest:
+                dead.append((i, end))
+        if not dead:
+            return lines
+        for i, end in reversed(dead):
+            del lines[i:end + 1]
 
 
 def last_child_end(src, first, cc_end, child_pad):
@@ -343,6 +362,10 @@ def update_suppr(suppr, path, ids, mirror_from=None):
         keep += [path + l[len(mirror_from):] for l in lines if l.startswith(mirror_from + '://') and not generated(l)]
     else:
         keep = [l for l in lines if not (l.startswith(path + '://') and generated(l))]
+    # suppressions for widgets that are no longer in the file
+    present = set(re.findall(r'id="([^"]+)"', open(os.path.join(ROOT, path), encoding='utf-8').read()))
+    keep = [l for l in keep if not l.startswith(path + '://')
+            or not (m := re.search(r"@id='([^']+)'", l)) or m.group(1) in present]
     while keep and keep[-1] == '':
         keep.pop()
     keep += [f"{path}://{k}[@id='{i}'] button-no-label" for k, i in ids]
