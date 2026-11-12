@@ -316,18 +316,6 @@ sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='btnTogglePrintComment']
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='btnTogglePrintColRowHeader'] button-no-label
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='btnTogglePrintZeroValues'] button-no-label
 
-
-
-
-
-
-
-
-
-
-
-
-
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sc/uiconfig/scalc/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label

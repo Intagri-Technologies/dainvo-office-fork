@@ -429,6 +429,8 @@ def update_suppr(suppr, path, ids, mirror_from=None):
     present = set(re.findall(r'id="([^"]+)"', open(os.path.join(ROOT, path), encoding='utf-8').read()))
     keep = [l for l in keep if not l.startswith(path + '://')
             or not (m := re.search(r"@id='([^']+)'", l)) or m.group(1) in present]
+    # removing a block leaves its blank separator lines behind; keep at most one in a row
+    keep = [l for n, l in enumerate(keep) if l != '' or (n and keep[n - 1] != '')]
     while keep and keep[-1] == '':
         keep.pop()
     keep += [f"{path}://{k}[@id='{i}'] button-no-label" for k, i in ids]

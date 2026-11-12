@@ -350,19 +350,6 @@ sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='btnPrintZoomPlus'] bu
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='btnPrintPrint'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='btnPrintClosePreview'] button-no-label
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label

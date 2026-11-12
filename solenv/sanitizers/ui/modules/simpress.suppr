@@ -308,18 +308,6 @@ sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawSubstract'] b
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawDistributeSelection'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawFormatUngroup'] button-no-label
 
-
-
-
-
-
-
-
-
-
-
-
-
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='dvbtn4'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='dvbtn6'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuToolButton[@id='dvbtn10'] button-no-label
