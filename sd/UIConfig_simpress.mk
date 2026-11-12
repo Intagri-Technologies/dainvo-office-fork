@@ -75,10 +75,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/simpress,\
 	sd/uiconfig/simpress/toolbar/flowchartshapes \
 	sd/uiconfig/simpress/toolbar/fontworkobjectbar \
 	sd/uiconfig/simpress/toolbar/fontworkshapetype \
-	sd/uiconfig/simpress/toolbar/formcontrols \
-	sd/uiconfig/simpress/toolbar/formdesign \
-	sd/uiconfig/simpress/toolbar/formsfilterbar \
-	sd/uiconfig/simpress/toolbar/formsnavigationbar \
 	sd/uiconfig/simpress/toolbar/formtextobjectbar \
 	sd/uiconfig/simpress/toolbar/fullscreenbar \
 	sd/uiconfig/simpress/toolbar/gluepointsobjectbar \

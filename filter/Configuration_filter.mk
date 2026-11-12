@@ -526,7 +526,6 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.x
 	MS_Excel_95_Vorlage_Template \
 	MS_Excel_97 \
 	MS_Excel_97_Vorlage_Template \
-	MS_Excel_2003_XML_Orcus \
 	Rich_Text_Format__StarCalc_ \
 	SYLK \
 	StarOffice_XML__Calc_ \
@@ -952,28 +951,13 @@ $(eval $(call filter_Configuration_add_internal_filters,fcfg_langpack,fcfg_inter
 
 # fcfg_xslt
 $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_xslt_types.xcu,filter/source/config/fragments/types,\
-	calc_ADO_rowset_XML \
-	calc_MS_Excel_2003_XML \
-	writer_DocBook_File \
-	writer_MS_Word_2003_XML \
 	XHTML_File \
-	Unified_Office_Format_text \
-	Unified_Office_Format_spreadsheet \
-	Unified_Office_Format_presentation \
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_xslt_filters.xcu,filter/source/config/fragments/filters,\
-	ADO_rowset_XML \
-	DocBook_File \
-	MS_Excel_2003_XML \
-	MS_Word_2003_XML \
 	XHTML_Calc_File \
-	XHTML_Draw_File \
 	XHTML_Impress_File \
 	XHTML_Writer_File \
-	UOF_text \
-	UOF_spreadsheet \
-	UOF_presentation \
 ))
 
 # vim: set noet sw=4 ts=4:

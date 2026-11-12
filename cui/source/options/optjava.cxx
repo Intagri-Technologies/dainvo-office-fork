@@ -76,6 +76,7 @@ SvxJavaOptionsPage::SvxJavaOptionsPage(weld::Container* pPage, weld::DialogContr
     , m_xExpertConfigBtn(m_xBuilder->weld_button(u"expertconfig"_ustr))
     , m_xExperimentalCB(m_xBuilder->weld_check_button(u"experimental"_ustr))
     , m_xExperimentalImg(m_xBuilder->weld_widget(u"lockexperimental"_ustr))
+    , m_xEnableMacrosCB(m_xBuilder->weld_check_button(u"enablemacros"_ustr))
     , m_xMacroCB(m_xBuilder->weld_check_button(u"macrorecording"_ustr))
     , m_xMacroImg(m_xBuilder->weld_widget(u"lockmacrorecording"_ustr))
     , m_xAddDialogText(m_xBuilder->weld_label(u"selectruntime"_ustr))
@@ -490,7 +491,8 @@ OUString SvxJavaOptionsPage::GetAllStrings()
             sAllStrings.append(pString->get_label() + " ");
     }
 
-    OUString checkButton[] = { u"javaenabled"_ustr, u"experimental"_ustr, u"macrorecording"_ustr };
+    OUString checkButton[] = { u"javaenabled"_ustr, u"experimental"_ustr, u"enablemacros"_ustr,
+                               u"macrorecording"_ustr };
 
     for (const auto& check : checkButton)
     {
@@ -521,6 +523,17 @@ bool SvxJavaOptionsPage::FillItemSet( SfxItemSet* /*rCoreSet*/ )
         xChanges->commit();
         bModified = true;
         RequestRestart( svtools::RESTART_REASON_EXP_FEATURES );
+    }
+
+    if ( m_xEnableMacrosCB->get_state_changed_from_saved() )
+    {
+        // Dainvo: applied at the next start (DainvoApplyMacroSetting)
+        std::shared_ptr< comphelper::ConfigurationChanges > xChanges(
+                comphelper::ConfigurationChanges::create());
+        officecfg::Office::Common::Misc::DainvoMacrosEnabled::set( m_xEnableMacrosCB->get_active(), xChanges );
+        xChanges->commit();
+        bModified = true;
+        RequestRestart( svtools::RESTART_REASON_NONE );
     }
 
     if ( m_xMacroCB->get_state_changed_from_saved() )
@@ -629,6 +642,9 @@ void SvxJavaOptionsPage::Reset( const SfxItemSet* /*rSet*/ )
 
     m_xExperimentalCB->set_active( officecfg::Office::Common::Misc::ExperimentalMode::get() );
     m_xExperimentalCB->save_state();
+    m_xEnableMacrosCB->set_active( officecfg::Office::Common::Misc::DainvoMacrosEnabled::get() );
+    m_xEnableMacrosCB->set_sensitive( !officecfg::Office::Common::Misc::DainvoMacrosEnabled::isReadOnly() );
+    m_xEnableMacrosCB->save_state();
     m_xMacroCB->set_active( officecfg::Office::Common::Misc::MacroRecorderMode::get() );
     m_xMacroCB->save_state();
 

@@ -2291,6 +2291,14 @@ AC_ARG_ENABLE(legacy-import-filters,
          (libwps), WordPerfect (libwpd, libwpg), T602 and Hangul 97.]),
 ,enable_legacy_import_filters=yes)
 
+AC_ARG_ENABLE(draw-app,
+    AS_HELP_STRING([--disable-draw-app],
+        [Disable the Draw application: no Draw documents (.odg) and no
+         Draw-only imports (Visio, Publisher, CorelDraw, Freehand,
+         PageMaker, QuarkXPress, Zoner, image files opened as drawings).
+         Drawing shapes in Writer, Calc and Impress is unaffected.]),
+,enable_draw_app=yes)
+
 libo_FUZZ_ARG_ENABLE(firebird-sdbc,
     AS_HELP_STRING([--disable-firebird-sdbc],
         [Disable the build of the Firebird-SDBC driver if it doesn't compile for you.]),
@@ -10093,6 +10101,12 @@ else
 fi
 AC_SUBST(LIB_FUZZING_ENGINE)
 
+ENABLE_DRAW_APP=
+if test "$enable_draw_app" != "no"; then
+    ENABLE_DRAW_APP="TRUE"
+fi
+AC_SUBST(ENABLE_DRAW_APP)
+
 dnl ===================================================================
 dnl Check for system zlib
 dnl ===================================================================
@@ -10566,6 +10580,18 @@ dnl Check for system cppunit
 dnl ===================================================================
 if test "$_os" != "Android" ; then
     libo_CHECK_SYSTEM_MODULE([cppunit],[CPPUNIT],[cppunit >= 1.14.0])
+fi
+
+if test "$enable_draw_app" = "no"; then
+    # Don't build or ship the Draw-only import libraries
+    draw_build_type=
+    for i in $BUILD_TYPE; do
+        case "$i" in
+        VISIO|CDR|MSPUB|FREEHAND|PAGEMAKER|QXP|ZMF) ;;
+        *) draw_build_type="$draw_build_type $i" ;;
+        esac
+    done
+    BUILD_TYPE="${draw_build_type# }"
 fi
 
 dnl ===================================================================

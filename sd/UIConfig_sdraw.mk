@@ -70,10 +70,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/sdraw,\
 	sd/uiconfig/sdraw/toolbar/flowchartshapes \
 	sd/uiconfig/sdraw/toolbar/fontworkobjectbar \
 	sd/uiconfig/sdraw/toolbar/fontworkshapetype \
-	sd/uiconfig/sdraw/toolbar/formcontrols \
-	sd/uiconfig/sdraw/toolbar/formdesign \
-	sd/uiconfig/sdraw/toolbar/formsfilterbar \
-	sd/uiconfig/sdraw/toolbar/formsnavigationbar \
 	sd/uiconfig/sdraw/toolbar/formtextobjectbar \
 	sd/uiconfig/sdraw/toolbar/fullscreenbar \
 	sd/uiconfig/sdraw/toolbar/gluepointsobjectbar \

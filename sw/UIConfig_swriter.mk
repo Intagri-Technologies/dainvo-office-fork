@@ -57,10 +57,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/swriter,\
 	sw/uiconfig/swriter/toolbar/flowchartshapes \
 	sw/uiconfig/swriter/toolbar/fontworkobjectbar \
 	sw/uiconfig/swriter/toolbar/fontworkshapetype \
-	sw/uiconfig/swriter/toolbar/formcontrols \
-	sw/uiconfig/swriter/toolbar/formdesign \
-	sw/uiconfig/swriter/toolbar/formsfilterbar \
-	sw/uiconfig/swriter/toolbar/formsnavigationbar \
 	sw/uiconfig/swriter/toolbar/formtextobjectbar \
 	sw/uiconfig/swriter/toolbar/frameobjectbar \
 	sw/uiconfig/swriter/toolbar/fullscreenbar \

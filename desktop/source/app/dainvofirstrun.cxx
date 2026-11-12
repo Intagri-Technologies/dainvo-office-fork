@@ -14,7 +14,11 @@
 
 #include <comphelper/configuration.hxx>
 #include <comphelper/diagnose_ex.hxx>
+#include <officecfg/Office/Commands.hxx>
 #include <officecfg/Office/Common.hxx>
+#include <com/sun/star/beans/XPropertySet.hpp>
+#include <com/sun/star/container/XNameContainer.hpp>
+#include <com/sun/star/lang/XSingleServiceFactory.hpp>
 #include <unotools/configmgr.hxx>
 #include <unotools/moduleoptions.hxx>
 #include <vcl/svapp.hxx>
@@ -76,6 +80,64 @@ void DainvoAskDefaultFileFormats()
     catch (const css::uno::Exception&)
     {
         TOOLS_WARN_EXCEPTION("desktop.app", "DainvoAskDefaultFileFormats");
+    }
+}
+
+void DainvoApplyMacroSetting()
+{
+    // Commands behind Tools > Macros; hidden from menus, toolbars and
+    // shortcuts while macros are off.
+    static constexpr OUString aMacroCommands[]
+        = { u"MacrosMenu"_ustr,     u"MacroManager"_ustr,    u"MacroRecorder"_ustr,
+            u"StopRecording"_ustr,  u"RunMacro"_ustr,        u"MacroDialog"_ustr,
+            u"BasicIDEAppear"_ustr, u"ScriptOrganizer"_ustr, u"MacroSignature"_ustr,
+            u"MacroOrganizer"_ustr };
+
+    try
+    {
+        const bool bEnabled = officecfg::Office::Common::Misc::DainvoMacrosEnabled::get();
+        std::shared_ptr<comphelper::ConfigurationChanges> batch(
+            comphelper::ConfigurationChanges::create());
+        bool bChanged = false;
+
+        css::uno::Reference<css::container::XNameContainer> xDisabled(
+            officecfg::Office::Commands::Execute::Disabled::get(batch), css::uno::UNO_SET_THROW);
+        css::uno::Reference<css::lang::XSingleServiceFactory> xFactory(xDisabled,
+                                                                       css::uno::UNO_QUERY_THROW);
+        for (const OUString& rCommand : aMacroCommands)
+        {
+            const OUString aNode = "DainvoMacro" + rCommand;
+            const bool bListed = xDisabled->hasByName(aNode);
+            if (!bEnabled && !bListed)
+            {
+                css::uno::Reference<css::beans::XPropertySet> xEntry(xFactory->createInstance(),
+                                                                     css::uno::UNO_QUERY_THROW);
+                xEntry->setPropertyValue(u"Command"_ustr, css::uno::Any(rCommand));
+                xDisabled->insertByName(aNode, css::uno::Any(xEntry));
+                bChanged = true;
+            }
+            else if (bEnabled && bListed)
+            {
+                xDisabled->removeByName(aNode);
+                bChanged = true;
+            }
+        }
+
+        if (officecfg::Office::Common::Security::Scripting::DisableMacrosExecution::get()
+                == bEnabled
+            && !officecfg::Office::Common::Security::Scripting::DisableMacrosExecution::isReadOnly())
+        {
+            officecfg::Office::Common::Security::Scripting::DisableMacrosExecution::set(!bEnabled,
+                                                                                        batch);
+            bChanged = true;
+        }
+
+        if (bChanged)
+            batch->commit();
+    }
+    catch (const css::uno::Exception&)
+    {
+        TOOLS_WARN_EXCEPTION("desktop.app", "DainvoApplyMacroSetting");
     }
 }
 }

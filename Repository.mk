@@ -295,7 +295,7 @@ $(eval $(call gb_Helper_register_plugins_for_install,OOOLIBS,calc, \
 
 $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,graphicfilter, \
 	svgfilter \
-	wpftdraw \
+	$(if $(ENABLE_DRAW_APP),wpftdraw) \
 	graphicfilter \
 ))
 
@@ -976,8 +976,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	extras_tplwizdesktop \
 	$(if $(WITH_TEMPLATES),\
 		extras_templates \
-		extras_tplwizbitmap \
-		extras_tplwizard \
 	) \
 	framework_dtd \
 	$(if $(filter $(OS),MACOSX),infoplist) \
@@ -1100,7 +1098,6 @@ $(eval $(call gb_Helper_register_packages_for_install,reportbuilder,\
 ))
 
 $(eval $(call gb_Helper_register_packages_for_install,xsltfilter,\
-	filter_docbook \
 	filter_xhtml \
 	filter_xslt \
 ))

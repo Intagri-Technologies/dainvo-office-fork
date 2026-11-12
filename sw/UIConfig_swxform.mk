@@ -50,10 +50,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/swxform,\
 	sw/uiconfig/swxform/toolbar/flowchartshapes \
 	sw/uiconfig/swxform/toolbar/fontworkobjectbar \
 	sw/uiconfig/swxform/toolbar/fontworkshapetype \
-	sw/uiconfig/swxform/toolbar/formcontrols \
-	sw/uiconfig/swxform/toolbar/formdesign \
-	sw/uiconfig/swxform/toolbar/formsfilterbar \
-	sw/uiconfig/swxform/toolbar/formsnavigationbar \
 	sw/uiconfig/swxform/toolbar/formtextobjectbar \
 	sw/uiconfig/swxform/toolbar/frameobjectbar \
 	sw/uiconfig/swxform/toolbar/fullscreenbar \

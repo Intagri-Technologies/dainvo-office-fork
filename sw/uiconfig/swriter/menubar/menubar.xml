@@ -689,59 +689,6 @@
       <menu:menuitem menu:id=".uno:TableDialog" menu:style="text"/>
     </menu:menupopup>
   </menu:menu>
-  <menu:menu menu:id=".uno:FormatFormMenu">
-    <menu:menupopup>
-      <menu:menuitem menu:id=".uno:SwitchControlDesignMode" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:Label" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:Edit" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:CheckBox" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:RadioButton" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:ListBox" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:ComboBox" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:Pushbutton" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:Imagebutton" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:FormattedField" menu:style="text"/>
-      <menu:menu menu:id=".uno:FormMoreFieldsMenu" menu:style="text">
-        <menu:menupopup>
-          <menu:menuitem menu:id=".uno:DateField" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:TimeField" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:NumericField" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:CurrencyField" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:PatternField" menu:style="text"/>
-        </menu:menupopup>
-      </menu:menu>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:GroupBox" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:ImageControl" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:FileControl" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:Grid" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:NavigationBar" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:ShowFmExplorer" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:TabDialog" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:OpenReadOnly" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:AutoControlFocus" menu:style="text"/>
-      <menu:menuseparator/>
-      <menu:menu menu:id=".uno:ContentControlsMenu" menu:style="text">
-        <menu:menupopup>
-          <menu:menuitem menu:id=".uno:InsertContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertPlainTextContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertPictureContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertCheckboxContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertComboBoxContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertDropdownContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:InsertDateContentControl" menu:style="text"/>
-          <menu:menuitem menu:id=".uno:ContentControlProperties" menu:style="text"/>
-        </menu:menupopup>
-      </menu:menu>
-    </menu:menupopup>
-  </menu:menu>
   <menu:menu menu:id=".uno:ToolsMenu">
     <menu:menupopup>
       <menu:menuitem menu:id=".uno:SpellingAndGrammarDialog"/>
@@ -774,7 +721,6 @@
         </menu:menupopup>
       </menu:menu>
       <menu:menuitem menu:id=".uno:EditGlossary" menu:style="text"/>
-      <menu:menuitem menu:id=".uno:ImageMapDialog" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menuitem menu:id=".uno:RedactDoc" menu:style="text"/>
       <menu:menuitem menu:id=".uno:AutoRedactDoc" menu:style="text"/>
@@ -787,7 +733,6 @@
         <menu:menupopup>
           <menu:menuitem menu:id=".uno:UpdateAll" menu:style="text"/>
           <menu:menuseparator/>
-          <menu:menuitem menu:id=".uno:Repaginate" menu:style="text"/>
           <menu:menuitem menu:id=".uno:UpdateSelectedField" menu:style="text"/>
           <menu:menuitem menu:id=".uno:ConvertSelectedField" menu:style="text"/>
           <menu:menuitem menu:id=".uno:UpdateFields?UnlockSoftFixed:bool=1"/>
@@ -820,7 +765,6 @@
         </menu:menupopup>
       </menu:menu>
       <menu:menuseparator/>
-      <menu:menuitem menu:id=".uno:ExtensionManager" menu:style="text"/>
       <menu:menuitem menu:id=".uno:ConfigureDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:OptionsTreeDialog"/>
     </menu:menupopup>

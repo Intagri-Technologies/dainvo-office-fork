@@ -77,6 +77,7 @@ private:
 
     std::unique_ptr<weld::CheckButton> m_xExperimentalCB;
     std::unique_ptr<weld::Widget> m_xExperimentalImg;
+    std::unique_ptr<weld::CheckButton> m_xEnableMacrosCB;
     std::unique_ptr<weld::CheckButton> m_xMacroCB;
     std::unique_ptr<weld::Widget> m_xMacroImg;
 

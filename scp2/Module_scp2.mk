@@ -14,7 +14,7 @@ $(eval $(call gb_Module_add_targets,scp2,\
 	CustomTarget_langmacros \
 	InstallModule_base \
 	InstallModule_calc \
-	InstallModule_draw \
+	$(if $(ENABLE_DRAW_APP),InstallModule_draw) \
 	InstallModule_extensions \
 	InstallModule_graphicfilter \
 	InstallModule_impress \

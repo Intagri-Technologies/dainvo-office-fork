@@ -21,7 +21,6 @@ $(eval $(call gb_Module_Module,filter))
 $(eval $(call gb_Module_add_targets,filter,\
 	Configuration_filter \
 	CustomTarget_svg \
-	CustomTarget_docbook \
 	Library_filterconfig \
     Library_icg \
 	Library_msfilter \
@@ -36,7 +35,6 @@ $(eval $(call gb_Module_add_targets,filter,\
 	Library_xmlfd \
 	Library_xsltdlg \
 	Library_xsltfilter \
-	Package_docbook \
 	Package_xhtml \
 	Package_xslt \
 	UIConfig_filter \

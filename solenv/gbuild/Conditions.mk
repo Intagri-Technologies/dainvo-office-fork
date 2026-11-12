@@ -29,7 +29,7 @@ $(if $(and $(filter DESKTOP,$(BUILD_TYPE)),$(if $(DISABLE_DYNLOADING),,$(true)))
 endef
 
 define gb_CondExeUnopkg
-$(if $(and $(filter DESKTOP,$(BUILD_TYPE)),$(if $(DISABLE_DYNLOADING),,$(true))),$(1),$(2))
+$(if $(and $(filter DESKTOP,$(BUILD_TYPE)),$(filter EXTENSIONS,$(BUILD_TYPE)),$(if $(DISABLE_DYNLOADING),,$(true))),$(1),$(2))
 endef
 
 define gb_CondLibSalTextenc

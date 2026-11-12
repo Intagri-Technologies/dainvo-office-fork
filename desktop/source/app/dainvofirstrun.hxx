@@ -15,6 +15,12 @@ namespace desktop
 /// (Microsoft Office or OpenDocument). Does nothing in headless mode or after
 /// the user has answered.
 void DainvoAskDefaultFileFormats();
+
+/// Dainvo: macros are off unless Misc/DainvoMacrosEnabled is set (Tools >
+/// Options > Advanced). Off: the macro commands are added to the disabled
+/// commands list (hiding them from menus and toolbars) and macro execution is
+/// disabled. On: both are undone. Call early at startup, before any window.
+void DainvoApplyMacroSetting();
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

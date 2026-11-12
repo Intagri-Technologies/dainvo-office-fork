@@ -21,7 +21,7 @@ $(eval $(call gb_Module_Module,writerperfect))
 
 $(eval $(call gb_Module_add_targets,writerperfect,\
     $(if $(ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS),, \
-	Library_wpftdraw \
+	$(if $(ENABLE_DRAW_APP),Library_wpftdraw) \
 	Library_wpftimpress \
     ) \
 	$(if $(ENABLE_WASM_STRIP_CALC),, \

@@ -1598,6 +1598,9 @@ int Desktop::Main()
     }
 #endif
 
+    // Dainvo: macros are off unless the user turned them on
+    DainvoApplyMacroSetting();
+
     // keep a language options instance...
     pExecGlobals->pCTLLanguageOptions.reset( new SvtCTLOptions(true));
 

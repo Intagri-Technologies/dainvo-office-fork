@@ -1175,9 +1175,7 @@ int SwTransferable::PrepareForCopy( bool bIsCut, bool bDeleteRedlines )
             nullptr != ( pDShell = m_pWrtShell->GetDoc()->GetDocShell()) &&
             SfxObjectCreateMode::STANDARD == pDShell->GetCreateMode() )
         {
-#if HAVE_FEATURE_DESKTOP
-            AddFormat( SotClipboardFormatId::LINK );
-#endif
+            // Dainvo: no DDE link format, so other apps can't paste a DDE link.
             m_xDdeLink = new SwTransferDdeLink( *this, *m_pWrtShell );
         }
 
@@ -3627,8 +3625,7 @@ void SwTransferable::PrePasteSpecial( const SwWrtShell& rSh, const TransferableD
             pDlg->Insert( SotClipboardFormatId::LINK_SOURCE, OUString() );
     }
 
-    if( SwTransferable::TestAllowedFormat( rData, SotClipboardFormatId::LINK, nDest ))
-        pDlg->Insert( SotClipboardFormatId::LINK, SwResId(STR_DDEFORMAT) );
+    // Dainvo: no "DDE link" paste option; DDE links are not offered.
 
     for( const SotClipboardFormatId* pIds = aPasteSpecialIds; *pIds != SotClipboardFormatId::NONE; ++pIds )
         if( SwTransferable::TestAllowedFormat( rData, *pIds, nDest ))
@@ -3680,8 +3677,7 @@ void SwTransferable::FillClipFormatItem( const SwWrtShell& rSh,
         }
     }
 
-    if( SwTransferable::TestAllowedFormat( rData, SotClipboardFormatId::LINK, nDest ))
-        rToFill.AddClipbrdFormat( SotClipboardFormatId::LINK, SwResId(STR_DDEFORMAT) );
+    // Dainvo: no "DDE link" paste option; DDE links are not offered.
 
     for( const SotClipboardFormatId* pIds = aPasteSpecialIds; *pIds != SotClipboardFormatId::NONE; ++pIds )
         if( SwTransferable::TestAllowedFormat( rData, *pIds, nDest ))

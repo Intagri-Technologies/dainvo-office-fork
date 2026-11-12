@@ -49,10 +49,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/swreport,\
 	sw/uiconfig/swreport/toolbar/flowchartshapes \
 	sw/uiconfig/swreport/toolbar/fontworkobjectbar \
 	sw/uiconfig/swreport/toolbar/fontworkshapetype \
-	sw/uiconfig/swreport/toolbar/formcontrols \
-	sw/uiconfig/swreport/toolbar/formdesign \
-	sw/uiconfig/swreport/toolbar/formsfilterbar \
-	sw/uiconfig/swreport/toolbar/formsnavigationbar \
 	sw/uiconfig/swreport/toolbar/formtextobjectbar \
 	sw/uiconfig/swreport/toolbar/frameobjectbar \
 	sw/uiconfig/swreport/toolbar/fullscreenbar \

@@ -8,7 +8,8 @@
 #
 
 # Dainvo: the old "icons" clip art is replaced by the Phosphor themes (Gallery_phosphor_*)
-system_galleries := arrows bpmn bullets diagrams flowchart fontwork network shapes symbolshapes
+# Dainvo: no BPMN or Network themes
+system_galleries := arrows bullets diagrams flowchart fontwork shapes symbolshapes
 
 $(eval $(call gb_Package_Package,extras_gallsystem,$(SRCDIR)/extras/source/gallery/gallery_system))
 

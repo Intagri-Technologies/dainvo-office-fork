@@ -68,8 +68,6 @@ endif
 ifneq ($(WITH_TEMPLATES),)
 $(eval $(call gb_Module_add_targets,extras,\
 	Package_templates \
-	Package_tplwizard \
-	Package_tplwizbitmap \
 ))
 endif
 

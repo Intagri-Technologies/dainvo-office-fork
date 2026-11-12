@@ -5281,6 +5281,15 @@
         </info>
         <value>false</value>
       </prop>
+      <prop oor:name="DainvoMacrosEnabled" oor:type="xs:boolean" oor:nillable="false">
+        <info>
+          <desc>Dainvo: whether macros (Basic and VBA) are available. When
+          false, the macro commands are hidden and macros never run. Applied
+          at startup.</desc>
+          <label>Enable macros</label>
+        </info>
+        <value>false</value>
+      </prop>
       <prop oor:name="PreloadJVM" oor:type="xs:boolean" oor:nillable="false">
         <info>
           <desc>Specifies if the JVM should be preloaded during LO start up.</desc>

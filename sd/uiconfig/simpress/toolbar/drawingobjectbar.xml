@@ -61,7 +61,6 @@
  <toolbar:toolbaritem xlink:href=".uno:FormatLine" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:FormatArea" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:Window3D" toolbar:visible="false"/>
- <toolbar:toolbaritem xlink:href=".uno:ImageMapDialog" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:CustomAnimation" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:AnimationEffects"/>
  <toolbar:toolbaritem xlink:href=".uno:DesignerDialog"/>

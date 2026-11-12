@@ -213,7 +213,7 @@ void ScTransferObj::AddSupportedFormats()
     // ScImportExport formats
     AddFormat( SotClipboardFormatId::HTML );
     AddFormat( SotClipboardFormatId::SYLK );
-    AddFormat( SotClipboardFormatId::LINK );
+    // Dainvo: no DDE link format, so other apps can't paste a DDE link.
     AddFormat( SotClipboardFormatId::DIF );
     AddFormat( SotClipboardFormatId::STRING );
     AddFormat( SotClipboardFormatId::STRING_TSVC );

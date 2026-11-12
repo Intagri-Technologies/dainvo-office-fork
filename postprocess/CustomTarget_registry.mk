@@ -24,7 +24,7 @@ postprocess_XCDS := \
 	cjk.xcd \
 	ctl.xcd \
 	ctlseqcheck.xcd \
-	draw.xcd \
+	$(if $(ENABLE_DRAW_APP),draw.xcd) \
 	graphicfilter.xcd \
 	impress.xcd \
 	lingucomponent.xcd \
@@ -80,7 +80,7 @@ postprocess_FILES_draw := \
 
 postprocess_DEPS_graphicfilter := main
 postprocess_FILES_graphicfilter := \
-	$(call gb_XcuFilterFiltersTarget_get_target,fcfg_drawgraphics_filters.xcu) \
+	$(if $(ENABLE_DRAW_APP),$(call gb_XcuFilterFiltersTarget_get_target,fcfg_drawgraphics_filters.xcu)) \
 	$(call gb_XcuFilterTypesTarget_get_target,fcfg_drawgraphics_types.xcu) \
 	$(call gb_XcuFilterFiltersTarget_get_target,fcfg_impressgraphics_filters.xcu) \
 	$(call gb_XcuFilterTypesTarget_get_target,fcfg_impressgraphics_types.xcu) \
@@ -422,12 +422,16 @@ postprocess_FILES_onlineupdate := \
 	$(call gb_XcuModuleTarget_get_target,extensions/source/update/check)/org/openoffice/Office/Jobs-onlineupdate.xcu
 endif
 
+ifeq ($(ENABLE_OPENGL_TRANSITIONS),TRUE)
 postprocess_XCDS += ogltrans.xcd
 postprocess_DEPS_ogltrans := main
 postprocess_FILES_ogltrans := \
 	$(postprocess_MOD)/org/openoffice/Office/Impress-ogltrans.xcu
+endif
 
-ifeq ($(ENABLE_PDFIMPORT),TRUE)
+# Dainvo: the PDF import filters need Poppler (xpdfimport); without it Office
+# doesn't open PDF files at all.
+ifeq ($(ENABLE_PDFIMPORT)$(ENABLE_POPPLER),TRUETRUE)
 postprocess_XCDS += pdfimport.xcd
 postprocess_OPTDEPS_pdfimport := calc draw impress math writer
 	# HACK: for all fcfg_X_types.xcu in filter/Configuration_filter.mk that

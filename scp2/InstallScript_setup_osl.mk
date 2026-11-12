@@ -12,7 +12,7 @@ $(eval $(call gb_InstallScript_InstallScript,setup_osl))
 $(eval $(call gb_InstallScript_use_modules,setup_osl,\
 	scp2/base \
 	scp2/calc \
-	scp2/draw \
+	$(if $(ENABLE_DRAW_APP),scp2/draw) \
 	scp2/graphicfilter \
 	scp2/impress \
 	scp2/math \

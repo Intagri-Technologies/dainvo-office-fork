@@ -188,7 +188,7 @@ void ScSelectionTransferObj::AddSupportedFormats()
             AddFormat( SotClipboardFormatId::BITMAP );
             AddFormat( SotClipboardFormatId::HTML );
             AddFormat( SotClipboardFormatId::SYLK );
-            AddFormat( SotClipboardFormatId::LINK );
+            // Dainvo: no DDE link format.
             AddFormat( SotClipboardFormatId::DIF );
             AddFormat( SotClipboardFormatId::STRING );
             AddFormat( SotClipboardFormatId::STRING_TSVC );

@@ -67,10 +67,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/scalc,\
 	sc/uiconfig/scalc/toolbar/fontworkobjectbar \
 	sc/uiconfig/scalc/toolbar/fontworkshapetype \
 	sc/uiconfig/scalc/toolbar/formatobjectbar \
-	sc/uiconfig/scalc/toolbar/formcontrols \
-	sc/uiconfig/scalc/toolbar/formdesign \
-	sc/uiconfig/scalc/toolbar/formsfilterbar \
-	sc/uiconfig/scalc/toolbar/formsnavigationbar \
 	sc/uiconfig/scalc/toolbar/formtextobjectbar \
 	sc/uiconfig/scalc/toolbar/fullscreenbar \
 	sc/uiconfig/scalc/toolbar/graffilterbar \

@@ -18,7 +18,7 @@ $(eval $(call gb_Package_add_files_with_dir,extras_templates,$(LIBO_SHARE_FOLDER
 	styles/Default.ott \
 	styles/Modern.ott \
 	styles/Simple.ott \
-	draw/bpmn.otg \
+	$(if $(ENABLE_DRAW_APP),draw/bpmn.otg) \
 	l10n/zh_CN_ott_normal.ott \
 	l10n/ja_ott_normal.ott \
 ))

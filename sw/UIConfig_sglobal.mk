@@ -51,10 +51,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/sglobal,\
 	sw/uiconfig/sglobal/toolbar/flowchartshapes \
 	sw/uiconfig/sglobal/toolbar/fontworkobjectbar \
 	sw/uiconfig/sglobal/toolbar/fontworkshapetype \
-	sw/uiconfig/sglobal/toolbar/formcontrols \
-	sw/uiconfig/sglobal/toolbar/formdesign \
-	sw/uiconfig/sglobal/toolbar/formsfilterbar \
-	sw/uiconfig/sglobal/toolbar/formsnavigationbar \
 	sw/uiconfig/sglobal/toolbar/formtextobjectbar \
 	sw/uiconfig/sglobal/toolbar/frameobjectbar \
 	sw/uiconfig/sglobal/toolbar/fullscreenbar \

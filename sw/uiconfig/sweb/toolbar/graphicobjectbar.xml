@@ -23,7 +23,6 @@
  <toolbar:toolbaritem xlink:href=".uno:GrafMode"/>
  <toolbar:toolbarseparator/>
  <toolbar:toolbaritem xlink:href=".uno:Crop"/>
- <toolbar:toolbaritem xlink:href=".uno:ImageMapDialog"/>
  <toolbar:toolbarseparator/>
  <toolbar:toolbaritem xlink:href=".uno:FlipVertical"/>
  <toolbar:toolbaritem xlink:href=".uno:FlipHorizontal"/>

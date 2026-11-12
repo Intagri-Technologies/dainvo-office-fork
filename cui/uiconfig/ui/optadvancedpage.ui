@@ -338,7 +338,7 @@
         <property name="label-xalign">0</property>
         <property name="shadow-type">none</property>
         <child>
-          <!-- n-columns=2 n-rows=3 -->
+          <!-- n-columns=2 n-rows=4 -->
           <object class="GtkGrid" id="grid4">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -366,6 +366,26 @@
               <packing>
                 <property name="left-attach">1</property>
                 <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="enablemacros">
+                <property name="label" translatable="yes" context="optadvancedpage|enablemacros">Enable _macros (Basic and VBA; takes effect after restart)</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="use-underline">True</property>
+                <property name="draw-indicator">True</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="enablemacros-atkobject">
+                    <property name="AtkObject::accessible-description" translatable="yes" context="extended_tip|enablemacros">Shows the macro tools and lets documents run macros. When off, macros never run, but they are kept when you save.</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
               </packing>
             </child>
             <child>

@@ -119,6 +119,9 @@ void SwFieldVarPage::Reset(const SfxItemSet* )
         for (short i = rRg.nStart; i < rRg.nEnd; ++i)
         {
             nTypeId = SwFieldMgr::GetTypeId(i);
+            // Dainvo: new DDE fields are not offered (existing ones still work).
+            if (nTypeId == SwFieldTypesEnum::DDE)
+                continue;
             m_xTypeLB->append(OUString::number(static_cast<sal_uInt16>(nTypeId)), SwFieldMgr::GetTypeStr(i));
         }
     }
