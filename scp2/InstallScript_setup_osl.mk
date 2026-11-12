@@ -10,7 +10,7 @@
 $(eval $(call gb_InstallScript_InstallScript,setup_osl))
 
 $(eval $(call gb_InstallScript_use_modules,setup_osl,\
-	scp2/base \
+	$(call gb_Helper_optional,DBCONNECTIVITY,scp2/base) \
 	scp2/calc \
 	$(if $(ENABLE_DRAW_APP),scp2/draw) \
 	scp2/graphicfilter \

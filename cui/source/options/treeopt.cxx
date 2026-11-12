@@ -313,6 +313,7 @@ constexpr OptionsMapping_Impl OptionsMap_Impl[]
     { u"LanguageSettings"_ustr,   u"SearchingInJapanese"_ustr,  RID_SVXPAGE_JSEARCH_OPTIONS },
     { u"LanguageSettings"_ustr,   u"AsianLayout"_ustr,          RID_SVXPAGE_ASIAN_LAYOUT },
     { u"LanguageSettings"_ustr,   u"ComplexTextLayout"_ustr,    RID_SVXPAGE_OPTIONS_CTL },
+    { u"LanguageSettings"_ustr,   u"LanguageTool"_ustr,         RID_SVXPAGE_LANGTOOL_OPTIONS },
     { u"Internet"_ustr,           u""_ustr,                SID_INET_DLG },
     { u"Internet"_ustr,           u"Proxy"_ustr,                RID_SVXPAGE_INET_PROXY },
     { u"Internet"_ustr,           u"Email"_ustr,                RID_SVXPAGE_INET_MAIL },

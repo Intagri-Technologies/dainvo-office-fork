@@ -12,7 +12,7 @@ $(eval $(call gb_Module_Module,scp2))
 $(eval $(call gb_Module_add_targets,scp2,\
 	AutoInstall \
 	CustomTarget_langmacros \
-	InstallModule_base \
+	$(call gb_Helper_optional,DBCONNECTIVITY,InstallModule_base) \
 	InstallModule_calc \
 	$(if $(ENABLE_DRAW_APP),InstallModule_draw) \
 	InstallModule_extensions \

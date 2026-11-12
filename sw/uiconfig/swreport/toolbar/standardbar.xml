@@ -53,6 +53,4 @@
  <toolbar:toolbaritem xlink:href=".uno:ViewDataSourceBrowser" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:ControlCodes"/>
  <toolbar:toolbaritem xlink:href=".uno:Zoom" toolbar:visible="false"/>
- <toolbar:toolbaritem xlink:href=".uno:HelpIndex" toolbar:visible="false"/>
- <toolbar:toolbaritem xlink:href=".uno:ExtendedHelp" toolbar:visible="false"/>
 </toolbar:toolbar>

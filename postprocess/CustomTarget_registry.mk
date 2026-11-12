@@ -19,7 +19,7 @@ postprocess_MOD := $(call gb_XcuModuleTarget_get_target,officecfg/registry/data)
 postprocess_DRIVERS :=
 
 postprocess_XCDS := \
-	base.xcd \
+	$(call gb_Helper_optional,DBCONNECTIVITY,base.xcd) \
 	calc.xcd \
 	cjk.xcd \
 	ctl.xcd \
@@ -226,6 +226,7 @@ postprocess_FILES_main := \
 	$(postprocess_XCU)/Office/Jobs.xcu \
 	$(postprocess_XCU)/Office/Logging.xcu \
 	$(postprocess_XCU)/Office/Math.xcu \
+	$(postprocess_XCU)/Office/Commands.xcu \
 	$(postprocess_XCU)/Office/OptionsDialog.xcu \
 	$(postprocess_XCU)/Office/Paths.xcu \
 	$(postprocess_XCU)/Office/ProtocolHandler.xcu \

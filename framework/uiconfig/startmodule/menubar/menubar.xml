@@ -21,7 +21,6 @@
         <menu:menupopup>
             <menu:menuitem menu:id=".uno:AddDirect"/>
             <menu:menuitem menu:id=".uno:Open"/>
-            <menu:menuitem menu:id=".uno:OpenRemote" menu:style="text"/>
             <menu:menuitem menu:id=".uno:RecentFileList" menu:style="text"/>
             <menu:menuseparator/>
             <menu:menu menu:id=".uno:TemplateMenu" menu:style="text">
@@ -33,7 +32,6 @@
             <menu:menuseparator/>
             <menu:menu menu:id=".uno:SignaturesMenu" menu:style="text">
                 <menu:menupopup>
-                    <menu:menuitem menu:id=".uno:SignPDF" menu:style="text"/>
                 </menu:menupopup>
             </menu:menu>
             <menu:menuseparator/>
@@ -59,16 +57,9 @@
     </menu:menu>
     <menu:menu menu:id=".uno:HelpMenu">
         <menu:menupopup>
-            <menu:menuitem menu:id=".uno:HelpIndex"/>
-            <menu:menuitem menu:id=".uno:ExtendedHelp" menu:style="text"/>
             <menu:menuitem menu:id=".uno:Documentation" menu:style="text"/>
             <menu:menuseparator/>
-            <menu:menuitem menu:id=".uno:QuestionAnswers" menu:style="text"/>
-            <menu:menuseparator/>
             <menu:menuitem menu:id=".uno:SafeMode" menu:style="text"/>
-            <menu:menuseparator/>
-            <menu:menuitem menu:id=".uno:GetInvolved" menu:style="text"/>
-            <menu:menuitem menu:id=".uno:Donation" menu:style="text"/>
             <menu:menuseparator/>
             <menu:menuitem menu:id=".uno:ShowLicense" menu:style="text"/>
             <menu:menuitem menu:id=".uno:About" menu:style="text"/>

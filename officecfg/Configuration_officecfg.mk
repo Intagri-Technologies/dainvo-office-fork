@@ -40,6 +40,7 @@ $(eval $(call gb_Configuration_add_datas,registry,officecfg/registry/data,\
 	org/openoffice/Office/Jobs.xcu \
 	org/openoffice/Office/Logging.xcu \
 	org/openoffice/Office/Math.xcu \
+	org/openoffice/Office/Commands.xcu \
 	org/openoffice/Office/OptionsDialog.xcu \
 	org/openoffice/Office/ProtocolHandler.xcu \
 	org/openoffice/Office/Security.xcu \

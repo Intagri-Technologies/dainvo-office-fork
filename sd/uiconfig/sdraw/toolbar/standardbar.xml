@@ -22,7 +22,6 @@
  <toolbar:toolbaritem xlink:href=".uno:AddDirect"/>
  <toolbar:toolbaritem xlink:href=".uno:NewDoc" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:Open"/>
- <toolbar:toolbaritem xlink:href=".uno:OpenRemote" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:Save"/>
  <toolbar:toolbaritem xlink:href=".uno:SaveAs" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:SendMail" toolbar:visible="false"/>
@@ -78,9 +77,6 @@
  <toolbar:toolbaritem xlink:href=".uno:GlueEditMode"/>
  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle"/>
  <toolbar:toolbaritem xlink:href=".uno:InsertDraw"/>
- <toolbar:toolbarseparator/>
- <toolbar:toolbaritem xlink:href=".uno:HelpIndex" toolbar:visible="false"/>
- <toolbar:toolbaritem xlink:href=".uno:ExtendedHelp" toolbar:visible="false"/>
  <toolbar:toolbarseparator/>
  <toolbar:toolbaritem xlink:href=".uno:FirstPage" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:PreviousPage" toolbar:visible="false"/>

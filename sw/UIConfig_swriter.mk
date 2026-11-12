@@ -47,7 +47,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/swriter,\
 	sw/uiconfig/swriter/toolbar/bezierobjectbar \
 	sw/uiconfig/swriter/toolbar/calloutshapes \
 	sw/uiconfig/swriter/toolbar/changes \
-	sw/uiconfig/swriter/toolbar/classificationbar \
 	sw/uiconfig/swriter/toolbar/colorbar \
 	sw/uiconfig/swriter/toolbar/drawbar \
 	sw/uiconfig/swriter/toolbar/drawingobjectbar \
@@ -64,7 +63,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/swriter,\
 	sw/uiconfig/swriter/toolbar/graphicobjectbar \
 	sw/uiconfig/swriter/toolbar/insertbar \
 	sw/uiconfig/swriter/toolbar/linesbar \
-	sw/uiconfig/swriter/toolbar/mailmerge \
 	sw/uiconfig/swriter/toolbar/mediaobjectbar \
 	sw/uiconfig/swriter/toolbar/navigationobjectbar \
 	sw/uiconfig/swriter/toolbar/notebookbarshortcuts \

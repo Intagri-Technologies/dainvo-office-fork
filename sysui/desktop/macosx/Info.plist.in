@@ -333,55 +333,6 @@
         </dict>
 
         <!-- Math documents -->
-        <dict>
-            <key>UTTypeIdentifier</key>
-            <string>org.openoffice.formula</string>
-            <key>UTTypeDescription</key>
-            <string>OpenOffice.org 1.0 Formula</string>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>public.data</string>
-                <string>public.content</string>
-            </array>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>sxm</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>application/vnd.sun.xml.math</string>
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>generic-formula.icns</string>
-        </dict>
-        <dict>
-            <key>UTTypeIdentifier</key>
-            <string>org.oasis-open.opendocument.formula</string>
-            <key>UTTypeDescription</key>
-            <string>OpenDocument Formula</string>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>org.oasis-open.opendocument</string>
-                <string>public.composite-content</string>
-                <string>public.zip-archive</string>
-           </array>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>odf</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>application/vnd.oasis.opendocument.formula</string>
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>oasis-formula.icns</string>
-        </dict>
 
         <!-- Text template documents -->
         <dict>
@@ -1210,30 +1161,6 @@
             <key>LSItemContentTypes</key>
             <array>
                 <string>org.oasis-open.opendocument.text-master</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleTypeName</key>
-            <string>OpenOffice.org 1.0 Formula</string>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>LSHandlerRank</key>
-            <string>Owner</string>
-            <key>LSItemContentTypes</key>
-            <array>
-                <string>org.openoffice.formula</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleTypeName</key>
-            <string>OpenDocument Formula</string>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>LSHandlerRank</key>
-            <string>Owner</string>
-            <key>LSItemContentTypes</key>
-            <array>
-                <string>org.oasis-open.opendocument.formula</string>
             </array>
         </dict>
         <dict>

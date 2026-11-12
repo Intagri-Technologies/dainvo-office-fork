@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<!-- Dainvo: commands for features Dainvo doesn't ship (remote files, CMIS,
+     scanning, Bluetooth, document versions and classification, extensions,
+     databases and mail merge, PDF signing of existing files, Impress Remote,
+     Calc document sharing and experimental data sources, LibreOffice
+     community help, and the interface/toolbar pickers: Dainvo is
+     ribbon-only). Disabled commands are hidden from menus, toolbars and
+     context menus and can't be run from shortcuts. Macro commands are handled
+     at startup instead (desktop/source/app/dainvofirstrun.cxx), because the
+     user can turn macros on. -->
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Commands" oor:package="org.openoffice.Office">
+  <node oor:name="Execute">
+    <node oor:name="Disabled">
+      <node oor:name="DainvoOpenRemote" oor:op="replace">
+        <prop oor:name="Command">
+          <value>OpenRemote</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoSaveAsRemote" oor:op="replace">
+        <prop oor:name="Command">
+          <value>SaveAsRemote</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoVersionDialog" oor:op="replace">
+        <prop oor:name="Command">
+          <value>VersionDialog</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoSendViaBluetooth" oor:op="replace">
+        <prop oor:name="Command">
+          <value>SendViaBluetooth</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoTwainSelect" oor:op="replace">
+        <prop oor:name="Command">
+          <value>TwainSelect</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoTwainTransfer" oor:op="replace">
+        <prop oor:name="Command">
+          <value>TwainTransfer</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoCheckOut" oor:op="replace">
+        <prop oor:name="Command">
+          <value>CheckOut</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoCancelCheckOut" oor:op="replace">
+        <prop oor:name="Command">
+          <value>CancelCheckOut</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoCheckIn" oor:op="replace">
+        <prop oor:name="Command">
+          <value>CheckIn</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoSignPDF" oor:op="replace">
+        <prop oor:name="Command">
+          <value>SignPDF</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoMoreDictionaries" oor:op="replace">
+        <prop oor:name="Command">
+          <value>MoreDictionaries</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoRemote" oor:op="replace">
+        <prop oor:name="Command">
+          <value>Remote</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoShareDocument" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ShareDocument</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoManageXMLSource" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ManageXMLSource</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoDataProvider" oor:op="replace">
+        <prop oor:name="Command">
+          <value>DataProvider</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoDataProviderRefresh" oor:op="replace">
+        <prop oor:name="Command">
+          <value>DataProviderRefresh</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoGetInvolved" oor:op="replace">
+        <prop oor:name="Command">
+          <value>GetInvolved</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoDonation" oor:op="replace">
+        <prop oor:name="Command">
+          <value>Donation</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoQuestionAnswers" oor:op="replace">
+        <prop oor:name="Command">
+          <value>QuestionAnswers</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoExtendedHelp" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ExtendedHelp</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoHelpIndex" oor:op="replace">
+        <prop oor:name="Command">
+          <value>HelpIndex</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoTipOfTheDay" oor:op="replace">
+        <prop oor:name="Command">
+          <value>TipOfTheDay</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoClassificationApply" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ClassificationApply</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoClassificationDialog" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ClassificationDialog</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoParagraphClassificationDialog" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ParagraphClassificationDialog</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoExtensionManager" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ExtensionManager</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoImageMapDialog" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ImageMapDialog</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoRepaginate" oor:op="replace">
+        <prop oor:name="Command">
+          <value>Repaginate</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoMailMergeWizard" oor:op="replace">
+        <prop oor:name="Command">
+          <value>MailMergeWizard</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoViewDataSourceBrowser" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ViewDataSourceBrowser</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoBibliographyComponent" oor:op="replace">
+        <prop oor:name="Command">
+          <value>BibliographyComponent</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoAutoPilotAddressDataSource" oor:op="replace">
+        <prop oor:name="Command">
+          <value>AutoPilotAddressDataSource</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoAddressBookSource" oor:op="replace">
+        <prop oor:name="Command">
+          <value>AddressBookSource</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoUIPicker" oor:op="replace">
+        <prop oor:name="Command">
+          <value>UIPicker</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoToolbarModeUI" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ToolbarModeUI</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoAvailableToolbars" oor:op="replace">
+        <prop oor:name="Command">
+          <value>AvailableToolbars</value>
+        </prop>
+      </node>
+    </node>
+  </node>
+</oor:component-data>

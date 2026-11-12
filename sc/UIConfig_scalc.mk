@@ -55,7 +55,6 @@ $(eval $(call gb_UIConfig_add_toolbarfiles,modules/scalc,\
 	sc/uiconfig/scalc/toolbar/arrowshapes \
 	sc/uiconfig/scalc/toolbar/basicshapes \
 	sc/uiconfig/scalc/toolbar/calloutshapes \
-	sc/uiconfig/scalc/toolbar/classificationbar \
 	sc/uiconfig/scalc/toolbar/colorbar \
 	sc/uiconfig/scalc/toolbar/connectorsbar \
 	sc/uiconfig/scalc/toolbar/datastreams \

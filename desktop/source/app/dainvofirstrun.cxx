@@ -91,7 +91,7 @@ void DainvoApplyMacroSetting()
         = { u"MacrosMenu"_ustr,     u"MacroManager"_ustr,    u"MacroRecorder"_ustr,
             u"StopRecording"_ustr,  u"RunMacro"_ustr,        u"MacroDialog"_ustr,
             u"BasicIDEAppear"_ustr, u"ScriptOrganizer"_ustr, u"MacroSignature"_ustr,
-            u"MacroOrganizer"_ustr };
+            u"MacroOrganizer"_ustr, u"TableEvents"_ustr };
 
     try
     {
