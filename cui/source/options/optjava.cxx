@@ -126,7 +126,9 @@ SvxJavaOptionsPage::SvxJavaOptionsPage(weld::Container* pPage, weld::DialogContr
 #if HAVE_FEATURE_JAVA
     jfw_lock();
 #else
+    // No Java in this build: hide the Java options rather than showing them greyed out
     m_xJavaFrame->set_sensitive(false);
+    m_xJavaFrame->hide();
 #endif
 }
 

@@ -226,6 +226,7 @@ postprocess_FILES_main := \
 	$(postprocess_XCU)/Office/Jobs.xcu \
 	$(postprocess_XCU)/Office/Logging.xcu \
 	$(postprocess_XCU)/Office/Math.xcu \
+	$(postprocess_XCU)/Office/OptionsDialog.xcu \
 	$(postprocess_XCU)/Office/Paths.xcu \
 	$(postprocess_XCU)/Office/ProtocolHandler.xcu \
 	$(postprocess_XCU)/Office/Security.xcu \

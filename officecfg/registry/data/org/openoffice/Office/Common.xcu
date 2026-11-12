@@ -171,17 +171,7 @@
           <value>_default</value>
         </prop>
       </node>
-      <node oor:name="m8" oor:op="replace" install:module="writer">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>private:factory/swriter?slot=21053</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">~XML Form Document</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_default</value>
-        </prop>
-      </node>
+      <!-- Dainvo: no File > New > XML Form Document (m8) -->
       <node oor:name="m9" oor:op="replace">
         <prop oor:name="URL" oor:type="xs:string">
           <value>private:separator</value>
@@ -252,34 +242,8 @@
     <node oor:name="Wizard">
       <!-- Dainvo: Letter (m0), Fax (m1) and Agenda (m2) wizards removed; they
            need Python, which Dainvo does not ship. Restore from upstream if
-           Python is re-enabled. -->
-      <node oor:name="m10" oor:op="replace">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>private:separator</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
-      <node oor:name="m11" oor:op="replace">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>macro:///ImportWizard.Main.Main</value>
-        </prop>
-        <prop oor:name="Title">
-          <value xml:lang="en-US">Document ~Converter...</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
-      <node oor:name="m13" oor:op="replace">
-        <prop oor:name="URL" oor:type="xs:string">
-          <value>private:separator</value>
-        </prop>
-        <prop oor:name="TargetName" oor:type="xs:string">
-          <value>_self</value>
-        </prop>
-      </node>
+           Python is re-enabled. The Document Converter (m11, ImportWizard
+           Basic library) and its separators (m10, m13) are removed too. -->
       <node oor:name="m14" oor:op="replace" install:module="base">
         <prop oor:name="URL" oor:type="xs:string">
           <value>.uno:AutoPilotAddressDataSource</value>

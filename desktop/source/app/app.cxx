@@ -41,6 +41,7 @@
 #include <dp_shared.hxx>
 #include <strings.hrc>
 #include "cmdlineargs.hxx"
+#include "dainvofirstrun.hxx"
 #include <lockfile.hxx>
 #include "userinstall.hxx"
 #include "desktopcontext.hxx"
@@ -2033,6 +2034,7 @@ IMPL_LINK_NOARG(Desktop, OpenClients_Impl, void*, void)
 
     CloseSplashScreen();
     CheckFirstRun( );
+    DainvoAskDefaultFileFormats();
 #ifdef _WIN32
     bool bDontShowDialogs
         = Application::IsHeadlessModeEnabled(); // uitest.uicheck fails when the dialog is open

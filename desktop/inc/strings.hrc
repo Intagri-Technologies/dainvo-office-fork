@@ -189,4 +189,11 @@
                                                                "If this does not apply, delete the lock file at:")
 #define RID_STR_UNOPKG_ERROR                                NC_("RID_STR_UNOPKG_ERROR", "ERROR: ")
 
+// Dainvo: first-launch default file format prompt
+#define STR_DAINVO_FORMAT_TITLE                             NC_("STR_DAINVO_FORMAT_TITLE", "Choose your default file formats")
+#define STR_DAINVO_FORMAT_PRIMARY                           NC_("STR_DAINVO_FORMAT_PRIMARY", "Which formats should %PRODUCTNAME save new documents in?")
+#define STR_DAINVO_FORMAT_SECONDARY                         NC_("STR_DAINVO_FORMAT_SECONDARY", "Microsoft Office formats (.docx, .xlsx, .pptx) are best for sharing with people who use Word, Excel or PowerPoint. OpenDocument formats (.odt, .ods, .odp) are open standards. You can change this later in Tools > Options > Load/Save > General.")
+#define STR_DAINVO_FORMAT_MSO                               NC_("STR_DAINVO_FORMAT_MSO", "Microsoft Office")
+#define STR_DAINVO_FORMAT_ODF                               NC_("STR_DAINVO_FORMAT_ODF", "OpenDocument")
+
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

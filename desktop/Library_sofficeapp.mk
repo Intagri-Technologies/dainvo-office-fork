@@ -120,6 +120,7 @@ $(eval $(call gb_Library_add_exception_objects,sofficeapp,\
     desktop/source/app/check_ext_deps \
     desktop/source/app/cmdlineargs \
     desktop/source/app/cmdlinehelp \
+    desktop/source/app/dainvofirstrun \
     desktop/source/app/desktopcontext \
     desktop/source/app/dispatchwatcher \
     desktop/source/app/initjsunoscripting \

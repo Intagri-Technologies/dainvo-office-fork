@@ -46,9 +46,11 @@ $(eval $(call gb_Package_add_files,wizards_basicsrvscriptforge,$(LIBO_SHARE_FOLD
 	script.xlb \
 ))
 
+ifneq ($(DISABLE_PYTHON),TRUE)
 $(eval $(call gb_Package_add_files,wizards_basicsrvscriptforge,$(LIBO_SHARE_FOLDER)/Scripts/python,\
 	python/ScriptForgeHelper.py \
 ))
+endif
 
 $(eval $(call gb_Package_add_files,wizards_basicsrvscriptforge,$(LIBO_SHARE_FOLDER)/basic/ScriptForge/po,\
 	po/ScriptForge.pot \
@@ -58,8 +60,10 @@ $(eval $(call gb_Package_add_files,wizards_basicsrvscriptforge,$(LIBO_SHARE_FOLD
 	po/pt.po \
 ))
 
+ifneq ($(DISABLE_PYTHON),TRUE)
 $(eval $(call gb_Package_add_files,wizards_basicsrvscriptforge,$(LIBO_LIB_PYUNO_FOLDER),\
 	python/scriptforge.py \
 	python/scriptforge.pyi \
 ))
+endif
 # vim: set noet sw=4 ts=4:

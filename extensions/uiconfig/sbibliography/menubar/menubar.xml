@@ -43,7 +43,6 @@
                     <menu:menuitem menu:id=".uno:MacroOrganizer?TabId:short=1" menu:style="text"/>
                 </menu:menupopup>
             </menu:menu>
-            <menu:menuitem menu:id=".uno:OpenXMLFilterSettings" menu:style="text"/>
             <menu:menuitem menu:id=".uno:ExtensionManager" menu:style="text"/>
             <menu:menuitem menu:id=".uno:ConfigureDialog" menu:style="text"/>
             <menu:menuitem menu:id=".uno:OptionsTreeDialog"/>

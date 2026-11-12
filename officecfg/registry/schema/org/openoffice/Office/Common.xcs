@@ -1728,7 +1728,8 @@
             be saved to an alien format.</desc>
             <label>Open windows</label>
           </info>
-          <value>true</value>
+          <!-- Dainvo: don't ask on every save in Word/Excel/PowerPoint format -->
+          <value>false</value>
         </prop>
         <prop oor:name="AlwaysSaveAs" oor:type="xs:boolean" oor:nillable="false">
           <info>
@@ -5271,6 +5272,14 @@
           <label>FirstRun</label>
         </info>
         <value>true</value>
+      </prop>
+      <prop oor:name="DainvoAskedDefaultFormat" oor:type="xs:boolean" oor:nillable="false">
+        <info>
+          <desc>Dainvo: whether the user has been asked, once, which file
+          formats to save in by default (Microsoft Office or OpenDocument).</desc>
+          <label>Asked default file format</label>
+        </info>
+        <value>false</value>
       </prop>
       <prop oor:name="PreloadJVM" oor:type="xs:boolean" oor:nillable="false">
         <info>

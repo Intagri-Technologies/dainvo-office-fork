@@ -1001,10 +1001,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	$(call gb_Helper_optional,SCRIPTING,scripting_scriptbindinglib) \
 	$(if $(filter $(OS),MACOSX),sysui_osxicons) \
 	wizards_basicshare \
-	wizards_basicsrvaccess2base \
-	wizards_basicsrvdepot \
-	wizards_basicsrvgimmicks \
-	wizards_basicsrvimport \
 	wizards_basicsrvform \
 	wizards_basicsrvscriptforge \
 	wizards_basicsrvsfdatabases \
@@ -1015,7 +1011,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	wizards_basicsrvstandard \
 	wizards_basicsrvtemplate \
 	wizards_basicsrvtools \
-	wizards_basicsrvtutorials \
 	wizards_basicusr \
 	wizards_properties \
 	wizards_wizardshare \
