@@ -22,6 +22,7 @@ $(eval $(call gb_CppunitTest_use_libraries,linguistic_dainvolangpacks, \
     test \
     unotest \
     utl \
+    vcl \
 ))
 
 $(eval $(call gb_CppunitTest_use_sdk_api,linguistic_dainvolangpacks))

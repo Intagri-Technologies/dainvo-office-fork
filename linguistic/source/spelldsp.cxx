@@ -35,6 +35,7 @@
 #include <vector>
 
 #include "spelldsp.hxx"
+#include <linguistic/dainvolangpacks.hxx>
 #include <linguistic/spelldta.hxx>
 #include "lngsvcmgr.hxx"
 
@@ -185,6 +186,9 @@ sal_Bool SAL_CALL SpellCheckerDispatcher::hasLocale( const Locale& rLocale )
 {
     MutexGuard  aGuard( GetLinguMutex() );
     SpellSvcByLangMap_t::const_iterator aIt( m_aSvcMap.find( LinguLocaleToLanguage( rLocale ) ) );
+    if (aIt == m_aSvcMap.end())
+        // no data for this language: fetch it in the background (Dainvo language packs)
+        linguistic::langpacks::RequestAutoDownload(rLocale, linguistic::langpacks::AUTO_SPELL | linguistic::langpacks::AUTO_HYPH);
     return aIt != m_aSvcMap.end();
 }
 

@@ -28,6 +28,36 @@ second because Dainvo plans its own grammar and AI tools.
 | Publishing tool | `dainvo/tools/langpacks.py` (build, licenses, index, sign, verify, publish, keygen), `dainvo/languages/licenses.json` |
 | Tests | `CppunitTest_linguistic_dainvolangpacks` (6 tests; `testLiveIndex` downloads from the real index only when `DAINVO_LANGPACKS_LIVE_TEST=1` is set: Ed25519 vectors from RFC 8032, signed index, bundled English, install/refresh/remove, checksum, zip-slip and mismatch refusal) and `CppunitTest_cui_dainvolanguages` (the dialog headless: fetch, install, in use without restart, remove, older index refused). Test data in `linguistic/qa/data/langpacks`, signed with the public RFC 8032 test key |
 
+### 0.1a Automatic download
+
+Users normally never open the dialog. When text needs spelling,
+hyphenation or the thesaurus in a language that has no data, the
+spelling, hyphenation and thesaurus dispatchers (`linguistic/source/
+spelldsp.cxx`, `hyphdsp.cxx`, `thesdsp.cxx`, in `hasLocale`) call
+`linguistic::langpacks::RequestAutoDownload`. That covers every way a
+language comes in: typing, the status bar or Tools > Language menus,
+Format > Character, opening a document, or changing the default document
+language in Options. A background thread then:
+
+1. fetches and verifies the index (once per session, falling back to the
+   cached one when offline),
+2. finds the language (exact tag, else the bare language, e.g. `de`),
+3. downloads the parts that are missing: spelling and hyphenation when
+   spelling needs the language, hyphenation when hyphenation does, the
+   thesaurus when the thesaurus does (so the large thesauri only come when
+   someone uses them),
+4. posts `ReloadLinguServices()` to the main thread, so the new language is
+   in use at once and documents are checked again.
+
+Each language is tried once per session. No dialog or prompt appears. On
+macOS, spelling for languages the system speller covers never misses, so
+only hyphenation and the thesaurus are fetched for those. The thread stops
+when the app quits (a Desktop terminate listener). Settings:
+`DainvoLanguagePacks/AutoDownload` (default on) and `AllowDownloads`.
+Headless conversions and unit tests never download from the network (only
+from a `file:` index). Tested by `testAutoDownload` in
+`CppunitTest_linguistic_dainvolangpacks`.
+
 ### 0.2 Signing key
 
 The private key is in the login keychain of the release machine: generic
@@ -123,8 +153,7 @@ To try packs locally without publishing, build into a folder, run `index
 - Windows and Linux builds of this code (it has no platform-specific parts
   except the macOS speller check in the dialog).
 - Exact licence versions for the 11 `LicenseRef-see-included-files` packs, and licences for Guarani and Odia spelling (ask their maintainers).
-- Phase 2: prompts when a language has no data, first-run suggestion,
-  offline `.dainvolang` files, machine-wide folder.
+- Phase 2: offline `.dainvolang` files, machine-wide folder.
 - Autonyms in the index (names come from Dainvo's language list instead).
 
 ## 1. Recommendation in short
@@ -563,17 +592,9 @@ New `cui/source/dialogs/dainvolanguages.cxx` and
    online…" link (`moredictslink`, `cui/source/options/optlingu.cxx:833`,
    `OnLinkClick`) becomes "Download languages…" and opens the dialog. The
    same link in the "Edit Modules" dialog (`optlingu.cxx:1565`) does too.
-3. **Phase 2, prompt when data is missing**: when the user sets a text
-   language that has no spelling or hyphenation, show an info bar with
-   "Download German (Germany), 1.6 MB". The language is set through
-   `sw/source/uibase/shells/langhelper.cxx` (Writer),
-   `sc/source/ui/view/tabvwsh5.cxx` (Calc) and
-   `sd/source/ui/view/ViewShellBase.cxx` (Impress), which handle
-   `SID_LANGUAGE_STATUS`.
-   Check with `LinguMgr::GetSpellChecker()->hasLocale`. Offer it once per
-   language, and remember "Don't ask again" in `Office.Common/Dainvo`.
-4. **Phase 2, first run**: if a preferred system language has no data, a
-   Start Center info bar offers it.
+3. **Automatic, no prompt** (built, replaces the planned info bar): a language
+   with no data is downloaded in the background as soon as it is needed.
+   See section 0.1a.
 
 The status bar language menu and the language list boxes already mark
 languages that have spelling data (`SvxLanguageBox`). Once packs are

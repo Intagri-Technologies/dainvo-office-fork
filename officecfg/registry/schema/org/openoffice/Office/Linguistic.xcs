@@ -364,6 +364,14 @@
         </info>
         <value>true</value>
       </prop>
+      <prop oor:name="AutoDownload" oor:type="xs:boolean" oor:nillable="false">
+        <info>
+          <desc>Download the packs for a language automatically, in the
+          background, when text in that language needs spelling,
+          hyphenation or the thesaurus and no data is installed.</desc>
+        </info>
+        <value>true</value>
+      </prop>
       <prop oor:name="IndexURL" oor:type="xs:string" oor:nillable="false">
         <info>
           <desc>URL of the signed index.json listing the available packs.

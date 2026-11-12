@@ -30,6 +30,7 @@
 #include <sal/log.hxx>
 
 #include "thesdsp.hxx"
+#include <linguistic/dainvolangpacks.hxx>
 #include <linguistic/misc.hxx>
 
 using namespace osl;
@@ -89,6 +90,9 @@ sal_Bool SAL_CALL
 {
     MutexGuard  aGuard( GetLinguMutex() );
     ThesSvcByLangMap_t::const_iterator aIt( aSvcMap.find( LinguLocaleToLanguage( rLocale ) ) );
+    if (aIt == aSvcMap.end())
+        // no data for this language: fetch it in the background (Dainvo language packs)
+        linguistic::langpacks::RequestAutoDownload(rLocale, linguistic::langpacks::AUTO_THES);
     return aIt != aSvcMap.end();
 }
 

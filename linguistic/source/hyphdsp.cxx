@@ -41,6 +41,7 @@
 
 #include "hyphdsp.hxx"
 #include <linguistic/hyphdta.hxx>
+#include <linguistic/dainvolangpacks.hxx>
 #include <linguistic/misc.hxx>
 #include "lngsvcmgr.hxx"
 
@@ -255,6 +256,9 @@ sal_Bool SAL_CALL HyphenatorDispatcher::hasLocale(const Locale& rLocale)
 {
     MutexGuard  aGuard( GetLinguMutex() );
     HyphSvcByLangMap_t::const_iterator aIt( aSvcMap.find( LinguLocaleToLanguage( rLocale ) ) );
+    if (aIt == aSvcMap.end())
+        // no data for this language: fetch it in the background (Dainvo language packs)
+        linguistic::langpacks::RequestAutoDownload(rLocale, linguistic::langpacks::AUTO_HYPH);
     return aIt != aSvcMap.end();
 }
 

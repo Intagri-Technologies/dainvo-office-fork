@@ -17,6 +17,8 @@
 #include <linguistic/dainvolangpacks.hxx>
 
 #include <com/sun/star/container/XNameAccess.hpp>
+#include <com/sun/star/frame/Desktop.hpp>
+#include <com/sun/star/frame/XTerminateListener.hpp>
 #include <com/sun/star/io/XInputStream.hpp>
 #include <com/sun/star/lang/EventObject.hpp>
 #include <com/sun/star/linguistic2/LinguServiceManager.hpp>
@@ -31,6 +33,9 @@
 #include <comphelper/hash.hxx>
 #include <comphelper/processfactory.hxx>
 #include <comphelper/sequence.hxx>
+#include <cppuhelper/implbase.hxx>
+#include <i18nlangtag/languagetag.hxx>
+#include <linguistic/misc.hxx>
 #include <officecfg/Office/Linguistic.hxx>
 #include <osl/file.hxx>
 #include <rtl/bootstrap.hxx>
@@ -40,10 +45,12 @@
 #include <rtl/uri.hxx>
 #include <sal/log.hxx>
 #include <systools/curlinit.hxx>
+#include <tools/link.hxx>
 #include <tools/urlobj.hxx>
 #include <ucbhelper/proxydecider.hxx>
 #include <unotools/bootstrap.hxx>
 #include <unotools/lingucfg.hxx>
+#include <vcl/svapp.hxx>
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -51,6 +58,11 @@
 #include <openssl/evp.h>
 
 #include <algorithm>
+#include <chrono>
+#include <condition_variable>
+#include <cstdlib>
+#include <deque>
+#include <thread>
 #include <memory>
 #include <mutex>
 #include <set>
@@ -1185,6 +1197,229 @@ bool RemoveComponent(const OUString& rId, OUString& rError)
     if (listDir(aLangDir).empty())
         osl::Directory::remove(aLangDir);
     return true;
+}
+
+// ------------------------------------------------------------ auto download
+
+namespace
+{
+struct AutoQueue
+{
+    std::mutex aMutex;
+    std::condition_variable aCond;
+    std::deque<std::pair<OUString, int>> aJobs;
+    std::set<std::pair<OUString, int>> aSeen;
+    std::thread aWorker;
+    std::atomic<bool> bStop{ false };
+    bool bBusy = false;
+    std::optional<Index> oIndex;
+    bool bIndexTried = false;
+};
+
+// Deliberately leaked: the worker is stopped by the terminate listener
+// below, not by a static destructor running after UNO is gone.
+AutoQueue& autoQueue()
+{
+    static AutoQueue* pQueue = new AutoQueue;
+    return *pQueue;
+}
+
+void stopAutoWorker()
+{
+    AutoQueue& rQ = autoQueue();
+    {
+        std::scoped_lock aGuard(rQ.aMutex);
+        rQ.bStop = true;
+    }
+    rQ.aCond.notify_all();
+    if (rQ.aWorker.joinable() && rQ.aWorker.get_id() != std::this_thread::get_id())
+        rQ.aWorker.join();
+}
+
+class AutoTerminateListener : public cppu::WeakImplHelper<frame::XTerminateListener>
+{
+public:
+    void SAL_CALL queryTermination(const lang::EventObject&) override {}
+    void SAL_CALL notifyTermination(const lang::EventObject&) override { stopAutoWorker(); }
+    void SAL_CALL disposing(const lang::EventObject&) override {}
+};
+
+/// The index row for a language: exact tag, else the bare language.
+const IndexLanguage* findLanguage(const Index& rIndex, const OUString& rTag)
+{
+    for (const IndexLanguage& rLang : rIndex.aLanguages)
+        if (rLang.aTag == rTag)
+            return &rLang;
+    const sal_Int32 nDash = rTag.indexOf('-');
+    if (nDash > 0)
+    {
+        const OUString aBase = rTag.copy(0, nDash);
+        for (const IndexLanguage& rLang : rIndex.aLanguages)
+            if (rLang.aTag == aBase)
+                return &rLang;
+    }
+    return nullptr;
+}
+
+bool isServed(const OUString& rTag, std::u16string_view aKind)
+{
+    for (const InstalledComponent& rComp : GetInstalledComponents())
+        if (rComp.aKind == aKind)
+            for (const PackDictionary& rDict : rComp.aDictionaries)
+                if (std::find(rDict.aLocales.begin(), rDict.aLocales.end(), rTag)
+                    != rDict.aLocales.end())
+                    return true;
+    return false;
+}
+
+/// Download what the language needs. Returns true if anything was installed.
+bool runAutoJob(const OUString& rTag, int nKinds)
+{
+    AutoQueue& rQ = autoQueue();
+    auto keepGoing = [&rQ](sal_Int64, sal_Int64) { return !rQ.bStop; };
+    if (!rQ.oIndex && !rQ.bIndexTried)
+    {
+        rQ.bIndexTried = true;
+        OUString aError;
+        rQ.oIndex = FetchIndex(aError, keepGoing);
+        if (!rQ.oIndex)
+        {
+            SAL_INFO("linguistic", "language packs: no index for auto download: " << aError);
+            rQ.oIndex = LoadCachedIndex();
+        }
+    }
+    if (!rQ.oIndex)
+        return false;
+    const IndexLanguage* pLang = findLanguage(*rQ.oIndex, rTag);
+    if (!pLang)
+        return false;
+    bool bInstalled = false;
+    for (const OUString& rId : pLang->aComponents)
+    {
+        const IndexComponent& rComp = rQ.oIndex->aComponents.at(rId);
+        const int nKind = rComp.aKind == u"spell" ? AUTO_SPELL
+                          : rComp.aKind == u"hyph" ? AUTO_HYPH
+                                                   : AUTO_THES;
+        if (!(nKinds & nKind) || rQ.bStop || isServed(pLang->aTag, rComp.aKind))
+            continue;
+        OUString aError;
+        if (InstallComponent(rComp, keepGoing, aError))
+        {
+            SAL_INFO("linguistic", "language packs: installed " << rId << " automatically");
+            bInstalled = true;
+        }
+        else
+            SAL_WARN_IF(!aError.isEmpty(), "linguistic",
+                        "language packs: auto download of " << rId << " failed: " << aError);
+    }
+    return bInstalled;
+}
+
+struct AutoReload
+{
+    DECL_STATIC_LINK(AutoReload, Reload, void*, void);
+};
+
+IMPL_STATIC_LINK_NOARG(AutoReload, Reload, void*, void)
+{
+    if (!autoQueue().bStop)
+        ReloadLinguServices();
+}
+
+void autoWorker()
+{
+    osl_setThreadName("DainvoLanguagesAuto");
+    AutoQueue& rQ = autoQueue();
+    for (;;)
+    {
+        std::pair<OUString, int> aJob;
+        {
+            std::unique_lock aGuard(rQ.aMutex);
+            rQ.aCond.wait(aGuard, [&rQ] { return rQ.bStop || !rQ.aJobs.empty(); });
+            if (rQ.bStop)
+                return;
+            aJob = rQ.aJobs.front();
+            rQ.aJobs.pop_front();
+            rQ.bBusy = true;
+        }
+        const bool bInstalled = runAutoJob(aJob.first, aJob.second);
+        if (bInstalled && !rQ.bStop)
+            Application::PostUserEvent(LINK(nullptr, AutoReload, Reload));
+        {
+            std::scoped_lock aGuard(rQ.aMutex);
+            rQ.bBusy = false;
+        }
+        rQ.aCond.notify_all();
+    }
+}
+}
+
+void RequestAutoDownload(const lang::Locale& rLocale, int nKinds)
+{
+    if (LinguIsUnspecified(LinguLocaleToLanguage(rLocale)))
+        return;
+    const OUString aTag = LanguageTag::convertToBcp47(rLocale, false);
+    if (aTag.isEmpty())
+        return;
+    AutoQueue& rQ = autoQueue();
+    {
+        std::scoped_lock aGuard(rQ.aMutex);
+        if (rQ.bStop || !rQ.aSeen.insert({ aTag, nKinds }).second)
+            return; // once per language, parts and session
+    }
+    try
+    {
+        if (!officecfg::Office::Linguistic::DainvoLanguagePacks::AutoDownload::get()
+            || !IsDownloadEnabled())
+            return;
+        // Only interactive sessions download on their own: headless
+        // conversions and unit tests never reach the network.
+        if ((Application::IsHeadlessModeEnabled() || getenv("LO_RUNNING_UNIT_TEST"))
+            && !officecfg::Office::Linguistic::DainvoLanguagePacks::IndexURL::get()
+                    .startsWithIgnoreAsciiCase("file:"))
+            return;
+    }
+    catch (const uno::Exception&)
+    {
+        return;
+    }
+    bool bStart = false;
+    {
+        std::scoped_lock aGuard(rQ.aMutex);
+        rQ.aJobs.emplace_back(aTag, nKinds);
+        bStart = !rQ.aWorker.joinable();
+        if (bStart)
+            rQ.aWorker = std::thread(autoWorker);
+    }
+    rQ.aCond.notify_all();
+    if (bStart)
+    {
+        try
+        {
+            frame::Desktop::create(comphelper::getProcessComponentContext())
+                ->addTerminateListener(new AutoTerminateListener);
+        }
+        catch (const uno::Exception&)
+        {
+        }
+    }
+}
+
+void WaitForAutoDownloads()
+{
+    AutoQueue& rQ = autoQueue();
+    for (;;)
+    {
+        {
+            std::unique_lock aGuard(rQ.aMutex);
+            if (rQ.bStop || (rQ.aJobs.empty() && !rQ.bBusy))
+                return;
+            rQ.aCond.wait_for(aGuard, std::chrono::milliseconds(50));
+        }
+        // let the worker post its reload to the main thread
+        if (Application::IsMainThread())
+            Application::Reschedule(true);
+    }
 }
 
 void ReloadLinguServices()

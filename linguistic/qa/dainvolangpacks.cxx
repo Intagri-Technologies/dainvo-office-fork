@@ -19,7 +19,9 @@
 #include <com/sun/star/linguistic2/XHyphenator.hpp>
 #include <com/sun/star/util/XRefreshable.hpp>
 
+#include <comphelper/configuration.hxx>
 #include <comphelper/processfactory.hxx>
+#include <vcl/scheduler.hxx>
 #include <linguistic/dainvolangpacks.hxx>
 #include <officecfg/Office/Linguistic.hxx>
 #include <osl/file.hxx>
@@ -234,6 +236,51 @@ CPPUNIT_TEST_FIXTURE(LangPacksTest, testBadDownloads)
     // only https: and file: are allowed
     aComp.aUrl = u"http://example.com/qaa-hyph.zip"_ustr;
     CPPUNIT_ASSERT(!lp::InstallComponent(aComp, {}, aError));
+}
+
+// Changing the text language is enough: the dispatcher sees a language with
+// no data and the packs are downloaded and used in the background, unasked.
+CPPUNIT_TEST_FIXTURE(LangPacksTest, testAutoDownload)
+{
+    const OUString aOldUrl = officecfg::Office::Linguistic::DainvoLanguagePacks::IndexURL::get();
+    const OUString aOldKey = officecfg::Office::Linguistic::DainvoLanguagePacks::PublicKey::get();
+    {
+        std::shared_ptr<comphelper::ConfigurationChanges> xChanges(
+            comphelper::ConfigurationChanges::create());
+        officecfg::Office::Linguistic::DainvoLanguagePacks::IndexURL::set(dataUrl(u"index.json"),
+                                                                         xChanges);
+        officecfg::Office::Linguistic::DainvoLanguagePacks::PublicKey::set(TEST_KEY_BASE64,
+                                                                          xChanges);
+        officecfg::Office::Linguistic::DainvoLanguagePacks::LastSequence::set(0, xChanges);
+        officecfg::Office::Linguistic::DainvoLanguagePacks::AutoDownload::set(true, xChanges);
+        xChanges->commit();
+    }
+    uno::Reference<uno::XComponentContext> xContext(comphelper::getProcessComponentContext());
+    uno::Reference<linguistic2::XHyphenator> xDispatcher
+        = linguistic2::LinguServiceManager::create(xContext)->getHyphenator();
+    const lang::Locale aQaa(u"qaa"_ustr, u""_ustr, u""_ustr);
+
+    CPPUNIT_ASSERT(!xDispatcher->hasLocale(aQaa)); // starts the download
+    lp::WaitForAutoDownloads();
+    CPPUNIT_ASSERT(hasComponent(u"qaa.hyph", false));
+    // the reload is posted to the main thread; then the language is in use
+    Scheduler::ProcessEventsToIdle();
+    CPPUNIT_ASSERT(xDispatcher->hasLocale(aQaa));
+    uno::Reference<linguistic2::XHyphenatedWord> xWord
+        = xDispatcher->hyphenate(u"aaabbb"_ustr, aQaa, 5, {});
+    CPPUNIT_ASSERT(xWord.is());
+
+    // leave nothing behind for the other tests
+    OUString aError;
+    CPPUNIT_ASSERT(lp::RemoveComponent(u"qaa.hyph"_ustr, aError));
+    lp::ReloadLinguServices();
+    Scheduler::ProcessEventsToIdle();
+    std::shared_ptr<comphelper::ConfigurationChanges> xChanges(
+        comphelper::ConfigurationChanges::create());
+    officecfg::Office::Linguistic::DainvoLanguagePacks::IndexURL::set(aOldUrl, xChanges);
+    officecfg::Office::Linguistic::DainvoLanguagePacks::PublicKey::set(aOldKey, xChanges);
+    officecfg::Office::Linguistic::DainvoLanguagePacks::LastSequence::set(0, xChanges);
+    xChanges->commit();
 }
 
 // Network test against the published index; runs only with

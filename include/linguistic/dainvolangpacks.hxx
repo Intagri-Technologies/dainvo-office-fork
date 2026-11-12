@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <com/sun/star/lang/Locale.hpp>
 #include <linguistic/lngdllapi.h>
 #include <rtl/ustring.hxx>
 #include <sal/types.h>
@@ -139,6 +140,24 @@ LNG_DLLPUBLIC bool InstallComponentFromZip(const OUString& rZipUrl, const IndexC
 /// Remove an installed user component. Folders that are in use are marked
 /// and deleted by the next Cleanup().
 LNG_DLLPUBLIC bool RemoveComponent(const OUString& rId, OUString& rError);
+
+/// Parts of a language for RequestAutoDownload
+enum AutoKind
+{
+    AUTO_SPELL = 1,
+    AUTO_HYPH = 2,
+    AUTO_THES = 4
+};
+
+/// Called when spelling, hyphenation or the thesaurus is needed for a
+/// language that has no data: downloads the matching packs in the
+/// background (once per language and session) and starts using them, without
+/// asking. Cheap to call often. Does nothing when
+/// Linguistic/DainvoLanguagePacks/AutoDownload or AllowDownloads is off.
+LNG_DLLPUBLIC void RequestAutoDownload(const css::lang::Locale& rLocale, int nKinds);
+
+/// Block until queued automatic downloads are finished (for tests).
+LNG_DLLPUBLIC void WaitForAutoDownloads();
 
 /// Make the spelling, hyphenation and thesaurus services re-read their data
 /// and ask open documents to check again. Call on the main thread.
