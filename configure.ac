@@ -2288,7 +2288,9 @@ AC_ARG_ENABLE(legacy-import-filters,
     AS_HELP_STRING([--disable-legacy-import-filters],
         [Disable import of obsolete file formats: old Mac formats (libmwaw),
          StarOffice 1-5 (libstaroffice), MS Works/Write/DOS Word/Pocket Word
-         (libwps), WordPerfect (libwpd, libwpg), T602 and Hangul 97.]),
+         (libwps), WordPerfect (libwpd, libwpg), T602, Hangul 97, e-books
+         (libebook: Palm, Plucker, BroadBand, FictionBook), Lotus 1-2-3,
+         DIF, SYLK, Excel 4.0, Word for Windows 5 and CGM.]),
 ,enable_legacy_import_filters=yes)
 
 AC_ARG_ENABLE(draw-app,
@@ -10552,7 +10554,7 @@ if test "$enable_legacy_import_filters" = "no"; then
     legacy_build_type=
     for i in $BUILD_TYPE; do
         case "$i" in
-        WPD|WPG|WPS|MWAW|STAROFFICE) ;;
+        WPD|WPG|WPS|MWAW|STAROFFICE|EBOOK) ;;
         *) legacy_build_type="$legacy_build_type $i" ;;
         esac
     done

@@ -24,6 +24,8 @@ $(eval $(call gb_Helper_register_executables,NONE, \
 endif
 
 $(eval $(call gb_Helper_register_executables,NONE, \
+	$(call gb_Helper_optional,OPENCL,opencltest) \
+	regview \
     $(call gb_Helper_optional,HELPTOOLS, \
 	HelpIndexer \
 	HelpLinker \
@@ -241,7 +243,6 @@ $(eval $(call gb_Helper_register_executables_for_install,OOO,ooo, \
 	$(if $(filter WNT,$(OS)), \
 		senddoc \
 	) \
-	$(if $(filter OPENCL,$(BUILD_TYPE)),opencltest) \
 ))
 
 ifeq ($(OS),WNT)
@@ -264,9 +265,6 @@ endif
 
 $(eval $(call gb_Helper_register_executables_for_install,UREBIN,ure,\
 	$(if $(and $(ENABLE_JAVA),$(filter-out HAIKU MACOSX WNT,$(OS)),$(filter DESKTOP,$(BUILD_TYPE))),javaldx) \
-    $(call gb_CondExeRegistryTools, \
-        regview \
-    ) \
     $(call gb_CondExeUno,uno) \
 ))
 
@@ -445,8 +443,6 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	$(call gb_Helper_optional,SCRIPTING,$(if $(ENABLE_QUICKJS),jsprov)) \
 	$(if $(filter $(OS),MACOSX),macbe1) \
 	$(if $(MERGELIBS),merged) \
-	migrationoo2 \
-	migrationoo3 \
 	$(call gb_Helper_optional,DBCONNECTIVITY,mozbootstrap) \
 	msfilter \
 	$(call gb_Helper_optional,SCRIPTING,msforms) \
@@ -495,7 +491,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	ucptdoc1 \
 	unordf \
 	unoxml \
-	updatefeed \
+	$(call gb_Helper_optional,EXTENSIONS,updatefeed) \
 	utl \
 	uui \
 	$(call gb_Helper_optional,SCRIPTING, \
@@ -927,7 +923,6 @@ $(eval $(call gb_Helper_register_packages_for_install,sdk,\
 
 ifneq ($(ENABLE_WASM_STRIP_PINGUSER),TRUE)
 $(eval $(call gb_Helper_register_packages_for_install,ooo,\
-	tipoftheday_images \
 ))
 endif
 
@@ -953,25 +948,15 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	extras_autotextuser \
 	extras_cfgsrvnolang \
 	extras_cfgusr \
-	extras_database \
-	extras_databasebiblio \
 	extras_gallbullets \
 	extras_gallmytheme \
 	$(if $(WITH_GALLERY_BUILD),extras_gallphosphor) \
-	extras_gallroot \
 	extras_gallsystem \
 	extras_gallsystemstr \
 	extras_glade \
 	extras_labels \
 	$(if $(filter WNT,$(OS)),extras_newfiles) \
 	extras_palettes \
-	extras_personas \
-	extras_persona_dark \
-	extras_persona_gray \
-	extras_persona_green \
-	extras_persona_pink \
-	extras_persona_sand \
-	extras_persona_white \
 	extras_tplpresnt \
 	extras_tplwizdesktop \
 	$(if $(WITH_TEMPLATES),\
@@ -999,13 +984,6 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	$(call gb_Helper_optional,SCRIPTING,scripting_scriptbindinglib) \
 	$(if $(filter $(OS),MACOSX),sysui_osxicons) \
 	wizards_basicshare \
-	wizards_basicsrvform \
-	wizards_basicsrvscriptforge \
-	wizards_basicsrvsfdatabases \
-	wizards_basicsrvsfdialogs \
-	wizards_basicsrvsfdocuments \
-	wizards_basicsrvsfunittests \
-	wizards_basicsrvsfwidgets \
 	wizards_basicsrvstandard \
 	wizards_basicsrvtemplate \
 	wizards_basicsrvtools \

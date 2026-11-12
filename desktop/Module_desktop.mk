@@ -34,8 +34,6 @@ $(eval $(call gb_Module_add_targets,desktop,\
     Executable_soffice_bin \
     $(call gb_CondExeUnopkg,Executable_unopkg_bin) \
     $(if $(ENABLE_BREAKPAD),Executable_minidump_upload) \
-    Library_migrationoo2 \
-    Library_migrationoo3 \
     $(call gb_CondExeUnopkg,Library_unopkgapp) \
     Package_scripts \
     $(if $(ENABLE_PAGEIN), \

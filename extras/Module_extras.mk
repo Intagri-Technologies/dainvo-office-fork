@@ -20,13 +20,10 @@ $(eval $(call gb_Module_add_targets,extras,\
 	Package_autotextuser \
 	Package_cfgsrvnolang \
 	Package_cfgusr \
-	Package_database \
-	Package_databasebiblio \
 	Package_fonts \
 	Package_resource_fonts \
 	Package_gallbullets \
 	Package_gallmytheme \
-	Package_gallroot \
 	Package_gallsystem \
 	Package_gallsystemstr \
 	Package_glade \
@@ -72,7 +69,6 @@ $(eval $(call gb_Module_add_targets,extras,\
 endif
 
 $(eval $(call gb_Module_add_targets,extras,\
-	Personas \
 ))
 
 $(eval $(call gb_Module_add_targets,extras,\

@@ -893,55 +893,6 @@
         <dict>
             <key>UTTypeConformsTo</key>
             <array>
-                <string>public.data</string>
-                <string>public.content</string>
-            </array>
-            <key>UTTypeDescription</key>
-            <string>Data Interchange Format</string>
-            <key>UTTypeIdentifier</key>
-            <string>org.libreoffice.dif-document</string>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>dif</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>application/x-dif-document</string> <!-- ??? -->
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>generic-spreadsheet.icns</string>
-        </dict>
-        <dict>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>public.text</string>
-                <string>public.data</string>
-                <string>public.content</string>
-            </array>
-            <key>UTTypeDescription</key>
-            <string>SYLK Document</string>
-            <key>UTTypeIdentifier</key>
-            <string>org.libreoffice.slk-document</string>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>slk</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>text/spreadsheet</string>
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>generic-spreadsheet.icns</string>
-        </dict>
-        <dict>
-            <key>UTTypeConformsTo</key>
-            <array>
                 <string>public.text</string>
                 <string>public.data</string>
                 <string>public.content</string>
@@ -963,59 +914,6 @@
             </dict>
             <key>UTTypeIconFile</key>
             <string>generic-spreadsheet.icns</string>
-        </dict>
-        <dict>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>public.data</string>
-                <string>public.content</string>
-            </array>
-            <key>UTTypeDescription</key>
-            <string>Lotus 1-2-3 Spreadsheet</string>
-            <key>UTTypeIdentifier</key>
-            <string>org.libreoffice.123-document</string>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>wk1</string>
-                    <string>wks</string>
-                    <string>123</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>application/vnd.lotus-1-2-3</string>
-                    <string>application/vnd.lotus-1-2-3</string>
-                    <string>application/vnd.lotus-1-2-3</string>
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>generic-spreadsheet.icns</string>
-        </dict>
-        <dict>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>public.data</string>
-                <string>public.content</string>
-                <string>public.image</string>
-            </array>
-            <key>UTTypeDescription</key>
-            <string>Computer Graphics Metafile</string>
-            <key>UTTypeIdentifier</key>
-            <string>org.libreoffice.cgm-document</string>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>cgm</string>
-                </array>
-                <key>public.mime-type</key>
-                <array>
-                    <string>image/cgm</string>
-                </array>
-            </dict>
-            <key>UTTypeIconFile</key>
-            <string>generic-drawing.icns</string>
         </dict>
     </array>
 
@@ -1286,11 +1184,7 @@
                 <string>org.openxmlformats.presentationml.presentation.macroEnabled</string>
                 <string>org.openxmlformats.presentationml.template</string>
                 <string>org.openxmlformats.presentationml.template.macroEnabled</string>
-                <string>org.libreoffice.dif-document</string>
-                <string>org.libreoffice.slk-document</string>
                 <string>org.libreoffice.csv-document</string>
-                <string>org.libreoffice.123-document</string>
-                <string>org.libreoffice.cgm-document</string>
             </array>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>

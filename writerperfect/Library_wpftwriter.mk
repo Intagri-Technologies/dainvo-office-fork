@@ -69,7 +69,7 @@ endif
 $(eval $(call gb_Library_use_externals,wpftwriter,\
 	abw \
 	boost_headers \
-	ebook \
+	$(call gb_Helper_optional,EBOOK,ebook) \
     $(if $(ENABLE_WASM_STRIP_SWEXPORTS),,etonyek) \
 	frozen \
 	icu_headers \
@@ -99,7 +99,7 @@ endif
 ifneq ($(ENABLE_WASM_STRIP_SWEXPORTS),TRUE)
 $(eval $(call gb_Library_add_exception_objects,wpftwriter,\
 	writerperfect/source/writer/AbiWordImportFilter \
-	writerperfect/source/writer/EBookImportFilter \
+	$(call gb_Helper_optional,EBOOK,writerperfect/source/writer/EBookImportFilter) \
 	writerperfect/source/writer/PagesImportFilter \
 ))
 endif

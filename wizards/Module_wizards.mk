@@ -22,14 +22,7 @@ $(eval $(call gb_Module_Module,wizards))
 $(eval $(call gb_Module_add_targets,wizards,\
 	CustomTarget_share \
 	CustomTarget_wizards \
-	Package_form \
 	Package_share \
-	Package_scriptforge \
-	Package_sfdatabases \
-	Package_sfdialogs \
-	Package_sfdocuments \
-	Package_sfunittests \
-	Package_sfwidgets \
 	Package_standard \
 	Package_template \
 	Package_tools \
@@ -40,7 +33,8 @@ $(eval $(call gb_Module_add_targets,wizards,\
 
 # Dainvo: not shipped - Depot (Euro Converter), ImportWizard (Document
 # Converter), Gimmicks and Tutorials (sample macros) and Access2Base (Base
-# macro toolkit). ScriptForge and Tools stay.
+# macro toolkit), FormWizard (Base forms) and ScriptForge (macro
+# framework; macros stay basic). Tools stays.
 
 # Letter, Fax and Agenda wizards are written in Python
 ifneq ($(DISABLE_PYTHON),TRUE)

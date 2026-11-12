@@ -13,11 +13,7 @@ $(eval $(call gb_Package_add_files,extras_palettes,$(LIBO_SHARE_FOLDER)/palette,
 	arrowhd.soe \
 	chart-palettes.soc \
 	classic.sog \
-	freecolour-hlc.soc \
 	hatching.soh \
-	html.soc \
-	libreoffice.soc \
-	material.soc \
 	modern.sog \
 	compatibility.soc \
 	dainvo.soc \
@@ -29,7 +25,6 @@ $(eval $(call gb_Package_add_files,extras_palettes,$(LIBO_SHARE_FOLDER)/palette,
 	standard.soh \
 	standard.sop \
 	styles.sod \
-	tonal.soc \
 ))
 
 # vim: set noet sw=4 ts=4:

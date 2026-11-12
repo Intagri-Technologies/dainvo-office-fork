@@ -131,6 +131,13 @@ SvxJavaOptionsPage::SvxJavaOptionsPage(weld::Container* pPage, weld::DialogContr
     m_xJavaFrame->set_sensitive(false);
     m_xJavaFrame->hide();
 #endif
+
+    // Dainvo: no experimental (unfinished) features and no raw configuration
+    // editor; macro recording only matters once macros are turned on
+    m_xExperimentalCB->hide();
+    m_xExpertConfigBtn->hide();
+    if (!officecfg::Office::Common::Misc::DainvoMacrosEnabled::get())
+        m_xMacroCB->hide();
 }
 
 SvxJavaOptionsPage::~SvxJavaOptionsPage()

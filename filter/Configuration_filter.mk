@@ -264,7 +264,6 @@ $(eval $(call filter_Configuration_Configuration,fcfg_langpack))
 
 # fcfg_base
 $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_base_types.xcu,filter/source/config/fragments/types,\
-	writer_web_HTML_help \
 	oxt_OpenOffice_Extension \
 	wav_Wave_Audio_File \
 	component_Bibliography \
@@ -272,7 +271,6 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_base_types.xcu,f
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_base_filters.xcu,filter/source/config/fragments/filters,\
-	writer_web_HTML_help \
 ))
 
 $(eval $(call filter_Configuration_add_others,fcfg_langpack,fcfg_base_others.xcu,filter/source/config/fragments,\
@@ -313,10 +311,10 @@ endif
 # fcfg_writer
 $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_writer_types.xcu,filter/source/config/fragments/types,\
 	generic_HTML \
-	calc_MS_Excel_40 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_MS_Excel_40) \
 	calc_MS_Excel_5095 \
 	calc_MS_Excel_95 \
-	writer_MS_WinWord_5 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MS_WinWord_5) \
 	writer_MS_WinWord_60 \
 	writer_MS_Word_95 \
 	writer_MS_Word_95_Vorlage \
@@ -352,13 +350,13 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_writer_types.xcu
 	writer_OOXML_VBA \
 	writer_layout_dump_xml \
 	writer_indexing_export_xml \
-	writer_BroadBand_eBook \
-	writer_FictionBook_2 \
-	writer_PalmDoc \
-	writer_Plucker_eBook \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_BroadBand_eBook) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_FictionBook_2) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_PalmDoc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_Plucker_eBook) \
 	writer_ApplePages \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Text_Document) \
-	Palm_Text_Document \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Palm_Text_Document) \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Writer) \
 	writer_EPUB_Document \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_PocketWord_File) \
@@ -367,7 +365,7 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_writer_types.xcu
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_writer_filters.xcu,filter/source/config/fragments/filters,\
 	HTML__StarWriter_ \
-	MS_WinWord_5 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_WinWord_5) \
 	MS_WinWord_6_0 \
 	MS_Word_95 \
 	MS_Word_95_Vorlage \
@@ -404,13 +402,13 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_writer_filters
 	OOXML_Text_VBA \
 	writer_layout_dump \
 	writer_indexing_export \
-	BroadBand_eBook \
-	FictionBook_2 \
-	PalmDoc \
-	Plucker_eBook \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),BroadBand_eBook) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),FictionBook_2) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),PalmDoc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Plucker_eBook) \
 	ApplePages \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Text_Document) \
-	Palm_Text_Document \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Palm_Text_Document) \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Writer) \
 	EPUB \
 	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),PocketWord_File) \
@@ -421,7 +419,6 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_writer_filters
 $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_web_types.xcu,filter/source/config/fragments/types,\
 	generic_HTML \
 	generic_Text \
-	writer_web_HTML_help \
 	writer_StarOffice_XML_Writer \
 	writer_web_StarOffice_XML_Writer_Web_Template \
 	pdf_Portable_Document_Format \
@@ -432,7 +429,6 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_web_filters.xc
 	HTML \
 	Text__StarWriter_Web_ \
 	Text__encoded___StarWriter_Web_ \
-	writer_web_HTML_help \
 	writer_web_StarOffice_XML_Writer \
 	writer_web_StarOffice_XML_Writer_Web_Template \
 	writer_web_pdf_Export\
@@ -466,7 +462,7 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_global_filters
 
 # fcfg_calc
 $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_calc_types.xcu,filter/source/config/fragments/types,\
-	calc_DIF \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_DIF) \
 	calc_ODS_FlatXML \
 	calc_HTML \
 	generic_JSON \
@@ -474,10 +470,10 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_calc_types.xcu,f
 	generic_Text \
 	generic_XML \
 	calc_Gnumeric \
-	calc_Lotus \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_Lotus) \
 	calc_QPro \
-	calc_MS_Excel_40 \
-	calc_MS_Excel_40_VorlageTemplate \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_MS_Excel_40) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_MS_Excel_40_VorlageTemplate) \
 	calc_MS_Excel_5095 \
 	calc_MS_Excel_5095_VorlageTemplate \
 	calc_MS_Excel_95 \
@@ -485,11 +481,11 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_calc_types.xcu,f
 	calc_MS_Excel_97 \
 	calc_MS_Excel_97_VorlageTemplate \
 	writer_Rich_Text_Format \
-	calc_SYLK \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_SYLK) \
 	calc_StarOffice_XML_Calc \
 	calc_StarOffice_XML_Calc_Template \
 	pdf_Portable_Document_Format \
-	calc_dBase\
+	$(call gb_Helper_optional,DBCONNECTIVITY,calc_dBase)\
 	calc8 \
 	calc8_template \
 	MS_Excel_2007_XML \
@@ -513,13 +509,13 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_calc_types.xcu,f
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.xcu,filter/source/config/fragments/filters,\
-	DIF \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),DIF) \
 	HTML__StarCalc_ \
 	ODS_FlatXML \
-	Lotus \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Lotus) \
 	QPro \
-	MS_Excel_4_0 \
-	MS_Excel_4_0_Vorlage_Template \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Excel_4_0) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Excel_4_0_Vorlage_Template) \
 	MS_Excel_5_0_95 \
 	MS_Excel_5_0_95_Vorlage_Template \
 	MS_Excel_95 \
@@ -527,7 +523,7 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.x
 	MS_Excel_97 \
 	MS_Excel_97_Vorlage_Template \
 	Rich_Text_Format__StarCalc_ \
-	SYLK \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),SYLK) \
 	StarOffice_XML__Calc_ \
 	Text___txt___csv__StarCalc_ \
 	calc_csv_Orcus \
@@ -536,7 +532,7 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.x
 	calc_HTML_WebQuery \
 	calc_StarOffice_XML_Calc_Template \
 	calc_pdf_Export \
-	dBase \
+	$(call gb_Helper_optional,DBCONNECTIVITY,dBase) \
 	calc8 \
 	calc8_template \
 	calc_Gnumeric \
@@ -799,7 +795,7 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_impressgraphics_
 	eps_Encapsulated_PostScript \
 	gif_Graphics_Interchange \
 	graphic_HTML \
-	impress_CGM_Computer_Graphics_Metafile \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),impress_CGM_Computer_Graphics_Metafile) \
 	jpg_JPEG \
 	jxl_JPEG_XL \
 	met_OS2_Metafile \
@@ -821,7 +817,7 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_impressgraphics_
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_impressgraphics_filters.xcu,filter/source/config/fragments/filters,\
-	CGM___Computer_Graphics_Metafile \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),CGM___Computer_Graphics_Metafile) \
 	impress_bmp_Export \
 	impress_emf_Export \
 	impress_eps_Export \
