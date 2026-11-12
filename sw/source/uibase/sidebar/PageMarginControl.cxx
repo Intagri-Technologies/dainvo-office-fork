@@ -130,22 +130,27 @@ PageMarginControl::PageMarginControl(PageMarginPopup* pControl, weld::Widget* pP
     const SvxSizeItem* pSize = nullptr;
     const SvxLongLRSpaceItem* pLRItem = nullptr;
     const SvxLongULSpaceItem* pULItem = nullptr;
+    // Dainvo: one holder per query, kept alive while the item pointers are used.
+    // Reusing a single holder freed each item before it was read (garbage margins).
+    SfxPoolItemHolder aPageResult, aSizeResult, aLRResult, aULResult;
     if (SfxViewFrame* pViewFrm = SfxViewFrame::Current())
     {
-        SfxPoolItemHolder aResult;
-        pViewFrm->GetBindings().GetDispatcher()->QueryState(SID_ATTR_PAGE, aResult);
-        const SvxPageItem* pPageItem(static_cast<const SvxPageItem*>(aResult.getItem()));
-        bLandscape = pPageItem->IsLandscape();
-        m_bMirrored = pPageItem->GetPageUsage() == SvxPageUsage::Mirror;
+        SfxDispatcher* pDispatcher = pViewFrm->GetBindings().GetDispatcher();
+        pDispatcher->QueryState(SID_ATTR_PAGE, aPageResult);
+        if (const SvxPageItem* pPageItem = dynamic_cast<const SvxPageItem*>(aPageResult.getItem()))
+        {
+            bLandscape = pPageItem->IsLandscape();
+            m_bMirrored = pPageItem->GetPageUsage() == SvxPageUsage::Mirror;
+        }
 
-        pViewFrm->GetBindings().GetDispatcher()->QueryState(SID_ATTR_PAGE_SIZE, aResult);
-        pSize = static_cast<const SvxSizeItem*>(aResult.getItem());
+        pDispatcher->QueryState(SID_ATTR_PAGE_SIZE, aSizeResult);
+        pSize = dynamic_cast<const SvxSizeItem*>(aSizeResult.getItem());
 
-        pViewFrm->GetBindings().GetDispatcher()->QueryState(SID_ATTR_PAGE_LRSPACE, aResult);
-        pLRItem = static_cast<const SvxLongLRSpaceItem*>(aResult.getItem());
+        pDispatcher->QueryState(SID_ATTR_PAGE_LRSPACE, aLRResult);
+        pLRItem = dynamic_cast<const SvxLongLRSpaceItem*>(aLRResult.getItem());
 
-        pViewFrm->GetBindings().GetDispatcher()->QueryState(SID_ATTR_PAGE_ULSPACE, aResult);
-        pULItem = static_cast<const SvxLongULSpaceItem*>(aResult.getItem());
+        pDispatcher->QueryState(SID_ATTR_PAGE_ULSPACE, aULResult);
+        pULItem = dynamic_cast<const SvxLongULSpaceItem*>(aULResult.getItem());
     }
 
     if ( pLRItem )

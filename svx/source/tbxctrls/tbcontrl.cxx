@@ -19,6 +19,8 @@
 
 #include <utility>
 
+#include <comphelper/dispatchcommand.hxx>
+#include <set>
 #include <comphelper/configurationlistener.hxx>
 #include <comphelper/propertysequence.hxx>
 #include <comphelper/propertyvalue.hxx>
@@ -3876,8 +3878,22 @@ namespace
 
             SvxCurrencyToolBoxControl::GetCurrencySymbols(aList, true, aCurrencyList, aCurrencyIDs);
 
-            sal_uInt16 nPos = 0, nCount = 0;
+            sal_uInt16 nPos = 0, nCount = 0, nAll = 0;
             sal_Int32 nSelectedPos = -1;
+            // Dainvo: a short, Word-like list - the default currency plus the
+            // common ones; "More Currencies..." opens the full number format dialog
+            // each common currency shown once, in its home locale
+            static constexpr std::pair<std::u16string_view, std::u16string_view> aCommon[]
+                = { { u"USD", u"en-US" }, { u"EUR", u"en-IE" }, { u"GBP", u"en-GB" },
+                    { u"JPY", u"ja-JP" }, { u"CNY", u"zh-CN" }, { u"CHF", u"de-CH" },
+                    { u"CAD", u"en-CA" }, { u"AUD", u"en-AU" }, { u"INR", u"en-IN" } };
+            std::set<OUString> aShownCodes;
+            auto isCommon = [&](const NfCurrencyEntry& rEntry) {
+                const OUString aTag = LanguageTag(rEntry.GetLanguage()).getBcp47();
+                return std::any_of(std::begin(aCommon), std::end(aCommon), [&](const auto& r) {
+                    return r.first == rEntry.GetBankSymbol() && r.second == aTag;
+                });
+            };
             bool bIsSymbol;
             NfWSStringsDtor aStringsDtor;
 
@@ -3887,14 +3903,21 @@ namespace
             for( const auto& rItem : aList )
             {
                 sal_uInt16& rCurrencyIndex = aCurrencyList[ nCount ];
-                if ( rCurrencyIndex < nLen )
+                const bool bKnown = rCurrencyIndex < nLen;
+                // one row per currency: the default first, then each common one once
+                bool bShow = bKnown && (nAll == 0 || isCommon(rCurrencyTable[rCurrencyIndex]));
+                if (bShow && !aShownCodes.insert(rCurrencyTable[rCurrencyIndex].GetBankSymbol()).second)
+                    bShow = false;
+                if (bKnown)
+                    ++nAll;
+                if ( bShow )
                 {
                     m_xCurrencyLb->append_text(rItem);
 
                     if (rItem.getLength() > sLongestString.getLength())
                         sLongestString = rItem;
 
-                    bIsSymbol = nPos >= nLen;
+                    bIsSymbol = nAll - 1 >= nLen;
 
                     sal_uInt16 nDefaultFormat;
                     const NfCurrencyEntry& rCurrencyEntry = rCurrencyTable[ rCurrencyIndex ];
@@ -3919,6 +3942,7 @@ namespace
                 }
                 ++nCount;
             }
+            m_xCurrencyLb->append_text(u"More Currencies\u2026"_ustr);
             m_xCurrencyLb->thaw();
             // enable multiple selection enabled so we can start with nothing selected
             m_xCurrencyLb->set_selection_mode(SelectionMode::Multiple);
@@ -3929,7 +3953,8 @@ namespace
             // gtk will initially make a best guess depending on the first few entries, so copy the probable
             // longest entry to the start temporarily and force in the width at this point
             m_xCurrencyLb->insert_text(0, sLongestString);
-            m_xCurrencyLb->set_size_request(m_xCurrencyLb->get_preferred_size().Width(), m_xCurrencyLb->get_height_rows(12));
+            m_xCurrencyLb->set_size_request(m_xCurrencyLb->get_preferred_size().Width(),
+                                            m_xCurrencyLb->get_height_rows(std::min(12, m_xCurrencyLb->n_children())));
             m_xCurrencyLb->remove(0);
         }
     };
@@ -3951,6 +3976,14 @@ namespace
             return true;
 
         m_xCurrencyLb->set_selection_mode(SelectionMode::Single);
+
+        if (o3tl::make_unsigned(nSelected) >= m_aFormatEntries.size())
+        {
+            // Dainvo: "More Currencies..." row
+            m_xControl->EndPopupMode();
+            comphelper::dispatchCommand(u".uno:FormatCellDialog"_ustr, {});
+            return true;
+        }
 
         m_rSelectedFormat = m_aFormatEntries[nSelected];
         m_eSelectedLanguage = m_eFormatLanguage;
