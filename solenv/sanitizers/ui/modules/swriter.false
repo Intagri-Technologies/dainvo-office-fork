@@ -746,6 +746,7 @@ sw/uiconfig/swriter/ui/optfonttabpage.ui://GtkLabel[@id='font_label'] orphan-lab
 
 
 
+
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ToggleObjectBezierMode'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltDown'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltUp'] button-no-label
@@ -753,31 +754,12 @@ sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-Extrus
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltRight'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-NameGroup'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ObjectTitleDescription'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-Label'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-Edit'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-CheckBox'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-RadioButton'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-ListBox'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-ComboBox'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-Pushbutton'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-Imagebutton'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-FormattedField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-DateField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-TimeField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-NumericField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-CurrencyField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-PatternField'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-ImageControl'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-FileControl'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-Grid'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuForm-NavigationBar'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-ImageCrop'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-ExternalEdit'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-ChangePicture'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-CompressGraphic'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-SaveGraphic'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-FormatArea'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-ImageMapDialog'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-NameGroup'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-ObjectTitleDescription'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuImage-GraphicDialog'] button-no-label
@@ -834,4 +816,3 @@ sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Media-FormatA
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Media-FormatLine'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Media-TransformDialog'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Print-FullScreen'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='FormMenu-FormProperties'] button-no-label

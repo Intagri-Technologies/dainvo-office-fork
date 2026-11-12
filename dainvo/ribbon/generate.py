@@ -286,7 +286,7 @@ def build(app, spec, commands):
                     label_ctx[lab.group(2).replace('~', '')] = lab.group(1)
                 if 'default' in classes:
                     home_classes = classes
-                elif classes:
+                elif classes and not set(classes) & SKIP_CONTEXTS:
                     contextual.append((page, tab))
             i = end + 1
         else:
@@ -311,7 +311,7 @@ def build(app, spec, commands):
         result = src[:first] + x.out + kept + src[last_child_end(src, first, cc_end, child_pad) + 1:]
         # top-level menus for the More buttons go before the first top-level object
         top = next(i for i, l in enumerate(result) if l.startswith('  <object '))
-        result = prune_menus(result[:top] + gen.menu_xml() + result[top:])
+        result = prune_menus(drop_commands(result[:top] + gen.menu_xml() + result[top:]))
         open(os.path.join(ROOT, path), 'w', encoding='utf-8').write('\n'.join(result))
         gen_ids = gen.menu_ids
         update_suppr(spec['suppr'], path, gen_ids, spec['file'] if compact else None)
@@ -319,6 +319,31 @@ def build(app, spec, commands):
         if compact and os.path.exists(os.path.join(ROOT, false_list)):
             update_suppr(false_list, path, [], spec['file'])
         print(f'{path}: {len(spec["tabs"])} tabs, {len(contextual)} contextual tabs kept')
+
+
+# Features Dainvo Office no longer builds or exposes (form design, image maps,
+# DDE, macros, extensions, standalone Draw): their contextual tabs and buttons
+# are left out of the generated ribbons.
+SKIP_CONTEXTS = {'Form'}
+DROP = re.compile(r'\.uno:(ImageMapDialog|Repaginate|\w*DDE\w*|SwitchControlDesignMode|ControlProperties'
+                  r'|FormProperties|ShowFmExplorer|FormDesignTools|Config:\w*[Ff]orm\w*|MacroDialog|RunMacro'
+                  r'|BasicIDEAppear|MacroRecorder|MacroOrganizer|ScriptOrganizer|MacroSignature|ExtensionManager)\b'
+                  r'|private:factory/sdraw')
+
+
+def drop_commands(lines):
+    """Remove each <child> whose widget runs a retired command."""
+    i = 0
+    while i < len(lines):
+        if 'name="action-name"' in lines[i] and DROP.search(lines[i]):
+            obj = next(j for j in range(i - 1, -1, -1)
+                       if lines[j].lstrip().startswith('<object ') and ind(lines[j]) < ind(lines[i]))
+            if lines[obj - 1].strip() == '<child>':
+                del lines[obj - 1:block_end(lines, obj - 1) + 1]
+                i = obj - 1
+                continue
+        i += 1
+    return lines
 
 
 def prune_menus(lines):
