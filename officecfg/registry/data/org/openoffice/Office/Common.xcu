@@ -293,19 +293,19 @@
       </node>
     </node>
     <prop oor:name="QA_URL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/forum/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="DocumentationURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/documentation/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="GetInvolvedURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/joinus/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="DonationURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/donation/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="ReleaseNotesURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/ReleaseNotes/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="CreditsURL" oor:type="xs:string">
       <value>https://hub.libreoffice.org/credits/</value>
@@ -317,7 +317,7 @@
       <value>https://hub.libreoffice.org/InstallJava/</value>
     </prop>
     <prop oor:name="VolunteerURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/volunteersupport/</value>
+      <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="PrivacyPolicyURL" oor:type="xs:string">
       <value>${PRIVACY_POLICY_URL}</value>

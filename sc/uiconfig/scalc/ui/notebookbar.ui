@@ -2169,11 +2169,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp1">
+                  <object class="VclOptionalBox" id="dvgrp1">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-8"/>
+                    </style>
                     <child>
                       <object class="GtkBox" id="dvrows2">
                         <property name="visible">True</property>
@@ -2238,24 +2241,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep7">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp8">
+                  <object class="VclOptionalBox" id="dvgrp7">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-7"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep8">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb9">
                         <property name="visible">True</property>
@@ -2353,24 +2359,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep17">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp18">
+                  <object class="VclOptionalBox" id="dvgrp17">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-6"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep18">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows19">
                         <property name="visible">True</property>
@@ -2515,24 +2524,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep32">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp33">
+                  <object class="VclOptionalBox" id="dvgrp32">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-5"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep33">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows34">
                         <property name="visible">True</property>
@@ -2657,24 +2669,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep45">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp46">
+                  <object class="VclOptionalBox" id="dvgrp45">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep46">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows47">
                         <property name="visible">True</property>
@@ -2769,24 +2784,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep55">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp56">
+                  <object class="VclOptionalBox" id="dvgrp55">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep56">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb57">
                         <property name="visible">True</property>
@@ -2852,24 +2870,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep62">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp63">
+                  <object class="VclOptionalBox" id="dvgrp62">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep63">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb64">
                         <property name="visible">True</property>
@@ -2923,24 +2944,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep68">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp69">
+                  <object class="VclOptionalBox" id="dvgrp68">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep69">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows70">
                         <property name="visible">True</property>
@@ -3054,11 +3078,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp77">
+                  <object class="VclOptionalBox" id="dvgrp77">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-5"/>
+                    </style>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb78">
                         <property name="visible">True</property>
@@ -3089,24 +3116,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep80">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp81">
+                  <object class="VclOptionalBox" id="dvgrp80">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep81">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb82">
                         <property name="visible">True</property>
@@ -3183,24 +3213,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep88">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp89">
+                  <object class="VclOptionalBox" id="dvgrp88">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep89">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows90">
                         <property name="visible">True</property>
@@ -3265,24 +3298,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep95">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp96">
+                  <object class="VclOptionalBox" id="dvgrp95">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep96">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb97">
                         <property name="visible">True</property>
@@ -3348,24 +3384,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep102">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp103">
+                  <object class="VclOptionalBox" id="dvgrp102">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep103">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows104">
                         <property name="visible">True</property>
@@ -3453,11 +3492,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp109">
+                  <object class="VclOptionalBox" id="dvgrp109">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb110">
                         <property name="visible">True</property>
@@ -3511,24 +3553,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep114">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp115">
+                  <object class="VclOptionalBox" id="dvgrp114">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep115">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb116">
                         <property name="visible">True</property>
@@ -3616,24 +3661,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep123">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp124">
+                  <object class="VclOptionalBox" id="dvgrp123">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep124">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows125">
                         <property name="visible">True</property>
@@ -3718,24 +3766,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep132">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp133">
+                  <object class="VclOptionalBox" id="dvgrp132">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep133">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb134">
                         <property name="visible">True</property>
@@ -3789,11 +3840,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp136">
+                  <object class="VclOptionalBox" id="dvgrp136">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb137">
                         <property name="visible">True</property>
@@ -3904,24 +3958,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep146">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp147">
+                  <object class="VclOptionalBox" id="dvgrp146">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep147">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb148">
                         <property name="visible">True</property>
@@ -4032,24 +4089,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep157">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp158">
+                  <object class="VclOptionalBox" id="dvgrp157">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep158">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb159">
                         <property name="visible">True</property>
@@ -4138,24 +4198,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep166">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp167">
+                  <object class="VclOptionalBox" id="dvgrp166">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep167">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb168">
                         <property name="visible">True</property>
@@ -4232,11 +4295,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp172">
+                  <object class="VclOptionalBox" id="dvgrp172">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb173">
                         <property name="visible">True</property>
@@ -4324,24 +4390,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep180">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp181">
+                  <object class="VclOptionalBox" id="dvgrp180">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep181">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb182">
                         <property name="visible">True</property>
@@ -4449,24 +4518,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep191">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp192">
+                  <object class="VclOptionalBox" id="dvgrp191">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep192">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb193">
                         <property name="visible">True</property>
@@ -4532,24 +4604,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep198">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp199">
+                  <object class="VclOptionalBox" id="dvgrp198">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep199">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb200">
                         <property name="visible">True</property>
@@ -4626,11 +4701,14 @@
                 <property name="valign">center</property>
                 <property name="vexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="dvgrp204">
+                  <object class="VclOptionalBox" id="dvgrp204">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-4"/>
+                    </style>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb205">
                         <property name="visible">True</property>
@@ -4684,24 +4762,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep209">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp210">
+                  <object class="VclOptionalBox" id="dvgrp209">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-3"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep210">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="GtkBox" id="dvrows211">
                         <property name="visible">True</property>
@@ -4786,24 +4867,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep218">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp219">
+                  <object class="VclOptionalBox" id="dvgrp218">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-2"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep219">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb220">
                         <property name="visible">True</property>
@@ -4857,24 +4941,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="dvsep224">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="dvgrp225">
+                  <object class="VclOptionalBox" id="dvgrp224">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
                     <property name="spacing">2</property>
+                    <style>
+                      <class name="priority-1"/>
+                    </style>
+                    <child>
+                      <object class="GtkSeparator" id="dvsep225">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="orientation">vertical</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
                     <child>
                       <object class="sfxlo-NotebookbarToolBox" id="dvtb226">
                         <property name="visible">True</property>

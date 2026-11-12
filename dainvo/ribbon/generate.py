@@ -83,6 +83,8 @@ class Generator:
         self.app, self.spec, self.commands = app, spec, commands
         self.uid = 0
         self.menu_ids = []
+        self.overflow = []      # commands hidden in the icons-only layout (current tab)
+        self.menus = []         # (menu id, commands) for each tab's More menu
 
     def next_id(self, prefix):
         self.uid += 1
@@ -124,12 +126,22 @@ class Generator:
         x.close('</packing>')
         x.close('</child>')
 
-    def group(self, x, g, compact):
+    def group(self, x, g, compact, priority=None, lead_separator=False):
         def body():
-            x.open(f'<object class="GtkBox" id="{self.next_id("grp")}">')
+            # VclOptionalBox: the tab's PriorityHBox hides low-priority groups
+            # (right-most first) when the window is too narrow
+            x.open(f'<object class="VclOptionalBox" id="{self.next_id("grp")}">')
             x.props(visible='True', can_focus='False', valign='center', spacing='2')
+            if priority is not None:
+                x.open('<style>')
+                x.line(f'<class name="priority-{priority}"/>')
+                x.close('</style>')
+            if lead_separator:
+                self.separator(x)
             if compact:
-                items = [c for c, over in map(self.parse, g.get('L', []) + sum(g.get('R', []), []) + g.get('L2', [])) if not over]
+                parsed = list(map(self.parse, g.get('L', []) + sum(g.get('R', []), []) + g.get('L2', [])))
+                items = [c for c, over in parsed if not over]
+                self.overflow += [c for c, over in parsed if over]
                 if g.get('G') and self.spec.get('compactGallery'):
                     items.insert(len(g.get('L', [])) + len(sum(g.get('R', []), [])), self.spec['compactGallery'])
                 if items:
@@ -153,6 +165,33 @@ class Generator:
             x.close('</object>')
         self.child(x, body, expand=bool(g.get('G')) and not compact)
 
+    def more_button(self, x, cmds):
+        menu_id = f'dvMenuMore{self.uid}'
+        self.menus.append((menu_id, cmds))
+        def body():
+            x.open(f'<object class="svtlo-ManagedMenuButton" id="{self.next_id("more")}:{menu_id}">')
+            x.line('<property name="label">\u00b7\u00b7\u00b7</property>')
+            x.props(visible='True', can_focus='True', focus_on_click='False', receives_default='False',
+                    valign='center', relief='none')
+            x.close('</object>')
+        self.child(x, body)
+
+    def menu_xml(self):
+        x = Xml(2)
+        for menu_id, cmds in self.menus:
+            x.open(f'<object class="GtkMenu" id="{menu_id}">')
+            x.props(visible='True', can_focus='False')
+            for c in cmds:
+                mid = self.next_id('mi')
+                self.menu_ids.append(('GtkMenuItem', mid))
+                x.open('<child>')
+                x.open(f'<object class="GtkMenuItem" id="{mid}">')
+                x.props(visible='True', can_focus='False', action_name=escape(c))
+                x.close('</object>')
+                x.close('</child>')
+            x.close('</object>')
+        return x.out
+
     def separator(self, x):
         def body():
             x.open(f'<object class="GtkSeparator" id="{self.next_id("sep")}">')
@@ -164,10 +203,13 @@ class Generator:
         x.open('<child>')
         x.open(f'<object class="sfxlo-PriorityHBox" id="{name} Tab">')
         x.props(visible='True', can_focus='False', valign='center', vexpand='True')
+        self.overflow = []
         for i, g in enumerate(groups):
-            if i:
-                self.separator(x)
-            self.group(x, g, compact)
+            # the first groups (undo, clipboard) are kept longest
+            self.group(x, g, compact, priority=len(groups) - i, lead_separator=i > 0)
+        if compact and self.overflow:
+            self.separator(x)
+            self.more_button(x, list(dict.fromkeys(self.overflow)))
         x.close('</object>')
         x.open('<packing>')
         x.props(position=str(pos))
@@ -267,6 +309,9 @@ def build(app, spec, commands):
             kept += block
             pos += 1
         result = src[:first] + x.out + kept + src[last_child_end(src, first, cc_end, child_pad) + 1:]
+        # top-level menus for the More buttons go before the first top-level object
+        top = next(i for i, l in enumerate(result) if l.startswith('  <object '))
+        result = result[:top] + gen.menu_xml() + result[top:]
         open(os.path.join(ROOT, path), 'w', encoding='utf-8').write('\n'.join(result))
         gen_ids = gen.menu_ids
         update_suppr(spec['suppr'], path, gen_ids, spec['file'] if compact else None)
