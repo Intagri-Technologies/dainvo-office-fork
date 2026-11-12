@@ -749,6 +749,7 @@ sw/uiconfig/swriter/ui/optfonttabpage.ui://GtkLabel[@id='font_label'] orphan-lab
 
 
 
+
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ToggleObjectBezierMode'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltDown'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuDraw-ExtrusionTiltUp'] button-no-label
@@ -806,7 +807,6 @@ sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-Conve
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableSort'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-MergeTable'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableNumberRecognition'] button-no-label
-sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableBoundaries'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Table-TableDialog'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Image-SaveGraphic'] button-no-label
 sw/uiconfig/swriter/ui/notebookbar_compact.ui://GtkToolButton[@id='Image-GraphicDialog'] button-no-label

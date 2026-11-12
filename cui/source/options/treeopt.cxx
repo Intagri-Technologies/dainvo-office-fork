@@ -1333,9 +1333,12 @@ void OfaTreeOptionsDialog::SelectHdl_Impl()
     }
 
     {
-        OUString sTitleText = sTitle
-                            + " - " + xTreeLB->get_text(*xParent)
-                            + " - " + xTreeLB->get_text(*xEntry);
+        // Dainvo: "Settings - User Data", "Settings - Spreadsheets - General"
+        const OUString sGroup = xTreeLB->get_text(*xParent);
+        OUString sTitleText = sTitle;
+        if (sGroup != utl::ConfigManager::getProductName())
+            sTitleText += " - " + sGroup;
+        sTitleText += " - " + xTreeLB->get_text(*xEntry);
         m_xDialog->set_title(sTitleText);
     }
 

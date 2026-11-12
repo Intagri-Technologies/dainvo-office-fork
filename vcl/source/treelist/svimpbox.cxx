@@ -566,6 +566,8 @@ void SvImpLBox::RecalcFocusRect()
     if (m_rView.HasFocus() && m_pCursor)
     {
         m_rView.HideFocus();
+        if (m_rView.IsSelected(m_pCursor))
+            return; // Dainvo: the rounded selection marks it
         tools::Long nY = GetEntryLine( m_pCursor );
         tools::Rectangle aRect = m_rView.GetFocusRect(m_pCursor, nY);
         vcl::Region aOldClip(m_rView.GetOutDev()->GetClipRegion());
@@ -648,7 +650,8 @@ void SvImpLBox::SetCursor( SvTreeListEntry* pEntry, bool bForceNoSelect )
 
 void SvImpLBox::ShowCursor( bool bShow )
 {
-    if (!bShow || !m_pCursor || !m_rView.HasFocus())
+    // Dainvo: the rounded selection already marks a selected cursor row
+    if (!bShow || !m_pCursor || !m_rView.HasFocus() || m_rView.IsSelected(m_pCursor))
     {
         vcl::Region aOldClip(m_rView.GetOutDev()->GetClipRegion());
         vcl::Region aClipRegion( GetClipRegionRect() );

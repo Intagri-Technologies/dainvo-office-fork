@@ -2790,6 +2790,23 @@ void SvTreeListBox::PaintEntry1(SvTreeListEntry& rEntry, tools::Long nLine, vcl:
     // the symbol may be drawn using aHighlightTextColor (usually white) on white background
     bool bImageHighlighted = false;
 
+    // Dainvo: one rounded, inset selection per row (like the dropdown lists)
+    // instead of square fills behind each column
+    const bool bRoundSel = bEntryHighlighted && !m_nFirstSelTab;
+    if (bRoundSel)
+    {
+        Color aSelColor = rSettings.GetHighlightColor();
+        if (bHideSelection && !rSettings.GetFaceColor().IsBright()
+            && rRenderContext.GetBackground().GetColor().IsBright() != rSettings.GetDeactiveColor().IsBright())
+            aSelColor = rSettings.GetDeactiveColor();
+        auto popIt = rRenderContext.ScopedPush(vcl::PushFlags::FILLCOLOR | vcl::PushFlags::LINECOLOR);
+        rRenderContext.SetLineColor();
+        rRenderContext.SetFillColor(aSelColor);
+        const tools::Long nRight = GetOutputSizePixel().Width() - 5;
+        rRenderContext.DrawRect(tools::Rectangle(Point(4, nLine + 1), Point(nRight, nLine + nTempEntryHeight - 2)), 5, 5);
+        bImageHighlighted = bNeedsImage && bDefaultImage;
+    }
+
     for (size_t nCurIndex = 0; nCurIndex < nTabCount && nCurIndex < nItemCount; ++nCurIndex)
     {
         SvLBoxTab* pTab = m_aTabs[nCurIndex].get();
@@ -2909,7 +2926,7 @@ void SvTreeListBox::PaintEntry1(SvTreeListEntry& rEntry, tools::Long nLine, vcl:
         if (!(nCurIndex == 0 && (m_nTreeFlags & SvTreeFlags::USESEL) && m_nFirstSelTab))
         {
             Color aBackgroundColor = aWallpaper.GetColor();
-            if (aBackgroundColor != COL_TRANSPARENT)
+            if (aBackgroundColor != COL_TRANSPARENT && !(bRoundSel && bSelTab))
             {
                 rRenderContext.SetFillColor(aBackgroundColor);
                 // this case may occur for smaller horizontal resizes

@@ -591,13 +591,6 @@
         <property name="action-name">.uno:TableNumberRecognition</property>
       </object>
     </child>
-    <child>
-      <object class="GtkMenuItem" id="MenuTable-TableBoundaries">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="action-name">.uno:TableBoundaries</property>
-      </object>
-    </child>
   </object>
   <object class="GtkMenu" id="Menu View">
     <property name="visible">True</property>
@@ -661,13 +654,6 @@
       <object class="GtkSeparatorMenuItem" id="MenuView-separator2">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="MenuView-Menubar">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="action-name">.uno:Menubar</property>
       </object>
     </child>
     <child>

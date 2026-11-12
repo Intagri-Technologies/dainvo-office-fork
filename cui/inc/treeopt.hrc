@@ -66,7 +66,7 @@ const std::pair<TranslateId, sal_uInt16> SID_INET_DLG_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SW_EDITOPTIONS_RES[] =
 {
-    { NC_("SID_SW_EDITOPTIONS_RES", "%PRODUCTNAME Writer"), 0 },
+    { NC_("SID_SW_EDITOPTIONS_RES", "Documents"), 0 },
     { NC_("SID_SW_EDITOPTIONS_RES", "General"),     RID_SW_TP_OPTLOAD_PAGE    },
     { NC_("SID_SW_EDITOPTIONS_RES", "View"),       RID_SW_TP_CONTENT_OPT   },
     { NC_("SID_SW_EDITOPTIONS_RES", "Formatting Aids"),        RID_SW_TP_OPTSHDWCRSR     },
@@ -85,7 +85,7 @@ const std::pair<TranslateId, sal_uInt16> SID_SW_EDITOPTIONS_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SW_ONLINEOPTIONS_RES[] =
 {
-    { NC_("SID_SW_ONLINEOPTIONS_RES", "%PRODUCTNAME Writer/Web"), 0 },
+    { NC_("SID_SW_ONLINEOPTIONS_RES", "Documents/Web"), 0 },
     { NC_("SID_SW_ONLINEOPTIONS_RES", "View"),       RID_SW_TP_HTML_CONTENT_OPT      },
     { NC_("SID_SW_ONLINEOPTIONS_RES", "Formatting Aids"),        RID_SW_TP_HTML_OPTSHDWCRSR     },
     { NC_("SID_SW_ONLINEOPTIONS_RES", "Grid"),        RID_SW_TP_HTML_OPTGRID_PAGE  },
@@ -95,13 +95,13 @@ const std::pair<TranslateId, sal_uInt16> SID_SW_ONLINEOPTIONS_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SM_EDITOPTIONS_RES[] =
 {
-    { NC_("SID_SM_EDITOPTIONS_RES", "%PRODUCTNAME Math"), 0 },
+    { NC_("SID_SM_EDITOPTIONS_RES", "Formulas"), 0 },
     { NC_("SID_SM_EDITOPTIONS_RES", "Settings"), SID_SM_TP_PRINTOPTIONS },
 };
 
 const std::pair<TranslateId, sal_uInt16> SID_SC_EDITOPTIONS_RES[] =
 {
-    { NC_("SID_SC_EDITOPTIONS_RES", "%PRODUCTNAME Calc"), 0 },
+    { NC_("SID_SC_EDITOPTIONS_RES", "Spreadsheets"), 0 },
     { NC_("SID_SC_EDITOPTIONS_RES", "General"),           SID_SC_TP_LAYOUT            },
     { NC_("SID_SC_EDITOPTIONS_RES", "Defaults"),          RID_SC_TP_DEFAULTS          },
     { NC_("SID_SC_EDITOPTIONS_RES", "View"),          SID_SC_TP_CONTENT           },
@@ -116,7 +116,7 @@ const std::pair<TranslateId, sal_uInt16> SID_SC_EDITOPTIONS_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SD_EDITOPTIONS_RES[] =
 {
-    { NC_("SID_SD_EDITOPTIONS_RES", "%PRODUCTNAME Impress"),   0                  },
+    { NC_("SID_SD_EDITOPTIONS_RES", "Presentations"),   0                  },
     { NC_("SID_SD_EDITOPTIONS_RES", "General"),                SID_SI_TP_MISC     },
     { NC_("SID_SD_EDITOPTIONS_RES", "View"),                   SID_SI_TP_CONTENTS },
     { NC_("SID_SD_EDITOPTIONS_RES", "Grid"),                   SID_SI_TP_SNAP     },
@@ -125,7 +125,7 @@ const std::pair<TranslateId, sal_uInt16> SID_SD_EDITOPTIONS_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SD_GRAPHIC_OPTIONS_RES[] =
 {
-    { NC_("SID_SD_GRAPHIC_OPTIONS_RES", "%PRODUCTNAME Draw"), 0 },
+    { NC_("SID_SD_GRAPHIC_OPTIONS_RES", "Drawings"), 0 },
     { NC_("SID_SD_GRAPHIC_OPTIONS_RES", "General"),           SID_SD_TP_MISC               },
     { NC_("SID_SD_GRAPHIC_OPTIONS_RES", "View"),          SID_SD_TP_CONTENTS           },
     { NC_("SID_SD_GRAPHIC_OPTIONS_RES", "Grid"),          SID_SD_TP_SNAP               },
@@ -149,7 +149,7 @@ const std::pair<TranslateId, sal_uInt16> SID_FILTER_DLG_RES[] =
 
 const std::pair<TranslateId, sal_uInt16> SID_SB_STARBASEOPTIONS_RES[] =
 {
-    { NC_("SID_SB_STARBASEOPTIONS_RES", "%PRODUCTNAME Base"), 0 },
+    { NC_("SID_SB_STARBASEOPTIONS_RES", "Database"), 0 },
     { NC_("SID_SB_STARBASEOPTIONS_RES", "Connections"), SID_SB_CONNECTIONPOOLING },
     { NC_("SID_SB_STARBASEOPTIONS_RES", "Databases"), SID_SB_DBREGISTEROPTIONS }
 };

@@ -335,7 +335,8 @@ DROP = re.compile(r'\.uno:(ImageMapDialog|Repaginate|\w*DDE\w*|SwitchControlDesi
                   r'|OpenRemote|SaveAsRemote|VersionDialog|SendViaBluetooth|Twain\w+|CheckOut|CancelCheckOut|CheckIn'
                   r'|SignPDF|MoreDictionaries|Remote|ShareDocument|ManageXMLSource|DataProvider\w*|TableEvents'
                   r'|GetInvolved|Donation|QuestionAnswers|ExtendedHelp|HelpIndex|TipOfTheDay|\w*Classification\w*'
-                  r'|ToolbarModeUI|AvailableToolbars|UIPicker|Notebookbar)\b'
+                  r'|ToolbarModeUI|AvailableToolbars|UIPicker|Notebookbar'
+                  r'|AssignMacro|TableBoundaries|Menubar)\b'
                   r'|private:factory/sdraw')
 # Dainvo Office is ribbon-only: the View tab switches between the labelled and
 # icons-only ribbon instead of a toolbar-mode picker
@@ -353,6 +354,15 @@ def drop_commands(lines):
             if lines[obj - 1].strip() == '<child>':
                 del lines[obj - 1:block_end(lines, obj - 1) + 1]
                 i = obj - 1
+                continue
+        i += 1
+    # a toolbox whose only buttons were retired would leave an empty gap
+    i = 0
+    while i < len(lines):
+        if 'class="sfxlo-NotebookbarToolBox"' in lines[i] and lines[i - 1].strip() == '<child>':
+            end = block_end(lines, i)
+            if not any(l.strip() == '<child>' for l in lines[i + 1:end]):
+                del lines[i - 1:block_end(lines, i - 1) + 1]
                 continue
         i += 1
     return lines

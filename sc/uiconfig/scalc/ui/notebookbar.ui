@@ -180,13 +180,6 @@
         <property name="action-name">.uno:OpenHyperlinkOnCursor</property>
       </object>
     </child>
-    <child>
-      <object class="GtkMenuItem" id="MenuImage-AssignMacro">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="action-name">.uno:AssignMacro</property>
-      </object>
-    </child>
   </object>
   <object class="GtkMenu" id="Menu Media">
     <property name="visible">True</property>
@@ -243,13 +236,6 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="action-name">.uno:OpenHyperlinkOnCursor</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="MenuMedia-AssignMacro">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="action-name">.uno:AssignMacro</property>
       </object>
     </child>
   </object>
@@ -3544,34 +3530,6 @@
                             <property name="width">2</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxImageAssignMacro">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnImageAssignMacro">
-                                <property name="visible">True</property>
-                                <property name="valign">center</property>
-                                <property name="vexpand">True</property>
-                                <property name="action-name">.uno:AssignMacro</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">False</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4427,34 +4385,6 @@
                             <property name="top-attach">0</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxDrawAssignMacro">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnDrawAssignMacro">
-                                <property name="visible">True</property>
-                                <property name="valign">center</property>
-                                <property name="vexpand">True</property>
-                                <property name="action-name">.uno:AssignMacro</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">False</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -5293,34 +5223,6 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxObjectAssignMacro">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnObjectAssignMacro">
-                                <property name="visible">True</property>
-                                <property name="valign">center</property>
-                                <property name="vexpand">True</property>
-                                <property name="action-name">.uno:AssignMacro</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">False</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="sfxlo-NotebookbarToolBox" id="bxObjectOriginalSize">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
@@ -5919,34 +5821,6 @@
                             <property name="left-attach">1</property>
                             <property name="top-attach">0</property>
                             <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="sfxlo-NotebookbarToolBox" id="bxMediaAssignMacro">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="vexpand">True</property>
-                            <property name="toolbar-style">both</property>
-                            <property name="show-arrow">False</property>
-                            <property name="icon_size">3</property>
-                            <child>
-                              <object class="GtkToolButton" id="btnMediaAssignMacro">
-                                <property name="visible">True</property>
-                                <property name="valign">center</property>
-                                <property name="vexpand">True</property>
-                                <property name="action-name">.uno:AssignMacro</property>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left-attach">0</property>
-                            <property name="top-attach">0</property>
-                            <property name="height">2</property>
                           </packing>
                         </child>
                       </object>

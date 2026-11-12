@@ -280,8 +280,6 @@ sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuTable-ConvertTable
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuTable-TableSort'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuTable-MergeTable'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuTable-TableNumberRecognition'] button-no-label
-sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuTable-TableBoundaries'] button-no-label
-sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuView-Menubar'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuView-Sidebar'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuView-StatusBarVisible'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkMenuItem[@id='MenuView-LeftPaneImpress'] button-no-label
@@ -309,6 +307,7 @@ sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawMerge'] butto
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawSubstract'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawDistributeSelection'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar.ui://GtkToolButton[@id='btnDrawFormatUngroup'] button-no-label
+
 
 
 
@@ -663,8 +662,6 @@ sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-Conv
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableSort'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-MergeTable'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableNumberRecognition'] button-no-label
-sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuTable-TableBoundaries'] button-no-label
-sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuView-Menubar'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuView-Sidebar'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuView-StatusBarVisible'] button-no-label
 sd/uiconfig/simpress/ui/notebookbar_compact.ui://GtkMenuItem[@id='MenuView-LeftPaneImpress'] button-no-label
