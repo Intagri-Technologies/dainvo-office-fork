@@ -44,7 +44,6 @@ $(eval $(call gb_CppunitTest_use_components,cppcanvas_emfplus,\
 	cppcanvas/source/uno/mtfrenderer \
 	configmgr/source/configmgr \
 	emfio/emfio \
-	extensions/source/scanner/scn \
 	filter/source/config/cache/filterconfig1 \
 	framework/util/fwk \
 	i18npool/util/i18npool \

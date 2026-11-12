@@ -254,7 +254,7 @@ Dim ComponentsToCheck As Variant, oComponent As Object
 	oReportDoc = CreateNewDocument(&quot;swriter&quot;)
 	oReportCursor = oReportDoc.getText().createTextCursor()
 
-	ComponentsToCheck() = Array(&quot;Writer&quot;, &quot;Calc&quot;, &quot;Impress&quot;,&quot;Draw&quot;, &quot;Math&quot;)
+	ComponentsToCheck() = Array(&quot;Writer&quot;, &quot;Calc&quot;, &quot;Impress&quot;, &quot;Math&quot;)
 	For Each oComponentName In ComponentsToCheck
 		oComponent = CreateNewDocument(&quot;s&quot; &amp; LCase(oComponentName))
 		AccReportHeading(oComponentName, 1)

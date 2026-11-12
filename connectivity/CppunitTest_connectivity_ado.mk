@@ -55,7 +55,7 @@ $(eval $(call gb_CppunitTest_use_libraries,connectivity_ado, \
 $(eval $(call gb_CppunitTest_use_components,connectivity_ado,\
     configmgr/source/configmgr \
     i18npool/util/i18npool \
-    connectivity/source/drivers/ado/ado \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/ado/ado) \
     ucb/source/core/ucb1 \
     ucb/source/ucp/file/ucpfile1 \
 ))

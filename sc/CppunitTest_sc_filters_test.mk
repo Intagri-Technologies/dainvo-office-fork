@@ -81,7 +81,7 @@ $(eval $(call gb_CppunitTest_use_components,sc_filters_test,\
     chart2/source/chart2 \
     comphelper/util/comphelp \
     configmgr/source/configmgr \
-    connectivity/source/manager/sdbc2 \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/manager/sdbc2) \
     dbaccess/util/dba \
     embeddedobj/util/embobj \
     emfio/emfio \

@@ -53,14 +53,14 @@ $(eval $(call gb_CppunitTest_use_components,dbaccess_hsqldb_test,\
     basic/util/sb \
     comphelper/util/comphelp \
     configmgr/source/configmgr \
-    connectivity/source/cpool/dbpool2 \
-    connectivity/source/drivers/hsqldb/hsqldb \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/cpool/dbpool2) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/hsqldb/hsqldb) \
     $(if $(ENABLE_FIREBIRD_SDBC),connectivity/source/drivers/firebird/firebird_sdbc) \
-    connectivity/source/drivers/jdbc/jdbc \
-    connectivity/source/manager/sdbc2 \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/jdbc/jdbc) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/manager/sdbc2) \
     dbaccess/util/dba \
-    dbaccess/source/filter/xml/dbaxml \
-    dbaccess/util/dbu \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/source/filter/xml/dbaxml) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/util/dbu) \
     filter/source/config/cache/filterconfig1 \
     framework/util/fwk \
     i18npool/util/i18npool \

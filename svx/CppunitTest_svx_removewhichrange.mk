@@ -46,7 +46,7 @@ $(eval $(call gb_CppunitTest_use_libraries,svx_removewhichrange, \
     vcl \
     xo \
     $(call gb_Helper_optional,AVMEDIA,avmedia) \
-    $(call gb_Helper_optional,DBCONNECTIVITY,dbtools) \
+    dbtools \
 ))
 
 $(eval $(call gb_CppunitTest_use_library_objects,svx_removewhichrange, \

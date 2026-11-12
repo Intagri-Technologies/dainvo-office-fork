@@ -7,6 +7,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <com/sun/star/container/XNameAccess.hpp>
+#include <comphelper/processfactory.hxx>
 #include <sal/config.h>
 
 #include "helper/scfiltertestbase.hxx"
@@ -74,6 +76,20 @@ bool ScFiltersTest::load(const OUString &rFilter, const OUString &rURL,
     return bLoaded;
 }
 
+namespace
+{
+// Dainvo drops some old import filters (--disable-legacy-import-filters, no
+// database layer); only test the formats that are present.
+bool hasFilter(const OUString& rName)
+{
+    css::uno::Reference<css::container::XNameAccess> xFilters(
+        comphelper::getProcessServiceFactory()->createInstance(
+            u"com.sun.star.document.FilterFactory"_ustr),
+        css::uno::UNO_QUERY);
+    return xFilters.is() && xFilters->hasByName(rName);
+}
+}
+
 void ScFiltersTest::testCVEs()
 {
 #ifndef DISABLE_CVE_TESTS
@@ -83,6 +99,7 @@ void ScFiltersTest::testCVEs()
     //warning, the current "sylk filter" in sc (docsh.cxx) automatically
     //chains on failure on trying as csv, rtf, etc. so "success" may
     //not indicate that it imported as .slk.
+    if (hasFilter(u"SYLK"_ustr))
     testDir(u"SYLK"_ustr,
         m_directories.getURLFromSrc(u"/sc/qa/unit/data/slk/"));
 #if defined _WIN32 && defined _ARM64_
@@ -98,9 +115,11 @@ void ScFiltersTest::testCVEs()
     testDir(u"Calc Office Open XML"_ustr,
         m_directories.getURLFromSrc(u"/sc/qa/unit/data/xlsm/"), OUString(), XLSX_FORMAT_TYPE);
 
+    if (hasFilter(u"dBase"_ustr))
     testDir(u"dBase"_ustr,
         m_directories.getURLFromSrc(u"/sc/qa/unit/data/dbf/"));
 
+    if (hasFilter(u"Lotus"_ustr))
     testDir(u"Lotus"_ustr,
         m_directories.getURLFromSrc(u"/sc/qa/unit/data/wks/"));
 

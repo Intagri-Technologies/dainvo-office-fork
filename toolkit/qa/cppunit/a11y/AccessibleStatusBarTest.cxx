@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <unotools/moduleoptions.hxx>
 #include <string>
 
 #include <com/sun/star/accessibility/AccessibleRole.hpp>
@@ -52,7 +53,13 @@ private:
 
     void testWriterDoc() { testDocument("swriter"); }
     void testMathDoc() { testDocument("smath"); }
-    void testDrawDoc() { testDocument("sdraw"); }
+    void testDrawDoc()
+    {
+        // Dainvo ships no Draw app
+        if (!SvtModuleOptions().IsDrawInstalled())
+            return;
+        testDocument("sdraw");
+    }
     void testImpressDoc() { testDocument("simpress"); }
     void testCalcDoc() { testDocument("scalc"); }
 

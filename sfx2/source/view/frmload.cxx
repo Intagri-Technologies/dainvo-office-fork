@@ -790,6 +790,11 @@ sal_Bool SAL_CALL SfxFrameLoader_Impl::load( const Sequence< PropertyValue >& rA
         const SfxObjectShellRef xDoc = impl_findObjectShell( xModel );
         ENSURE_OR_THROW( xDoc.is(), "no SfxObjectShell for the given model" );
 
+        // A document type whose application isn't installed (Dainvo ships no
+        // Draw) has no view factories: refuse the load instead of crashing.
+        if (xDoc->GetFactory().GetViewFactoryCount() == 0)
+            throw RuntimeException(u"no view available for this document type"_ustr);
+
         if (pEmptyURLFilter)
         {
             // Detach the medium from the template, and set proper document name and filter

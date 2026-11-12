@@ -89,7 +89,6 @@ $(eval $(call gb_CppunitTest_use_uiconfigs,sw_uiwriter$(1),\
 
 $(eval $(call gb_CppunitTest_use_packages,sw_uiwriter$(1),\
     oox_customshapes \
-    sfx2_classification \
 ))
 
 $(call gb_CppunitTest_get_target,sw_uiwriter$(1)) : $(call gb_Library_get_target,i18npool)

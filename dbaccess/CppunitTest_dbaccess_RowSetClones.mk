@@ -73,14 +73,14 @@ $(eval $(call gb_CppunitTest_use_components,dbaccess_RowSetClones,\
     basic/util/sb \
     comphelper/util/comphelp \
     configmgr/source/configmgr \
-    connectivity/source/drivers/hsqldb/hsqldb \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/hsqldb/hsqldb) \
     $(if $(ENABLE_FIREBIRD_SDBC),connectivity/source/drivers/firebird/firebird_sdbc) \
-    connectivity/source/drivers/jdbc/jdbc \
-    connectivity/source/manager/sdbc2 \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/jdbc/jdbc) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/manager/sdbc2) \
     dbaccess/util/dba \
-    dbaccess/util/dbu \
-    dbaccess/util/sdbt \
-    dbaccess/source/filter/xml/dbaxml \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/util/dbu) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/util/sdbt) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/source/filter/xml/dbaxml) \
     filter/source/config/cache/filterconfig1 \
     forms/util/frm \
     framework/util/fwk \

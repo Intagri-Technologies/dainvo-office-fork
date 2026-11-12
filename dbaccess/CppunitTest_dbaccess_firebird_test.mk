@@ -48,11 +48,11 @@ $(eval $(call gb_CppunitTest_use_components,dbaccess_firebird_test,\
     basic/util/sb \
     comphelper/util/comphelp \
     configmgr/source/configmgr \
-    connectivity/source/drivers/firebird/firebird_sdbc \
-    connectivity/source/manager/sdbc2 \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/firebird/firebird_sdbc) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/manager/sdbc2) \
     dbaccess/util/dba \
-    dbaccess/source/filter/xml/dbaxml \
-    dbaccess/util/dbu \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/source/filter/xml/dbaxml) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,dbaccess/util/dbu) \
     filter/source/config/cache/filterconfig1 \
     framework/util/fwk \
     i18npool/util/i18npool \

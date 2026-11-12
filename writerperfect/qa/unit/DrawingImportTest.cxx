@@ -7,6 +7,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <unotools/moduleoptions.hxx>
 #include <com/sun/star/beans/XPropertySet.hpp>
 #include <com/sun/star/drawing/XDrawPages.hpp>
 #include <com/sun/star/drawing/XDrawPagesSupplier.hpp>
@@ -121,6 +122,9 @@ public:
 
 void DrawingImportTest::test()
 {
+    // Dainvo ships no Draw app
+    if (!SvtModuleOptions().IsDrawInstalled())
+        return;
     using namespace css;
 
     rtl::Reference<DrawingImportFilter> xFilter{ new DrawingImportFilter(m_xContext) };

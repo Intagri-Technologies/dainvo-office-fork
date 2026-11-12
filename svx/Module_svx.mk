@@ -39,13 +39,13 @@ $(eval $(call gb_Module_add_l10n_targets,svx,\
 
 $(eval $(call gb_Module_add_check_targets,svx,\
 	CppunitTest_svx_unit_SdrTextObject \
-	CppunitTest_svx_unit_customshapes \
+	$(if $(ENABLE_DRAW_APP),CppunitTest_svx_unit_customshapes) \
 	CppunitTest_svx_unit_classicshapes \
 	$(if $(ENABLE_FIREBIRD_SDBC),CppunitTest_svx_unit_form) \
 	CppunitTest_svx_unit_framelinkarray \
 	CppunitTest_svx_unit_gluepointTest \
-	CppunitTest_svx_unit_sdr \
-	CppunitTest_svx_unit_svdraw \
+	$(if $(ENABLE_DRAW_APP),CppunitTest_svx_unit_sdr) \
+	$(if $(ENABLE_DRAW_APP),CppunitTest_svx_unit_svdraw) \
 	CppunitTest_svx_unit_table \
 	CppunitTest_svx_unit_unodraw \
 	CppunitTest_svx_unit_xoutdev \

@@ -56,7 +56,7 @@ $(eval $(call gb_CppunitTest_use_vcl,extensions_test_update))
 
 $(eval $(call gb_CppunitTest_use_components,extensions_test_update,\
     configmgr/source/configmgr \
-    extensions/source/update/feed/updatefeed \
+    $(call gb_Helper_optional,EXTENSIONS,extensions/source/update/feed/updatefeed) \
     ucb/source/core/ucb1 \
     ucb/source/ucp/file/ucpfile1 \
     unoxml/source/service/unoxml \

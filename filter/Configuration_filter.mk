@@ -270,8 +270,7 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_base_types.xcu,f
 	component_DB \
 ))
 
-$(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_base_filters.xcu,filter/source/config/fragments/filters,\
-))
+# Dainvo: no base filters are left (the help-viewer filter was the only one)
 
 $(eval $(call filter_Configuration_add_others,fcfg_langpack,fcfg_base_others.xcu,filter/source/config/fragments,\
 	frameloaders/com_sun_star_frame_Bibliography \

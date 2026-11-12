@@ -10,7 +10,8 @@
      scanning, Bluetooth, document versions and classification, extensions,
      databases and mail merge, PDF signing of existing files, Impress Remote,
      Calc document sharing and experimental data sources, LibreOffice
-     community help, and the interface/toolbar pickers: Dainvo is
+     community help, redaction (it needs Draw; redaction belongs to the Dainvo
+     PDF app), and the interface/toolbar pickers: Dainvo is
      ribbon-only). Disabled commands are hidden from menus, toolbars and
      context menus and can't be run from shortcuts. Macro commands are handled
      at startup instead (desktop/source/app/dainvofirstrun.cxx), because the
@@ -201,6 +202,16 @@
       <node oor:name="DainvoShowCredits" oor:op="replace">
         <prop oor:name="Command">
           <value>ShowCredits</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoRedactDoc" oor:op="replace">
+        <prop oor:name="Command">
+          <value>RedactDoc</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoAutoRedactDoc" oor:op="replace">
+        <prop oor:name="Command">
+          <value>AutoRedactDoc</value>
         </prop>
       </node>
     </node>

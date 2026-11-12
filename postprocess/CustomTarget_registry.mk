@@ -263,7 +263,6 @@ postprocess_FILES_main := \
 	$(postprocess_XCU)/UserProfile.xcu \
 	$(postprocess_XCU)/VCL.xcu \
 	$(postprocess_XCU)/ucb/Configuration.xcu \
-	$(call gb_XcuFilterFiltersTarget_get_target,fcfg_base_filters.xcu) \
 	$(call gb_XcuFilterOthersTarget_get_target,fcfg_base_others.xcu) \
 	$(call gb_XcuFilterTypesTarget_get_target,fcfg_base_types.xcu) \
 	$(call gb_XcuFilterFiltersTarget_get_target,fcfg_chart_filters.xcu) \

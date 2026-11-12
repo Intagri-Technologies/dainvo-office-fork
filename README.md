@@ -1,145 +1,103 @@
-# LibreOffice
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/211/badge.svg)](https://scan.coverity.com/projects/211) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/307/badge)](https://www.bestpractices.dev/projects/307) [![Translation status](https://weblate.documentfoundation.org/widgets/libo_ui-master/-/svg-badge.svg)](https://weblate.documentfoundation.org/engage/libo_ui-master/?utm_source=widget)
+<p align="center">
+  <img src="sysui/desktop/icons/hicolor/256x256/apps/main.png" width="128" height="128" alt="Dainvo Office icon">
+</p>
 
-<img align="right" width="150" src="https://opensource.org/wp-content/uploads/2009/06/OSIApproved.svg">
+<h1 align="center">Dainvo Office</h1>
 
-LibreOffice is an integrated office suite based on copyleft licenses
-and compatible with most document formats and standards. Libreoffice
-is backed by The Document Foundation, which represents a large
-independent community of enterprises, developers and other volunteers
-moved by the common goal of bringing to the market the best software
-for personal productivity. LibreOffice is open source, and free to
-download, use and distribute.
+Dainvo Office is a lean office suite for documents, spreadsheets and
+presentations, built from [LibreOffice](https://www.libreoffice.org). It keeps
+LibreOffice's engines and Microsoft Office compatibility and drops the parts
+most people never use, as the base for Dainvo's AI features.
 
-A quick overview of the LibreOffice code structure.
+- **Documents** (Writer), **Spreadsheets** (Calc) and **Presentations**
+  (Impress), with charts and equations.
+- Opens and saves Word, Excel and PowerPoint files, and saves in those formats
+  by default if you choose that on first launch.
+- A ribbon-only interface, a modern Start Center and Phosphor icon galleries.
+- Signed automatic updates (Sparkle on macOS, WinSparkle on Windows, a
+  built-in notice on Linux) and downloadable language packs.
 
-## Overview
+Releases: [Intagri-Technologies/dainvo-office-releases](https://github.com/Intagri-Technologies/dainvo-office-releases).
 
-You can develop for LibreOffice in one of two ways, one
-recommended and one much less so. First the somewhat less recommended
-way: it is possible to use the SDK to develop an extension,
-for which you can read the [API docs](https://api.libreoffice.org/)
-and [Developers Guide](https://wiki.documentfoundation.org/Documentation/DevGuide).
-This re-uses the (extremely generic) UNO APIs that are also used by
-macro scripting in StarBasic.
+## How it differs from LibreOffice
 
-The best way to add a generally useful feature to LibreOffice
-is to work on the code base however. Overall this way makes it easier
-to compile and build your code, it avoids any arbitrary limitations of
-our scripting APIs, and in general is far more simple and intuitive -
-if you are a reasonably able C++ programmer.
+Removed or off by default, to keep the app small and simple:
 
-## The Build Chain and Runtime Baselines
+| Area | Change |
+|---|---|
+| Apps | No Base (databases) or Draw app. The Formula (Math) app is hidden; equations in documents still work. |
+| Data | No database layer: no mail merge, data sources or database fields (mail merge will return as a Dainvo feature). |
+| Scripting | No Python or Java. Basic and VBA macros are off by default (Tools > Options > Advanced > Enable macros). |
+| Add-ons | No extensions; language data comes as Dainvo language packs. |
+| PDF | PDF export and signing stay; opening PDFs for editing is left to a separate Dainvo PDF app. |
+| Formats | Very old import formats are dropped (`--disable-legacy-import-filters`). |
+| UI | No classic toolbars or interface picker, no form design tools, no built-in or online help, no LibreOffice community links. |
 
-The C++ baseline is C++23. The available features are constrained by
-the minimum compiler versions.
+Every build switch is in [`distro-configs/DainvoMacOS.conf`](distro-configs/DainvoMacOS.conf)
+with a comment saying why. Dainvo's own tools and notes are in [`dainvo/`](dainvo/):
 
-These are the current minimum operating system and compiler versions to
-run and compile LibreOffice, also used by the TDF builds:
+| Path | What |
+|---|---|
+| [`dainvo/ribbon/`](dainvo/ribbon/) | Ribbon definitions (`ribbons.json`) and `generate.py`, which writes the `notebookbar*.ui` files. Edit the JSON, not the generated `.ui` files. |
+| [`dainvo/icons/`](dainvo/icons/) | Ribbon and sidebar icons and their installer. |
+| [`dainvo/branding/`](dainvo/branding/) | App icon artwork (`app-icon-source.png`), logos, splash screen and About images. |
+| [`dainvo/fonts/`](dainvo/fonts/) | Bundled fonts (Intos, Gelasio; SIL Open Font License). |
+| [`dainvo/languages/`](dainvo/languages/) | Bundled US English language data and licence records. |
+| [`dainvo/docs/`](dainvo/docs/) | [Releases](dainvo/docs/RELEASES.md), [updates design](dainvo/docs/UPDATES-DESIGN.md), [language packs](dainvo/docs/LANGUAGE_TOOLS.md), [font compatibility](dainvo/docs/FONT-COMPATIBILITY.md). |
+| [`dainvo/tools/`](dainvo/tools/) | Release, language-pack, font and gallery tools. |
 
-* Windows:
-    * Runtime: Windows 10
-    * Build: [wsl-as-helper](https://wiki.documentfoundation.org/Development/BuildingOnWSLWindows) + Visual Studio 2022
-* macOS:
-    * Runtime: 11
-    * Build: macOS 14 with Xcode 16.2 or later (using latest version available for a given version of macOS)
-* Linux:
-    * Runtime: RHEL 9 or CentOS 9 and comparable
-    * Build: either GCC 13; or Clang 18 with libstdc++ 11
-* iOS (only for LibreOfficeKit):
-    * Runtime: 14.5 (only support for newer i devices == 64 bit)
-    * Build: Xcode 12.5 and iPhone SDK 14.5
-* Android:
-    * Build: NDK 27 and SDK 30.0.3
-* Emscripten / WASM:
-    * Runtime: a browser with SharedMemory support (threads + atomics)
-    * Build: Qt 5.15 with Qt supported Emscripten 1.39.8
-    * See [README.wasm](static/README.wasm.md)
+## Building (macOS)
 
-Java is required for building many parts of LibreOffice. In TDF Wiki article
-[Development/Java](https://wiki.documentfoundation.org/Development/Java), the
-exact modules that depend on Java are listed.
+You need Xcode, Homebrew `pkg-config` and Python 3.11 or newer on `PATH`, plus
+the usual LibreOffice build tools (see
+[LibreOffice's macOS build guide](https://wiki.documentfoundation.org/Development/BuildingOnMac)).
 
-The baseline for Java is Java Development Kit (JDK) Version 17 or later.
+1. Create `autogen.input` in the repository root (it is ignored by git). Start
+   from [`dainvo/autogen.input`](dainvo/autogen.input) and adjust the
+   machine-specific lines:
 
-The baseline for Python is version 3.11. It follows the version available
-in SUSE Linux Enterprise Desktop and the Maintenance Support version of
-Red Hat Enterprise Linux.
+   ```
+   INCLUDE:DainvoMacOS
+   --with-branding=/full/path/to/this/repo/dainvo/branding
+   --enable-ccache
+   --with-parallelism=8
+   PKG_CONFIG=/opt/homebrew/bin/pkg-config
+   ```
 
-If you want to use Clang with the LibreOffice compiler plugins, the minimal
-version of Clang is 18. Since Xcode doesn't provide the compiler plugin
-headers, you have to compile your own Clang to use them on macOS.
+2. Configure and build:
 
-You can find the TDF configure switches in the `distro-configs/` directory.
+   ```bash
+   ./autogen.sh && make
+   ```
 
-To setup your initial build environment on Windows and macOS, we provide
-the LibreOffice Development Environment
-([LODE](https://wiki.documentfoundation.org/Development/lode)) scripts.
+   The app is in `instdir/DainvoOffice.app`.
 
-For more information see the build instructions for your platform in the
-[TDF wiki](https://wiki.documentfoundation.org/Development/How_to_build).
+3. For a release disk image (stripped, with symbols kept separately for crash
+   reports):
 
-## The Important Bits of Code
+   ```bash
+   make instsetoo_native PKGFORMAT=dmg
+   ```
 
-Each module should have a `README.md` file inside it which has some
-degree of documentation for that module; patches are most welcome to
-improve those. We have those turned into a web page here:
+   The image is in `workdir/installation/DainvoOffice/dmg/install/en-US/`.
+   Signing, notarization and publishing are covered in
+   [`dainvo/docs/RELEASES.md`](dainvo/docs/RELEASES.md).
 
-<https://docs.libreoffice.org/>
+Windows and Linux builds are planned; their configuration files don't exist yet.
 
-However, there are two hundred modules, many of them of only
-peripheral interest for a specialist audience. So - where is the
-good stuff, the code that is most useful. Here is a quick overview of
-the most important ones:
+## Licence and credit
 
-Module    | Description
-----------|-------------------------------------------------
-[sal/](sal)             | this provides a simple System Abstraction Layer
-[tools/](tools)         | this provides basic internal types: `Rectangle`, `Color` etc.
-[vcl/](vcl)             | this is the widget toolkit library and one rendering abstraction
-[framework/](framework) | UNO framework, responsible for building toolbars, menus, status bars, and the chrome around the document using widgets from VCL, and XML descriptions from `/uiconfig/` files
-[sfx2/](sfx2)           | legacy core framework used by Writer/Calc/Draw: document model / load/save / signals for actions etc.
-[svx/](svx)             | drawing model related helper code, including much of Draw/Impress
+Dainvo Office is a fork of LibreOffice, made by The Document Foundation and
+its community, and keeps LibreOffice's licence: the
+[Mozilla Public License 2.0](COPYING.MPL), with some files under other
+licences as stated in their headers and in the [`COPYING`](COPYING) file.
 
-Then applications
+This repository's history starts with a single commit that imports
+LibreOffice exactly as it was at upstream commit
+`6cd7c50d0e943f89b8092958deb01340afeb1fd1`; LibreOffice's earlier history is
+in [its own repository](https://git.libreoffice.org/core). LibreOffice's
+original README, with its overview of the code structure, is in
+[`README.libreoffice.md`](README.libreoffice.md).
 
-Module    | Description
-----------|-------------------------------------------------
-[desktop/](desktop)  | this is where the `main()` for the application lives, init / bootstrap. the name dates back to an ancient StarOffice that also drew a desktop
-[sw/](sw/)           | Writer
-[sc/](sc/)           | Calc
-[sd/](sd/)           | Draw / Impress
-
-There are several other libraries that are helpful from a graphical perspective:
-
-Module    | Description
-----------|-------------------------------------------------
-[basegfx/](basegfx)  | algorithms and data-types for graphics as used in the canvas
-[canvas/](canvas)   | new (UNO) canvas rendering model with various backends
-[cppcanvas/](cppcanvas) | C++ helper classes for using the UNO canvas
-[drawinglayer/](drawinglayer) | View code to render drawable objects and break them down into primitives we can render more easily.
-
-## Rules for #include Directives (C/C++)
-
-Use the `"..."` form if and only if the included file is found next to the
-including file. Otherwise, use the `<...>` form. (For further details, see the
-mail [Re: C[++]: Normalizing include syntax ("" vs
-<>)](https://lists.freedesktop.org/archives/libreoffice/2017-November/078778.html).)
-
-The UNO API include files should consistently use double quotes, for the
-benefit of external users of this API.
-
-`loplugin:includeform (compilerplugins/clang/includeform.cxx)` enforces these rules.
-
-
-## Finding Out More
-
-Beyond this, you can read the `README.md` files, send us patches, ask
-on the mailing list libreoffice@lists.freedesktop.org (no subscription
-required) or poke people on IRC `#libreoffice-dev` on irc.libera.chat -
-we're a friendly and generally helpful mob. We know the code can be
-hard to get into at first, and so there are no silly questions.
-
-## SAST Tools
-
-[PVS-Studio](https://pvs-studio.com/en/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
+LibreOffice is a registered trademark of The Document Foundation. Dainvo
+Office is not affiliated with or endorsed by The Document Foundation.

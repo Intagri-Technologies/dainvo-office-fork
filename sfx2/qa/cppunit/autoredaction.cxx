@@ -7,6 +7,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <unotools/moduleoptions.hxx>
 #include <test/unoapi_test.hxx>
 
 #include <com/sun/star/drawing/XDrawPagesSupplier.hpp>
@@ -31,6 +32,9 @@ public:
 
 CPPUNIT_TEST_FIXTURE(AutoRedactionTest, testImageRedaction)
 {
+    // Redaction builds a Draw document; Dainvo ships no Draw app
+    if (!SvtModuleOptions().IsDrawInstalled())
+        return;
     // Get the images size and position from the writer
     loadFromFile(u"autoredact_img.fodt");
     CPPUNIT_ASSERT_MESSAGE("Failed to load autoredact_img.odt", mxComponent.is());

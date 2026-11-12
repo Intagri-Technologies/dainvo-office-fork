@@ -53,7 +53,7 @@ $(eval $(call gb_Module_add_check_targets,filter,\
 
 ifneq ($(DISABLE_CVE_TESTS),TRUE)
 $(eval $(call gb_Module_add_check_targets,filter,\
-    CppunitTest_filter_svg \
+    $(if $(ENABLE_DRAW_APP),CppunitTest_filter_svg) \
 ))
 endif
 

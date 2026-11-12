@@ -34,9 +34,9 @@ endif
 $(eval $(call gb_Module_add_check_targets,xmloff,\
 	$(if $(MERGELIBS),, \
 		CppunitTest_xmloff_uxmloff) \
-	CppunitTest_xmloff_draw \
+	$(if $(ENABLE_DRAW_APP),CppunitTest_xmloff_draw) \
 	CppunitTest_xmloff_forms \
-	CppunitTest_xmloff_style \
+	$(if $(ENABLE_DRAW_APP),CppunitTest_xmloff_style) \
 	CppunitTest_xmloff_text \
 ))
 

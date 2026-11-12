@@ -41,8 +41,8 @@ $(eval $(call gb_CppunitTest_use_components,connectivity_mysql_test,\
     basic/util/sb \
     comphelper/util/comphelp \
     configmgr/source/configmgr \
-    connectivity/source/drivers/mysqlc/mysqlc \
-    connectivity/source/manager/sdbc2 \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/drivers/mysqlc/mysqlc) \
+    $(call gb_Helper_optional,DBCONNECTIVITY,connectivity/source/manager/sdbc2) \
     filter/source/config/cache/filterconfig1 \
     framework/util/fwk \
     i18npool/util/i18npool \

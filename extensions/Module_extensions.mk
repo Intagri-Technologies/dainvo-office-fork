@@ -59,7 +59,7 @@ endif
 ifneq (,$(filter DESKTOP,$(BUILD_TYPE)))
 ifeq (,$(ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS))
 $(eval $(call gb_Module_add_targets,extensions,\
-	$(call gb_Helper_optional,EXTENSIONS,Library_updatefeed) \
+	Library_updatefeed \
 ))
 
 ifeq ($(ENABLE_ONLINE_UPDATE),TRUE)

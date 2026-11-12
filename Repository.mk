@@ -492,7 +492,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,ooo, \
 	ucptdoc1 \
 	unordf \
 	unoxml \
-	$(call gb_Helper_optional,EXTENSIONS,updatefeed) \
+	updatefeed \
 	utl \
 	uui \
 	$(call gb_Helper_optional,SCRIPTING, \
@@ -856,7 +856,14 @@ $(eval $(call gb_Helper_register_packages, \
 	setup_native_misc \
 	sysui_share \
 	vcl_fontunxpsprint \
+	$(call gb_Helper_optional,MORE_FONTS,\
+		fonts_dejavu \
+		fonts_libertineg \
+	) \
 ))
+
+# Dainvo: DejaVu and Linux Libertine G are built into instdir only, for the
+# unit tests that measure text with them; they are not installed or shipped.
 
 $(eval $(call gb_Helper_register_packages_for_install,impress,\
 	sd_xml \

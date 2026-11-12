@@ -7,6 +7,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <unotools/moduleoptions.hxx>
 #include <config_poppler.h>
 #include <test/unoapi_test.hxx>
 
@@ -77,6 +78,9 @@ public:
 
 CPPUNIT_TEST_FIXTURE(Sfx2ViewTest, testDrawSaveKeepsOdg)
 {
+    // Dainvo ships no Draw app (it also opens PDFs)
+    if (!SvtModuleOptions().IsDrawInstalled())
+        return;
     utl::TempFileNamed aDirectory(nullptr, true);
     aDirectory.EnableKillingFile();
     const OUString aURL = aDirectory.GetURL() + "/drawing.odg";
@@ -714,6 +718,9 @@ CPPUNIT_TEST_FIXTURE(Sfx2ViewTest, testLokHelperCommandValuesSignatureHash)
 
 CPPUNIT_TEST_FIXTURE(Sfx2ViewTest, testSignatureSerialize)
 {
+    // Dainvo ships no Draw app (it also opens PDFs)
+    if (!SvtModuleOptions().IsDrawInstalled())
+        return;
     // Given an unsigned PDF file:
     std::shared_ptr<vcl::pdf::PDFium> pPDFium = vcl::pdf::PDFiumLibrary::get();
     if (!pPDFium)
