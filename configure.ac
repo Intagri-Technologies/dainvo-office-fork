@@ -2284,6 +2284,13 @@ libo_FUZZ_ARG_ENABLE(lotuswordpro,
         [Disable the build of the Lotus Word Pro filter.]),
 ,test "${enable_lotuswordpro+set}" = set || enable_lotuswordpro=yes)
 
+AC_ARG_ENABLE(legacy-import-filters,
+    AS_HELP_STRING([--disable-legacy-import-filters],
+        [Disable import of obsolete file formats: old Mac formats (libmwaw),
+         StarOffice 1-5 (libstaroffice), MS Works/Write/DOS Word/Pocket Word
+         (libwps), WordPerfect (libwpd, libwpg), T602 and Hangul 97.]),
+,enable_legacy_import_filters=yes)
+
 libo_FUZZ_ARG_ENABLE(firebird-sdbc,
     AS_HELP_STRING([--disable-firebird-sdbc],
         [Disable the build of the Firebird-SDBC driver if it doesn't compile for you.]),
@@ -10001,6 +10008,12 @@ if test "$enable_lotuswordpro" = "yes"; then
 fi
 AC_SUBST(ENABLE_LWP)
 
+ENABLE_LEGACY_IMPORT_FILTERS=
+if test "$enable_legacy_import_filters" != "no"; then
+    ENABLE_LEGACY_IMPORT_FILTERS="TRUE"
+fi
+AC_SUBST(ENABLE_LEGACY_IMPORT_FILTERS)
+
 dnl ===================================================================
 dnl Check for building ODK
 dnl ===================================================================
@@ -10519,6 +10532,18 @@ libo_CHECK_SYSTEM_MODULE([libzmf],[ZMF],[libzmf-0.0])
 
 libo_CHECK_SYSTEM_MODULE([libstaroffice],[STAROFFICE],[libstaroffice-0.0])
 libo_PKG_VERSION([STAROFFICE], [libstaroffice-0.0], [0.0.7])
+
+if test "$enable_legacy_import_filters" = "no"; then
+    # Don't build or ship the obsolete-format import libraries
+    legacy_build_type=
+    for i in $BUILD_TYPE; do
+        case "$i" in
+        WPD|WPG|WPS|MWAW|STAROFFICE) ;;
+        *) legacy_build_type="$legacy_build_type $i" ;;
+        esac
+    done
+    BUILD_TYPE="${legacy_build_type# }"
+fi
 
 dnl ===================================================================
 dnl Check for system lcms2

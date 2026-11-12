@@ -566,11 +566,11 @@ $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,reportbuilder, \
 ))
 
 $(eval $(call gb_Helper_register_libraries_for_install,OOOLIBS,writer, \
-	hwp \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),hwp) \
 	$(if $(ENABLE_LWP),lwpft) \
 	msword \
 	swd \
-	t602filter \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),t602filter) \
 	$(call gb_Helper_optional,SCRIPTING,vbaswobj) \
 	wpftwriter \
 	sw_writerfilter \

@@ -58,6 +58,7 @@
       constructor="org_libreoffice_comp_Writer_StarOfficeWriterImportFilter_get_implementation">
     <service name="com.sun.star.document.ImportFilter"/>
     <service name="com.sun.star.document.ExtendedTypeDetection"/>
+    <optional/>
   </implementation>
   <implementation name="com.sun.star.comp.Writer.EPUBExportFilter"
       constructor="com_sun_star_comp_Writer_EPUBExportFilter_get_implementation">

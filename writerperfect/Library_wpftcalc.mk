@@ -28,6 +28,7 @@ $(eval $(call gb_Library_set_componentfile,wpftcalc,writerperfect/source/calc/wp
 
 $(eval $(call gb_Library_add_componentimpls,wpftcalc, \
     $(if $(ENABLE_WASM_STRIP_SCEXPORTS),,extended) \
+    $(if $(ENABLE_LEGACY_IMPORT_FILTERS),legacy) \
 ))
 
 $(eval $(call gb_Library_use_sdk_api,wpftcalc))
@@ -53,9 +54,9 @@ $(eval $(call gb_Library_use_externals,wpftcalc,\
 	$(if $(ENABLE_WASM_STRIP_SCEXPORTS),,etonyek) \
 	odfgen \
 	revenge \
-	mwaw \
-	staroffice \
-	wps \
+	$(call gb_Helper_optional,MWAW,mwaw) \
+	$(call gb_Helper_optional,STAROFFICE,staroffice) \
+	$(call gb_Helper_optional,WPS,wps) \
 	lcms2 \
 	icu_headers \
 	icui18n \
@@ -68,10 +69,12 @@ $(eval $(call gb_Library_add_exception_objects,wpftcalc,\
 ))
 endif
 
+ifeq ($(ENABLE_LEGACY_IMPORT_FILTERS),TRUE)
 $(eval $(call gb_Library_add_exception_objects,wpftcalc,\
 	writerperfect/source/calc/MSWorksCalcImportFilter \
 	writerperfect/source/calc/MWAWCalcImportFilter \
 	writerperfect/source/calc/StarOfficeCalcImportFilter \
 ))
+endif
 
 # vim: set noet sw=4 ts=4:

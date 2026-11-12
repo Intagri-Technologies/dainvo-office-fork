@@ -30,7 +30,7 @@ $(eval $(call gb_Module_add_targets,filter,\
 	Library_storagefd \
 	Library_svgfilter \
 	Library_graphicfilter \
-	Library_t602filter \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Library_t602filter) \
 	Library_textfd \
 	Library_xmlfa \
 	Library_xmlfd \

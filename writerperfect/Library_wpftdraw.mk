@@ -26,6 +26,10 @@ $(eval $(call gb_Library_set_include,wpftdraw,\
 
 $(eval $(call gb_Library_set_componentfile,wpftdraw,writerperfect/source/draw/wpftdraw,services))
 
+$(eval $(call gb_Library_add_componentimpls,wpftdraw, \
+    $(if $(ENABLE_LEGACY_IMPORT_FILTERS),legacy) \
+))
+
 $(eval $(call gb_Library_use_sdk_api,wpftdraw))
 
 $(eval $(call gb_Library_use_common_precompiled_header,wpftdraw))
@@ -49,17 +53,17 @@ $(eval $(call gb_Library_use_externals,wpftdraw,\
 	cdr \
 	freehand \
 	mspub \
-	mwaw \
+	$(call gb_Helper_optional,MWAW,mwaw) \
 	odfgen \
 	zmf \
 	libpng \
 	pagemaker \
 	qxp \
 	revenge \
-	staroffice \
+	$(call gb_Helper_optional,STAROFFICE,staroffice) \
 	visio \
-	wpg \
-	wpd \
+	$(call gb_Helper_optional,WPG,wpg) \
+	$(call gb_Helper_optional,WPD,wpd) \
 	lcms2 \
 	libxml2 \
 	icu_headers \
@@ -73,13 +77,18 @@ $(eval $(call gb_Library_add_exception_objects,wpftdraw,\
 	writerperfect/source/draw/CMXImportFilter \
 	writerperfect/source/draw/FreehandImportFilter \
 	writerperfect/source/draw/MSPUBImportFilter \
-	writerperfect/source/draw/MWAWDrawImportFilter \
 	writerperfect/source/draw/PageMakerImportFilter \
 	writerperfect/source/draw/QXPImportFilter \
-	writerperfect/source/draw/StarOfficeDrawImportFilter \
 	writerperfect/source/draw/VisioImportFilter \
-	writerperfect/source/draw/WPGImportFilter \
 	writerperfect/source/draw/ZMFImportFilter \
 ))
+
+ifeq ($(ENABLE_LEGACY_IMPORT_FILTERS),TRUE)
+$(eval $(call gb_Library_add_exception_objects,wpftdraw,\
+	writerperfect/source/draw/MWAWDrawImportFilter \
+	writerperfect/source/draw/StarOfficeDrawImportFilter \
+	writerperfect/source/draw/WPGImportFilter \
+))
+endif
 
 # vim: set noet sw=4 ts=4:

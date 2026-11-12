@@ -18,10 +18,12 @@
       constructor="com_sun_star_comp_Impress_MWAWPresentationImportFilter_get_implementation">
     <service name="com.sun.star.document.ImportFilter"/>
     <service name="com.sun.star.document.ExtendedTypeDetection"/>
+    <optional/>
   </implementation>
   <implementation name="org.libreoffice.comp.Impress.StarOfficePresentationImportFilter"
       constructor="org_libreoffice_comp_Presentation_StarOfficePresentationImportFilter_get_implementation">
     <service name="com.sun.star.document.ImportFilter"/>
     <service name="com.sun.star.document.ExtendedTypeDetection"/>
+    <optional/>
   </implementation>
 </component>

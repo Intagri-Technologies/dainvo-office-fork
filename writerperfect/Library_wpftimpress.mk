@@ -26,6 +26,10 @@ $(eval $(call gb_Library_set_include,wpftimpress,\
 
 $(eval $(call gb_Library_set_componentfile,wpftimpress,writerperfect/source/impress/wpftimpress,services))
 
+$(eval $(call gb_Library_add_componentimpls,wpftimpress, \
+    $(if $(ENABLE_LEGACY_IMPORT_FILTERS),legacy) \
+))
+
 $(eval $(call gb_Library_use_sdk_api,wpftimpress))
 
 $(eval $(call gb_Library_use_libraries,wpftimpress,\
@@ -46,16 +50,21 @@ $(eval $(call gb_Library_use_libraries,wpftimpress,\
 $(eval $(call gb_Library_use_externals,wpftimpress,\
 	boost_headers \
 	etonyek \
-	mwaw \
+	$(call gb_Helper_optional,MWAW,mwaw) \
 	odfgen \
-	staroffice \
+	$(call gb_Helper_optional,STAROFFICE,staroffice) \
 	revenge \
 ))
 
 $(eval $(call gb_Library_add_exception_objects,wpftimpress,\
 	writerperfect/source/impress/KeynoteImportFilter \
+))
+
+ifeq ($(ENABLE_LEGACY_IMPORT_FILTERS),TRUE)
+$(eval $(call gb_Library_add_exception_objects,wpftimpress,\
 	writerperfect/source/impress/MWAWPresentationImportFilter \
 	writerperfect/source/impress/StarOfficePresentationImportFilter \
 ))
+endif
 
 # vim: set noet sw=4 ts=4:

@@ -29,6 +29,7 @@ $(eval $(call gb_Library_set_componentfile,wpftwriter,writerperfect/source/write
 $(eval $(call gb_Library_add_componentimpls,wpftwriter, \
     $(if $(ENABLE_WASM_STRIP_EPUB),,extended) \
     $(if $(ENABLE_WASM_STRIP_SWEXPORTS),,extended2) \
+    $(if $(ENABLE_LEGACY_IMPORT_FILTERS),legacy) \
 ))
 
 $(eval $(call gb_Library_use_sdk_api,wpftwriter))
@@ -76,13 +77,13 @@ $(eval $(call gb_Library_use_externals,wpftwriter,\
 	icuuc \
 	liblangtag \
 	libxml2 \
-	mwaw \
+	$(call gb_Helper_optional,MWAW,mwaw) \
 	odfgen \
 	revenge \
-	staroffice \
-	wpd \
-	wpg \
-	wps \
+	$(call gb_Helper_optional,STAROFFICE,staroffice) \
+	$(call gb_Helper_optional,WPD,wpd) \
+	$(call gb_Helper_optional,WPG,wpg) \
+	$(call gb_Helper_optional,WPS,wps) \
 	zlib \
 ))
 
@@ -99,15 +100,11 @@ ifneq ($(ENABLE_WASM_STRIP_SWEXPORTS),TRUE)
 $(eval $(call gb_Library_add_exception_objects,wpftwriter,\
 	writerperfect/source/writer/AbiWordImportFilter \
 	writerperfect/source/writer/EBookImportFilter \
-	writerperfect/source/writer/MSWorksImportFilter \
-	writerperfect/source/writer/MWAWImportFilter \
 	writerperfect/source/writer/PagesImportFilter \
-	writerperfect/source/writer/WordPerfectImportFilter \
 ))
 endif
 
 $(eval $(call gb_Library_add_exception_objects,wpftwriter,\
-	writerperfect/source/writer/StarOfficeWriterImportFilter \
 	writerperfect/source/writer/exp/XMLBase64ImportContext \
 	writerperfect/source/writer/exp/XMLFootnoteImportContext \
 	writerperfect/source/writer/exp/XMLSectionContext \
@@ -123,6 +120,15 @@ $(eval $(call gb_Library_add_exception_objects,wpftwriter,\
 	writerperfect/source/writer/exp/xmltbli \
 	writerperfect/source/writer/exp/xmltext \
 ))
+
+ifeq ($(ENABLE_LEGACY_IMPORT_FILTERS),TRUE)
+$(eval $(call gb_Library_add_exception_objects,wpftwriter,\
+	writerperfect/source/writer/MSWorksImportFilter \
+	writerperfect/source/writer/MWAWImportFilter \
+	writerperfect/source/writer/StarOfficeWriterImportFilter \
+	writerperfect/source/writer/WordPerfectImportFilter \
+))
+endif
 
 # On Windows, libepubgen-0.1.lib(EPUBGenerator.obj) references BCryptCloseAlgorithmProvider,
 # BCryptGenRandom, and BCryptOpenAlgorithmProvider via

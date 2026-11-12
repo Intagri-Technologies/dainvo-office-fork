@@ -325,21 +325,21 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_writer_types.xcu
 	writer_ODT_FlatXML \
 	writer_Rich_Text_Format \
 	writer_StarOffice_XML_Writer \
-	writer_WordPerfect_Document \
-	writer_MS_Works_Document \
-	writer_MS_Write \
-	writer_DosWord \
-	writer_ClarisWorks \
-	writer_Mac_Word \
-	writer_Mac_Works \
-	writer_MacWrite \
-	writer_Mariner_Write \
-	writer_WriteNow \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_WordPerfect_Document) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MS_Works_Document) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MS_Write) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_DosWord) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_ClarisWorks) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_Mac_Word) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_Mac_Works) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MacWrite) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_Mariner_Write) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_WriteNow) \
 	writer_AbiWord_Document \
-	writer_T602_Document \
-	writer_LotusWordPro_Document \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_T602_Document) \
+	$(if $(ENABLE_LWP),writer_LotusWordPro_Document) \
 	generic_Text \
-	writer_MIZI_Hwp_97 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MIZI_Hwp_97) \
 	writer_StarOffice_XML_Writer_Template \
 	pdf_Portable_Document_Format \
 	writer8_template \
@@ -357,11 +357,11 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_writer_types.xcu
 	writer_PalmDoc \
 	writer_Plucker_eBook \
 	writer_ApplePages \
-	MWAW_Text_Document \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Text_Document) \
 	Palm_Text_Document \
-	StarOffice_Writer \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Writer) \
 	writer_EPUB_Document \
-	writer_PocketWord_File \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_PocketWord_File) \
 	generic_Markdown \
 ))
 
@@ -376,22 +376,22 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_writer_filters
 	ODT_FlatXML \
 	Rich_Text_Format \
 	StarOffice_XML__Writer_ \
-	WordPerfect \
-	MS_Works \
-	MS_Write \
-	DosWord \
-	ClarisWorks \
-	Mac_Word \
-	Mac_Works \
-	MacWrite \
-	Mariner_Write \
-	WriteNow \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),WordPerfect) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Works) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Write) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),DosWord) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),ClarisWorks) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Mac_Word) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Mac_Works) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MacWrite) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Mariner_Write) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),WriteNow) \
 	AbiWord \
-	T602Document \
-	LotusWordPro \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),T602Document) \
+	$(if $(ENABLE_LWP),LotusWordPro) \
 	Text \
 	Text__encoded_ \
-	writer_MIZI_Hwp_97 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),writer_MIZI_Hwp_97) \
 	writer_StarOffice_XML_Writer_Template \
 	writer_pdf_Export\
 	writer8\
@@ -409,11 +409,11 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_writer_filters
 	PalmDoc \
 	Plucker_eBook \
 	ApplePages \
-	MWAW_Text_Document \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Text_Document) \
 	Palm_Text_Document \
-	StarOffice_Writer \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Writer) \
 	EPUB \
-	PocketWord_File \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),PocketWord_File) \
 	Markdown \
 ))
 
@@ -499,17 +499,17 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_calc_types.xcu,f
 	calc_OOXML \
 	calc_OOXML_Template \
 	calc_OOXML_VBA \
-	calc_MS_Works_Document \
-	calc_WPS_Lotus_Document \
-	calc_WPS_QPro_Document \
-	calc_ClarisWorks \
-	calc_Claris_Resolve \
-	calc_Mac_Works \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_MS_Works_Document) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_WPS_Lotus_Document) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_WPS_QPro_Document) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_ClarisWorks) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_Claris_Resolve) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_Mac_Works) \
 	calc_AppleNumbers \
-	MWAW_Database \
-	MWAW_Spreadsheet \
-	StarOffice_Spreadsheet \
-	calc_MS_Multiplan \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Database) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Spreadsheet) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Spreadsheet) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),calc_MS_Multiplan) \
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.xcu,filter/source/config/fragments/filters,\
@@ -548,17 +548,17 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_calc_filters.x
 	calc_OOXML \
 	calc_OOXML_Template \
 	calc_OOXML_VBA \
-	MS_Works_Calc \
-	WPS_Lotus_Calc \
-	WPS_QPro_Calc \
-	ClarisWorks_Calc \
-	Claris_Resolve_Calc \
-	Mac_Works_Calc \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Works_Calc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),WPS_Lotus_Calc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),WPS_QPro_Calc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),ClarisWorks_Calc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Claris_Resolve_Calc) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),Mac_Works_Calc) \
 	AppleNumbers \
-	MWAW_Database \
-	MWAW_Spreadsheet \
-	StarOffice_Spreadsheet \
-	MS_Multiplan \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Database) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Spreadsheet) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Spreadsheet) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MS_Multiplan) \
 ))
 
 ifeq "$(WITH_PARQUET_FILTER)" "TRUE"
@@ -579,19 +579,19 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_draw_types.xcu,f
 	pdf_Portable_Document_Format \
 	draw8 \
 	draw8_template \
-	draw_WordPerfect_Graphics \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),draw_WordPerfect_Graphics) \
 	draw_Visio_Document \
 	draw_Publisher_Document \
 	draw_CorelDraw_Document \
 	draw_Corel_Presentation_Exchange \
 	draw_Freehand_Document \
-	draw_ClarisWorks \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),draw_ClarisWorks) \
 	draw_PageMaker_Document \
 	draw_QXP_Document \
 	draw_ZMF_Document \
-	MWAW_Bitmap \
-	MWAW_Drawing \
-	StarOffice_Drawing \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Bitmap) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Drawing) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Drawing) \
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_draw_filters.xcu,filter/source/config/fragments/filters,\
@@ -601,19 +601,19 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_draw_filters.x
 	draw_pdf_Export \
 	draw8 \
 	draw8_template \
-	WordPerfectGraphics \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),WordPerfectGraphics) \
 	VisioDocument \
 	PublisherDocument \
 	CorelDrawDocument \
 	CorelPresentationExchange \
 	FreehandDocument \
-	ClarisWorks_Draw \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),ClarisWorks_Draw) \
 	PageMakerDocument \
 	QXPDocument \
 	ZMFDocument \
-	MWAW_Bitmap \
-	MWAW_Drawing \
-	StarOffice_Drawing \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Bitmap) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Drawing) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Drawing) \
 ))
 
 # fcfg_impress
@@ -637,10 +637,10 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_impress_types.xc
 	impress_OOXML_Presentation \
 	impress_OOXML_Presentation_Template \
 	impress_OOXML_Presentation_AutoPlay \
-	impress_ClarisWorks \
-	StarOffice_Presentation \
-	MWAW_Presentation \
-	impress_PowerPoint3 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),impress_ClarisWorks) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Presentation) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Presentation) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),impress_PowerPoint3) \
 ))
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_impress_filters.xcu,filter/source/config/fragments/filters,\
@@ -663,10 +663,10 @@ $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_impress_filter
 	impress_OOXML \
 	impress_OOXML_Template \
 	impress_OOXML_AutoPlay \
-	ClarisWorks_Impress \
-	StarOffice_Presentation \
-	MWAW_Presentation \
-	PowerPoint3 \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),ClarisWorks_Impress) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),StarOffice_Presentation) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),MWAW_Presentation) \
+	$(if $(ENABLE_LEGACY_IMPORT_FILTERS),PowerPoint3) \
 ))
 endif
 
