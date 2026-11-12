@@ -957,6 +957,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 	extras_databasebiblio \
 	extras_gallbullets \
 	extras_gallmytheme \
+	$(if $(WITH_GALLERY_BUILD),extras_gallphosphor) \
 	extras_gallroot \
 	extras_gallsystem \
 	extras_gallsystemstr \

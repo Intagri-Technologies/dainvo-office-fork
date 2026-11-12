@@ -7,7 +7,8 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-system_galleries := arrows bpmn bullets diagrams flowchart fontwork icons network shapes symbolshapes
+# Dainvo: the old "icons" clip art is replaced by the Phosphor themes (Gallery_phosphor_*)
+system_galleries := arrows bpmn bullets diagrams flowchart fontwork network shapes symbolshapes
 
 $(eval $(call gb_Package_Package,extras_gallsystem,$(SRCDIR)/extras/source/gallery/gallery_system))
 

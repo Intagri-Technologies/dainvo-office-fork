@@ -47,6 +47,19 @@ ifneq ($(WITH_GALLERY_BUILD),)
 $(eval $(call gb_Module_add_targets,extras,\
 	Gallery_backgrounds \
     $(call gb_Helper_optional,AVMEDIA,Gallery_sound) \
+	Gallery_phosphor-office \
+	Gallery_phosphor-business \
+	Gallery_phosphor-arrows \
+	Gallery_phosphor-communication \
+	Gallery_phosphor-people \
+	Gallery_phosphor-technology \
+	Gallery_phosphor-design \
+	Gallery_phosphor-media \
+	Gallery_phosphor-travel \
+	Gallery_phosphor-nature \
+	Gallery_phosphor-signs \
+	Gallery_phosphor-leisure \
+	Package_gallphosphor \
 ))
 endif
 

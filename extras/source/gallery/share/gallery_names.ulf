@@ -37,4 +37,40 @@ en-US = "Shapes"
 [sounds_name]
 en-US = "Sounds"
 
+[phosphor-office_name]
+en-US = "Icons: Office & Education"
+
+[phosphor-business_name]
+en-US = "Icons: Business & Finance"
+
+[phosphor-arrows_name]
+en-US = "Icons: Arrows"
+
+[phosphor-communication_name]
+en-US = "Icons: Communication"
+
+[phosphor-people_name]
+en-US = "Icons: People"
+
+[phosphor-technology_name]
+en-US = "Icons: Devices & Technology"
+
+[phosphor-design_name]
+en-US = "Icons: Design"
+
+[phosphor-media_name]
+en-US = "Icons: Media"
+
+[phosphor-travel_name]
+en-US = "Icons: Travel & Places"
+
+[phosphor-nature_name]
+en-US = "Icons: Nature & Weather"
+
+[phosphor-signs_name]
+en-US = "Icons: Signs & Security"
+
+[phosphor-leisure_name]
+en-US = "Icons: Health & Leisure"
+
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
