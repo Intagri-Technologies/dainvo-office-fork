@@ -1826,9 +1826,13 @@ void SfxObjectShell::ShowLinkUpdateInfobar()
     if (!pInfoBar)
         return;
 
-    weld::Button& rHelpBtn = pInfoBar->addButton();
-    rHelpBtn.set_label(GetStandardText(StandardButtonType::Help).replaceFirst("~", ""));
-    rHelpBtn.connect_clicked(LINK(nullptr, LinkUpdateHelp, DispatchHelpLinksHdl));
+    // Dainvo: no Help button when there's no help URL
+    if (!officecfg::Office::Common::Help::HelpRootURL::get().isEmpty())
+    {
+        weld::Button& rHelpBtn = pInfoBar->addButton();
+        rHelpBtn.set_label(GetStandardText(StandardButtonType::Help).replaceFirst("~", ""));
+        rHelpBtn.connect_clicked(LINK(nullptr, LinkUpdateHelp, DispatchHelpLinksHdl));
+    }
 
     weld::Button& rBtn = pInfoBar->addButton();
     rBtn.set_buildable_name(u"allowupdating"_ustr);

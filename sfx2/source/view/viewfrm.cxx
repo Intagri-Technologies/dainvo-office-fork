@@ -1592,7 +1592,8 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
                         rButton.set_label(SfxResId(STR_REFRESH_PASSWORD));
                         rButton.connect_clicked(LINK(this,
                                                    SfxViewFrame, RefreshMasterPasswordHdl));
-                        if (Application::GetHelp())
+                        if (Application::GetHelp()
+                            && !officecfg::Office::Common::Help::HelpRootURL::get().isEmpty())
                         {
                             weld::Button& rHelp = pOldMasterPasswordInfoBar->addButton();
                             rHelp.set_label(SfxResId(RID_STR_HELP));

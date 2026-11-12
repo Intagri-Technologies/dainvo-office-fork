@@ -18,6 +18,7 @@
  */
 
 
+#include <officecfg/Office/Common.hxx>
 #include <tools/debug.hxx>
 #include <tools/json_writer.hxx>
 #include <tools/mapunit.hxx>
@@ -410,7 +411,9 @@ namespace vcl
         // the help button
         m_pHelp= VclPtr<HelpButton>::Create(this, WB_TABSTOP);
         m_pHelp->SetSizePixel(LogicToPixel(Size(50, 14), MapMode(MapUnit::MapAppFont)));
-        m_pHelp->Show();
+        // Dainvo: no Help button when there's no help URL
+        if (!officecfg::Office::Common::Help::HelpRootURL::get().isEmpty())
+            m_pHelp->Show();
         m_pHelp->set_id(u"help"_ustr);
         AddButton( m_pHelp, WIZARDDIALOG_BUTTON_STDOFFSET_X);
 
