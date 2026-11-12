@@ -187,6 +187,24 @@ void RecentDocsView::Reload()
     Invalidate();
 }
 
+bool RecentDocsView::acceptsURL(const OUString& rURL) const
+{
+    return mnFileTypes == ApplicationType::TYPE_NONE || isAcceptedFile(INetURLObject(rURL));
+}
+
+void RecentDocsView::openURL(const OUString& rURL)
+{
+    for (const auto& pItem : mItemList)
+    {
+        auto pRecent = static_cast<RecentDocsViewItem*>(pItem.get());
+        if (pRecent->getURL() == rURL)
+        {
+            pRecent->OpenDocument();
+            return;
+        }
+    }
+}
+
 void RecentDocsView::setFilter(ApplicationType aFilter)
 {
     mnFileTypes = aFilter;

@@ -44,6 +44,7 @@ public:
     void OpenDocument();
 
     bool isPinned () const { return m_bPinned; }
+    const OUString& getURL() const { return maURL; }
 
 private:
     sfx2::RecentDocsView& mrParentView;

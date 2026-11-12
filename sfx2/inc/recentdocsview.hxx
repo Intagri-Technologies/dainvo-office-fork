@@ -85,6 +85,11 @@ public:
 
     void setFilter(ApplicationType aFilter);
 
+    /// Dainvo: whether rURL passes the current file-type filter
+    bool acceptsURL(const OUString& rURL) const;
+    /// Dainvo: open the recent document with this URL (as a double-click would)
+    void openURL(const OUString& rURL);
+
 protected:
     void UpdateColors(const StyleSettings& rSettings) override;
 

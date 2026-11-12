@@ -2,6 +2,20 @@
 <!-- Generated with glade 3.40.0 -->
 <interface domain="sfx">
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkListStore" id="dv_recent_store">
+    <columns>
+      <!-- column-name icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name location -->
+      <column type="gchararray"/>
+      <!-- column-name modified -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkImage" id="calc_all_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -652,8 +666,131 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="scrollrecent">
+              <object class="GtkBox" id="dv_recent_box">
                 <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
+                <property name="margin-bottom">16</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
+                <child>
+                  <object class="GtkEntry" id="dv_recent_search">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="halign">start</property>
+                    <property name="width-chars">36</property>
+                    <property name="placeholder-text" translatable="yes" context="startcenter|dv_recent_search">Search recent files</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="dv_recent_scroll">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="shadow-type">in</property>
+                    <child>
+                      <object class="GtkTreeView" id="dv_recent_list">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="model">dv_recent_store</property>
+                        <property name="search-column">1</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="dv_recent_list-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes" context="startcenter|dv_recent_list-atkobject">Recent files</property>
+                          </object>
+                        </child>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="dv_col0">
+                            <property name="resizable">True</property>
+                            <property name="spacing">8</property>
+                            <property name="title" translatable="yes" context="startcenter|dv_col0">Name</property>
+                            <property name="expand">True</property>
+                            <child>
+                              <object class="GtkCellRendererPixbuf" id="dv_cell_icon"/>
+                              <attributes>
+                                <attribute name="pixbuf">0</attribute>
+                              </attributes>
+                            </child>
+                            <child>
+                              <object class="GtkCellRendererText" id="dv_cell_name"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="dv_col1">
+                            <property name="resizable">True</property>
+                            <property name="spacing">8</property>
+                            <property name="title" translatable="yes" context="startcenter|dv_col1">Location</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="dv_cell1"/>
+                              <attributes>
+                                <attribute name="text">2</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="dv_col2">
+                            <property name="resizable">True</property>
+                            <property name="spacing">8</property>
+                            <property name="title" translatable="yes" context="startcenter|dv_col2">Modified</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="dv_cell2"/>
+                              <attributes>
+                                <attribute name="text">3</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="dv_recent_empty">
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">24</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes" context="startcenter|dv_recent_empty">Files you open will appear here. Drop a file anywhere in this window to open it.</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="scrollrecent">
+                <property name="visible">False</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
@@ -679,7 +816,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">4</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child>
@@ -710,7 +847,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
             <child>
@@ -803,7 +940,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">6</property>
+                <property name="position">7</property>
               </packing>
             </child>
           </object>

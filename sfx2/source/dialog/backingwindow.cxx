@@ -78,6 +78,15 @@
 #include <vcl/graphicfilter.hxx>
 
 #include <config_folders.h>
+#include <osl/file.hxx>
+#include <osl/security.hxx>
+#include <osl/time.h>
+#include <tools/date.hxx>
+#include <tools/time.hxx>
+#include <tools/urlobj.hxx>
+#include <unotools/historyoptions.hxx>
+#include <unotools/localedatawrapper.hxx>
+#include <unotools/syslocale.hxx>
 
 using namespace ::com::sun::star;
 using namespace ::com::sun::star::beans;
@@ -176,6 +185,10 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     , mxCreateLabel(m_xBuilder->weld_label(u"create_label"_ustr))
     , mxAltHelpLabel(m_xBuilder->weld_label(u"althelplabel"_ustr))
     , mxFilter(m_xBuilder->weld_combo_box(u"cbFilter"_ustr))
+    , mxRecentBox(m_xBuilder->weld_widget(u"dv_recent_box"_ustr))
+    , mxRecentSearch(m_xBuilder->weld_entry(u"dv_recent_search"_ustr))
+    , mxRecentList(m_xBuilder->weld_tree_view(u"dv_recent_list"_ustr))
+    , mxRecentEmpty(m_xBuilder->weld_label(u"dv_recent_empty"_ustr))
     , mxActions(m_xBuilder->weld_menu_button(u"mbActions"_ustr))
     , mxWriterAllButton(m_xBuilder->weld_button(u"writer_all"_ustr))
     , mxCalcAllButton(m_xBuilder->weld_button(u"calc_all"_ustr))
@@ -337,6 +350,10 @@ void BackingWindow::dispose()
     mxCreateLabel.reset();
     mxAltHelpLabel.reset();
     mxFilter.reset();
+    mxRecentBox.reset();
+    mxRecentSearch.reset();
+    mxRecentList.reset();
+    mxRecentEmpty.reset();
     mxActions.reset();
     mxWriterAllButton.reset();
     mxCalcAllButton.reset();
@@ -425,6 +442,13 @@ void BackingWindow::initControls()
     mxTemplateButton->connect_toggled(LINK(this, BackingWindow, ToggleHdl));
 
     mxFilter->connect_changed(LINK(this, BackingWindow, FilterHdl));
+    mxRecentSearch->connect_changed(LINK(this, BackingWindow, RecentSearchHdl));
+    mxRecentList->connect_item_activated(LINK(this, BackingWindow, RecentActivatedHdl));
+    mxRecentList->set_size_request(-1, mxRecentList->get_height_rows(8));
+    {
+        const int nDigit = mxRecentList->get_approximate_digit_width();
+        mxRecentList->set_column_fixed_widths({ nDigit * 48, nDigit * 56 });
+    }
     mxActions->connect_selected(LINK(this, BackingWindow, MenuSelectHdl));
 
     ApplyStyleSettings();
@@ -692,7 +716,110 @@ void BackingWindow::applyFilter()
         else
             aFilter = static_cast<sfx2::ApplicationType>(1 << (nFilter - 1));
         mxAllRecentThumbnails->setFilter(aFilter);
+        fillRecentList();
     }
+}
+
+namespace
+{
+OUString lcl_RecentIcon(std::u16string_view rExt)
+{
+    using sfx2::ApplicationType;
+    using sfx2::RecentDocsView;
+    if (RecentDocsView::typeMatchesExtension(ApplicationType::TYPE_WRITER, rExt))
+        return u"res/odt_16_8.png"_ustr;
+    if (RecentDocsView::typeMatchesExtension(ApplicationType::TYPE_CALC, rExt))
+        return u"res/ods_16_8.png"_ustr;
+    if (RecentDocsView::typeMatchesExtension(ApplicationType::TYPE_IMPRESS, rExt))
+        return u"res/odp_16_8.png"_ustr;
+    if (RecentDocsView::typeMatchesExtension(ApplicationType::TYPE_DRAW, rExt))
+        return u"res/odg_16_8.png"_ustr;
+    if (RecentDocsView::typeMatchesExtension(ApplicationType::TYPE_MATH, rExt))
+        return u"res/odf_16_8.png"_ustr;
+    return OUString();
+}
+}
+
+void BackingWindow::fillRecentList()
+{
+    if (!mxRecentList)
+        return;
+
+    const OUString aQuery = mxRecentSearch->get_text().trim().toAsciiLowerCase();
+    OUString aHomeURL, aHome;
+    if (osl::Security().getHomeDir(aHomeURL))
+        osl::FileBase::getSystemPathFromFileURL(aHomeURL, aHome);
+    const LocaleDataWrapper& rLocale = SvtSysLocale().GetLocaleData();
+    const Date aToday(Date::SYSTEM);
+
+    mxRecentList->freeze();
+    mxRecentList->clear();
+    for (const SvtHistoryOptions::HistoryItem& rItem : SvtHistoryOptions::GetList(EHistoryType::PickList))
+    {
+        if (!mxAllRecentThumbnails->acceptsURL(rItem.sURL))
+            continue;
+        const INetURLObject aURL(rItem.sURL);
+        const OUString aName = aURL.GetLastName(INetURLObject::DecodeMechanism::WithCharset);
+        if (!aQuery.isEmpty() && aName.toAsciiLowerCase().indexOf(aQuery) == -1)
+            continue;
+
+        OUString aLocation;
+        if (aURL.GetProtocol() == INetProtocol::File)
+        {
+            INetURLObject aDir(aURL);
+            aDir.removeSegment();
+            aLocation = aDir.getFSysPath(FSysStyle::Detect);
+            if (aLocation.endsWith("/") && aLocation.getLength() > 1)
+                aLocation = aLocation.copy(0, aLocation.getLength() - 1);
+            if (!aHome.isEmpty() && aLocation.startsWith(aHome))
+                aLocation = "~" + aLocation.copy(aHome.getLength());
+        }
+        else
+            aLocation = aURL.GetHost();
+
+        OUString aModified;
+        osl::DirectoryItem aDirItem;
+        osl::FileStatus aStatus(osl_FileStatus_Mask_ModifyTime);
+        TimeValue aLocal;
+        oslDateTime aDT;
+        if (aURL.GetProtocol() == INetProtocol::File
+            && osl::DirectoryItem::get(rItem.sURL, aDirItem) == osl::FileBase::E_None
+            && aDirItem.getFileStatus(aStatus) == osl::FileBase::E_None)
+        {
+            TimeValue aUtc = aStatus.getModifyTime();
+            if (osl_getLocalTimeFromSystemTime(&aUtc, &aLocal) && osl_getDateTimeFromTimeValue(&aLocal, &aDT))
+            {
+                const Date aDate(aDT.Day, aDT.Month, aDT.Year);
+                if (aDate == aToday)
+                    aModified = rLocale.getTime(tools::Time(aDT.Hours, aDT.Minutes), false);
+                else
+                    aModified = rLocale.getDate(aDate);
+            }
+        }
+
+        mxRecentList->append(rItem.sURL, aName, lcl_RecentIcon(aURL.getExtension()));
+        const int nRow = mxRecentList->n_children() - 1;
+        mxRecentList->set_text(nRow, aLocation, 1);
+        mxRecentList->set_text(nRow, aModified, 2);
+    }
+    mxRecentList->thaw();
+    const bool bEmpty = mxRecentList->n_children() == 0;
+    // the scrolled window is merged into the list by the builder, so hide the list itself
+    mxRecentList->set_visible(!bEmpty);
+    mxRecentEmpty->set_visible(bEmpty);
+}
+
+IMPL_LINK_NOARG(BackingWindow, RecentSearchHdl, weld::TextWidget&, void)
+{
+    fillRecentList();
+}
+
+IMPL_LINK_NOARG(BackingWindow, RecentActivatedHdl, const weld::TreeIter&, bool)
+{
+    const OUString aURL = mxRecentList->get_selected_id();
+    if (!aURL.isEmpty())
+        mxAllRecentThumbnails->openURL(aURL);
+    return true;
 }
 
 IMPL_LINK_NOARG( BackingWindow, FilterHdl, weld::ComboBox&, void )
@@ -705,14 +832,17 @@ IMPL_LINK( BackingWindow, ToggleHdl, weld::Toggleable&, rButton, void )
     if (&rButton == mxRecentButton.get())
     {
         mxLocalView->Hide();
-        mxAllRecentThumbnails->Show();
-        mxAllRecentThumbnails->GrabFocus();
+        // Dainvo: the recent files list replaces the thumbnail grid
+        mxAllRecentThumbnails->Hide();
+        mxRecentBox->show();
+        mxRecentList->grab_focus();
         mxTemplateButton->set_active(false);
         mxActions->show();
     }
     else
     {
         mxAllRecentThumbnails->Hide();
+        mxRecentBox->hide();
         initializeLocalView();
         mxLocalView->Show();
         mxLocalView->reload();

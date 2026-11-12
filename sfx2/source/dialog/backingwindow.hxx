@@ -25,12 +25,14 @@
 #include <vcl/InterimItemWindow.hxx>
 #include <vcl/weld/Button.hxx>
 #include <vcl/weld/ComboBox.hxx>
+#include <vcl/weld/Entry.hxx>
 #include <vcl/weld/Container.hxx>
 #include <vcl/weld/Image.hxx>
 #include <vcl/weld/Label.hxx>
 #include <vcl/weld/LinkButton.hxx>
 #include <vcl/weld/MenuButton.hxx>
 #include <vcl/weld/ToggleButton.hxx>
+#include <vcl/weld/TreeView.hxx>
 
 #include <recentdocsview.hxx>
 #include <templatedefaultview.hxx>
@@ -63,6 +65,11 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Label> mxCreateLabel;
     std::unique_ptr<weld::Label> mxAltHelpLabel;
     std::unique_ptr<weld::ComboBox> mxFilter;
+    // Dainvo: recent files as a list (Name, Location, Modified) with search
+    std::unique_ptr<weld::Widget> mxRecentBox;
+    std::unique_ptr<weld::Entry> mxRecentSearch;
+    std::unique_ptr<weld::TreeView> mxRecentList;
+    std::unique_ptr<weld::Label> mxRecentEmpty;
     std::unique_ptr<weld::MenuButton> mxActions;
 
     std::unique_ptr<weld::Button> mxWriterAllButton;
@@ -109,6 +116,8 @@ class BackingWindow : public InterimItemWindow
 
     DECL_LINK(ToggleHdl, weld::Toggleable&, void);
     DECL_LINK(FilterHdl, weld::ComboBox&, void);
+    DECL_LINK(RecentSearchHdl, weld::TextWidget&, void);
+    DECL_LINK(RecentActivatedHdl, const weld::TreeIter&, bool);
     DECL_LINK(ClickHdl, weld::Button&, void);
     DECL_LINK(ClickHelpHdl, weld::Button&, void);
     DECL_LINK(MenuSelectHdl, const OUString&, void);
@@ -132,6 +141,7 @@ class BackingWindow : public InterimItemWindow
 
 private:
     void applyFilter();
+    void fillRecentList();
 
 public:
     explicit BackingWindow(vcl::Window* pParent);
