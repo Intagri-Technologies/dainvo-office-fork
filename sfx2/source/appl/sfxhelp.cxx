@@ -629,6 +629,10 @@ void SfxHelp::SearchKeyword( const OUString& rKeyword )
 
 bool SfxHelp::Start( const OUString& rURL, const vcl::Window* pWindow )
 {
+    // Dainvo: no installed help and no help URL - nothing to show
+    if (officecfg::Office::Common::Help::HelpRootURL::get().isEmpty() && !impl_hasHelpInstalled()
+        && !impl_hasHTMLHelpInstalled())
+        return true;
     if (bLaunchingHelp)
         return true;
     bLaunchingHelp = true;
@@ -639,6 +643,10 @@ bool SfxHelp::Start( const OUString& rURL, const vcl::Window* pWindow )
 
 bool SfxHelp::Start(const OUString& rURL, weld::Widget* pWidget)
 {
+    // Dainvo: no installed help and no help URL - nothing to show
+    if (officecfg::Office::Common::Help::HelpRootURL::get().isEmpty() && !impl_hasHelpInstalled()
+        && !impl_hasHTMLHelpInstalled())
+        return true;
     if (bLaunchingHelp)
         return true;
     bLaunchingHelp = true;

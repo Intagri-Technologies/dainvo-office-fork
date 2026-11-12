@@ -1224,7 +1224,6 @@ $(eval $(call gb_Helper_register_uiconfigs,\
 	modules/StartModule \
 	modules/sweb \
 	modules/swriter \
-	modules/swxform \
 	sfx \
 	svt \
 	svx \

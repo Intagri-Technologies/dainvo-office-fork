@@ -37,7 +37,6 @@ $(eval $(call gb_Module_add_targets,sw,\
 	UIConfig_sglobal \
 	UIConfig_sweb \
 	UIConfig_swriter \
-	UIConfig_swxform \
 ))
 
 $(eval $(call gb_Module_add_l10n_targets,sw,\

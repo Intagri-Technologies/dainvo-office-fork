@@ -7,6 +7,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <config_extensions.h>
+
 #include <sfx2/templatedlg.hxx>
 
 #include <sfx2/module.hxx>
@@ -229,7 +231,8 @@ SfxTemplateManagerDlg::SfxTemplateManagerDlg(weld::Window *pParent)
     mxCBApp->set_active(0);
     fillFolderComboBox();
 
-    mxActionBar->set_item_visible(MNI_ACTION_EXTENSIONS, true);
+    // Dainvo: online templates come as extensions, which Dainvo doesn't support
+    mxActionBar->set_item_visible(MNI_ACTION_EXTENSIONS, HAVE_FEATURE_EXTENSIONS != 0);
     mxActionBar->set_item_visible(MNI_ACTION_IMPORT, true);
     mxActionBar->set_item_visible(MNI_ACTION_NEW_FOLDER, true);
 

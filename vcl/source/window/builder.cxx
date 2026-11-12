@@ -548,8 +548,9 @@ VclBuilder::VclBuilder(vcl::Window* pParent, std::u16string_view sUIDir, const O
     }
 #endif
 
-    const bool bHideHelp = comphelper::LibreOfficeKit::isActive() &&
-        officecfg::Office::Common::Help::HelpRootURL::get().isEmpty();
+    // Dainvo: hide Help buttons whenever there's no help URL, not only in
+    // LibreOfficeKit (Dainvo ships no help)
+    const bool bHideHelp = officecfg::Office::Common::Help::HelpRootURL::get().isEmpty();
     if (bHideHelp)
     {
         if (vcl::Window *pHelpButton = get(u"help"))

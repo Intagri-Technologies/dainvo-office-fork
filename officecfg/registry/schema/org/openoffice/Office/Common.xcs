@@ -3096,7 +3096,10 @@
           <desc>Specifies the root URL to the Office help pages. Blank disables
           Help buttons on dialogs in LibreOffice Online.</desc>
         </info>
-        <value>https://help.libreoffice.org/help.html?</value>
+        <!-- Dainvo: no help ships and LibreOffice's online help describes
+             features Dainvo doesn't have, so there is no help URL: dialogs
+             hide their Help buttons and F1 does nothing -->
+        <value></value>
       </prop>
       <group oor:name="StartCenter">
         <info>

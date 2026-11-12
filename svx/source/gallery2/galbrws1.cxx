@@ -17,6 +17,8 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <config_extensions.h>
+
 #include <sal/config.h>
 
 #include <tools/datetime.hxx>
@@ -153,6 +155,10 @@ GalleryBrowser::GalleryBrowser(weld::Builder& rBuilder, Gallery* pGallery)
     mxThemes->set_size_request(-1, mxThemes->get_height_rows(6));
 
     mxMoreGalleries->connect_clicked(LINK(this, GalleryBrowser, OnMoreGalleriesClick));
+#if !HAVE_FEATURE_EXTENSIONS
+    // Dainvo: more galleries come as extensions, which Dainvo doesn't support
+    mxMoreGalleries->hide();
+#endif
 
     // disable creation of new themes if a writable directory is not available
     if( mpGallery->GetUserURL().GetProtocol() == INetProtocol::NotValid )

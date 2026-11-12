@@ -198,6 +198,16 @@
           <value>AvailableToolbars</value>
         </prop>
       </node>
+      <node oor:name="DainvoAdditionsDialog" oor:op="replace">
+        <prop oor:name="Command">
+          <value>AdditionsDialog</value>
+        </prop>
+      </node>
+      <node oor:name="DainvoShowCredits" oor:op="replace">
+        <prop oor:name="Command">
+          <value>ShowCredits</value>
+        </prop>
+      </node>
     </node>
   </node>
 </oor:component-data>
