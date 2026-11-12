@@ -780,10 +780,12 @@ void FloatingWindow::StartPopupMode( const tools::Rectangle& rRect, FloatWinPopu
     mnOldTitle = mnTitle;
     if ( ( mpWindowImpl->mnStyle & WB_POPUP ) && !GetText().isEmpty() )
         SetTitleType( FloatWinTitleType::Popup );
-    else if ( nFlags & FloatWinPopupFlags::AllowTearOff )
-        SetTitleType( FloatWinTitleType::TearOff );
     else
+    {
+        // Dainvo: no tear-off strip across the top of rounded dropdown popups
+        nFlags &= ~FloatWinPopupFlags::AllowTearOff;
         SetTitleType( FloatWinTitleType::NONE );
+    }
 
     // avoid close on focus change for decorated floating windows only
     if( mpWindowImpl->mbFrame && (GetStyle() & WB_MOVEABLE) )

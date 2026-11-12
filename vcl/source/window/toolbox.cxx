@@ -2580,7 +2580,7 @@ void ToolBox::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplToolItems::si
     if ( (pItem->meType != ToolBoxItemType::BUTTON) || pItem->mbShowWindow )
         return;
 
-    ImplErase(rRenderContext, pItem->maRect, nHighlight != 0, bHasOpenPopup );
+    ImplErase(rRenderContext, pItem->maRect, nHighlight != 0, false);
 
     nOffX += pItem->maRect.Left();
     nOffY += pItem->maRect.Top();
@@ -2629,11 +2629,9 @@ void ToolBox::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplToolItems::si
         }
         if ( nHighlight != 0 || (pItem->meState == TRISTATE_TRUE) )
         {
-            if( bHasOpenPopup )
-                ImplDrawFloatwinBorder(rRenderContext, pItem);
-            else
-                ImplDrawButton(rRenderContext, aButtonRect, nHighlight, pItem->meState == TRISTATE_TRUE,
-                               pItem->mbEnabled && IsEnabled(), pItem->mbShowWindow);
+            // Dainvo: an open popup keeps the rounded pressed highlight, not a square outline
+            ImplDrawButton(rRenderContext, aButtonRect, bHasOpenPopup ? 1 : nHighlight, pItem->meState == TRISTATE_TRUE,
+                           pItem->mbEnabled && IsEnabled(), pItem->mbShowWindow);
         }
 
         // determine drawing flags
@@ -2697,11 +2695,8 @@ void ToolBox::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplToolItems::si
         // draw selection only if not already drawn during image output (see above)
         if ( !bImage && (nHighlight != 0 || (pItem->meState == TRISTATE_TRUE) ) )
         {
-            if( bHasOpenPopup )
-                ImplDrawFloatwinBorder(rRenderContext, pItem);
-            else
-                ImplDrawButton(rRenderContext, pItem->maRect, nHighlight, pItem->meState == TRISTATE_TRUE,
-                               pItem->mbEnabled && IsEnabled(), pItem->mbShowWindow );
+            ImplDrawButton(rRenderContext, pItem->maRect, bHasOpenPopup ? 1 : nHighlight, pItem->meState == TRISTATE_TRUE,
+                           pItem->mbEnabled && IsEnabled(), pItem->mbShowWindow );
         }
 
         DrawTextFlags nTextStyle = DrawTextFlags::NONE;
@@ -2727,50 +2722,15 @@ void ToolBox::ImplDrawItem(vcl::RenderContext& rRenderContext, ImplToolItems::si
     // dropdown only will be painted without inner border
     if( (pItem->mnBits & ToolBoxItemBits::DROPDOWNONLY) != ToolBoxItemBits::DROPDOWNONLY )
     {
-        ImplErase(rRenderContext, aDropDownRect, nHighlight != 0, bHasOpenPopup);
+        ImplErase(rRenderContext, aDropDownRect, nHighlight != 0, false);
 
         if( nHighlight != 0 || (pItem->meState == TRISTATE_TRUE) )
         {
-            if( bHasOpenPopup )
-                ImplDrawFloatwinBorder(rRenderContext, pItem);
-            else
-                ImplDrawButton(rRenderContext, aDropDownRect, nHighlight, pItem->meState == TRISTATE_TRUE,
-                               pItem->mbEnabled && IsEnabled(), false);
+            ImplDrawButton(rRenderContext, aDropDownRect, bHasOpenPopup ? 1 : nHighlight, pItem->meState == TRISTATE_TRUE,
+                           pItem->mbEnabled && IsEnabled(), false);
         }
     }
     ImplDrawDropdownArrow(rRenderContext, aDropDownRect, bSetColor, bRotate);
-}
-
-void ToolBox::ImplDrawFloatwinBorder(vcl::RenderContext& rRenderContext, ImplToolItem const * pItem)
-{
-    if ( pItem->maRect.IsEmpty() )
-        return;
-
-    rRenderContext.SetLineColor(rRenderContext.GetSettings().GetStyleSettings().GetShadowColor());
-    Point p1, p2;
-
-    p1 = pItem->maRect.TopLeft();
-    p1.AdjustX( 1 );
-    p2 = pItem->maRect.TopRight();
-    p2.AdjustX( -1 );
-    rRenderContext.DrawLine( p1, p2);
-    p1 = pItem->maRect.BottomLeft();
-    p1.AdjustX( 1 );
-    p2 = pItem->maRect.BottomRight();
-    p2.AdjustX( -1 );
-    rRenderContext.DrawLine( p1, p2);
-
-    p1 = pItem->maRect.TopLeft();
-    p1.AdjustY( 1 );
-    p2 = pItem->maRect.BottomLeft();
-    p2.AdjustY( -1 );
-    rRenderContext.DrawLine( p1, p2);
-    p1 = pItem->maRect.TopRight();
-    p1.AdjustY( 1 );
-    p2 = pItem->maRect.BottomRight();
-    p2.AdjustY( -1 );
-    rRenderContext.DrawLine( p1, p2);
-
 }
 
 void ToolBox::ImplFloatControl( bool bStart, FloatingWindow* pFloatWindow )
