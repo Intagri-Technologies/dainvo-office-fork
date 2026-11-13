@@ -23,6 +23,7 @@
 #include <unotools/moduleoptions.hxx>
 #include <vcl/svapp.hxx>
 #include <vcl/vclenum.hxx>
+#include <vcl/weld/Button.hxx>
 #include <vcl/weld/MessageDialog.hxx>
 
 #include <memory>
@@ -55,17 +56,36 @@ void DainvoAskDefaultFileFormats()
 
     try
     {
+        // Parent it to the app's current window (the Start Center) so it is a
+        // proper modal dialog of the app
         std::unique_ptr<weld::MessageDialog> xBox(Application::CreateMessageDialog(
-            nullptr, VclMessageType::Question, VclButtonsType::NONE,
+            Application::GetDefDialogParent(), VclMessageType::Question, VclButtonsType::NONE,
             DpResId(STR_DAINVO_FORMAT_PRIMARY)
                 .replaceAll("%PRODUCTNAME", utl::ConfigManager::getProductName())));
         xBox->set_title(DpResId(STR_DAINVO_FORMAT_TITLE));
+#ifdef MACOSX
+        // On macOS the options window is "Settings" in the application menu
+        xBox->set_secondary_text(DpResId(STR_DAINVO_FORMAT_SECONDARY_MAC)
+                                     .replaceAll("%PRODUCTNAME", utl::ConfigManager::getProductName()));
+#else
         xBox->set_secondary_text(DpResId(STR_DAINVO_FORMAT_SECONDARY));
+#endif
         xBox->add_button(DpResId(STR_DAINVO_FORMAT_ODF), RESPONSE_ODF);
         xBox->add_button(DpResId(STR_DAINVO_FORMAT_MSO), RESPONSE_MSO);
         xBox->set_default_response(RESPONSE_MSO);
+        // Name the buttons for screen readers (VoiceOver)
+        for (const auto& [nResponse, pLabel] :
+             { std::pair{ RESPONSE_ODF, STR_DAINVO_FORMAT_ODF },
+               std::pair{ RESPONSE_MSO, STR_DAINVO_FORMAT_MSO } })
+        {
+            if (std::unique_ptr<weld::Button> xButton = xBox->weld_button_for_response(nResponse))
+                xButton->set_accessible_name(DpResId(pLabel));
+        }
 
         const int nResponse = xBox->run();
+        // Close the dialog window right away, before any other work
+        xBox->hide();
+        xBox.reset();
         // Closed without choosing (or the app was quitting): ask again next time
         if (nResponse != RESPONSE_MSO && nResponse != RESPONSE_ODF)
             return;

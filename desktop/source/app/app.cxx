@@ -26,6 +26,7 @@
 #include <config_folders.h>
 #include <config_extensions.h>
 #include <config_wasm_strip.h>
+#include <config_version.h>
 #if !ENABLE_WASM_STRIP_RECENT
 #include <sfx2/recentfilemetadata.hxx>
 #endif
@@ -483,7 +484,13 @@ OUString ReplaceStringHookProc( const OUString& rStr )
 {
     const static OUString sBuildId(utl::Bootstrap::getBuildIdData(u"development"_ustr)),
         sBrandName(utl::ConfigManager::getProductName()),
+#ifdef DAINVO_VERSION
+        // Dainvo: show Dainvo's own version (e.g. 0.1.0) in UI text, not the
+        // LibreOffice version it's built from (that stays in ooSetupVersion)
+        sVersion(u"" DAINVO_VERSION ""_ustr),
+#else
         sVersion(utl::ConfigManager::getProductVersion()),
+#endif
         sAboutBoxVersion(utl::ConfigManager::getAboutBoxProductVersion()),
         sAboutBoxVersionSuffix(utl::ConfigManager::getAboutBoxProductVersionSuffix()),
         sExtension(utl::ConfigManager::getProductExtension());

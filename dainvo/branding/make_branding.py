@@ -25,7 +25,8 @@ HERE = os.path.join(ROOT, 'dainvo', 'branding')
 # DAINVO_INTER_TTF at Inter.ttf, e.g. the copy in the Dainvo mobile project.
 FONT = os.environ.get('DAINVO_INTER_TTF', os.path.expanduser(
     '~/Projects/Dainvo Project/dainvo_mobile/assets/fonts/Inter.ttf'))
-MARK = os.path.join(ROOT, 'dainvo', 'icons', 'source', 'dainvo.png')
+# The Dainvo Office app icon (cobalt), the same artwork as the app icon
+MARK = os.path.join(ROOT, 'dainvo', 'branding', 'app-icon.png')
 SOFFICE = os.path.join(ROOT, 'instdir', 'DainvoOffice.app', 'Contents', 'MacOS', 'soffice')
 
 CAP = 72.7    # Inter cap height at font size 100
@@ -88,11 +89,19 @@ def splash_svg(words, scale, mark_b64):
 
 
 def to_png(svg_text, out_png, tmp):
+    """Render the SVG to a PNG of the same pixel size as its width/height
+    (macOS built-in SVG support via tools/svg2png.swift; Dainvo has no Draw
+    to convert SVG with)."""
+    import re
     src = os.path.join(tmp, os.path.basename(out_png).replace('.png', '.svg'))
     open(src, 'w').write(svg_text)
-    subprocess.run([SOFFICE, '--headless', f'-env:UserInstallation=file://{tmp}/profile',
-                    '--convert-to', 'png', '--outdir', tmp, src], check=True, capture_output=True)
-    os.replace(src[:-4] + '.png', out_png)
+    w, h = re.search(r'width="([0-9.]+)" height="([0-9.]+)"', svg_text).groups()
+    tool = os.path.join(tmp, 'svg2png')
+    if not os.path.exists(tool):
+        subprocess.run(['swiftc', '-O', '-o', tool, os.path.join(HERE, 'tools', 'svg2png.swift')],
+                       check=True, capture_output=True)
+    subprocess.run([tool, src, out_png, str(int(float(w))), str(int(float(h)))],
+                   check=True, capture_output=True)
 
 
 def main():
