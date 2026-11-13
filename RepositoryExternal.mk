@@ -2294,7 +2294,7 @@ else # !SYSTEM_WPD
 ifeq ($(COM),MSC)
 
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
-	wpd \
+	$(call gb_Helper_optional,WPD,wpd) \
 ))
 
 define gb_LinkTarget__use_wpd
@@ -2359,7 +2359,7 @@ else # !SYSTEM_WPG
 ifeq ($(COM),MSC)
 
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
-	wpg \
+	$(call gb_Helper_optional,WPG,wpg) \
 ))
 
 define gb_LinkTarget__use_wpg
@@ -2414,7 +2414,7 @@ else # !SYSTEM_WPS
 ifeq ($(COM),MSC)
 
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
-	wps \
+	$(call gb_Helper_optional,WPS,wps) \
 ))
 
 define gb_LinkTarget__use_wps
@@ -2469,7 +2469,7 @@ else # !SYSTEM_MWAW
 ifeq ($(COM),MSC)
 
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
-	mwaw \
+	$(call gb_Helper_optional,MWAW,mwaw) \
 ))
 
 define gb_LinkTarget__use_mwaw
@@ -2523,7 +2523,7 @@ else # !SYSTEM_STAROFFICE
 ifeq ($(COM),MSC)
 
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
-	staroffice \
+	$(call gb_Helper_optional,STAROFFICE,staroffice) \
 ))
 
 define gb_LinkTarget__use_staroffice
