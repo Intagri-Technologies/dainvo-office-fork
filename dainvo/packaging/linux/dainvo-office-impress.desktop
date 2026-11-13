@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Dainvo Office Impress
+GenericName=Presentation
+Comment=Create and edit presentations
+Exec=dainvo-office --impress %U
+Icon=dainvo-office-impress
+Terminal=false
+StartupNotify=true
+StartupWMClass=dainvo office-impress
+Categories=Office;Presentation;
+Keywords=presentation;slides;pptx;odp;powerpoint;
+MimeType=application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-template;application/vnd.oasis.opendocument.presentation-flat-xml;application/vnd.ms-powerpoint;application/vnd.ms-powerpoint.presentation.macroEnabled.12;application/vnd.ms-powerpoint.slideshow.macroEnabled.12;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.slideshow;application/vnd.openxmlformats-officedocument.presentationml.template;

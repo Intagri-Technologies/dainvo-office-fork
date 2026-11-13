@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Dainvo Office
+GenericName=Office Suite
+Comment=Write documents, work with spreadsheets and make presentations
+Exec=dainvo-office %U
+Icon=dainvo-office-main
+Terminal=false
+StartupNotify=true
+StartupWMClass=dainvo office-startcenter
+Categories=Office;
+Keywords=office;writer;calc;impress;document;spreadsheet;presentation;
+Actions=Writer;Calc;Impress;
+
+[Desktop Action Writer]
+Name=New Document
+Exec=dainvo-office --writer
+
+[Desktop Action Calc]
+Name=New Spreadsheet
+Exec=dainvo-office --calc
+
+[Desktop Action Impress]
+Name=New Presentation
+Exec=dainvo-office --impress

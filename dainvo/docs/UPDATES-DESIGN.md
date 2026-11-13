@@ -1,6 +1,6 @@
 # Dainvo Office: versioning and updates (design proposal)
 
-Status: decided 2026-11-12 — Sparkle 2 (macOS), WinSparkle (Windows), built-in notice (Linux), file names `Dainvo-Office-<version>-<os>-<arch>`. Built as described in [RELEASES.md](RELEASES.md), which is the current reference; this file keeps the reasoning.
+Status: decided 2026-11-12; CI release builds added (see RELEASES.md) — Sparkle 2 (macOS), WinSparkle (Windows), built-in notice (Linux), file names `Dainvo-Office-<version>-<os>-<arch>`. Built as described in [RELEASES.md](RELEASES.md), which is the current reference; this file keeps the reasoning.
 
 ## 1. Versioning
 

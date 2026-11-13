@@ -1,0 +1,25 @@
+# Maintainer: @MAINTAINER@
+# Generated from dainvo/packaging/aur/PKGBUILD.in in Intagri-Technologies/dainvo-office-fork;
+# edit it there, not in the AUR repository.
+pkgname=dainvo-office-bin
+pkgver=@VERSION@
+pkgrel=@PKGREL@
+pkgdesc="Dainvo Office office suite (Writer, Calc, Impress), based on LibreOffice"
+arch=('x86_64')
+url="https://github.com/Intagri-Technologies/dainvo-office-releases"
+license=('MPL-2.0')
+depends=('fontconfig' 'freetype2' 'libcups' 'gtk3' 'glib2' 'dbus' 'libx11' 'libxext'
+         'libxrender' 'libxinerama' 'libxrandr' 'libsm' 'libice' 'hicolor-icon-theme')
+optdepends=('hunspell-en_us: spell checking'
+            'hyphen-en: hyphenation'
+            'mythes-en: thesaurus'
+            'gst-plugins-base: audio and video in presentations')
+provides=('dainvo-office')
+conflicts=('dainvo-office')
+options=('!strip' '!debug')
+source=("https://github.com/Intagri-Technologies/dainvo-office-releases/releases/download/v${pkgver}/Dainvo-Office-${pkgver}-linux-x86_64.tar.gz")
+sha256sums=('@SHA256@')
+
+package() {
+    cp -a "$srcdir/opt" "$srcdir/usr" "$pkgdir/"
+}

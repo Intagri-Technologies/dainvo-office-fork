@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Dainvo Office Calc
+GenericName=Spreadsheet
+Comment=Create and edit spreadsheets
+Exec=dainvo-office --calc %U
+Icon=dainvo-office-calc
+Terminal=false
+StartupNotify=true
+StartupWMClass=dainvo office-calc
+Categories=Office;Spreadsheet;
+Keywords=spreadsheet;table;xlsx;ods;excel;csv;
+MimeType=application/vnd.oasis.opendocument.spreadsheet;application/vnd.oasis.opendocument.spreadsheet-template;application/vnd.oasis.opendocument.spreadsheet-flat-xml;application/vnd.ms-excel;application/vnd.ms-excel.sheet.macroEnabled.12;application/vnd.ms-excel.sheet.binary.macroEnabled.12;application/vnd.ms-excel.template.macroEnabled.12;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.openxmlformats-officedocument.spreadsheetml.template;text/csv;text/tab-separated-values;

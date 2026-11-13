@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Dainvo Office Writer
+GenericName=Word Processor
+Comment=Create and edit text documents
+Exec=dainvo-office --writer %U
+Icon=dainvo-office-writer
+Terminal=false
+StartupNotify=true
+StartupWMClass=dainvo office-writer
+Categories=Office;WordProcessor;
+Keywords=text;letter;document;docx;odt;word;
+MimeType=application/vnd.oasis.opendocument.text;application/vnd.oasis.opendocument.text-template;application/vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-flat-xml;application/msword;application/vnd.ms-word;application/vnd.ms-word.document.macroEnabled.12;application/vnd.ms-word.template.macroEnabled.12;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.openxmlformats-officedocument.wordprocessingml.template;application/rtf;text/rtf;
