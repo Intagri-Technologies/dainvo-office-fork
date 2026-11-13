@@ -28,7 +28,7 @@ dnf config-manager --set-enabled powertools
 dnf -y install \
     autoconf automake libtool bison flex gperf make patch which file \
     zip unzip xz wget git ccache nasm \
-    perl perl-Digest-MD5 perl-FindBin perl-IPC-Cmd perl-lib perl-Archive-Zip \
+    perl perl-Digest-MD5 'perl(FindBin)' perl-IPC-Cmd 'perl(lib)' perl-Archive-Zip \
     gtk3-devel cups-devel fontconfig-devel freetype-devel zlib-devel \
     libX11-devel libXext-devel libXrender-devel libXrandr-devel libXinerama-devel \
     libXt-devel libSM-devel libICE-devel dbus-devel glib2-devel krb5-devel \
