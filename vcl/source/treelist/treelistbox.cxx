@@ -2950,7 +2950,9 @@ void SvTreeListBox::PaintEntry1(SvTreeListEntry& rEntry, tools::Long nLine, vcl:
         // division line between tabs (but not if this is a separator line)
         if (!bSeparator && pNextTab && rItem.GetType() == SvLBoxItemType::String &&
             // not at the right edge of the window!
-            aRect.Right() < nMaxRight)
+            aRect.Right() < nMaxRight
+            // Dainvo: the rounded row selection already covers it (and no fill colour is set)
+            && !(bRoundSel && bSelTab))
         {
             aRect.SetLeft( aRect.Right() - SV_TAB_BORDER );
             rRenderContext.DrawRect(aRect);

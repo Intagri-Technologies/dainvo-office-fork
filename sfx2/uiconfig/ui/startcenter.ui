@@ -501,7 +501,7 @@
                     <property name="homogeneous">False</property>
                     <child>
                       <object class="GtkButton" id="writer_all">
-                        <property name="width-request">96</property>
+                        <property name="width-request">112</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|writer_all">_Writer Document</property>
                         <property name="visible">True</property>
@@ -522,7 +522,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="calc_all">
-                        <property name="width-request">96</property>
+                        <property name="width-request">112</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|calc_all">_Calc Spreadsheet</property>
                         <property name="visible">True</property>
@@ -543,7 +543,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="impress_all">
-                        <property name="width-request">96</property>
+                        <property name="width-request">112</property>
                         <property name="height-request">96</property>
                         <property name="label" translatable="yes" context="startcenter|impress_all">_Impress Presentation</property>
                         <property name="visible">True</property>
