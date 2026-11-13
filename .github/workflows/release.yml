@@ -64,6 +64,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Check out bundled dictionaries
+        run: |
+          git submodule init dictionaries
+          git config submodule.dictionaries.url https://github.com/LibreOffice/dictionaries.git
+          git submodule update --depth 1 dictionaries
+
       - name: Install build tools
         run: |
           brew install autoconf automake libtool pkgconf gperf bison make nasm ccache cpanminus
@@ -186,6 +192,13 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+
+      - name: Check out bundled dictionaries
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
+          git submodule init dictionaries
+          git config submodule.dictionaries.url https://github.com/LibreOffice/dictionaries.git
+          git submodule update --depth 1 dictionaries
 
       - name: Install LibreOffice's Windows build tools
         run: |
@@ -319,13 +332,19 @@ jobs:
           key: ccache-linux-${{ github.sha }}
           restore-keys: ccache-linux-
 
-      - name: Build and package (manylinux_2_28 container)
+      - name: Check out bundled dictionaries
+        run: |
+          git submodule init dictionaries
+          git config submodule.dictionaries.url https://github.com/LibreOffice/dictionaries.git
+          git submodule update --depth 1 dictionaries
+
+      - name: Build and package (manylinux_2_34 container)
         run: |
           mkdir -p "$CCACHE_DIR" dist
           docker run --rm \
             -v "$GITHUB_WORKSPACE:/src" -v "$CCACHE_DIR:/ccache" -w /src \
             -e CCACHE_DIR=/ccache -e CCACHE_MAXSIZE=3G -e container=docker \
-            quay.io/pypa/manylinux_2_28_x86_64 \
+            quay.io/pypa/manylinux_2_34_x86_64 \
             bash -c 'git config --global --add safe.directory /src && dainvo/ci/linux-build.sh /src/dist'
           sudo chown -R "$(id -u):$(id -g)" dist "$CCACHE_DIR"
 

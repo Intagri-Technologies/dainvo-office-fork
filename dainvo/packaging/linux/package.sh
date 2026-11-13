@@ -110,7 +110,7 @@ scripts:
 overrides:
   deb:
     depends:
-      - libc6 (>= 2.28)
+      - libc6 (>= 2.34)
       - libfontconfig1
       - libfreetype6
       - libcups2 | libcups2t64
@@ -133,7 +133,7 @@ overrides:
       - fonts-crosextra-caladea
   rpm:
     depends:
-      - glibc >= 2.28
+      - glibc >= 2.34
       - fontconfig
       - freetype
       - cups-libs
