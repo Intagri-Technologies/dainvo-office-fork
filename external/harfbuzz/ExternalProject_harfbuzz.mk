@@ -55,6 +55,7 @@ $(call gb_ExternalProject_get_state_target,harfbuzz,build) : | $(call gb_Externa
 	$(call gb_Trace_StartRange,harfbuzz,EXTERNAL)
 	$(file >$(gb_UnpackedTarball_workdir)/harfbuzz/cross-file.txt,$(gb_harfbuzz_cross_compile))
 	$(call gb_ExternalProject_run,build,\
+		$(if $(filter MSC,$(COM)),export INCLUDE="$(gb_ExternalProject_INCLUDE)" LIB="$(ILIB)" &&) \
 		PKG_CONFIG_PATH="${PKG_CONFIG_PATH}$(LIBO_PATH_SEPARATOR)$(gb_UnpackedTarball_workdir)/graphite$(if $(SYSTEM_ICU),,$(LIBO_PATH_SEPARATOR)$(gb_UnpackedTarball_workdir)/icu)" \
 		PYTHONWARNINGS= \
 		$(MESON) setup --wrap-mode nofallback builddir \
