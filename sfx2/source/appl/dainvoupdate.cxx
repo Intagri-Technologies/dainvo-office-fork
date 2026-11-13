@@ -33,7 +33,6 @@
 #include <com/sun/star/frame/Desktop.hpp>
 #include <comphelper/configuration.hxx>
 #include <comphelper/processfactory.hxx>
-#include <curl/curl.h>
 #include <officecfg/Office/Common.hxx>
 #include <o3tl/test_info.hxx>
 #include <rtl/ustrbuf.hxx>
@@ -42,7 +41,6 @@
 #include <sfx2/sfxresid.hxx>
 #include <sfx2/strings.hrc>
 #include <sfx2/viewfrm.hxx>
-#include <systools/curlinit.hxx>
 #include <tools/link.hxx>
 #include <vcl/svapp.hxx>
 #include <vcl/weld/Button.hxx>
@@ -50,6 +48,8 @@
 #include <vcl/weld/WaitObject.hxx>
 
 #include <openuriexternally.hxx>
+
+#include <systools/curlinit.hxx>
 
 #ifdef _WIN32
 #include <o3tl/char16_t2wchar_t.hxx>

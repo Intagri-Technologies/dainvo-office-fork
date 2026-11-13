@@ -44,13 +44,17 @@
 #include <rtl/ustrbuf.hxx>
 #include <rtl/uri.hxx>
 #include <sal/log.hxx>
-#include <systools/curlinit.hxx>
 #include <tools/link.hxx>
 #include <tools/urlobj.hxx>
 #include <ucbhelper/proxydecider.hxx>
 #include <unotools/bootstrap.hxx>
 #include <unotools/lingucfg.hxx>
 #include <vcl/svapp.hxx>
+
+#include <systools/curlinit.hxx>
+#ifdef _WIN32
+#include <postwin.h>
+#endif
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
