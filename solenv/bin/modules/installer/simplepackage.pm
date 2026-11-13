@@ -428,14 +428,16 @@ sub create_package
         }
         elsif ($volume_name_classic_app eq 'LibreOffice' || $volume_name_classic_app eq 'LibreOfficeDev' || ( $ENV{'DAINVO_VERSION'} && $volume_name_classic_app eq $allvariables->{'PRODUCTNAME'} ))
         {
-            my $subdir = "$tempdir/$packagename/$volume_name_classic_app.app/Contents/Resources";
+            my $bundle_name = $ENV{'DAINVO_VERSION'} ? $ENV{'PRODUCTNAME_WITHOUT_SPACES'} : $volume_name_classic_app;
+            my $app_path = "$localtempdir/$folder/$bundle_name.app";
+            my $subdir = "$app_path/Contents/Resources";
             if ( ! -d $subdir ) { installer::systemactions::create_directory($subdir); }
             # For non-release builds where no identity is, set entitlements
             # to allow Xcode's Instruments application to connect to the
             # application
             if ( $ENV{'MACOSX_CODESIGNING_IDENTITY'} || !$ENV{'ENABLE_RELEASE_BUILD'} )
             {
-                $systemcall = "$ENV{'SRCDIR'}/solenv/bin/macosx-codesign-app-bundle '$localtempdir/$folder/$volume_name_classic_app.app'";
+                $systemcall = "$ENV{'SRCDIR'}/solenv/bin/macosx-codesign-app-bundle '$app_path'";
                 print "... $systemcall ...\n";
                 my $infoline = "Systemcall: $systemcall\n";
                 push( @installer::globals::logfileinfo, $infoline);
