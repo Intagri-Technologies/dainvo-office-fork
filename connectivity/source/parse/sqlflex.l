@@ -97,8 +97,14 @@ OSQLScanner* xxx_pGLOBAL_SQLSCAN = nullptr;
 static void do_fatal_error(const char* msg)
 {
     xxx_pGLOBAL_SQLSCAN->SQLyyerror(msg);
-    /*hack to silence -Wunused-function*/
-    if ((0)) yy_fatal_error(msg);
+    // Reference Flex's generated handler to avoid -Wunused-function.
+    // Flex 2.6.5 renamed it to yypanic.
+    if (false)
+#if YY_FLEX_MAJOR_VERSION > 2 || (YY_FLEX_MAJOR_VERSION == 2 && (YY_FLEX_MINOR_VERSION > 6 || (YY_FLEX_MINOR_VERSION == 6 && YY_FLEX_SUBMINOR_VERSION >= 5)))
+        yypanic(msg);
+#else
+        yy_fatal_error(msg);
+#endif
 }
 
 #define YY_FATAL_ERROR(msg) \

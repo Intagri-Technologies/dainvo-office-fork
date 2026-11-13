@@ -141,6 +141,9 @@ Steps:
 6. **Publish**: Actions > Publish release > Run workflow, version `0.2.0`,
    channel `public` (or `prerelease` first).
 
+For a manual check, set **platform** to one platform in **Release build**.
+A single-platform run uploads its packages without creating a draft.
+
 ### One-time setup (repository settings of dainvo-office-fork)
 
 Create an environment named **`release`** (Settings > Environments). Under

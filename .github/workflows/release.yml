@@ -15,12 +15,17 @@ on:
         description: Create the draft release when all three builds pass
         type: boolean
         default: true
+      platform:
+        description: Build all platforms or verify one platform
+        type: choice
+        default: all
+        options: [all, macos, windows, linux]
 
 permissions:
   contents: read
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ github.ref }}-${{ inputs.platform || 'all' }}
   cancel-in-progress: false
 
 env:
@@ -51,6 +56,7 @@ jobs:
           echo "build=$build" >> "$GITHUB_OUTPUT"
 
   macos:
+    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'macos'
     name: macOS (arm64)
     needs: version
     runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
@@ -58,7 +64,7 @@ jobs:
     environment: release
     env:
       VERSION: ${{ needs.version.outputs.version }}
-      CCACHE_DIR: ${{ github.workspace }}/../ccache
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
       CCACHE_MAXSIZE: 3G
       CCACHE_COMPRESS: '1'
     steps:
@@ -161,6 +167,7 @@ jobs:
           compression-level: 0
 
   windows:
+    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'windows'
     name: Windows (x64)
     needs: version
     runs-on: ${{ vars.WINDOWS_RUNNER || 'windows-2022' }}
@@ -312,12 +319,13 @@ jobs:
           compression-level: 0
 
   linux:
+    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'linux'
     name: Linux (x86_64)
     needs: version
     runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 360
     env:
-      CCACHE_DIR: ${{ github.workspace }}/../ccache
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
     steps:
       - name: Free disk space
         run: |
@@ -367,7 +375,7 @@ jobs:
   draft:
     name: Create draft release
     needs: [version, macos, windows, linux]
-    if: github.event_name == 'push' || inputs.create_draft
+    if: github.event_name == 'push' || (inputs.platform == 'all' && inputs.create_draft)
     # macOS: Sparkle's sign_update (EdDSA signatures) and the DMG check run there.
     runs-on: macos-15
     environment: release
