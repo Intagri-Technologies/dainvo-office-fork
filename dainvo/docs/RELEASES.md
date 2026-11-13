@@ -82,8 +82,8 @@ To sign on another machine or in CI, import it with `generate_keys -f <file>`.
 |---|---|---|
 | `Dainvo-Office-<v>-mac-arm64.dmg` | macOS 11+ on Apple silicon | `make instsetoo_native PKGFORMAT=dmg` |
 | `Dainvo-Office-<v>-win-x64.msi` | Windows 10/11, 64-bit | `make instsetoo_native` (Cygwin + Visual Studio 2022) |
-| `Dainvo-Office-<v>-linux-amd64.deb` | Debian 10+, Ubuntu 20.04+ | [`dainvo/packaging/linux/package.sh`](../packaging/linux/package.sh) (nfpm) |
-| `Dainvo-Office-<v>-linux-x86_64.rpm` | Fedora, openSUSE, RHEL 8+ | same |
+| `Dainvo-Office-<v>-linux-amd64.deb` | Debian 12+, Ubuntu 22.04+ | [`dainvo/packaging/linux/package.sh`](../packaging/linux/package.sh) (nfpm) |
+| `Dainvo-Office-<v>-linux-x86_64.rpm` | Fedora, openSUSE, RHEL 9+ | same |
 | `Dainvo-Office-<v>-linux-x86_64.tar.gz` | other Linux; source of the AUR package | same |
 | AUR `dainvo-office-bin` | Arch Linux | [`dainvo/packaging/aur`](../packaging/aur), pushed when a release goes public |
 | `appcast.xml` | the updaters | `release.py package` |
@@ -92,8 +92,8 @@ To sign on another machine or in CI, import it with `generate_keys -f <file>`.
 The Linux packages share one layout: the program in `/opt/dainvo-office`,
 the launcher `/usr/bin/dainvo-office`, desktop entries for the Start Center,
 Writer, Calc and Impress, and icons in `/usr/share/icons/hicolor`. They are
-built in the `manylinux_2_28` container (AlmaLinux 8, glibc 2.28) so one
-build runs on all current distributions. Spell checking on Linux uses the
+built in the `manylinux_2_34` container (AlmaLinux 9) and require glibc
+2.34 and the GTK 3 libraries listed in the package dependencies. Spell checking on Linux uses the
 distribution's Hunspell dictionaries (recommended by the packages).
 
 ## Checking release branding
@@ -155,6 +155,9 @@ Steps:
    Optionally install from it.
 6. **Publish**: Actions > Publish release > Run workflow, version `0.2.0`,
    channel `public` (or `prerelease` first).
+
+For a manual check, set **platform** to one platform in **Release build**.
+A single-platform run uploads its packages without creating a draft.
 
 ### One-time setup (repository settings of dainvo-office-fork)
 

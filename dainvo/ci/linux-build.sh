@@ -6,11 +6,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 # Linux release build, run by .github/workflows/release.yml inside the
-# quay.io/pypa/manylinux_2_28_x86_64 container (AlmaLinux 8, glibc 2.28,
-# gcc-toolset with a static libstdc++ supplement). Building on this old
-# baseline is what lets one .deb/.rpm/.tar.gz run on Debian 10+, Ubuntu
-# 20.04+, Fedora, openSUSE and Arch, the same approach LibreOffice's own
-# Linux builds use.
+# quay.io/pypa/manylinux_2_34_x86_64 container (AlmaLinux 9, glibc 2.34,
+# gcc-toolset with a static libstdc++ supplement). AlmaLinux 9 supplies the
+# GTK, GLib and ATK versions required by this LibreOffice source.
 #
 # Usage (from the repository root, as root in the container):
 #   dainvo/ci/linux-build.sh <output-dir>
@@ -24,12 +22,12 @@ NFPM_SHA256=${NFPM_SHA256:-}
 
 echo "::group::Install build dependencies"
 dnf -y install dnf-plugins-core epel-release
-dnf config-manager --set-enabled powertools
+dnf config-manager --set-enabled crb
 dnf -y install \
     autoconf automake libtool bison flex gperf make patch which file \
-    zip unzip xz wget git ccache nasm \
+    zip unzip xz wget git ccache nasm ninja-build \
     perl perl-Digest-MD5 'perl(FindBin)' perl-IPC-Cmd 'perl(lib)' perl-Archive-Zip \
-    gtk3-devel cups-devel fontconfig-devel freetype-devel zlib-devel \
+    gtk3-devel atk-devel cups-devel fontconfig-devel freetype-devel zlib-devel \
     libX11-devel libXext-devel libXrender-devel libXrandr-devel libXinerama-devel \
     libXt-devel libSM-devel libICE-devel dbus-devel glib2-devel krb5-devel \
     gstreamer1-devel gstreamer1-plugins-base-devel

@@ -608,7 +608,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_URE,ure, \
 	) \
 	i18nlangtag \
 	$(if $(ENABLE_DOTNET), \
-		net_bootstrap \
+		$(call gb_Helper_optional,ODK,net_bootstrap) \
 		net_uno \
 	) \
 	$(if $(ENABLE_JAVA), \
@@ -882,7 +882,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ure,\
 	instsetoo_native_setup_ure \
     $(call gb_CondExeUno,uno_sh) \
 	ure_install \
-	$(if $(ENABLE_DOTNET),\
+	$(if $(and $(ENABLE_DOTNET),$(filter ODK,$(BUILD_TYPE))),\
 		net_basetypes \
 		net_uretypes \
 		net_oootypes \

@@ -44,7 +44,7 @@ trap 'rm -rf "$work"' EXIT
 root="$work/root"
 
 echo "Installing the program tree (stripped) into /opt/$name"
-make -C "$src" cmd cmd="$src/solenv/bin/ooinstall --strip $root/opt/$name"
+make -C "$src" install-strip INSTALLDIR="$root/opt/$name"
 test -x "$root/opt/$name/program/soffice" || { echo "error: ooinstall left no program/soffice" >&2; exit 1; }
 
 install -d "$root/usr/bin" "$root/usr/share/applications"
@@ -109,7 +109,7 @@ scripts:
 overrides:
   deb:
     depends:
-      - libc6 (>= 2.28)
+      - libc6 (>= 2.34)
       - libfontconfig1
       - libfreetype6
       - libcups2 | libcups2t64
@@ -132,7 +132,7 @@ overrides:
       - fonts-crosextra-caladea
   rpm:
     depends:
-      - glibc >= 2.28
+      - glibc >= 2.34
       - fontconfig
       - freetype
       - cups-libs
