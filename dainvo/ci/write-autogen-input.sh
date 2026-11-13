@@ -8,7 +8,7 @@
 # Writes autogen.input for a CI release build.
 # Usage: dainvo/ci/write-autogen-input.sh macos|windows|linux
 # Optional environment:
-#   MACOS_SIGNING_IDENTITY   "Developer ID Application: ..." -> signed app
+#   MACOS_SIGNING_IDENTITY   Developer ID Application certificate fingerprint -> signed app
 #   WINDOWS_SIGNING=1        sign Windows binaries (needs PFXFILE/PFXPASSWORD)
 #   CI_PYTHON                build-time Python (3.11+) if not "python3"
 set -euo pipefail
