@@ -66,7 +66,9 @@ jobs:
 
       - name: Install build tools
         run: |
-          brew install autoconf automake libtool pkgconf gperf bison make nasm ccache
+          brew install autoconf automake libtool pkgconf gperf bison make nasm ccache cpanminus
+          perl "$(command -v cpanm)" --local-lib-contained "$RUNNER_TEMP/perl" Archive::Zip
+          echo "PERL5LIB=$RUNNER_TEMP/perl/lib/perl5${PERL5LIB:+:$PERL5LIB}" >> "$GITHUB_ENV"
           echo "$(brew --prefix make)/libexec/gnubin" >> "$GITHUB_PATH"
           echo "$(brew --prefix bison)/bin" >> "$GITHUB_PATH"
 
@@ -179,7 +181,11 @@ jobs:
           packages: >-
             autoconf automake bison cabextract flex gettext-devel git gnupg gperf
             libxml2-devel make nasm patch perl perl-Archive-Zip perl-Font-TTF
-            perl-IO-String pkg-config python312 rsync unzip wget zip
+            perl-IO-String pkg-config rsync unzip wget zip
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
 
       - name: Install LibreOffice's Windows build tools
         run: |
@@ -219,7 +225,9 @@ jobs:
         run: |
           cd "$(cygpath -u "$GITHUB_WORKSPACE")"
           export PATH="/opt/lo/bin:$PATH"
-          CI_PYTHON=/usr/bin/python3.12 env -u WINDOWS_SIGNING dainvo/ci/write-autogen-input.sh windows
+          export PYTHON_FOR_BUILD="$(command -v python.exe)"
+          "$PYTHON_FOR_BUILD" --version
+          env -u WINDOWS_SIGNING dainvo/ci/write-autogen-input.sh windows
           ./autogen.sh
 
       - name: Build Windows binaries
