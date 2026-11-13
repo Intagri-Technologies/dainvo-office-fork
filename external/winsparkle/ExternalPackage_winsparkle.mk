@@ -13,5 +13,7 @@ winsparkle_ARCH := $(if $(filter X86_64,$(CPUNAME)),x64,$(if $(filter AARCH64,$(
 
 # sfx2 loads it at run time (sfx2/source/appl/dainvoupdate.cxx).
 $(eval $(call gb_ExternalPackage_add_unpacked_file,winsparkle,$(LIBO_BIN_FOLDER)/WinSparkle.dll,WinSparkle-$(WINSPARKLE_VERSION)/$(winsparkle_ARCH)/Release/WinSparkle.dll))
+$(eval $(call gb_ExternalPackage_add_unpacked_file,winsparkle,$(LIBO_SHARE_FOLDER)/licenses/WinSparkle/COPYING,WinSparkle-$(WINSPARKLE_VERSION)/COPYING))
+$(eval $(call gb_ExternalPackage_add_unpacked_file,winsparkle,$(LIBO_SHARE_FOLDER)/licenses/WinSparkle/COPYING.expat,WinSparkle-$(WINSPARKLE_VERSION)/COPYING.expat))
 
 # vim: set noet sw=4 ts=4:

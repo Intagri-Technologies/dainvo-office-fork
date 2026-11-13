@@ -151,8 +151,11 @@ Steps:
 4. **Wait for the draft** (Actions > Release build). If a platform job
    failed or timed out, use *Re-run failed jobs*: the compiler cache makes
    the second run much faster, and the draft is created once all three pass.
-5. **Check the draft** on the releases page: notes, files, `appcast.xml`.
-   Optionally install from it.
+5. **Check the draft** on the releases page: notes, files, `appcast.xml`,
+   and the source link to the exact build revision. In the installed app,
+   check **Help > License Information** and the shipped `NOTICE` and
+   component license files. The updater notices are under `licenses/` in the
+   app's `Contents/Resources` on macOS and `share` on Windows.
 6. **Publish**: Actions > Publish release > Run workflow, version `0.2.0`,
    channel `public` (or `prerelease` first).
 
@@ -215,16 +218,17 @@ from the login keychain:
 
 ```bash
 dainvo/tools/release.py prepare 0.2.0 103
+# Commit and push the version change and any other source changes before building.
 ./autogen.sh && make && make instsetoo_native PKGFORMAT=dmg
 dainvo/tools/release.py package            # checks and signs, writes dainvo/dist/0.2.0
 dainvo/tools/release.py publish            # creates the draft
 dainvo/tools/release.py promote            # publishes it (add --prerelease for testers)
 ```
 
-`package --add FILE` adds Windows/Linux installers built elsewhere; for
-platforms a release doesn't ship, the newest item from the live appcast is
-carried over. `release.py status` shows the configured and published
-versions, `release.py verify` re-checks the signatures in a dist folder.
+`package --add FILE` adds Windows/Linux installers built elsewhere from the
+same source revision. For platforms a release doesn't ship, the newest item
+from the live appcast is carried over. `release.py status` shows the configured
+and published versions. `release.py verify` checks the signatures in a dist folder.
 
 ### Testing an update before users see it
 
@@ -256,5 +260,3 @@ versions, `release.py verify` re-checks the signatures in a dist folder.
   workflow, published to Flathub / the Snap Store when a release goes public.
   On Flatpak/Snap the store handles updates, so the in-app notice should be
   switched off there.
-- Sparkle and WinSparkle are MIT licensed; their notices should be added to
-  the bundled third-party license file.

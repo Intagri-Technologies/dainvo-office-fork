@@ -46,6 +46,12 @@ root="$work/root"
 echo "Installing the program tree (stripped) into /opt/$name"
 make -C "$src" install-strip INSTALLDIR="$root/opt/$name"
 test -x "$root/opt/$name/program/soffice" || { echo "error: ooinstall left no program/soffice" >&2; exit 1; }
+for file in LICENSE LICENSE.html NOTICE share/licenses/Lucide/LICENSE; do
+    if [ ! -s "$root/opt/$name/$file" ]; then
+        echo "error: installed tree is missing $file" >&2
+        exit 1
+    fi
+done
 
 install -d "$root/usr/bin" "$root/usr/share/applications"
 cat > "$root/usr/bin/$name" <<EOF

@@ -88,9 +88,19 @@ Windows and Linux builds are planned; their configuration files don't exist yet.
 ## Licence and credit
 
 Dainvo Office is a fork of LibreOffice, made by The Document Foundation and
-its community, and keeps LibreOffice's licence: the
-[Mozilla Public License 2.0](COPYING.MPL), with some files under other
-licences as stated in their headers and in the [`COPYING`](COPYING) file.
+its community. Its primary licence is the [Mozilla Public License 2.0](LICENSE).
+Individual files and bundled components carry their own licence notices.
+See the [third-party licence information](readlicense_oo/license/license.xml)
+and [upstream attribution notices](readlicense_oo/license/NOTICE). The inherited
+[GNU GPL v3](readlicense_oo/license/COPYING.GPL) and
+[GNU LGPL v3](readlicense_oo/license/COPYING.LGPL) texts are also included for
+components that use them.
+
+For a distributed build, follow the source link in its release notes to the
+exact revision, including Dainvo's changes. The installed app also provides
+the source repository under **Help > License Information**. Clone or check out
+that revision and run `git submodule update --init dictionaries` to obtain the
+matching dictionary source used by the build.
 
 This repository's history starts with a single commit that imports
 LibreOffice exactly as it was at upstream commit

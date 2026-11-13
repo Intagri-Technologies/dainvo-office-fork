@@ -7,13 +7,16 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-$(eval $(call gb_Package_Package,readlicense_oo_files,$(SRCDIR)/readlicense_oo/license))
+$(eval $(call gb_Package_Package,readlicense_oo_files,$(SRCDIR)))
 
 ifneq ($(OS),MACOSX)
-$(eval $(call gb_Package_add_file,readlicense_oo_files,NOTICE,NOTICE))
+$(eval $(call gb_Package_add_file,readlicense_oo_files,NOTICE,readlicense_oo/license/NOTICE))
 else
-$(eval $(call gb_Package_add_file,readlicense_oo_files,Resources/NOTICE,NOTICE))
-# Dainvo: source and contributor information is in the license.
+$(eval $(call gb_Package_add_file,readlicense_oo_files,Resources/NOTICE,readlicense_oo/license/NOTICE))
+endif
+
+ifneq ($(DAINVO_VERSION),)
+$(eval $(call gb_Package_add_file,readlicense_oo_files,$(LIBO_SHARE_FOLDER)/licenses/Lucide/LICENSE,dainvo/icons/LUCIDE-LICENSE))
 endif
 
 # vim: set noet sw=4 ts=4:

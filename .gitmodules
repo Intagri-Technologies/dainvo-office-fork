@@ -1,6 +1,6 @@
 [submodule "dictionaries"]
 	path = dictionaries
-	url = ../dictionaries
+	url = https://github.com/LibreOffice/dictionaries.git
 	branch = .
     shallow = true
 [submodule "helpcontent2"]

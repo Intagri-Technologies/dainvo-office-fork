@@ -28,6 +28,7 @@ import hashlib
 import html
 import json
 import os
+from pathlib import Path
 import plistlib
 import re
 import shutil
@@ -45,6 +46,7 @@ DIST = os.path.join(ROOT, "dainvo", "dist")
 NOTES_DIR = os.path.join(ROOT, "dainvo", "release-notes")
 KEY_ENV = "DAINVO_ED_PRIVATE_KEY"
 REPO = "Intagri-Technologies/dainvo-office-releases"
+SOURCE_REPO = "Intagri-Technologies/dainvo-office-fork"
 FEED = f"https://github.com/{REPO}/releases/latest/download/appcast.xml"
 KEY_ACCOUNT = "dainvo-office"
 PRODUCT = "Dainvo Office"
@@ -279,8 +281,8 @@ def default_notes(version):
     return path if os.path.exists(path) else None
 
 
-def check_dmg(path, version, build):
-    """Mount the DMG and check the app's Info.plist versions."""
+def check_dmg(path, version, build, revision):
+    """Check the mounted app's version, source revision and license files."""
     mount = tempfile.mkdtemp(prefix="dainvo-dmg-")
     subprocess.run(["hdiutil", "attach", "-nobrowse", "-readonly", "-mountpoint", mount, path],
                    check=True, capture_output=True)
@@ -298,6 +300,14 @@ def check_dmg(path, version, build):
             fail(f"{path}: Info.plist has no Sparkle feed/key; configure with --enable-dainvo-updater")
         if not os.path.isdir(os.path.join(app, "Contents", "Frameworks", "Sparkle.framework")):
             fail(f"{path}: Sparkle.framework missing from the app")
+        resources = Path(app) / "Contents" / "Resources"
+        for name in ("LICENSE", "LICENSE.html", "NOTICE", "setuprc",
+                     "licenses/Sparkle/LICENSE", "licenses/Lucide/LICENSE"):
+            file = resources / name
+            if not file.is_file() or not file.stat().st_size:
+                fail(f"{path}: missing or empty {name}")
+        if f"buildid={revision}" not in (resources / "setuprc").read_text(encoding="utf-8").splitlines():
+            fail(f"{path}: build ID does not match source revision {revision}")
         signature = subprocess.run(["codesign", "--verify", "--deep", "--strict", app],
                                    capture_output=True, text=True)
         if signature.returncode != 0:
@@ -406,6 +416,9 @@ def cmd_status(_args):
 
 def cmd_package(args):
     version, build = read_version()
+    revision = run(["git", "rev-parse", "HEAD"], cwd=ROOT).strip()
+    if run(["git", "status", "--porcelain", "--untracked-files=no"], cwd=ROOT).strip():
+        fail("commit the source changes before packaging a release")
     out = os.path.join(DIST, version)
     os.makedirs(out, exist_ok=True)
 
@@ -430,6 +443,9 @@ def cmd_package(args):
             fail(f"no installer for {platform} among {[os.path.basename(s) for s in sources]}")
     notes_path = args.notes or default_notes(version)
 
+    # An interrupted repackage must not leave a previous build's revision in place.
+    revision_file = Path(out) / "SOURCE_REVISION"
+    revision_file.unlink(missing_ok=True)
     collected = []
     for source in sources:
         name = os.path.basename(source)
@@ -440,7 +456,7 @@ def cmd_package(args):
         if match.group("version") != version:
             fail(f"{name}: version is not {version}")
         if name.endswith(".dmg"):
-            check_dmg(source, version, build)
+            check_dmg(source, version, build, revision)
         if os.path.abspath(source) != os.path.join(out, name):
             shutil.copy2(source, os.path.join(out, name))
         print(f"collected {name}")
@@ -479,6 +495,7 @@ def cmd_package(args):
     ed_sign_feed(appcast)
     if notes_path:
         shutil.copy2(notes_path, os.path.join(out, "NOTES.md"))
+    revision_file.write_text(revision + "\n", encoding="utf-8")
     print(f"wrote {appcast} with {len(items)} item(s)")
     print("Next: dainvo/tools/release.py publish")
 
@@ -535,6 +552,19 @@ def cmd_publish(args):
     tag = f"v{version}"
     if not os.path.exists(os.path.join(out, "appcast.xml")):
         fail(f"{out}/appcast.xml missing; run release.py package first")
+    revision_file = Path(out) / "SOURCE_REVISION"
+    if not revision_file.is_file():
+        fail(f"{revision_file} missing; run release.py package first")
+    revision = revision_file.read_text(encoding="utf-8").strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", revision):
+        fail(f"{revision_file} does not contain a full Git commit ID")
+    # Check anonymous access, the same access available to downloaders.
+    source_url = f"https://github.com/{SOURCE_REPO}/tree/{revision}"
+    try:
+        with urllib.request.urlopen(urllib.request.Request(source_url, method="HEAD"), timeout=15):
+            pass
+    except OSError as e:
+        fail(f"cannot open the release source at {source_url}: {e}")
     cmd_verify(argparse.Namespace(dir=out))
     for existing, draft, _pre in published_releases():
         if existing != tag:
@@ -552,10 +582,7 @@ def cmd_publish(args):
     notes = os.path.join(out, "NOTES.md")
     body = open(notes, encoding="utf-8").read() if os.path.exists(notes) else f"{PRODUCT} {version}"
     body += INSTALL_HELP.format(prefix=FILE_PREFIX, version=version)
-    body += f"\nBuild {build}."
-    source = os.environ.get("GITHUB_SHA")
-    if source:
-        body += f" Source: Intagri-Technologies/dainvo-office-fork@{source}."
+    body += f"\nBuild {build}. [Source code for this build]({source_url})."
     cmd = ["gh", "release", "create", tag, "--repo", REPO, "--draft", "--title",
            f"{PRODUCT} {version}", "--notes", body]
     print(run(cmd + release_files(out)).strip())

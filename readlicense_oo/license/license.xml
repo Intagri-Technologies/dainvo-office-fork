@@ -19,10 +19,13 @@
     <p>LibreOffice was created by The Document Foundation, incorporating many modifications from
     different contributors. See <a href="https://www.libreoffice.org/">www.libreoffice.org</a> for more details.</p>
     <div class="DAINVO">
-        <p>The source code and build instructions for Dainvo Office, including the covered modifications, are available
-        from the <a href="https://github.com/Intagri-Technologies/dainvo-office-fork">Dainvo Office source repository</a>
-        at https://github.com/Intagri-Technologies/dainvo-office-fork.
-        The build ID shown in About identifies the source revision.</p>
+        <p>Dainvo Office is a modified version of LibreOffice. The source code, including the covered modifications,
+        and build instructions are available at
+        <a href="https://github.com/Intagri-Technologies/dainvo-office-fork">https://github.com/Intagri-Technologies/dainvo-office-fork</a>.
+        The release notes link to the matching source revision. You can also copy the Build ID from the About dialog
+        and use it to find the revision in the source repository.</p>
+        <p>The installed share directory contains additional third-party notices under <code>licenses/</code>,
+        <code>fonts/licenses/</code>, <code>gallery/</code> and the language data directories, as applicable.</p>
     </div>
     <p><strong>Note:</strong> Do not translate or localize this document. Only English version is legally binding.</p>
     <h2>Contents</h2>
@@ -3653,8 +3656,8 @@
         software is governed by the terms of the license below:</p>
         <p>MPLv2 and LesserGPLv3+</p>
         <p>The contents of this software may be used under the terms of the GNU Lesser General Public License Version 3
-        or later (the "LGPL", see COPYING.LGPL) or the Mozilla Public License Version 2.0 or later (the "MPL", see
-        COPYING.MPL in the root folder of the source tree).</p>
+        or later (the "LGPL", see the license text below) or the Mozilla Public License Version 2.0 or later (the "MPL",
+        see COPYING.MPL in the root folder of the source tree).</p>
         <p>Software distributed under these licenses is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND,
         either express or implied. See the licences for the specific language governing rights and limitations under
         the licenses.</p>

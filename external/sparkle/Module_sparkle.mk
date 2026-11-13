@@ -11,6 +11,7 @@ $(eval $(call gb_Module_Module,sparkle))
 
 $(eval $(call gb_Module_add_targets,sparkle,\
 	CustomTarget_sparkle \
+	ExternalPackage_sparkle_license \
 	UnpackedTarball_sparkle \
 ))
 
