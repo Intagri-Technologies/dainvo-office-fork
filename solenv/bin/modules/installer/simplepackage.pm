@@ -426,7 +426,7 @@ sub create_package
                 push( @installer::globals::logfileinfo, $infoline);
             }
         }
-        elsif ($volume_name_classic_app eq 'LibreOffice' || $volume_name_classic_app eq 'LibreOfficeDev')
+        elsif ($volume_name_classic_app eq 'LibreOffice' || $volume_name_classic_app eq 'LibreOfficeDev' || ( $ENV{'DAINVO_VERSION'} && $volume_name_classic_app eq $allvariables->{'PRODUCTNAME'} ))
         {
             my $subdir = "$tempdir/$packagename/$volume_name_classic_app.app/Contents/Resources";
             if ( ! -d $subdir ) { installer::systemactions::create_directory($subdir); }

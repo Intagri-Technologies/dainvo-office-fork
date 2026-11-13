@@ -1,0 +1,101 @@
+# Publishes a draft made by "Release build" (release.yml):
+#   public      -> becomes releases/latest, so every installed copy is offered
+#                  the update (Sparkle/WinSparkle within a day, Linux notice),
+#                  and the AUR package dainvo-office-bin is updated.
+#   prerelease  -> visible on GitHub but not in releases/latest; only copies
+#                  pointed at its own appcast.xml (testers) see it. It can be
+#                  made public later by running this again with "public".
+# See dainvo/docs/RELEASES.md.
+
+name: Publish release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish, e.g. 0.1.0 (the draft v0.1.0 must exist)
+        required: true
+      channel:
+        description: public = all users; prerelease = testers only
+        type: choice
+        options: [public, prerelease]
+        default: public
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-release
+
+env:
+  RELEASES_REPO: Intagri-Technologies/dainvo-office-releases
+
+jobs:
+  publish:
+    name: Publish v${{ inputs.version }} (${{ inputs.channel }})
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+          VERSION: ${{ inputs.version }}
+          CHANNEL: ${{ inputs.channel }}
+        run: |
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::version must look like 0.1.0"; exit 1; }
+          if [ "$CHANNEL" = prerelease ]; then
+            python3 dainvo/tools/release.py promote --version "$VERSION" --prerelease
+          else
+            python3 dainvo/tools/release.py promote --version "$VERSION"
+          fi
+          echo "Published https://github.com/$RELEASES_REPO/releases/tag/v$VERSION ($CHANNEL)" >> "$GITHUB_STEP_SUMMARY"
+
+  aur:
+    name: Update AUR package
+    needs: publish
+    if: inputs.channel == 'public'
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Push PKGBUILD to the AUR
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+          AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [ -z "$AUR_SSH_PRIVATE_KEY" ]; then
+            echo "::warning::No AUR_SSH_PRIVATE_KEY secret: AUR package not updated"
+            exit 0
+          fi
+          gh release download "v$VERSION" --repo "$RELEASES_REPO" \
+            --pattern "Dainvo-Office-$VERSION-linux-x86_64.tar.gz" --dir "$RUNNER_TEMP"
+
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$AUR_SSH_PRIVATE_KEY" > ~/.ssh/aur
+          chmod 600 ~/.ssh/aur
+          ssh-keyscan -t ed25519 aur.archlinux.org >> ~/.ssh/known_hosts
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/aur -o IdentitiesOnly=yes"
+
+          git clone ssh://aur@aur.archlinux.org/dainvo-office-bin.git "$RUNNER_TEMP/aur"
+          cd "$RUNNER_TEMP/aur"
+          # Same version again (e.g. a rebuilt tarball): bump pkgrel.
+          pkgrel=1
+          if [ -f .SRCINFO ] && grep -q "pkgver = $VERSION\$" .SRCINFO; then
+            pkgrel=$(( $(sed -n 's/^\tpkgrel = //p' .SRCINFO) + 1 ))
+          fi
+          "$GITHUB_WORKSPACE/dainvo/packaging/aur/render.sh" "$VERSION" \
+            "$RUNNER_TEMP/Dainvo-Office-$VERSION-linux-x86_64.tar.gz" . "$pkgrel"
+          git add PKGBUILD .SRCINFO
+          if git diff --cached --quiet; then
+            echo "AUR package already up to date"
+            exit 0
+          fi
+          git -c user.name="Dainvo release bot" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Update to $VERSION-$pkgrel"
+          git push origin HEAD:master
+          rm -f ~/.ssh/aur

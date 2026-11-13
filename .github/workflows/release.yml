@@ -1,0 +1,373 @@
+# Builds Dainvo Office for macOS, Windows and Linux and, when all three
+# builds pass, creates a DRAFT release in Intagri-Technologies/dainvo-office-releases.
+# Drafts are invisible to installed copies; "Publish release"
+# (publish-release.yml) makes the draft public (or a prerelease for testers).
+# See dainvo/docs/RELEASES.md for the secrets this needs and the whole process.
+
+name: Release build
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      create_draft:
+        description: Create the draft release when all three builds pass
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  RELEASES_REPO: Intagri-Technologies/dainvo-office-releases
+
+jobs:
+  version:
+    name: Check version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.read.outputs.version }}
+      build: ${{ steps.read.outputs.build }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: distro-configs/DainvoVersion.conf
+          sparse-checkout-cone-mode: false
+      - id: read
+        run: |
+          version=$(sed -n 's/^--with-dainvo-version=//p' distro-configs/DainvoVersion.conf)
+          build=$(sed -n 's/^--with-dainvo-build=//p' distro-configs/DainvoVersion.conf)
+          echo "Dainvo Office $version (build $build)"
+          if [ "${GITHUB_REF_TYPE}" = tag ] && [ "${GITHUB_REF_NAME}" != "v$version" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match DainvoVersion.conf ($version). Run release.py prepare, commit, then tag v$version."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+
+  macos:
+    name: macOS (arm64)
+    needs: version
+    runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
+    timeout-minutes: 360
+    environment: release
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+      CCACHE_DIR: ${{ github.workspace }}/../ccache
+      CCACHE_MAXSIZE: 3G
+      CCACHE_COMPRESS: '1'
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install build tools
+        run: |
+          brew install autoconf automake libtool pkgconf gperf bison make nasm ccache
+          echo "$(brew --prefix make)/libexec/gnubin" >> "$GITHUB_PATH"
+          echo "$(brew --prefix bison)/bin" >> "$GITHUB_PATH"
+
+      - uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ github.sha }}
+          restore-keys: ccache-macos-
+
+      - name: Import Developer ID certificate
+        env:
+          MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+          MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+        run: |
+          if [ -z "$MACOS_CERTIFICATE_P12" ]; then
+            echo "::warning::No MACOS_CERTIFICATE_P12 secret: the app is not Developer ID signed or notarized"
+            exit 0
+          fi
+          keychain="$RUNNER_TEMP/signing.keychain-db"
+          password=$(openssl rand -hex 16)
+          security create-keychain -p "$password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$password" "$keychain"
+          printf '%s' "$MACOS_CERTIFICATE_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$keychain" -P "$MACOS_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          rm -f "$RUNNER_TEMP/cert.p12"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$password" "$keychain" > /dev/null
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | tr -d '"')
+          identity=$(security find-identity -v -p codesigning "$keychain" | sed -n 's/.*"\(Developer ID Application: .*\)"/\1/p' | head -1)
+          [ -n "$identity" ] || { echo "::error::No Developer ID Application identity in the certificate"; exit 1; }
+          echo "MACOS_SIGNING_IDENTITY=$identity" >> "$GITHUB_ENV"
+
+      - name: Configure
+        run: |
+          dainvo/ci/write-autogen-input.sh macos
+          ./autogen.sh
+
+      - name: Build
+        run: make
+
+      - name: Make the DMG
+        run: |
+          make instsetoo_native PKGFORMAT=dmg
+          mkdir -p dist
+          dmg=$(ls workdir/installation/DainvoOffice/dmg/install/en-US/*.dmg | head -1)
+          cp "$dmg" "dist/Dainvo-Office-$VERSION-mac-arm64.dmg"
+
+      - name: Sign and notarize the DMG
+        if: env.MACOS_SIGNING_IDENTITY != ''
+        env:
+          APPLE_API_KEY_BASE64: ${{ secrets.APPLE_API_KEY_BASE64 }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+        run: |
+          dmg="dist/Dainvo-Office-$VERSION-mac-arm64.dmg"
+          codesign --force --timestamp --sign "$MACOS_SIGNING_IDENTITY" "$dmg"
+          if [ -z "$APPLE_API_KEY_BASE64$APPLE_API_KEY_ID$APPLE_API_ISSUER" ]; then
+            echo "::warning::No App Store Connect API key configured. The DMG is signed but not notarized."
+            exit 0
+          fi
+          if [ -z "$APPLE_API_KEY_BASE64" ] || [ -z "$APPLE_API_KEY_ID" ] || [ -z "$APPLE_API_ISSUER" ]; then
+            echo "::error::Set APPLE_API_KEY_BASE64, APPLE_API_KEY_ID, and APPLE_API_ISSUER together."
+            exit 1
+          fi
+          key_path=$(mktemp "$RUNNER_TEMP/office-notary-key.XXXXXX")
+          trap 'rm -f "$key_path"' EXIT
+          printf '%s' "$APPLE_API_KEY_BASE64" | base64 --decode > "$key_path"
+          xcrun notarytool submit "$dmg" --key "$key_path" --key-id "$APPLE_API_KEY_ID" \
+            --issuer "$APPLE_API_ISSUER" --wait --timeout 2h
+          xcrun stapler staple "$dmg"
+          spctl --assess --type open --context context:primary-signature --verbose "$dmg"
+
+      - uses: actions/cache/save@v6
+        if: always()
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ github.sha }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist-macos
+          path: dist/*.dmg
+          retention-days: 14
+          compression-level: 0
+
+  windows:
+    name: Windows (x64)
+    needs: version
+    runs-on: ${{ vars.WINDOWS_RUNNER || 'windows-2022' }}
+    timeout-minutes: 360
+    environment: release
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+    defaults:
+      run:
+        shell: C:\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+    steps:
+      - name: Keep LF line endings
+        shell: pwsh
+        run: git config --global core.autocrlf false
+
+      - uses: actions/checkout@v7
+
+      - uses: cygwin/cygwin-install-action@v7
+        with:
+          install-dir: C:\cygwin
+          packages: >-
+            autoconf automake bison cabextract flex gettext-devel git gnupg gperf
+            libxml2-devel make nasm patch perl perl-Archive-Zip perl-Font-TTF
+            perl-IO-String pkg-config python312 rsync unzip wget zip
+
+      - name: Install LibreOffice's make for Windows
+        run: |
+          mkdir -p /opt/lo/bin
+          wget -q https://dev-www.libreoffice.org/bin/cygwin/make-4.2.1-msvc.exe -O /opt/lo/bin/make
+          chmod +x /opt/lo/bin/make
+
+      - name: Check Azure Artifact Signing configuration
+        id: windows-signing
+        env:
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TRUSTED_SIGNING_ENDPOINT: ${{ secrets.AZURE_TRUSTED_SIGNING_ENDPOINT }}
+          AZURE_TRUSTED_SIGNING_ACCOUNT_NAME: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
+          AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE_NAME: ${{ secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE_NAME }}
+        run: |
+          missing=()
+          for secret in AZURE_TENANT_ID AZURE_CLIENT_ID \
+              AZURE_TRUSTED_SIGNING_ENDPOINT AZURE_TRUSTED_SIGNING_ACCOUNT_NAME \
+              AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE_NAME; do
+            if [ -z "${!secret}" ]; then
+              missing+=("$secret")
+            fi
+          done
+          if [ "${#missing[@]}" -gt 0 ]; then
+            echo "::warning::Windows binaries and MSI will be unsigned. Missing secrets: ${missing[*]}"
+            exit 0
+          fi
+          echo 'enabled=true' >> "$(cygpath -u "$GITHUB_OUTPUT")"
+
+      - name: Configure
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
+          export PATH="/opt/lo/bin:$PATH"
+          CI_PYTHON=/usr/bin/python3.12 env -u WINDOWS_SIGNING dainvo/ci/write-autogen-input.sh windows
+          ./autogen.sh
+
+      - name: Build Windows binaries
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
+          export PATH="/opt/lo/bin:$PATH"
+          # PKGFORMAT enables MSI packaging as part of the default build.
+          make PKGFORMAT=
+
+      - name: Sign in to Azure with GitHub OIDC
+        if: steps.windows-signing.outputs.enabled == 'true'
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        env:
+          AZURE_CORE_OUTPUT: none
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: Sign Windows binaries before packaging
+        if: steps.windows-signing.outputs.enabled == 'true'
+        uses: azure/artifact-signing-action@c7ab2a863ab5f9a846ddb8265964877ef296ee82 # v2.0.0
+        with:
+          endpoint: ${{ secrets.AZURE_TRUSTED_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE_NAME }}
+          exclude-environment-credential: true
+          exclude-azure-cli-credential: false
+          files-folder: ${{ github.workspace }}\instdir
+          files-folder-filter: exe,dll,com,pyd,soffice.bin,unopkg.bin
+          files-folder-recurse: true
+
+      - name: Package and collect the MSI
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
+          export PATH="/opt/lo/bin:$PATH"
+          make instsetoo_native PKGFORMAT=msi
+          mkdir -p dist
+          msi=$(ls workdir/installation/DainvoOffice/msi/install/en-US/*.msi | head -1)
+          cp "$msi" "dist/Dainvo-Office-$VERSION-win-x64.msi"
+
+      - name: Sign the MSI
+        if: steps.windows-signing.outputs.enabled == 'true'
+        uses: azure/artifact-signing-action@c7ab2a863ab5f9a846ddb8265964877ef296ee82 # v2.0.0
+        with:
+          endpoint: ${{ secrets.AZURE_TRUSTED_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE_NAME }}
+          exclude-environment-credential: true
+          exclude-azure-cli-credential: false
+          files: ${{ github.workspace }}\dist\Dainvo-Office-${{ env.VERSION }}-win-x64.msi
+          description: Dainvo Office
+
+      - name: Verify Windows signatures
+        if: steps.windows-signing.outputs.enabled == 'true'
+        run: |
+          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
+          sdkbin=$(ls -d "/cygdrive/c/Program Files (x86)/Windows Kits/10/bin/"10.*/x64 | sort -V | tail -1)
+          "$sdkbin/signtool.exe" verify /pa /tw \
+            "$(cygpath -w instdir/program/soffice.exe)" \
+            "$(cygpath -w instdir/program/soffice.bin)" \
+            "$(cygpath -w "dist/Dainvo-Office-$VERSION-win-x64.msi")"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist-windows
+          path: dist/*.msi
+          retention-days: 14
+          compression-level: 0
+
+  linux:
+    name: Linux (x86_64)
+    needs: version
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 360
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/../ccache
+    steps:
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost
+          df -h /
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-linux-${{ github.sha }}
+          restore-keys: ccache-linux-
+
+      - name: Build and package (manylinux_2_28 container)
+        run: |
+          mkdir -p "$CCACHE_DIR" dist
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/src" -v "$CCACHE_DIR:/ccache" -w /src \
+            -e CCACHE_DIR=/ccache -e CCACHE_MAXSIZE=3G -e container=docker \
+            quay.io/pypa/manylinux_2_28_x86_64 \
+            bash -c 'git config --global --add safe.directory /src && dainvo/ci/linux-build.sh /src/dist'
+          sudo chown -R "$(id -u):$(id -g)" dist "$CCACHE_DIR"
+
+      - uses: actions/cache/save@v6
+        if: always()
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-linux-${{ github.sha }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist-linux
+          path: |
+            dist/*.tar.gz
+            dist/*.deb
+            dist/*.rpm
+          retention-days: 14
+          compression-level: 0
+
+  draft:
+    name: Create draft release
+    needs: [version, macos, windows, linux]
+    if: github.event_name == 'push' || inputs.create_draft
+    # macOS: Sparkle's sign_update (EdDSA signatures) and the DMG check run there.
+    runs-on: macos-15
+    environment: release
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: dist-*
+          path: incoming
+          merge-multiple: true
+
+      - name: Sign installers and write appcast.xml
+        env:
+          DAINVO_ED_PRIVATE_KEY: ${{ secrets.DAINVO_ED_PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+        run: |
+          [ -n "$DAINVO_ED_PRIVATE_KEY" ] || { echo "::error::DAINVO_ED_PRIVATE_KEY secret is missing"; exit 1; }
+          ls -l incoming
+          python3 dainvo/tools/release.py package --from incoming \
+            --require macos --require windows --require linux
+
+      - name: Create the draft
+        env:
+          DAINVO_ED_PRIVATE_KEY: ${{ secrets.DAINVO_ED_PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+        run: |
+          [ -n "$GH_TOKEN" ] || { echo "::error::RELEASES_TOKEN secret is missing"; exit 1; }
+          python3 dainvo/tools/release.py publish --replace-draft
+          echo "Draft: https://github.com/$RELEASES_REPO/releases" >> "$GITHUB_STEP_SUMMARY"
+          echo "Publish it with the 'Publish release' workflow (public or prerelease)." >> "$GITHUB_STEP_SUMMARY"

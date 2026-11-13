@@ -77,6 +77,27 @@ if test -z "$MACOSX_CODESIGNING_IDENTITY"; then
     exit 0
 fi
 
+# Dainvo Office: sign the Sparkle updater the way Sparkle documents it
+# (https://sparkle-project.org/documentation/sandboxing/#code-signing):
+# inner helpers first, with the hardened runtime, keeping the Downloader's
+# entitlements, and without our launch constraint (Sparkle's helpers are
+# started by launchd/XPC, not by soffice). The generic loops below skip it.
+
+SPARKLE="$APP_BUNDLE/Contents/Frameworks/Sparkle.framework"
+if test -d "$SPARKLE"; then
+    for item in \
+        "$SPARKLE/Versions/B/XPCServices/Installer.xpc" \
+        "$SPARKLE/Versions/B/XPCServices/Downloader.xpc" \
+        "$SPARKLE/Versions/B/Autoupdate" \
+        "$SPARKLE/Versions/B/Updater.app" \
+        "$SPARKLE"; do
+        test -e "$item" || continue
+        preserve=
+        case "$item" in */Downloader.xpc) preserve=--preserve-metadata=entitlements ;; esac
+        codesign --force --timestamp --options=runtime $preserve --sign "$MACOSX_CODESIGNING_IDENTITY" "$item" || exit 1
+    done
+fi
+
 # Sign dylibs
 #
 # The dylibs in the Python framework are called *.so. Go figure
@@ -84,7 +105,7 @@ fi
 # Make a depth-first search to sign the contents of e.g. the spotlight plugin
 # before attempting to sign the plugin itself
 
-find "$APP_BUNDLE" \( -name '*.dylib' -or -name '*.dylib.*' -or -name '*.so' -or -name '*.jnilib' \) ! -type l |
+find "$APP_BUNDLE" \( -name '*.dylib' -or -name '*.dylib.*' -or -name '*.so' -or -name '*.jnilib' \) ! -type l ! -path '*/Sparkle.framework/*' |
 while read file; do
     id=`echo ${file#${APP_BUNDLE}/Contents/} | sed -e 's,/,.,g'`
     codesign --force --identifier=$MACOSX_BUNDLE_IDENTIFIER.$id --sign "$MACOSX_CODESIGNING_IDENTITY" "$file" || exit 1
@@ -93,7 +114,7 @@ done
 # Sign included bundles. First .app ones (i.e. the Python.app inside
 # the LibreOfficePython.framework. Be generic for kicks...)
 
-find "$APP_BUNDLE"/Contents -name '*.app' -type d |
+find "$APP_BUNDLE"/Contents -name '*.app' -type d ! -path '*/Sparkle.framework/*' |
 while read app; do
     # Assume the app has a XML (and not binary) Info.plist
     id=`grep -A 1 '<key>CFBundleIdentifier</key>' "$app/Contents/Info.plist" | tail -1 | sed -e 's,.*<string>,,' -e 's,</string>.*,,'`
@@ -102,7 +123,7 @@ done
 
 # Then .framework ones. Again, be generic just for kicks.
 
-find "$APP_BUNDLE" -name '*.framework' -type d |
+find "$APP_BUNDLE" -name '*.framework' -type d ! -name Sparkle.framework |
 while read framework; do
     for version in "$framework"/Versions/*; do
         if test ! -L "$version" -a -d "$version"; then
