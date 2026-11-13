@@ -35,11 +35,12 @@ $(gb_CustomTarget_workdir)/extras/source/templates/% : $(SRCDIR)/extras/source/t
 
 # test and copy xml files
 $(gb_CustomTarget_workdir)/extras/source/templates/%.xml : $(SRCDIR)/extras/source/templates/%.xml \
+          $(SRCDIR)/extras/util/compact.xsl \
         | $(call gb_ExternalExecutable_get_dependencies,xsltproc) \
           $$(dir $(gb_CustomTarget_workdir)/extras/source/templates/$$*.xml).dir
 	$(call gb_Output_announce,templates/$*.xml,$(true),XSL,1)
 	$(call gb_Trace_StartRange,templates/$*.xml,XSL)
-	$(call gb_ExternalExecutable_get_command,xsltproc) --nonet -o $@ $(SRCDIR)/extras/util/compact.xsl $<
+	$(call gb_ExternalExecutable_get_command,xsltproc) --nonet --stringparam dainvo-version "$(DAINVO_VERSION)" -o $@ $(SRCDIR)/extras/util/compact.xsl $<
 	$(call gb_Trace_EndRange,templates/$*.xml,XSL)
 
 $(gb_CustomTarget_workdir)/extras/source/templates/%.odt \

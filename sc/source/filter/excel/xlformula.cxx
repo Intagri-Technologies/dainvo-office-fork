@@ -18,6 +18,8 @@
  */
 
 #include <xlformula.hxx>
+#include <config_version.h>
+#include <formula/vendorfunction.hxx>
 
 #include <refdata.hxx>
 #include <tokenarray.hxx>
@@ -762,8 +764,14 @@ void XclFunctionProvider::FillXclFuncMap( const XclFunctionInfo* pBeg, const Xcl
         {
             if( pIt->mnXclFunc != NOID )
                 maXclFuncMap[ pIt->mnXclFunc ] = pIt;
-            if( pIt->IsMacroFunc() )
-                maXclMacroNameMap[ pIt->GetMacroFuncName() ] = pIt;
+            if (pIt->IsMacroFunc())
+            {
+                const OUString aMacroName = pIt->GetMacroFuncName();
+                maXclMacroNameMap[aMacroName] = pIt;
+#ifdef DAINVO_VERSION
+                maXclMacroNameMap[formula::rebrandVendorFunction(aMacroName)] = pIt;
+#endif
+            }
         }
     }
 }

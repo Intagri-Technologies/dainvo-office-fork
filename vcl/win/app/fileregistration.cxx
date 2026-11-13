@@ -7,6 +7,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <systools/officeidentity.h>
 #include <sal/config.h>
 
 #include <comphelper/scopeguard.hxx>
@@ -72,7 +73,7 @@ IsPathDefaultForClass(sal::systools::COMReference<IApplicationAssociationRegistr
 
 static bool IsDefaultAppInstalledInReg()
 {
-    const wchar_t* keyPath = L"SOFTWARE\\LibreOffice\\UNO\\InstallPath";
+    const wchar_t* keyPath = OFFICE_UNO_INSTALL_PATH;
 
     WCHAR szRegPath[EXTENDED_MAX_PATH];
     DWORD cbData = sizeof(szRegPath);
@@ -150,9 +151,9 @@ void CheckFileExtRegistration(weld::Window* pDialogParent)
     }
 
     static const std::pair<LPCWSTR, LPCWSTR> formats[] = {
-        { L".odp", L"LibreOffice.ImpressDocument.1" },
-        { L".odt", L"LibreOffice.WriterDocument.1" },
-        { L".ods", L"LibreOffice.CalcDocument.1" },
+        { L".odp", OFFICE_WIDE_PROG_ID_PREFIX L"ImpressDocument.1" },
+        { L".odt", OFFICE_WIDE_PROG_ID_PREFIX L"WriterDocument.1" },
+        { L".ods", OFFICE_WIDE_PROG_ID_PREFIX L"CalcDocument.1" },
     };
     OUString aNonDefaults;
 

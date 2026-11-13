@@ -34,7 +34,7 @@ $(eval $(call gb_UIConfig_add_uifiles,svx,\
 	svx/uiconfig/ui/colsmenu \
 	svx/uiconfig/ui/columnswindow \
 	svx/uiconfig/ui/compressgraphicdialog \
-	svx/uiconfig/ui/crashreportdlg \
+	$(call gb_Helper_optional,BREAKPAD,svx/uiconfig/ui/crashreportdlg) \
 	svx/uiconfig/ui/datanavigator \
 	svx/uiconfig/ui/defaultshapespanel \
 	svx/uiconfig/ui/deleteheaderdialog \

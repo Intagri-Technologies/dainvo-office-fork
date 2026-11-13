@@ -78,7 +78,7 @@ $(gb_CustomTarget_workdir)/instsetoo_native/setup/$(call gb_Helper_get_rcfile,fu
 		&& echo 'URE_MORE_JAVA_CLASSPATH_URLS=$(if $(SYSTEM_HSQLDB),$(HSQLDB_JAR))' \
 		&& echo 'URE_OVERRIDE_JAVA_JFW_SHARED_DATA=$${BRAND_BASE_DIR}/$(LIBO_SHARE_FOLDER)/config/javasettings_$${_OS}_$${_ARCH}.xml' \
 		&& echo 'URE_OVERRIDE_JAVA_JFW_USER_DATA=$${$${BRAND_BASE_DIR}/$(LIBO_ETC_FOLDER)/$(call gb_Helper_get_rcfile,bootstrap):UserInstallation}/user/config/javasettings_$${_OS}_$${_ARCH}.xml' \
-		&& echo 'URE_MORE_JAVA_TYPES=$${BRAND_BASE_DIR}/$(LIBO_SHARE_JAVA_FOLDER)/libreoffice.jar $${BRAND_BASE_DIR}/$(LIBO_SHARE_JAVA_FOLDER)/ScriptFramework.jar $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_UserUnoFile}:UNO_JAVA_CLASSPATH} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_SharedUnoFile}:UNO_JAVA_CLASSPATH} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_BundledUnoFile}:UNO_JAVA_CLASSPATH}' \
+		$(if $(ENABLE_JAVA),&& echo 'URE_MORE_JAVA_TYPES=$${BRAND_BASE_DIR}/$(LIBO_SHARE_JAVA_FOLDER)/libreoffice.jar $${BRAND_BASE_DIR}/$(LIBO_SHARE_JAVA_FOLDER)/ScriptFramework.jar $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_UserUnoFile}:UNO_JAVA_CLASSPATH} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_SharedUnoFile}:UNO_JAVA_CLASSPATH} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_BundledUnoFile}:UNO_JAVA_CLASSPATH}') \
 		&& echo 'URE_MORE_SERVICES=$${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_UserUnoFile}:UNO_SERVICES} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_SharedUnoFile}:UNO_SERVICES} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_BundledUnoFile}:UNO_SERVICES} <$$ORIGIN/services>*' \
 		&& echo 'URE_MORE_TYPES=<$$ORIGIN/types>* $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_UserUnoFile}:UNO_TYPES} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_SharedUnoFile}:UNO_TYPES} $${$${$$ORIGIN/$(call gb_Helper_get_rcfile,louno):PKG_BundledUnoFile}:UNO_TYPES}' \
 	) > $@
@@ -182,7 +182,7 @@ define instsetoo_native_genversionini
 [Version]
 AllLanguages=$(if $(gb_WITH_LANG),$(gb_WITH_LANG),en-US)
 buildid=$(shell cd $(SRCDIR) && git log -1 --format=%H)
-ExtensionUpdateURL=https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update
+ExtensionUpdateURL=$(if $(DAINVO_VERSION),,https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update)
 UpdateChannel=$(if $(ENABLE_ONLINE_UPDATE_MAR),LOOnlineUpdater)
 ReferenceOOoMajorMinor=4.1
 UpdateID=$(PRODUCTNAME)_$(LIBO_VERSION_MAJOR)_en-US

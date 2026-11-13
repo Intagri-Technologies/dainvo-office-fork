@@ -18,6 +18,7 @@
  */
 
 #include <common.h>
+#include <systools/officeidentity.h>
 #include <com/sun/star/lang/XMultiServiceFactory.hpp>
 #include <com/sun/star/container/XNameAccess.hpp>
 
@@ -29,31 +30,31 @@ wchar_t const * getStorageTypeFromGUID_Impl( GUID const & guid )
         return L"soffice.StarWriterDocument.6";
 
     if ( guid == OID_WriterOASISTextServer )
-        return L"LibreOffice.WriterDocument.1";
+        return OFFICE_WIDE_PROG_ID_PREFIX L"WriterDocument.1";
 
     if ( guid == OID_CalcServer )
         return L"soffice.StarCalcDocument.6";
 
     if ( guid == OID_CalcOASISServer )
-        return L"LibreOffice.CalcDocument.1";
+        return OFFICE_WIDE_PROG_ID_PREFIX L"CalcDocument.1";
 
     if ( guid == OID_DrawingServer )
         return L"soffice.StarDrawDocument.6";
 
     if ( guid == OID_DrawingOASISServer )
-        return L"LibreOffice.DrawDocument.1";
+        return OFFICE_WIDE_PROG_ID_PREFIX L"DrawDocument.1";
 
     if ( guid == OID_PresentationServer )
         return L"soffice.StarImpressDocument.6";
 
     if ( guid == OID_PresentationOASISServer )
-        return L"LibreOffice.ImpressDocument.1";
+        return OFFICE_WIDE_PROG_ID_PREFIX L"ImpressDocument.1";
 
     if ( guid == OID_MathServer )
         return L"soffice.StarMathDocument.6";
 
     if ( guid == OID_MathOASISServer )
-        return L"LibreOffice.MathDocument.1";
+        return OFFICE_WIDE_PROG_ID_PREFIX L"MathDocument.1";
 
     return L"";
 }

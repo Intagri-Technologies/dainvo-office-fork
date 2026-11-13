@@ -8,6 +8,7 @@
  */
 
 #include <sal/config.h>
+#include <config_folders.h>
 
 #include <thread>
 
@@ -2230,9 +2231,9 @@ protected:
 void vclmain::createApplication()
 {
 #ifdef _WIN32
-    _putenv_s("LIBO_VCL_DEMO", "1");
+    _putenv_s("VCL_DEMO_SOURCE", SRC_ROOT);
 #else
-    setenv("LIBO_VCL_DEMO", "1", 0);
+    setenv("VCL_DEMO_SOURCE", SRC_ROOT, 0);
 #endif
     static DemoApp aApp;
 }

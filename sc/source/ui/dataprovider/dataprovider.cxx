@@ -7,11 +7,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <config_version.h>
 #include <dataprovider.hxx>
 #include <com/sun/star/ucb/XSimpleFileAccess3.hpp>
 #include <com/sun/star/ucb/SimpleFileAccess.hpp>
 #include <com/sun/star/io/XInputStream.hpp>
-#include <o3tl/string_view.hxx>
 #include <rtl/strbuf.hxx>
 #include <sal/log.hxx>
 #include <unotools/charclass.hxx>
@@ -75,10 +75,48 @@ std::unique_ptr<SvStream> DataProvider::FetchStreamFromURL(const OUString& rURL,
     }
 }
 
+namespace
+{
+constexpr std::u16string_view LEGACY_PROVIDER_PREFIX = u"org.libreoffice.calc.";
+constexpr std::u16string_view DAINVO_PROVIDER_PREFIX = u"com.dainvo.office.calc.";
+
+OUString normalizeProvider(const OUString& rProvider)
+{
+#ifdef DAINVO_VERSION
+    if (rProvider.startsWith(LEGACY_PROVIDER_PREFIX))
+        return rProvider.replaceAt(0, LEGACY_PROVIDER_PREFIX.size(), DAINVO_PROVIDER_PREFIX);
+#else
+    if (rProvider.startsWith(DAINVO_PROVIDER_PREFIX))
+        return rProvider.replaceAt(0, DAINVO_PROVIDER_PREFIX.size(), LEGACY_PROVIDER_PREFIX);
+#endif
+    return rProvider;
+}
+}
+
+DataProviderKind getDataProviderKind(std::u16string_view rProvider)
+{
+    if (rProvider.starts_with(DAINVO_PROVIDER_PREFIX))
+        rProvider.remove_prefix(DAINVO_PROVIDER_PREFIX.size());
+    else if (rProvider.starts_with(LEGACY_PROVIDER_PREFIX))
+        rProvider.remove_prefix(LEGACY_PROVIDER_PREFIX.size());
+    else
+        return DataProviderKind::Unknown;
+
+    if (rProvider == u"csv")
+        return DataProviderKind::Csv;
+    if (rProvider == u"html")
+        return DataProviderKind::Html;
+    if (rProvider == u"xml")
+        return DataProviderKind::Xml;
+    if (rProvider == u"sql")
+        return DataProviderKind::Sql;
+    return DataProviderKind::Unknown;
+}
+
 ExternalDataSource::ExternalDataSource(OUString aURL,
         OUString aProvider, ScDocument* pDoc)
     : maURL(std::move(aURL))
-    , maProvider(std::move(aProvider))
+    , maProvider(normalizeProvider(aProvider))
     , mpDoc(pDoc)
 {
 }
@@ -102,7 +140,7 @@ void ExternalDataSource::setURL(const OUString& rURL)
 
 void ExternalDataSource::setProvider(const OUString& rProvider)
 {
-    maProvider = rProvider;
+    maProvider = normalizeProvider(rProvider);
     mpDataProvider.reset();
 }
 
@@ -330,34 +368,24 @@ ScDBData* ScDBDataManager::getDBData()
     return pDBData;
 }
 
-bool DataProviderFactory::isInternalDataProvider(std::u16string_view rProvider)
-{
-    return o3tl::starts_with(rProvider, u"org.libreoffice.calc");
-}
-
 std::shared_ptr<DataProvider> DataProviderFactory::getDataProvider(ScDocument* pDoc,
         sc::ExternalDataSource& rDataSource)
 {
-    const OUString& rDataProvider = rDataSource.getProvider();
-    bool bInternal = DataProviderFactory::isInternalDataProvider(rDataProvider);
-    if (bInternal)
+    switch (getDataProviderKind(rDataSource.getProvider()))
     {
-        if (rDataProvider == "org.libreoffice.calc.csv")
+        case DataProviderKind::Csv:
             return std::make_shared<CSVDataProvider>(pDoc, rDataSource);
-        else if (rDataProvider == "org.libreoffice.calc.html")
+        case DataProviderKind::Html:
             return std::make_shared<HTMLDataProvider>(pDoc, rDataSource);
-        else if (rDataProvider == "org.libreoffice.calc.xml")
+        case DataProviderKind::Xml:
             return std::make_shared<XMLDataProvider>(pDoc, rDataSource);
-        else if (rDataProvider == "org.libreoffice.calc.sql")
+        case DataProviderKind::Sql:
             return std::make_shared<SQLDataProvider>(pDoc, rDataSource);
+        case DataProviderKind::Unknown:
+            SAL_WARN("sc", "no external data provider supported yet");
+            return {};
     }
-    else
-    {
-        SAL_WARN("sc", "no external data provider supported yet");
-        return std::shared_ptr<DataProvider>();
-    }
-
-    return std::shared_ptr<DataProvider>();
+    return {};
 }
 
 }

@@ -26,6 +26,7 @@
 #include <cppuhelper/findsofficepath.h>
 
 #if defined(_WIN32)
+#include <systools/officeidentity.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -100,7 +101,7 @@ static wchar_t* platformSpecific(void)
         return wcsdup(env);
     }
 
-    const wchar_t* SUBKEYNAME = L"Software\\LibreOffice\\UNO\\InstallPath";
+    const wchar_t* SUBKEYNAME = OFFICE_UNO_INSTALL_PATH;
 
     /* read the key's default value from HKEY_CURRENT_USER */
     wchar_t* path = getPathFromRegistryKey( HKEY_CURRENT_USER, SUBKEYNAME );

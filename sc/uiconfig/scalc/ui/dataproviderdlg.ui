@@ -148,9 +148,9 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <items>
-                              <item id="org.libreoffice.calc.csv">CSV</item>
-                              <item id="org.libreoffice.calc.html">HTML</item>
-                              <item id="org.libreoffice.calc.xml">XML</item>
+                              <item id="com.dainvo.office.calc.csv">CSV</item>
+                              <item id="com.dainvo.office.calc.html">HTML</item>
+                              <item id="com.dainvo.office.calc.xml">XML</item>
                             </items>
                             <child internal-child="accessible">
                               <object class="AtkObject" id="provider_lst-atkobject">

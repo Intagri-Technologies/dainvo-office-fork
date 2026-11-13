@@ -221,7 +221,7 @@ postprocess_FILES_main := \
 	$(postprocess_XCU)/Office/DataAccess.xcu \
 	$(postprocess_XCU)/Office/Embedding.xcu \
 	$(postprocess_XCU)/Office/ExtensionDependencies.xcu \
-	$(postprocess_XCU)/Office/ExtensionManager.xcu \
+	$(if $(DAINVO_VERSION),,$(postprocess_XCU)/Office/ExtensionManager.xcu) \
 	$(postprocess_XCU)/Office/FormWizard.xcu \
 	$(postprocess_XCU)/Office/Histories.xcu \
 	$(postprocess_XCU)/Office/Impress.xcu \
@@ -591,9 +591,10 @@ postprocess_main_SED := \
 	-e 's,$${SYSTEM_LIBEXTTEXTCAT_DATA},$(SYSTEM_LIBEXTTEXTCAT_DATA),g' \
 	-e 's,$${SYSTEM_LIBNUMBERTEXT_DATA},$(SYSTEM_LIBNUMBERTEXT_DATA),g' \
 	-e 's,$${PRIVACY_POLICY_URL},$(PRIVACY_POLICY_URL),g' \
+	-e 's,$${MAR_UPDATE_URL},$(if $(DAINVO_VERSION),,$(or $(ONLINEUPDATE_MAR_BASEURL),https://update-mar.libreoffice.org/)),g' \
 
 $(call gb_XcdTarget_get_target,main.xcd) \
-		: $(BUILDDIR)/config_host.mk.stamp \
+		: $(BUILDDIR)/config_host.mk.stamp $(SRCDIR)/postprocess/CustomTarget_registry.mk \
         | $(call gb_ExternalExecutable_get_dependencies,xsltproc)
 	$(call gb_Output_announce,main,$(true),XCD,3)
 	$(call gb_Trace_StartRange,main,XCD)

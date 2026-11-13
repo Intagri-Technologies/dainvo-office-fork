@@ -253,7 +253,7 @@ End
 
 RegistryItem gid_Regitem_Software_Openoffice_Productname_Productversion_Path
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\%PRODUCTNAME\%PRODUCTVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\%PRODUCTNAME\%PRODUCTVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "Path";
 	Value = "<progpath>\program\soffice.exe";
@@ -279,7 +279,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Install
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "INSTALLLOCATION";
 	Value = "[INSTALLLOCATION]";
@@ -324,7 +324,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Officeinstall
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "OFFICEINSTALLLOCATION";
 	Value = "[INSTALLLOCATION]";
@@ -351,7 +351,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Basisinstall
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\Basis\%PRODUCTVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\Basis\%PRODUCTVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "BASISINSTALLLOCATION";
 	Value = "[INSTALLLOCATION]";
@@ -360,7 +360,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Layer_Basisinstall
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "BASISINSTALLLOCATION";
 	Value = "[INSTALLLOCATION]";
@@ -387,7 +387,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Ureinstall
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\URE\%URELAYERVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\URE\%URELAYERVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "UREINSTALLLOCATION";
 	Value = "[INSTALLLOCATION]URE\\";
@@ -396,7 +396,7 @@ End
 
 RegistryItem gid_Regitem_Software_OpenOfficeorg_Ooobaseversion_Layer_Ureinstall
 	ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\${REGISTRYLAYERNAME}\%PRODUCTNAME\%BRANDPACKAGEVERSION";
 	ModuleID = gid_Module_Root;
 	Name = "UREINSTALLLOCATION";
 	Value = "[INSTALLLOCATION]URE\\";
@@ -519,14 +519,14 @@ End
 
 RegistryItem gid_Regitem_Software_Openofficeorg_Uno_Installpath
     ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\UNO\InstallPath";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\UNO\InstallPath";
     ModuleID = gid_Module_Root;
     Value  = "<progpath>\program";
 End
 
 RegistryItem gid_Regitem_Software_Openofficeorg_Uno_Installpath_Branded
     ParentID = PREDEFINED_HKEY_LOCAL_MACHINE;
-    Subkey = "Software\LibreOffice\UNO\InstallPath";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\UNO\InstallPath";
     ModuleID = gid_Module_Root;
     Name = "%PRODUCTNAME %PRODUCTVERSION";
     Value  = "<progpath>\program";
@@ -678,5 +678,9 @@ RegistryItem gid_Regitem_Software_RegisteredApplications
 End
 
 // registering vnd.libreoffice.command URI scheme handler
+#ifdef DAINVO_BRAND
+REGISTER_URI_HANDLER( vnd.dainvo.command, vnd_libreoffice_command, gid_Module_Root )
+#else
 REGISTER_URI_HANDLER( vnd.libreoffice.command, vnd_libreoffice_command, gid_Module_Root )
-REGISTRY_ENTRY_CAPABILITIES_URL(vnd.libreoffice.command, vnd_libreoffice_command, gid_Module_Root, vnd.libreoffice.command)
+#endif
+REGISTRY_ENTRY_CAPABILITIES_URL("${PRODUCTCOMMANDSCHEME}", vnd_libreoffice_command, gid_Module_Root, "${PRODUCTCOMMANDSCHEME}")

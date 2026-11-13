@@ -27,8 +27,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <delayimp.h>
+#include <systools/officeidentity.h>
 
-#define INSTALL_PATH L"Software\\LibreOffice\\UNO\\InstallPath"
+#define INSTALL_PATH OFFICE_UNO_INSTALL_PATH
 #define UNO_PATH L"UNO_PATH"
 
 namespace {

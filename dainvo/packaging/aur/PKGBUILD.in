@@ -4,7 +4,7 @@
 pkgname=dainvo-office-bin
 pkgver=@VERSION@
 pkgrel=@PKGREL@
-pkgdesc="Dainvo Office office suite (Writer, Calc, Impress), based on LibreOffice"
+pkgdesc="Dainvo Office office suite (Writer, Calc, Impress)"
 arch=('x86_64')
 url="https://github.com/Intagri-Technologies/dainvo-office-releases"
 license=('MPL-2.0')

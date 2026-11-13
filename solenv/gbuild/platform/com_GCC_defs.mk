@@ -100,6 +100,12 @@ gb_CXXFLAGS_COMMON := \
 	$(if $(ENABLE_HARDENING_FLAGS),$(HARDENING_CFLAGS)) \
 	$(if $(filter EMSCRIPTEN,$(OS)),-fno-stack-protector,-fstack-protector-strong) \
 
+ifneq ($(DAINVO_VERSION),)
+gb_DAINVO_SOURCE_MAP := -ffile-prefix-map=$(SRCDIR)=dainvo-office
+gb_CFLAGS_COMMON += $(gb_DAINVO_SOURCE_MAP)
+gb_CXXFLAGS_COMMON += $(gb_DAINVO_SOURCE_MAP)
+endif
+
 ifeq ($(HAVE_WDEPRECATED_COPY_DTOR),TRUE)
 gb_CXXFLAGS_COMMON += -Wdeprecated-copy-dtor
 endif

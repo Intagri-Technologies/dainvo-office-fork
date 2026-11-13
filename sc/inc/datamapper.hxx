@@ -25,6 +25,9 @@ class ScDBDataManager;
 class DataProvider;
 class DataTransformation;
 
+enum class DataProviderKind { Unknown, Csv, Html, Xml, Sql };
+DataProviderKind getDataProviderKind(std::u16string_view rProvider);
+
 class SC_DLLPUBLIC ExternalDataSource
 {
 private:
@@ -37,19 +40,7 @@ private:
      */
     OUString maURL;
 
-    /**
-     * The data provider is a unique identifier that will
-     * allow to identify and instantiate the required data
-     * provider.
-     *
-     * Examples for the internal data providers are:
-     *
-     * org.libreoffice.dataprovider.calc.csv
-     * org.libreoffice.dataprovider.calc.json
-     *
-     * Only internal data providers should use the:
-     * "org.libreoffice.dataprovider prefix".
-     */
+    // Persistent identifier for the provider that handles this source.
     OUString maProvider;
 
     /**

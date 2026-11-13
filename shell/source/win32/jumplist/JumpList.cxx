@@ -7,6 +7,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <systools/officeidentity.h>
 #include <sal/config.h>
 
 #include <algorithm>
@@ -145,7 +146,7 @@ void SAL_CALL JumpListImpl::beginList(const OUString& sApplication)
             "'Math', 'Base', 'Startcenter'.",
             getXWeak(), 1);
     }
-    OUString sApplicationID("TheDocumentFoundation.LibreOffice." + sApplication);
+    OUString sApplicationID(OFFICE_APP_USER_MODEL_PREFIX + sApplication);
 
     try
     {
@@ -428,7 +429,7 @@ void SAL_CALL JumpListImpl::deleteList(const OUString& sApplication)
             "'Math', 'Base', 'Startcenter'.",
             getXWeak(), 1);
     }
-    OUString sApplicationID("TheDocumentFoundation.LibreOffice." + sApplication);
+    OUString sApplicationID(OFFICE_APP_USER_MODEL_PREFIX + sApplication);
 
     try
     {
@@ -453,7 +454,7 @@ Sequence<JumpListItem> SAL_CALL JumpListImpl::getRemovedItems(const OUString& sA
             "'Math', 'Base', 'Startcenter'.",
             getXWeak(), 1);
     }
-    OUString sApplicationID("TheDocumentFoundation.LibreOffice." + sApplication);
+    OUString sApplicationID(OFFICE_APP_USER_MODEL_PREFIX + sApplication);
 
     std::vector<JumpListItem> removedItems;
     try

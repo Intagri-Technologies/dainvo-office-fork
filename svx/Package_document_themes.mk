@@ -13,7 +13,7 @@ $(eval $(call gb_Package_add_files_with_dir,svx_document_themes,$(LIBO_SHARE_FOL
     Beach.theme \
     Breeze.theme \
     Forest.theme \
-    Libreoffice.theme \
+    $(if $(DAINVO_VERSION),Dainvo.theme,Libreoffice.theme) \
     Ocean.theme \
     Rainbow.theme \
     Sunset.theme \

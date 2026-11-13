@@ -8,10 +8,15 @@
  */
 #pragma once
 
+#include <config_version.h>
 #include <rtl/ustring.hxx>
 
 inline constexpr OUString STR_HTML_GENERATOR
+#ifdef DAINVO_VERSION
+    = u"%PRODUCTNAME " DAINVO_VERSION " (%1)"_ustr;
+#else
     = u"%PRODUCTNAME %PRODUCTVERSION%PRODUCTEXTENSION (%1)"_ustr;
+#endif
 
 // Do not translate STR_TEMPLATE_NAME*_DEF names!!
 // STR_TEMPLATE_NAME*_DEF strings must EXACTLY fit dc:title tag in meta.xml of each template file

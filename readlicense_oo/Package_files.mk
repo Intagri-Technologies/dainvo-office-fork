@@ -13,7 +13,7 @@ ifneq ($(OS),MACOSX)
 $(eval $(call gb_Package_add_file,readlicense_oo_files,NOTICE,NOTICE))
 else
 $(eval $(call gb_Package_add_file,readlicense_oo_files,Resources/NOTICE,NOTICE))
-# Dainvo: no local CREDITS.fodt; About > Credits links to the online list
+# Dainvo: source and contributor information is in the license.
 endif
 
 # vim: set noet sw=4 ts=4:

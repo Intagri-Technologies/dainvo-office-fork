@@ -900,7 +900,7 @@
             <key>UTTypeDescription</key>
             <string>Comma-Separated Value Document</string>
             <key>UTTypeIdentifier</key>
-            <string>org.libreoffice.csv-document</string>
+            <string>@MACOSX_CSV_UTI@</string>
             <key>UTTypeTagSpecification</key>
             <dict>
                 <key>public.filename-extension</key>
@@ -921,18 +921,10 @@
     <array>
         <dict>
             <key>CFBundleURLName</key>
-            <string>@PRODUCTNAME@ CMIS</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>vnd.libreoffice.cmis</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
             <string>@PRODUCTNAME@</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>vnd.libreoffice.command</string>
+                <string>@MACOSX_COMMAND_SCHEME@</string>
                 <string>ms-word</string>
                 <string>ms-powerpoint</string>
                 <string>ms-excel</string>
@@ -1184,7 +1176,7 @@
                 <string>org.openxmlformats.presentationml.presentation.macroEnabled</string>
                 <string>org.openxmlformats.presentationml.template</string>
                 <string>org.openxmlformats.presentationml.template.macroEnabled</string>
-                <string>org.libreoffice.csv-document</string>
+                <string>@MACOSX_CSV_UTI@</string>
             </array>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>

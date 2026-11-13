@@ -18,6 +18,14 @@ readlicense_oo_LANGS := en-US $(filter-out en-US,$(gb_WITH_LANG))
 $(call gb_CustomTarget_get_target,readlicense_oo/readme) : \
 	$(foreach lang,$(readlicense_oo_LANGS),$(readlicense_oo_DIR)/$(call gb_README,$(lang)))
 
+ifneq ($(DAINVO_VERSION),)
+
+$(readlicense_oo_DIR)/$(call gb_README,%) : $(SRCDIR)/dainvo/packaging/README.txt \
+        | $(readlicense_oo_DIR)/.dir
+	sed -e 's/@VERSION@/$(DAINVO_VERSION)/g' -e 's/@BUILD@/$(DAINVO_BUILD)/g' $< > $@
+
+else
+
 ifeq ($(strip $(gb_WITH_LANG)),)
 readlicense_oo_README_XRM := $(SRCDIR)/readlicense_oo/docs/readme.xrm
 else
@@ -72,5 +80,7 @@ $(readlicense_oo_DIR)/$(call gb_README,%) : \
 		&& rm $@.out \
 	)
 	$(call gb_Trace_EndRange,$(subst $(WORKDIR)/,,$@),XSL)
+
+endif
 
 # vim:set shiftwidth=4 tabstop=4 noexpandtab:

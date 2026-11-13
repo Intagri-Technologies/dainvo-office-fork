@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <config_version.h>
 #include <rtl/ustrbuf.hxx>
 #include <unotools/configmgr.hxx>
 #include <unotools/bootstrap.hxx>
@@ -71,7 +72,11 @@ OUString DocInfoHelper::GetGeneratorString()
             // build_information has '(' and '[' encoded as '$', ')' and ']' ignored
             // and ':' replaced by '-'
             {
-                aResult.append( "LibreOffice_project/" );
+#ifdef DAINVO_VERSION
+                aResult.append("Dainvo_Office_project/");
+#else
+                aResult.append("LibreOffice_project/");
+#endif
                 OUString aBuildId( Bootstrap::getBuildIdData( OUString() ) );
                 for( sal_Int32 i=0; i < aBuildId.getLength(); i++ )
                 {

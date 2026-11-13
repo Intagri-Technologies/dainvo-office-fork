@@ -24,7 +24,7 @@ void SessionManagerInhibitor::inhibit(bool bInhibit, std::u16string_view sReason
     if (bInhibit)
     {
         IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn,
-                                    CFSTR("LibreOffice presentation running"), &mnAssertionID);
+                                    CFSTR("Office presentation running"), &mnAssertionID);
     }
     else
     {

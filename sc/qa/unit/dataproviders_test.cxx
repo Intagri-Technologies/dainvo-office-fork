@@ -15,6 +15,8 @@
 #include <dbdata.hxx>
 #include <datamapper.hxx>
 #include <vcl/scheduler.hxx>
+#include <config_features.h>
+#include <config_version.h>
 #include <orcusxml.hxx>
 #include <sortparam.hxx>
 #include <datatransformation.hxx>
@@ -34,22 +36,30 @@ public:
     void testDataLargerThanDB();
     void testHTMLImport();
     void testXMLImport();
+#if HAVE_FEATURE_DBCONNECTIVITY
     void testBaseImport();
+#endif
     void testTdf169541_TwoDataMapping();
     void testTdf169610_SortTransform();
     void testLinkUpdateGate();
+#if HAVE_FEATURE_DBCONNECTIVITY
     void testDBImportRefreshDeferred();
+#endif
 
     CPPUNIT_TEST_SUITE(ScDataProvidersTest);
     CPPUNIT_TEST(testCSVImport);
     CPPUNIT_TEST(testDataLargerThanDB);
     CPPUNIT_TEST(testHTMLImport);
     CPPUNIT_TEST(testXMLImport);
+#if HAVE_FEATURE_DBCONNECTIVITY
     CPPUNIT_TEST(testBaseImport);
+#endif
     CPPUNIT_TEST(testTdf169541_TwoDataMapping);
     CPPUNIT_TEST(testTdf169610_SortTransform);
     CPPUNIT_TEST(testLinkUpdateGate);
+#if HAVE_FEATURE_DBCONNECTIVITY
     CPPUNIT_TEST(testDBImportRefreshDeferred);
+#endif
     CPPUNIT_TEST_SUITE_END();
 };
 
@@ -201,6 +211,7 @@ void ScDataProvidersTest::testXMLImport()
     CPPUNIT_ASSERT_EQUAL(u"test4"_ustr, pDoc->GetString(1, 4, 0));
 }
 
+#if HAVE_FEATURE_DBCONNECTIVITY
 void ScDataProvidersTest::testBaseImport()
 {
     createScDoc();
@@ -225,6 +236,7 @@ void ScDataProvidersTest::testBaseImport()
     CPPUNIT_ASSERT_EQUAL(OUString("ARJ00"), pDoc->GetString(0, 0, 0));
     CPPUNIT_ASSERT_EQUAL(OUString("AVV00"), pDoc->GetString(0, 1, 0));
 }
+#endif
 
 void ScDataProvidersTest::testTdf169541_TwoDataMapping()
 {
@@ -345,8 +357,22 @@ void ScDataProvidersTest::testLinkUpdateGate()
     pDocShell->GetEmbeddedObjectContainer().setUserAllowsLinkUpdate(true);
     pLinkManager->UpdateAllLinks(false, OUString());
     CPPUNIT_ASSERT_EQUAL(u"changed"_ustr, pDoc->GetString(0, 0, 0));
+
+    // Loading the legacy identifier still registers and refreshes the link.
+    // The next save writes the provider ID for this build.
+    skipValidation(); // No schema yet for calcext:data-mappings.
+    saveAndReload(TestFilter::ODS);
+    auto pXmlDoc = parseExport(u"content.xml"_ustr);
+#ifdef DAINVO_VERSION
+    constexpr OUString aExpectedProvider = u"com.dainvo.office.calc.csv"_ustr;
+#else
+    constexpr OUString aExpectedProvider = u"org.libreoffice.calc.csv"_ustr;
+#endif
+    assertXPath(pXmlDoc, "//calcext:data-mapping", "provider", aExpectedProvider);
+    CPPUNIT_ASSERT_EQUAL(size_t(1), getScDoc()->GetExternalDataMapper().getDataSources().size());
 }
 
+#if HAVE_FEATURE_DBCONNECTIVITY
 void ScDataProvidersTest::testDBImportRefreshDeferred()
 {
     // A database range that imports from a data source on a refresh delay is an external link.
@@ -373,6 +399,7 @@ void ScDataProvidersTest::testDBImportRefreshDeferred()
     pDBData->Timer::Invoke();
     CPPUNIT_ASSERT_EQUAL(u"Identifier"_ustr, pDoc->GetString(0, 0, 0));
 }
+#endif
 
 ScDataProvidersTest::ScDataProvidersTest()
     : ScModelTestBase(u"sc/qa/unit/data/dataprovider"_ustr)

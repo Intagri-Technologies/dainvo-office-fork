@@ -133,10 +133,6 @@ public:
 
 class DataProviderFactory
 {
-private:
-
-    static bool isInternalDataProvider(std::u16string_view rProvider);
-
 public:
 
     static std::shared_ptr<DataProvider> getDataProvider(ScDocument* pDoc, sc::ExternalDataSource& rDataSource);

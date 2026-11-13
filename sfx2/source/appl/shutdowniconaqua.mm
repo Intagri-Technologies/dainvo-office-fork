@@ -166,7 +166,7 @@ struct RecentMenuEntry
 
     SolarMutexGuard aGuard;
 
-    if ( m_aCommand == "vnd.org.libreoffice.recentdocs:ClearRecentFileList" )
+    if ( m_aCommand == "vnd.dainvo.office.recentdocs:ClearRecentFileList" )
     {
         // Clearing the recent file list requires an extra step
         SvtHistoryOptions::Clear( EHistoryType::PickList, false );
@@ -339,7 +339,7 @@ struct RecentMenuEntry
             [menu addItem: [NSMenuItem separatorItem]];
 
             QSCommandMenuItem* pNewItem = [[QSCommandMenuItem alloc] initWithTitle: getAutoreleasedString( aClearList ) action: @selector(menuItemTriggered:) keyEquivalent: @""];
-            [pNewItem setCommand: "vnd.org.libreoffice.recentdocs:ClearRecentFileList"];
+            [pNewItem setCommand: "vnd.dainvo.office.recentdocs:ClearRecentFileList"];
             [pNewItem setTarget: pNewItem];
             [pNewItem setEnabled: YES];
             [menu addItem: pNewItem];

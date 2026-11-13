@@ -72,7 +72,7 @@
     </node>
     <node oor:name="com.sun.star.comp.sfx2.BackingComp" oor:op="replace">
       <prop oor:name="Protocols">
-        <value>vnd.org.libreoffice.recentdocs:*</value>
+        <value>vnd.dainvo.office.recentdocs:*</value>
       </prop>
     </node>
   </node>

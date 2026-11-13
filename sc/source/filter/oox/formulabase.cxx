@@ -18,6 +18,8 @@
  */
 
 #include <formulabase.hxx>
+#include <config_version.h>
+#include <formula/vendorfunction.hxx>
 #include <rangelst.hxx>
 #include <addressconverter.hxx>
 
@@ -1083,6 +1085,10 @@ void FunctionProviderImpl::initFunc(const FunctionData& rFuncData)
         xFuncInfo->maOdfFuncName = OUString::createFromAscii( rFuncData.mpcOdfFuncName );
     if( rFuncData.mpcOoxFuncName )
         xFuncInfo->maOoxFuncName = OUString::createFromAscii( rFuncData.mpcOoxFuncName );
+#ifdef DAINVO_VERSION
+    xFuncInfo->maOdfFuncName = formula::rebrandVendorFunction(xFuncInfo->maOdfFuncName);
+    xFuncInfo->maOoxFuncName = formula::rebrandVendorFunction(xFuncInfo->maOoxFuncName);
+#endif
 
     if( rFuncData.mnFlags & FuncFlags::MACROCALL )
     {
@@ -1149,7 +1155,11 @@ FunctionProvider::~FunctionProvider()
 
 const FunctionInfo* FunctionProvider::getFuncInfoFromOoxFuncName( const OUString& rFuncName ) const
 {
-    return mxFuncImpl->maOoxFuncs.get( rFuncName ).get();
+#ifdef DAINVO_VERSION
+    return mxFuncImpl->maOoxFuncs.get(formula::rebrandVendorFunction(rFuncName)).get();
+#else
+    return mxFuncImpl->maOoxFuncs.get(rFuncName).get();
+#endif
 }
 
 const FunctionInfo* FunctionProvider::getFuncInfoFromBiff12FuncId( sal_uInt16 nFuncId ) const
@@ -1159,7 +1169,11 @@ const FunctionInfo* FunctionProvider::getFuncInfoFromBiff12FuncId( sal_uInt16 nF
 
 const FunctionInfo* FunctionProvider::getFuncInfoFromMacroName( const OUString& rFuncName ) const
 {
-    return mxFuncImpl->maMacroFuncs.get( rFuncName ).get();
+#ifdef DAINVO_VERSION
+    return mxFuncImpl->maMacroFuncs.get(formula::rebrandVendorFunction(rFuncName)).get();
+#else
+    return mxFuncImpl->maMacroFuncs.get(rFuncName).get();
+#endif
 }
 
 FunctionLibraryType FunctionProvider::getFuncLibTypeFromLibraryName( std::u16string_view rLibraryName )
@@ -1413,6 +1427,15 @@ bool OpCodeProviderImpl::initFuncOpCode( FunctionInfo& orFuncInfo, const ApiToke
                 aEntry.Name = orFuncInfo.maOoxFuncName;
                 aEntry.Token = aIt->second;
                 maParserMap.push_back( aEntry );
+#ifdef DAINVO_VERSION
+                constexpr std::u16string_view aPrefix = u"_xlfn.ORG.DAINVO.";
+                if (aEntry.Name.startsWith(aPrefix))
+                {
+                    aEntry.Name = aEntry.Name.replaceAt(0, aPrefix.size(),
+                                                        u"_xlfn.ORG.LIBREOFFICE.");
+                    maParserMap.push_back(aEntry);
+                }
+#endif
             }
         }
         else

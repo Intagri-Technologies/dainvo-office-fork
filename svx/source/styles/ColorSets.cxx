@@ -8,6 +8,7 @@
  *
  */
 
+#include <config_version.h>
 #include <svx/ColorSets.hxx>
 
 #include <svl/hint.hxx>
@@ -149,7 +150,11 @@ model::ColorSet const* ColorSets::getDefault()
 {
     bool bForceDefault = !o3tl::getEnvironment(u"LO_FORCE_FALLBACK_DOCUMENT_THEME"_ustr).isEmpty();
     ColorSets& rSets = ColorSets::get();
+#ifdef DAINVO_VERSION
+    auto const* pColorSet = rSets.getColorSet(u"Dainvo");
+#else
     auto const* pColorSet = rSets.getColorSet(u"LibreOffice");
+#endif
     if (pColorSet && !bForceDefault)
     {
         return pColorSet;

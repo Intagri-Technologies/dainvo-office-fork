@@ -115,6 +115,7 @@ CommandLineEvent CheckOfficeURI(/* in,out */ OUString& arg, CommandLineEvent cur
     // 1. Strip the scheme name
     OUString rest1;
     bool isOfficeURI = ( arg.startsWithIgnoreAsciiCase("vnd.libreoffice.command:", &rest1) // Proposed extended schema
+                      || arg.startsWithIgnoreAsciiCase("vnd.dainvo.command:",       &rest1)
                       || arg.startsWithIgnoreAsciiCase("ms-word:",                 &rest1)
                       || arg.startsWithIgnoreAsciiCase("ms-powerpoint:",           &rest1)
                       || arg.startsWithIgnoreAsciiCase("ms-excel:",                &rest1)

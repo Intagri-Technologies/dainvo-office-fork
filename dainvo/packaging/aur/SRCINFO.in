@@ -1,5 +1,5 @@
 pkgbase = dainvo-office-bin
-	pkgdesc = Dainvo Office office suite (Writer, Calc, Impress), based on LibreOffice
+	pkgdesc = Dainvo Office office suite (Writer, Calc, Impress)
 	pkgver = @VERSION@
 	pkgrel = @PKGREL@
 	url = https://github.com/Intagri-Technologies/dainvo-office-releases

@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <config_version.h>
 #include "shlxtmsi.hxx"
 #include <algorithm>
 #include <sstream>
@@ -43,7 +44,6 @@ extern "C" __declspec(dllexport) UINT __stdcall MigrateInstallPath(MSIHANDLE han
     const std::wstring sDefinedName = GetMsiPropertyW( handle, L"DEFINEDPRODUCT" );
     const std::wstring sUpdateVersion = GetMsiPropertyW( handle, L"DEFINEDVERSION" );
     const std::wstring sUpgradeCode = GetMsiPropertyW( handle, L"UpgradeCode" );
-    const std::wstring sBrandPackageVersion = GetMsiPropertyW(handle, L"BRANDPACKAGEVERSION");
 
     std::wstring   sKey = L"Software\\" + sManufacturer + L"\\" + sDefinedName +
                                         L"\\" + sUpdateVersion + L"\\" + sUpgradeCode;
@@ -51,6 +51,8 @@ extern "C" __declspec(dllexport) UINT __stdcall MigrateInstallPath(MSIHANDLE han
     sInstDir = RegValue(HKEY_CURRENT_USER, sKey.c_str(), L"INSTALLLOCATION");
     if (sInstDir.empty())
         sInstDir = RegValue(HKEY_LOCAL_MACHINE, sKey.c_str(), L"INSTALLLOCATION");
+#ifndef DAINVO_VERSION
+    const std::wstring sBrandPackageVersion = GetMsiPropertyW(handle, L"BRANDPACKAGEVERSION");
     // See #i93032# for layers description
     if (sInstDir.empty())
     {
@@ -72,6 +74,7 @@ extern "C" __declspec(dllexport) UINT __stdcall MigrateInstallPath(MSIHANDLE han
         sKey = L"Software\\LibreOffice\\Layers_\\" + sDefinedName + L"\\" + sBrandPackageVersion;
         sInstDir = RegValue(HKEY_LOCAL_MACHINE, sKey.c_str(), L"INSTALLLOCATION");
     }
+#endif
     if (sInstDir.empty())
     {
         std::wistringstream sOlds{ GetMsiPropertyW(handle, L"OLDPRODUCTS") };

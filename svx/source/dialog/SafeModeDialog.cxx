@@ -264,7 +264,8 @@ IMPL_LINK(SafeModeDialog, DialogBtnHdl, weld::Button&, rBtn, void)
 
 IMPL_LINK(SafeModeDialog, CreateZipBtnHdl, weld::Button&, /*rBtn*/, void)
 {
-    const OUString zipFileURL(comphelper::BackupFileHelper::getUserProfileURL() + "/libreoffice-profile.zip");
+    constexpr OUString aZipName = u"office-profile.zip"_ustr;
+    const OUString zipFileURL(comphelper::BackupFileHelper::getUserProfileURL() + "/" + aZipName);
     osl::File::remove(zipFileURL); // Remove previous exports
     try
     {
@@ -281,7 +282,9 @@ IMPL_LINK(SafeModeDialog, CreateZipBtnHdl, weld::Button&, /*rBtn*/, void)
         return;
     }
 
-    FileExportedDialog aDialog(m_xDialog.get(), SvxResId(RID_SVXSTR_SAFEMODE_USER_PROFILE_EXPORTED));
+    FileExportedDialog aDialog(m_xDialog.get(),
+                               SvxResId(RID_SVXSTR_SAFEMODE_USER_PROFILE_EXPORTED)
+                                   .replaceFirst("%1", aZipName));
     aDialog.run();
 }
 

@@ -229,7 +229,7 @@ End
 RegistryItem gid_Regitem_Path
     ModuleID = gid_Module_Root;
     ParentID = PREDEFINED_HKEY_CLASSES_ROOT;
-    Subkey = "Software\LibreOffice\%PRODUCTNAME";
+    Subkey = "Software\${PRODUCTREGISTRYROOT}\%PRODUCTNAME";
     Name = "Path";
     Value = "[INSTALLLOCATION]";
 End

@@ -24,6 +24,8 @@
 #include <formula/errorcodes.hxx>
 #include <formula/token.hxx>
 #include <formula/tokenarray.hxx>
+#include <formula/vendorfunction.hxx>
+#include <config_version.h>
 #include <o3tl/string_view.hxx>
 #include <core_resource.hxx>
 #include <core_resource.hrc>
@@ -310,6 +312,10 @@ void OpCodeList::putDefaultOpCode( const FormulaCompiler::NonConstOpCodeMapPtr& 
             return;
         sKey = ForResId(pKey);
     }
+#ifdef DAINVO_VERSION
+    if (xMap->isODFF() || xMap->isOOXML())
+        sKey = formula::rebrandVendorFunction(sKey);
+#endif
     xMap->putOpCode(sKey, OpCode(nOp), pCharClass);
 }
 

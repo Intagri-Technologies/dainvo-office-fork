@@ -35,7 +35,7 @@ $(eval $(call gb_Configuration_add_datas,registry,officecfg/registry/data,\
 	org/openoffice/Office/Canvas.xcu \
 	org/openoffice/Office/Compatibility.xcu \
 	org/openoffice/Office/ExtensionDependencies.xcu \
-	org/openoffice/Office/ExtensionManager.xcu \
+	$(if $(DAINVO_VERSION),,org/openoffice/Office/ExtensionManager.xcu) \
 	org/openoffice/Office/Impress.xcu \
 	org/openoffice/Office/Jobs.xcu \
 	org/openoffice/Office/Logging.xcu \

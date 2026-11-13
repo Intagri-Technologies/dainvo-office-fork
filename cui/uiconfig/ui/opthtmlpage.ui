@@ -578,7 +578,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="starbasic">
-                    <property name="label" translatable="yes" context="opthtmlpage|starbasic">LibreOffice _Basic</property>
+                    <property name="label" translatable="yes" context="opthtmlpage|starbasic">%PRODUCTNAME _Basic</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">False</property>

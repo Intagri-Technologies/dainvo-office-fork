@@ -15,6 +15,10 @@ Globals
             BASISPACKAGEPREFIX libobasis
             UREPACKAGEPREFIX libreoffice
             SOLSUREPACKAGEPREFIX libreoffice
+            PRODUCTREGISTRYROOT LibreOffice
+            PRODUCTPROGID LibreOffice
+            PRODUCTAPPUSERMODELID TheDocumentFoundation.LibreOffice
+            PRODUCTCOMMANDSCHEME vnd.libreoffice.command
             PROGRESSBARCOLOR 0,0,0
             PROGRESSFRAMECOLOR 102,102,102
             PROGRESSPOSITION 30,145
@@ -79,6 +83,14 @@ DainvoOffice
     {
         variables
         {
+            WINDOWSBASISROOTNAME Dainvo Office
+            UNIXBASISROOTNAME dainvo-office
+            UREPACKAGEPREFIX dainvo-office
+            SOLSUREPACKAGEPREFIX dainvo-office
+            PRODUCTREGISTRYROOT Dainvo
+            PRODUCTPROGID DainvoOffice
+            PRODUCTAPPUSERMODELID IntagriTechnologies.DainvoOffice
+            PRODUCTCOMMANDSCHEME vnd.dainvo.command
             PRODUCTNAME @PRODUCTNAME@
             PRODUCTVERSION @LIBO_VERSION_MAJOR@.@LIBO_VERSION_MINOR@
             PRODUCTEXTENSION .@LIBO_VERSION_MICRO@.@LIBO_VERSION_PATCH@@LIBO_VERSION_SUFFIX@

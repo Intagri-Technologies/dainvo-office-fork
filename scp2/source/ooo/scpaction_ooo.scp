@@ -52,7 +52,7 @@ ScpAction scp_Copy_Install
 End
 #endif
 
-#ifdef MACOSX
+#if defined(MACOSX) && !defined(DAINVO_BRAND)
 ScpAction scp_Copy_Dmg_Background_Image
     Copy = "osxdndinstall.png";
     Name = "background.png";

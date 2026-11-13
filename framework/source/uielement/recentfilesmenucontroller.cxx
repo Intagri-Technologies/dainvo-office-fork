@@ -412,7 +412,7 @@ void SAL_CALL RecentFilesMenuController::itemSelected( const css::awt::MenuEvent
         {
             SvtHistoryOptions::Clear( EHistoryType::PickList, false );
             dispatchCommand(
-            u"vnd.org.libreoffice.recentdocs:ClearRecentFileList"_ustr,
+            u"vnd.dainvo.office.recentdocs:ClearRecentFileList"_ustr,
             css::uno::Sequence< css::beans::PropertyValue >() );
         }
     }

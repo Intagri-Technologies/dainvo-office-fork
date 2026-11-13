@@ -688,7 +688,7 @@ $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo, \
 	emboleobj \
 	package2 \
 	$(call gb_Helper_optional,SCRIPTING,scriptframe) \
-	sdbc2 \
+	$(call gb_Helper_optional,DBCONNECTIVITY,sdbc2) \
 	sofficeapp \
 	srtrs1 \
 	ucb1 \

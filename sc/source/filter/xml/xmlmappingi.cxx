@@ -105,9 +105,8 @@ ScXMLMappingContext::ScXMLMappingContext( ScXMLImport& rImport,
     {
         // Only build the data providers we support. The sql provider is left
         // out: it was never finished and was dropped from the dialog in tdf#169079.
-        if (aProvider != "org.libreoffice.calc.csv"
-            && aProvider != "org.libreoffice.calc.html"
-            && aProvider != "org.libreoffice.calc.xml")
+        const auto eProvider = sc::getDataProviderKind(aProvider);
+        if (eProvider == sc::DataProviderKind::Unknown || eProvider == sc::DataProviderKind::Sql)
         {
             SAL_WARN("sc", "ignoring document data mapping for provider \"" << aProvider << "\"");
             return;

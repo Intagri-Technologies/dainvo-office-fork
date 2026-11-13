@@ -71,6 +71,7 @@
 #include <com/sun/star/table/BorderLineStyle.hpp>
 #include <tools/globname.hxx>
 #include <comphelper/classids.hxx>
+#include <systools/officeidentity.h>
 #include <comphelper/propertysequence.hxx>
 #include <comphelper/storagehelper.hxx>
 #include <comphelper/memorystream.hxx>
@@ -229,7 +230,7 @@ static uno::Reference<io::XInputStream> lcl_StoreOwnAsOOXML(
         { {SO3_SW_CLASSID_60}, "MS Word 2007 XML", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Word.Document.12", "docx" },
         { {SO3_SC_CLASSID_60}, "Calc MS Excel 2007 XML", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Excel.Sheet.12", "xlsx" },
         { {SO3_SIMPRESS_CLASSID_60}, "Impress MS PowerPoint 2007 XML", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "PowerPoint.Show.12", "pptx" },
-        { {SO3_SDRAW_CLASSID}, "draw8", "application/vnd.oasis.opendocument.graphics", "LibreOffice.DrawDocument.1", "odg" },
+        { {SO3_SDRAW_CLASSID}, "draw8", "application/vnd.oasis.opendocument.graphics", OFFICE_PROG_ID_PREFIX "DrawDocument.1", "odg" },
         { {SO3_SCH_CLASSID_60}, "unused", "", "", "" },
         { {SO3_SM_CLASSID_60}, "unused", "", "", "" },
     };

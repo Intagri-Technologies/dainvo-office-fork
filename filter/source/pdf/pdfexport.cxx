@@ -75,6 +75,7 @@
 
 #include <rtl/bootstrap.hxx>
 #include <config_features.h>
+#include <config_version.h>
 
 using namespace ::com::sun::star;
 using namespace ::com::sun::star::io;
@@ -522,7 +523,11 @@ bool PDFExport::Export( const OUString& rFile, const Sequence< PropertyValue >& 
                     aContext.DocumentInfo.Producer =
                         utl::ConfigManager::getProductName() +
                         " " +
+#ifdef DAINVO_VERSION
+                        DAINVO_VERSION +
+#else
                         utl::ConfigManager::getAboutBoxProductVersion() +
+#endif
                         " (" + arch + ")"
                         ;
             }

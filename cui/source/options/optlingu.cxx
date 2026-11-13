@@ -1541,7 +1541,6 @@ SvxEditModulesDlg::SvxEditModulesDlg(weld::Window* pParent, SvxLinguData_Impl& r
     , m_xPrioUpPB(m_xBuilder->weld_button(u"up"_ustr))
     , m_xPrioDownPB(m_xBuilder->weld_button(u"down"_ustr))
     , m_xBackPB(m_xBuilder->weld_button(u"back"_ustr))
-    , m_xMoreDictsLink(m_xBuilder->weld_link_button(u"moredictslink"_ustr))
     , m_xClosePB(m_xBuilder->weld_button(u"close"_ustr))
     , m_xLanguageLB(new SvxLanguageBox(m_xBuilder->weld_combo_box(u"language"_ustr)))
 {
@@ -1562,10 +1561,6 @@ SvxEditModulesDlg::SvxEditModulesDlg(weld::Window* pParent, SvxLinguData_Impl& r
     // in case of not installed language modules
     m_xPrioUpPB->set_sensitive( false );
     m_xPrioDownPB->set_sensitive( false );
-
-    m_xMoreDictsLink->connect_activate_link(LINK(this, SvxEditModulesDlg, OnLinkClick));
-    if (officecfg::Office::Security::Hyperlinks::Open::get() == SvtExtendedSecurityOptions::OPEN_NEVER)
-        m_xMoreDictsLink->hide();
 
     // set that we want the checkbox shown if spellchecking is available
     m_xLanguageLB->SetLanguageList(SvxLanguageListFlags::EMPTY, false, false, true);
@@ -1978,12 +1973,6 @@ IMPL_LINK_NOARG(SvxEditModulesDlg, BackHdl_Impl, weld::Button&, void)
 {
     rLinguData = *pDefaultLinguData;
     LangSelectHdl_Impl(nullptr);
-}
-
-IMPL_LINK_NOARG(SvxEditModulesDlg, OnLinkClick, weld::LinkButton&, bool)
-{
-    AdditionsDialogHelper::RunAdditionsDialog(getDialog(), u"Dictionary"_ustr);
-    return true;
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

@@ -18,6 +18,8 @@
  */
 
 #define WIN32_LEAN_AND_MEAN
+#include <systools/officeidentity.h>
+#include <sal/macros.h>
 #include <windows.h>
 #include <msiquery.h>
 
@@ -110,7 +112,7 @@ static bool CheckExtensionInRegistry( LPCWSTR lpSubKey )
             {   // We will replace registration for WordPad (alas, on XP only) FIXME
                 bRet = true;
             }
-            else if ( wcsncmp( szBuffer, L"LibreOffice.", 12 ) == 0 )
+            else if ( wcsncmp( szBuffer, OFFICE_WIDE_PROG_ID_PREFIX, SAL_N_ELEMENTS(OFFICE_WIDE_PROG_ID_PREFIX) - 1 ) == 0 )
             {   // We will replace registration for our own types, too
                 bRet = true;
             }
@@ -189,7 +191,7 @@ static void saveOldRegistration( LPCWSTR lpSubKey )
             szBuffer[nSize/sizeof(*szBuffer)] = L'\0';
 
             // No need to save associations for our own types
-            if ( wcsncmp( szBuffer, L"LibreOffice.", 12 ) != 0 )
+            if ( wcsncmp( szBuffer, OFFICE_WIDE_PROG_ID_PREFIX, SAL_N_ELEMENTS(OFFICE_WIDE_PROG_ID_PREFIX) - 1 ) != 0 )
             {
                 // Save the old association
                 RegSetValueExW( hKey, L"LOBackupAssociation", 0,

@@ -393,7 +393,7 @@ CacheItem& FilterCache::impl_getItem(      EItemType        eType,
         if ( !bIsHelpFilter && !impl_isModuleInstalled(sDocService) )
         {
             OUString sMsg("The requested filter '" + sItem +
-                          "' exists ... but it should not; because the corresponding LibreOffice module was not installed.");
+                          "' exists ... but it should not; because the corresponding application module was not installed.");
             throw css::container::NoSuchElementException(sMsg, css::uno::Reference< css::uno::XInterface >());
         }
     }

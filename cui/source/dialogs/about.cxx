@@ -80,7 +80,12 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     if (IsStringValidGitHash(sbuildId))
     {
         const tools::Long nMaxChar = 25;
+#ifdef DAINVO_VERSION
+        m_pBuildLabel->set_uri("https://github.com/Intagri-Technologies/dainvo-office-fork/commit/"
+                               + sbuildId);
+#else
         m_pBuildLabel->set_uri("https://git.libreoffice.org/core/commit/" + sbuildId);
+#endif
         m_pBuildLabel->set_label(
             sbuildId.getLength() > nMaxChar
                 ? sbuildId.replaceAt(nMaxChar, sbuildId.getLength() - nMaxChar, u"...")
@@ -126,16 +131,24 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     }
 
     // Links
+#ifdef DAINVO_VERSION
+    m_pCreditsButton->hide();
+#else
     m_pCreditsButton->set_uri(officecfg::Office::Common::Menus::CreditsURL::get());
+#endif
 
     OUString sURL(officecfg::Office::Common::Help::StartCenter::InfoURL::get());
     localizeWebserviceURI(sURL);
     m_pWebsiteButton->set_uri(sURL);
 
+#ifdef DAINVO_VERSION
+    sURL = u"https://github.com/Intagri-Technologies/dainvo-office-releases/releases"_ustr;
+#else
     // See also SID_WHATSNEW in sfx2/source/appl/appserv.cxx
     sURL = officecfg::Office::Common::Menus::ReleaseNotesURL::get()
            + "?LOvers=" + utl::ConfigManager::getProductVersion()
            + "&LOlocale=" + LanguageTag(utl::ConfigManager::getUILocale()).getBcp47();
+#endif
     m_pReleaseNotesButton->set_uri(sURL);
 
     // Handler
@@ -157,15 +170,12 @@ OUString AboutDialog::GetVersionString()
     auto const ok = rtl::Bootstrap::get(u"_ARCH"_ustr, arch);
     assert(ok);
     (void)ok;
-    OUString sLibreOfficeVersion
-        = CuiResId(TranslateId(nullptr, "%ABOUTBOXPRODUCTVERSION%ABOUTBOXPRODUCTVERSIONSUFFIX"));
 #ifdef DAINVO_VERSION
-    // Dainvo Office has its own version and build number; the LibreOffice
-    // version underneath stays visible for bug reports and extensions.
     return u"" DAINVO_VERSION " (build " LIBO_VERSION_STRINGIFY(DAINVO_BUILD) ", "_ustr + arch
-           + ")\nBased on LibreOffice " + sLibreOfficeVersion;
+           + ")";
 #else
-    return sLibreOfficeVersion + " (" + arch + ")";
+    return CuiResId(TranslateId(nullptr, "%ABOUTBOXPRODUCTVERSION%ABOUTBOXPRODUCTVERSIONSUFFIX"))
+           + " (" + arch + ")";
 #endif
 }
 
@@ -256,6 +266,9 @@ OUString AboutDialog::GetMiscString()
 
 OUString AboutDialog::GetCopyrightString()
 {
+#ifdef DAINVO_VERSION
+    return CuiResId(RID_CUISTR_ABOUT_VENDOR);
+#else
     OUString sVendorTextStr(CuiResId(RID_CUISTR_ABOUT_VENDOR));
     OUString aCopyrightString = sVendorTextStr + "\n" + CuiResId(RID_CUISTR_ABOUT_COPYRIGHT) + "\n";
 
@@ -265,6 +278,7 @@ OUString AboutDialog::GetCopyrightString()
         aCopyrightString += CuiResId(RID_CUISTR_ABOUT_DERIVED);
 
     return aCopyrightString;
+#endif
 }
 
 // special labels to comply with previous version info

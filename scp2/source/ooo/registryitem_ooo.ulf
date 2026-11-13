@@ -26,4 +26,4 @@ en-US = "%PRODUCTNAME Configuration File"
 en-US = "%PRODUCTNAME Extension"
 
 [STR_REG_VAL_APPCAPABILITY_DESCRIPTION_OOO]
-en-US = "LibreOffice"
+en-US = "%PRODUCTNAME"

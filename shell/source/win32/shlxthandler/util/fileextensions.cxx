@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <systools/officeidentity.h>
 #include <algorithm>
 #include <fileextensions.hxx>
 #include <rtl/character.hxx>
@@ -42,18 +43,18 @@ const FileExtensionEntry OOFileExtensionTable[] = {
     { ".std", L".std", L"soffice.StarDrawTemplate.6"         },
     { ".sti", L".sti", L"soffice.StarImpressTemplate.6"      },
     { ".stc", L".stc", L"soffice.StarCalcTemplate.6"         },
-    { ".odt", L".odt", L"LibreOffice.WriterDocument.1"       },
-    { ".ott", L".ott", L"LibreOffice.WriterTemplate.1"       },
-    { ".odm", L".odm", L"LibreOffice.WriterGlobalDocument.1" },
-    { ".oth", L".oth", L"LibreOffice.WriterWebTemplate.1"    },
-    { ".ods", L".ods", L"LibreOffice.CalcDocument.1"         },
-    { ".ots", L".ots", L"LibreOffice.CalcTemplate.1"         },
-    { ".odg", L".odg", L"LibreOffice.DrawDocument.1"         },
-    { ".otg", L".otg", L"LibreOffice.DrawTemplate.1"         },
-    { ".odp", L".odp", L"LibreOffice.ImpressDocument.1"      },
-    { ".otp", L".otp", L"LibreOffice.ImpressTemplate.1"      },
-    { ".odf", L".odf", L"LibreOffice.MathDocument.1"         },
-    { ".odb", L".odb", L"LibreOffice.DatabaseDocument.1"     }
+    { ".odt", L".odt", OFFICE_WIDE_PROG_ID_PREFIX L"WriterDocument.1"       },
+    { ".ott", L".ott", OFFICE_WIDE_PROG_ID_PREFIX L"WriterTemplate.1"       },
+    { ".odm", L".odm", OFFICE_WIDE_PROG_ID_PREFIX L"WriterGlobalDocument.1" },
+    { ".oth", L".oth", OFFICE_WIDE_PROG_ID_PREFIX L"WriterWebTemplate.1"    },
+    { ".ods", L".ods", OFFICE_WIDE_PROG_ID_PREFIX L"CalcDocument.1"         },
+    { ".ots", L".ots", OFFICE_WIDE_PROG_ID_PREFIX L"CalcTemplate.1"         },
+    { ".odg", L".odg", OFFICE_WIDE_PROG_ID_PREFIX L"DrawDocument.1"         },
+    { ".otg", L".otg", OFFICE_WIDE_PROG_ID_PREFIX L"DrawTemplate.1"         },
+    { ".odp", L".odp", OFFICE_WIDE_PROG_ID_PREFIX L"ImpressDocument.1"      },
+    { ".otp", L".otp", OFFICE_WIDE_PROG_ID_PREFIX L"ImpressTemplate.1"      },
+    { ".odf", L".odf", OFFICE_WIDE_PROG_ID_PREFIX L"MathDocument.1"         },
+    { ".odb", L".odb", OFFICE_WIDE_PROG_ID_PREFIX L"DatabaseDocument.1"     }
     };
 
 

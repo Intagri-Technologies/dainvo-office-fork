@@ -17,6 +17,7 @@
  *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
  */
 
+#include <systools/officeidentity.h>
 #include <string.h>
 #include <win/svsys.h>
 #include <process.h>
@@ -771,7 +772,7 @@ void WinSalInstance::AddToRecentDocumentList(const OUString& rFileUrl, const OUS
 
             if ( !sApplicationName.isEmpty() )
             {
-                OUString sApplicationID("TheDocumentFoundation.LibreOffice." + sApplicationName);
+                OUString sApplicationID(OFFICE_APP_USER_MODEL_PREFIX + sApplicationName);
 
                 SHARDAPPIDINFO info;
                 info.psi = pShellItem;

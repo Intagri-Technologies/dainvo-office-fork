@@ -170,6 +170,8 @@ void Test::testMetaGenerator()
         { "OpenOffice/4.1.2$OS/2 OpenOffice.org_project/412m3$Build-9782-bww", "412$9782-bww", SvXMLImport::AOO_4x },
         { "OpenOffice/4.1.4$Unix OpenOffice.org_project/414m2$Build-9785", "414$9785", SvXMLImport::AOO_4x },
 
+        { "Dainvo_Office/27.2.0.0.alpha0$MacOSX_AARCH64 Dainvo_Office_project/0123456789abcdef", ";27.2.0.0.", SvXMLImport::LO_New },
+
         // LO versions
         { "LibreOffice/3.3$Linux LibreOffice_project/330m17$Build-3", "330$3;3.3", SvXMLImport::LO_3x },
         { "BrOffice/3.3$Win32 LibreOffice_project/330m19$Build-8", "330$8;3.3", SvXMLImport::LO_3x },

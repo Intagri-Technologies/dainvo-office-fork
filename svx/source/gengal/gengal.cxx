@@ -113,7 +113,7 @@ static void createTheme( const OUString& aThemeName, std::u16string_view aGaller
 
 static int PrintHelp()
 {
-    fprintf( stdout, "Utility to generate LibreOffice gallery files\n\n" );
+    fprintf( stdout, "Utility to generate office gallery files\n\n" );
 
     fprintf( stdout, "using: gengal --name <name> --id <id> --path <dir> [ --destdir <path> ]\n");
     fprintf( stdout, "              [ files ... ]\n\n" );

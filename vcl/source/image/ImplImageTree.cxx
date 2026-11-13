@@ -18,6 +18,7 @@
  */
 
 #include <config_folders.h>
+#include <o3tl/environment.hxx>
 
 #include <sal/config.h>
 #include <sal/log.hxx>
@@ -495,10 +496,10 @@ void ImplImageTree::setStyle(OUString const & style)
  * The vcldemo app doesn't set up all the config stuff that the main app does, so we need another
  * way of finding the cursor images.
  */
-static bool isVclDemo()
+static const OUString& getVclDemoSource()
 {
-    static const bool bVclDemoOverride = std::getenv("LIBO_VCL_DEMO") != nullptr;
-    return bVclDemoOverride;
+    static const OUString aDemoSource = o3tl::getEnvironment(u"VCL_DEMO_SOURCE"_ustr);
+    return aDemoSource;
 }
 
 void ImplImageTree::createStyle()
@@ -508,12 +509,12 @@ void ImplImageTree::createStyle()
 
     OUString sThemeUrl;
 
-    if (isVclDemo())
+    if (const OUString& rDemoSource = getVclDemoSource(); !rDemoSource.isEmpty())
     {
         if (maCurrentStyle == "default")
-            sThemeUrl = "file://" SRC_ROOT "/icon-themes/colibre-svg";
+            sThemeUrl = "file://" + rDemoSource + "/icon-themes/colibre-svg";
         else
-            sThemeUrl = "file://" SRC_ROOT "/icon-themes/" + maCurrentStyle;
+            sThemeUrl = "file://" + rDemoSource + "/icon-themes/" + maCurrentStyle;
     }
     else if (maCurrentStyle != "default")
     {
@@ -717,7 +718,7 @@ bool ImplImageTree::checkPathAccess()
 
     try
     {
-        if (isVclDemo())
+        if (!getVclDemoSource().isEmpty())
             rNameAccess = new FolderFileAccess(comphelper::getProcessComponentContext(), rIconSet.maURL);
         else
             rNameAccess = packages::zip::ZipFileAccess::createWithURL(comphelper::getProcessComponentContext(), rIconSet.maURL);

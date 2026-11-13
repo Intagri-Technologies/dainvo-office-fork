@@ -18,6 +18,7 @@
  */
 
 
+#include <config_version.h>
 #include <stdio.h>
 #include <comphelper/string.hxx>
 #include <app.hxx>
@@ -36,8 +37,11 @@
 namespace desktop
 {
     constexpr OUString aCmdLineHelp_version =
-        u"%PRODUCTNAME %PRODUCTVERSION%PRODUCTEXTENSION %BUILDID\n"
-        "\n"_ustr;
+#ifdef DAINVO_VERSION
+        u"%PRODUCTNAME " DAINVO_VERSION " (build " LIBO_VERSION_STRINGIFY(DAINVO_BUILD) ")\n\n"_ustr;
+#else
+        u"%PRODUCTNAME %PRODUCTVERSION%PRODUCTEXTENSION %BUILDID\n\n"_ustr;
+#endif
     constexpr OUStringLiteral aCmdLineHelp =
         u"Usage: %CMDNAME [argument...]\n"
         "       argument - switches, switch parameters and document URIs (filenames).   \n\n"

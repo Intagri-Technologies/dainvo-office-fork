@@ -18,6 +18,8 @@
  */
 
 #include <config_features.h>
+#include <config_version.h>
+#include <formula/vendorfunction.hxx>
 
 #include <compiler.hxx>
 
@@ -3096,6 +3098,10 @@ bool ScCompiler::ParseOpCode( const OUString& rName, bool bInArray )
     // name resolves.
     if (mxSymbols->isOOXML() && rName.startsWithIgnoreAsciiCase(u"_xleta."))
         aName = rName.copy(7);
+#ifdef DAINVO_VERSION
+    if (mxSymbols->isODFF() || mxSymbols->isOOXML())
+        aName = formula::rebrandVendorFunction(aName);
+#endif
     // Functions added to OOXML after its first edition carry the _xlfn. prefix, but some producers
     // write them without it. A bare name that is called like a function and is known only with
     // the prefix resolves as the prefixed one. Some, such as FILTER and SORT, carry _xlfn._xlws.

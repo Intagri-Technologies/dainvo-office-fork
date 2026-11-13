@@ -358,7 +358,7 @@ check_semantic_version_three_prefixed()
 
 echo "********************************************************************"
 echo "*"
-echo "*   Running ${PACKAGE_NAME} build configuration."
+echo "*   Running ${with_product_name:-$PACKAGE_NAME} build configuration."
 echo "*"
 echo "********************************************************************"
 echo ""
@@ -623,6 +623,7 @@ if test -n "$with_dainvo_version" -a "$with_dainvo_version" != no; then
     MACOSX_BUNDLE_SHORTVERSION=$DAINVO_VERSION
     MACOSX_BUNDLE_VERSION=$DAINVO_BUILD
     AC_MSG_RESULT([$DAINVO_VERSION (build $DAINVO_BUILD)])
+    SCPDEFS="$SCPDEFS -DDAINVO_BRAND"
     AC_DEFINE_UNQUOTED(DAINVO_VERSION,"$DAINVO_VERSION")
     AC_DEFINE_UNQUOTED(DAINVO_BUILD,$DAINVO_BUILD)
 else
@@ -4154,6 +4155,14 @@ AC_SUBST(MACOSX_CODESIGNING_TEAM_IDENTIFIER)
 AC_SUBST(MACOSX_PACKAGE_SIGNING_IDENTITY)
 AC_SUBST(ENABLE_MACOSX_SANDBOX)
 AC_SUBST(MACOSX_BUNDLE_IDENTIFIER)
+MACOSX_CSV_UTI=org.libreoffice.csv-document
+MACOSX_COMMAND_SCHEME=vnd.libreoffice.command
+if test -n "$DAINVO_VERSION"; then
+    MACOSX_CSV_UTI=com.dainvo.office.csv-document
+    MACOSX_COMMAND_SCHEME=vnd.dainvo.command
+fi
+AC_SUBST(MACOSX_CSV_UTI)
+AC_SUBST(MACOSX_COMMAND_SCHEME)
 AC_SUBST(MACOSX_PROVISIONING_INFO)
 AC_SUBST(MACOSX_PROVISIONING_PROFILE)
 AC_SUBST(MACOSX_SDK_BUILD_VERSION)
@@ -15893,6 +15902,9 @@ fi
 AC_SUBST(WITH_COMPAT_OOWRAPPERS)
 
 INSTALLDIRNAME=`echo AC_PACKAGE_NAME | $AWK '{print tolower($0)}'`
+if test -n "$DAINVO_VERSION"; then
+    INSTALLDIRNAME=dainvo-office
+fi
 AC_MSG_CHECKING([for install dirname])
 if test -n "$with_install_dirname" -a "$with_install_dirname" != "no" -a "$with_install_dirname" != "yes"; then
     INSTALLDIRNAME="$with_install_dirname"

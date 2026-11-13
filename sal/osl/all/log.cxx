@@ -321,6 +321,7 @@ void sal_detail_log(
     if (level == SAL_DETAIL_LOG_LEVEL_DEBUG) {
         s << ' ';
     } else {
+        // Match the source prefix used for __FILE__ by this build.
         const size_t nStrLen(std::strlen(SRCDIR "/"));
         s << (where
               + (std::strncmp(where, SRCDIR "/", nStrLen) == 0

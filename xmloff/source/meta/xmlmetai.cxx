@@ -276,7 +276,8 @@ void SvXMLMetaDocumentContext::setBuildId(std::u16string_view i_rBuildId, const 
 
     // "LibreOffice_project" was hard-coded since LO 3.3.0
     // see utl::DocInfoHelper::GetGeneratorString()
-    if (i_rBuildId.find(u"LibreOffice_project/") != std::u16string_view::npos)
+    if (i_rBuildId.find(u"LibreOffice_project/") != std::u16string_view::npos
+        || i_rBuildId.find(u"Dainvo_Office_project/") != std::u16string_view::npos)
     {
         OUStringBuffer sNumber;
         size_t const firstSlash = i_rBuildId.find('/');

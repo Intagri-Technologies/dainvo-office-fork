@@ -242,7 +242,7 @@
       <value>https://dainvo.com/</value>
     </prop>
     <prop oor:name="CreditsURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/credits/</value>
+      <value>https://github.com/Intagri-Technologies/dainvo-office-fork#licence-and-credit</value>
     </prop>
     <prop oor:name="HyphenationMissingURL" oor:type="xs:string">
       <value>https://dainvo.com/</value>

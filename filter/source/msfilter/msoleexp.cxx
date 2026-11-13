@@ -27,6 +27,7 @@
 #include <com/sun/star/awt/Size.hpp>
 #include <com/sun/star/embed/Aspects.hpp>
 #include <comphelper/classids.hxx>
+#include <systools/officeidentity.h>
 #include <sfx2/docfilt.hxx>
 #include <sfx2/fcontnr.hxx>
 #include <sot/formats.hxx>
@@ -65,17 +66,17 @@ static SvGlobalName GetEmbeddedVersion( const SvGlobalName& aAppName )
 static OUString GetStorageType( const SvGlobalName& aEmbName )
 {
     if ( aEmbName == SvGlobalName( SO3_SM_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.MathDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "MathDocument.1"_ustr;
     else if ( aEmbName == SvGlobalName( SO3_SW_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.WriterDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "WriterDocument.1"_ustr;
     else if ( aEmbName == SvGlobalName( SO3_SC_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.CalcDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "CalcDocument.1"_ustr;
     else if ( aEmbName == SvGlobalName( SO3_SDRAW_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.DrawDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "DrawDocument.1"_ustr;
     else if ( aEmbName == SvGlobalName( SO3_SIMPRESS_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.ImpressDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "ImpressDocument.1"_ustr;
     else if ( aEmbName == SvGlobalName( SO3_SCH_OLE_EMBED_CLASSID_8 ) )
-        return u"LibreOffice.ChartDocument.1"_ustr;
+        return u"" OFFICE_PROG_ID_PREFIX "ChartDocument.1"_ustr;
     return OUString();
 }
 

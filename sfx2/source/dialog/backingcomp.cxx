@@ -682,7 +682,7 @@ void SAL_CALL BackingComp::keyReleased( /*IN*/ const css::awt::KeyEvent& )
 css::uno::Reference< css::frame::XDispatch > SAL_CALL BackingComp::queryDispatch( const css::util::URL& aURL, const OUString& /*sTargetFrameName*/, sal_Int32 /*nSearchFlags*/ )
 {
     css::uno::Reference< css::frame::XDispatch > xDispatch;
-    if ( aURL.Protocol == "vnd.org.libreoffice.recentdocs:" )
+    if ( aURL.Protocol == "vnd.dainvo.office.recentdocs:" )
         xDispatch = this;
 
     return xDispatch;
@@ -703,7 +703,7 @@ css::uno::Sequence < css::uno::Reference< css::frame::XDispatch > > SAL_CALL Bac
 // XDispatch
 void SAL_CALL BackingComp::dispatch( const css::util::URL& aURL, const css::uno::Sequence < css::beans::PropertyValue >& /*lArgs*/ )
 {
-    // vnd.org.libreoffice.recentdocs:ClearRecentFileList  - clear recent files
+    // vnd.dainvo.office.recentdocs:ClearRecentFileList  - clear recent files
     if ( aURL.Path != "ClearRecentFileList" )
         return;
 

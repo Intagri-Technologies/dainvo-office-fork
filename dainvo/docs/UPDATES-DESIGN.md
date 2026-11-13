@@ -21,8 +21,6 @@ Where they show:
 - **Help > About**: `0.1.0 (build 100)`. The About box reads
   `ooSetupVersionAboutBox`, which postprocess fills from `LIBO_VERSION_*`
   today. When `DAINVO_VERSION` is set, it gets the Dainvo version instead.
-  The underlying LibreOffice version is still shown on a second line
-  ("Based on LibreOffice 27.2.0.0") so bug reports stay useful.
 - **Info.plist**: `CFBundleShortVersionString = 0.1.0`,
   `CFBundleVersion = 100`. Sparkle compares `CFBundleVersion`, so this is
   required for the updater.

@@ -552,7 +552,7 @@ def cmd_publish(args):
     notes = os.path.join(out, "NOTES.md")
     body = open(notes, encoding="utf-8").read() if os.path.exists(notes) else f"{PRODUCT} {version}"
     body += INSTALL_HELP.format(prefix=FILE_PREFIX, version=version)
-    body += f"\nBuild {build}. Based on LibreOffice."
+    body += f"\nBuild {build}."
     source = os.environ.get("GITHUB_SHA")
     if source:
         body += f" Source: Intagri-Technologies/dainvo-office-fork@{source}."

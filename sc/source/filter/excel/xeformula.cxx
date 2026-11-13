@@ -27,6 +27,8 @@
 #include <scmatrix.hxx>
 #include <utility>
 #include <xeformula.hxx>
+#include <config_version.h>
+#include <formula/vendorfunction.hxx>
 #include <xehelper.hxx>
 #include <xelink.hxx>
 #include <xename.hxx>
@@ -1422,7 +1424,13 @@ void XclExpFmlaCompImpl::ProcessFunction( const XclExpScToken& rTokData )
         aExtFuncData.Set( pFuncInfo->GetAddInEquivalentFuncName(), true, false );
     // functions simulated by a macro call in file format
     else if( pFuncInfo->IsMacroFunc() )
-        aExtFuncData.Set( pFuncInfo->GetMacroFuncName(), false, true );
+    {
+        OUString aMacroName = pFuncInfo->GetMacroFuncName();
+#ifdef DAINVO_VERSION
+        aMacroName = formula::rebrandVendorFunction(aMacroName);
+#endif
+        aExtFuncData.Set(std::move(aMacroName), false, true);
+    }
 
     XclExpFuncData aFuncData( rTokData, *pFuncInfo, std::move(aExtFuncData) );
     XclExpScToken aTokData;

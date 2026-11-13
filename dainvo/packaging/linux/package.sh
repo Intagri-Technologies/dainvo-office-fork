@@ -97,8 +97,7 @@ homepage: https://github.com/Intagri-Technologies/dainvo-office-releases
 license: MPL-2.0
 description: |-
   Dainvo Office office suite
-  Word processor (Writer), spreadsheets (Calc) and presentations (Impress),
-  based on LibreOffice.
+  Word processor (Writer), spreadsheets (Calc) and presentations (Impress).
 contents:
   - src: $root/opt/$name
     dst: /opt/$name

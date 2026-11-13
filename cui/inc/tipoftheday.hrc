@@ -23,6 +23,7 @@
 
 #include <rtl/ustring.hxx>
 #include <config_python.h>
+#include <config_version.h>
 #include <tuple>
 #include <unotools/resmgr.hxx>
 
@@ -51,6 +52,12 @@ enum tipModule : sal_uInt8
 
 const std::tuple<TranslateId, OUString, OUString, tipModule> TIPOFTHEDAY_STRINGARRAY[] =
 {
+#ifdef DAINVO_VERSION
+     { NC_("RID_CUI_TIPOFTHEDAY", "Want to sum a cell through several sheets? Refer to the range of sheets e.g. =SUM(Sheet1.A1:Sheet2.A3)."), "", "sum_sheets.png", scalc},
+     { NC_("RID_CUI_TIPOFTHEDAY", "To remove a hyperlink but keep its text, right-click on the hyperlink, and use “Remove Hyperlink”."), "", "remove_hyperlink.png", swriter},
+     { NC_("RID_CUI_TIPOFTHEDAY", "You can restart the slide show after a pause specified at Slide Show ▸ Slide Show Settings ▸ Loop and repeat after."), "", "", simpress},
+     { NC_("RID_CUI_TIPOFTHEDAY", "To start temporarily with a fresh user profile, or to restore a non-working %PRODUCTNAME, use Help ▸ Restart in Troubleshoot Mode."), "svx/ui/safemodedialog/SafeModeDialog", "", soffice},
+#else
      { NC_("RID_CUI_TIPOFTHEDAY", "%PRODUCTNAME offers a variety of user interface options to make you feel at home"), ".uno:UIPicker", "toolbarmode.png", soffice},
      { NC_("RID_CUI_TIPOFTHEDAY", "Need to allow changes to parts of a read-only document in Writer? Insert frames or sections that can authorize changes."), "https://help.libreoffice.org/%PRODUCTVERSION/%LANGUAGENAME/text/swriter/guide/section_edit.html", "", swriter}, //local help missing
      { NC_("RID_CUI_TIPOFTHEDAY", "To print the notes of your slides go to File ▸ Print ▸ %PRODUCTNAME Impress tab and select Notes under Document ▸ Type."), "", "printnote.png", soffice},
@@ -277,6 +284,7 @@ const std::tuple<TranslateId, OUString, OUString, tipModule> TIPOFTHEDAY_STRINGA
      { NC_("RID_CUI_TIPOFTHEDAY", "Never use certain arrow styles? Remove them by using the Delete button on the Format ▸ Text Box and Shape ▸ Line ▸ Arrow Styles tab."), "cui/ui/lineendstabpage/BTN_MODIFY", "", sdraw},
      { NC_("RID_CUI_TIPOFTHEDAY", "Don’t like the position of some icons on your toolbar? Change it with Tools ▸ Customize ▸ Toolbars tab ▸ Target."), "CUI_HID_SVX_CONFIG_TOOLBAR", "", soffice},
      { NC_("RID_CUI_TIPOFTHEDAY", "Can’t find a command in the menus? Try %SHIFT+ESC."), ".uno:CommandPopup", "", soffice},
+#endif
 };
 
 #define STR_HELP_LINK                   NC_("STR_HELP_LINK", "%PRODUCTNAME Help")

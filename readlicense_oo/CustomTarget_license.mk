@@ -29,7 +29,7 @@ $(readlicense_oo_DIR)/LICENSE.html : \
 	$(call gb_Trace_StartRange,$(subst $(WORKDIR)/,,$@),XSL)
 	$(call gb_Helper_abbreviate_dirs, \
 		$(call gb_ExternalExecutable_get_command,xsltproc) --nonet --novalid -o $@ \
-			--stringparam build_type "$(BUILD_TYPE)" \
+			--stringparam build_type "$(BUILD_TYPE) $(if $(DAINVO_VERSION),DAINVO)" \
 			--stringparam os "$(OS)" \
 			--stringparam themes "$(WITH_THEMES)" \
 			$(if $(MPL_SUBSET),,--stringparam no_mpl_subset no_mpl_subset) \
@@ -51,7 +51,7 @@ $(readlicense_oo_DIR)/LICENSE : \
 	$(call gb_Trace_StartRange,$(subst $(WORKDIR)/,,$@),XSL)
 	$(call gb_Helper_abbreviate_dirs, \
 		$(call gb_ExternalExecutable_get_command,xsltproc) --nonet --novalid -o $@ \
-			--stringparam build_type "$(BUILD_TYPE)" \
+			--stringparam build_type "$(BUILD_TYPE) $(if $(DAINVO_VERSION),DAINVO)" \
 			--stringparam os "$(OS)" \
 			--stringparam themes "$(WITH_THEMES)" \
 			$(if $(MPL_SUBSET),,--stringparam no_mpl_subset no_mpl_subset) \

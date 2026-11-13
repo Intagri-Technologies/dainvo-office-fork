@@ -21,7 +21,7 @@ Where they show up:
 
 | Place | Value |
 |---|---|
-| Help > About | `0.1.0 (build 100, aarch64)` and "Based on LibreOffice 27.2…" |
+| Help > About | `0.1.0 (build 100, aarch64)` |
 | `Info.plist` | `CFBundleShortVersionString` = `0.1.0`, `CFBundleVersion` = `100` (also the Quick Look extensions) |
 | Installer names | `Dainvo-Office-0.1.0-mac-arm64.dmg`, `…-win-x64.msi`, `…-linux-amd64.deb`, `…-linux-x86_64.rpm`, `…-linux-x86_64.tar.gz` |
 | Update feed | `sparkle:shortVersionString` / `sparkle:version` |
@@ -95,6 +95,21 @@ Writer, Calc and Impress, and icons in `/usr/share/icons/hicolor`. They are
 built in the `manylinux_2_28` container (AlmaLinux 8, glibc 2.28) so one
 build runs on all current distributions. Spell checking on Linux uses the
 distribution's Hunspell dictionaries (recommended by the packages).
+
+## Checking release branding
+
+Mount the disk image or extract the installer, then run
+`python3 dainvo/tools/audit-package-branding.py <directory>`. It reports
+upstream references in names, compiled files, and ZIP members. It exits
+with status 1 if it finds references outside the designated license and
+notice files. Review the results before publishing. The scan also reports
+copyright headers in bundled resources and identifiers used to read older
+documents.
+
+Calc reads the older `ORG.LIBREOFFICE.*` formula names. Dainvo writes
+`ORG.DAINVO.*` for those vendor-specific formulas in ODS, XLSX and XLS.
+Other spreadsheet apps may not recognize the new names. Standard formulas
+keep their existing names.
 
 ## Making a release (GitHub Actions)
 
