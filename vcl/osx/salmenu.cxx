@@ -688,6 +688,37 @@ void AquaSalMenu::EnableItem( unsigned nPos, bool bEnable )
     }
 }
 
+// Dainvo: really hide the item (e.g. commands on the Office.Commands disabled
+// list); the base class would only grey it out
+void AquaSalMenu::ShowItem( unsigned nPos, bool bShow )
+{
+    if( nPos >= maItems.size() )
+        return;
+    [maItems[nPos]->mpMenuItem setHidden: !bShow];
+
+    // NSMenu does not collapse separators around hidden items: hide a separator
+    // that would lead, trail or follow another visible separator
+    NSMenuItem* pPrevSep = nil;
+    bool bSeenItem = false;
+    for( const AquaSalMenuItem* pEntry : maItems )
+    {
+        NSMenuItem* pItem = pEntry->mpMenuItem;
+        if( [pItem isSeparatorItem] )
+        {
+            [pItem setHidden: YES];
+            if( bSeenItem && !pPrevSep )
+                pPrevSep = pItem;
+        }
+        else if( ![pItem isHidden] )
+        {
+            if( pPrevSep )
+                [pPrevSep setHidden: NO];
+            pPrevSep = nil;
+            bSeenItem = true;
+        }
+    }
+}
+
 void AquaSalMenu::SetItemImage( unsigned /*nPos*/, SalMenuItem* pSMI, const Image& rImage )
 {
     AquaSalMenuItem* pSalMenuItem = static_cast<AquaSalMenuItem*>( pSMI );

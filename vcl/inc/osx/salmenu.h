@@ -65,6 +65,7 @@ public:
     virtual void SetFrame( const SalFrame* pFrame ) override;
     virtual void CheckItem( unsigned nPos, bool bCheck ) override;
     virtual void EnableItem( unsigned nPos, bool bEnable ) override;
+    virtual void ShowItem( unsigned nPos, bool bShow ) override;
     virtual void SetItemText( unsigned nPos, SalMenuItem* pSalMenuItem, const OUString& rText ) override;
     virtual void SetItemImage( unsigned nPos, SalMenuItem* pSalMenuItem, const Image& rImage) override;
     virtual void SetAccelerator( unsigned nPos, SalMenuItem* pSalMenuItem, const vcl::KeyCode& rKeyCode, const OUString& rKeyName ) override;
