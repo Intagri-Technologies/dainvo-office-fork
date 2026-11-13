@@ -51,6 +51,8 @@
 
 #include <sfx2/fcontnr.hxx>
 
+#include <array>
+
 using namespace com::sun::star::uno;
 using namespace com::sun::star::lang;
 using namespace com::sun::star::beans;
@@ -64,7 +66,8 @@ struct SvxSaveTabPage_Impl
     std::vector< OUString >     aFilterArr[APP_COUNT];
     std::vector< bool >         aODFArr[APP_COUNT];
     std::vector< OUString >     aUIFilterArr[APP_COUNT];
-    OUString                    aDefaultArr[APP_COUNT];
+    std::array<OUString, APP_COUNT> aDefaultArr;
+    std::array<OUString, APP_COUNT> aInitialDefaultArr;
     bool                    aDefaultReadonlyArr[APP_COUNT];
     bool                    bInitialized;
 
@@ -206,6 +209,8 @@ SvxSaveTabPage::SvxSaveTabPage(weld::Container* pPage, weld::DialogController* p
         pImpl->aDefaultReadonlyArr[APP_WRITER_GLOBAL] = aModuleOpt.IsDefaultFilterReadonly(SvtModuleOptions::EFactory::WRITERGLOBAL);
     }
 
+    pImpl->aInitialDefaultArr = pImpl->aDefaultArr;
+
     Link<weld::ComboBox&,void> aLink = LINK( this, SvxSaveTabPage, ODFVersionHdl_Impl );
     m_xODFVersionLB->connect_changed( aLink );
     aLink = LINK( this, SvxSaveTabPage, FilterHdl_Impl );
@@ -333,34 +338,36 @@ bool SvxSaveTabPage::FillItemSet( SfxItemSet* rSet )
 
     SvtModuleOptions aModuleOpt;
     if(!pImpl->aDefaultArr[APP_MATH].isEmpty() &&
-            pImpl->aDefaultArr[APP_MATH] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::MATH))
+            pImpl->aDefaultArr[APP_MATH] != pImpl->aInitialDefaultArr[APP_MATH])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::MATH, pImpl->aDefaultArr[APP_MATH]);
 
     if( !pImpl->aDefaultArr[APP_DRAW].isEmpty() &&
-            pImpl->aDefaultArr[APP_DRAW] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::DRAW))
+            pImpl->aDefaultArr[APP_DRAW] != pImpl->aInitialDefaultArr[APP_DRAW])
             aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::DRAW, pImpl->aDefaultArr[APP_DRAW]);
 
     if(!pImpl->aDefaultArr[APP_IMPRESS].isEmpty() &&
-            pImpl->aDefaultArr[APP_IMPRESS] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::IMPRESS))
+            pImpl->aDefaultArr[APP_IMPRESS] != pImpl->aInitialDefaultArr[APP_IMPRESS])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::IMPRESS, pImpl->aDefaultArr[APP_IMPRESS]);
 
     if(!pImpl->aDefaultArr[APP_CALC].isEmpty() &&
-            pImpl->aDefaultArr[APP_CALC] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::CALC))
+            pImpl->aDefaultArr[APP_CALC] != pImpl->aInitialDefaultArr[APP_CALC])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::CALC, pImpl->aDefaultArr[APP_CALC]);
 
     if(!pImpl->aDefaultArr[APP_WRITER].isEmpty() &&
-            pImpl->aDefaultArr[APP_WRITER] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITER))
+            pImpl->aDefaultArr[APP_WRITER] != pImpl->aInitialDefaultArr[APP_WRITER])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITER, pImpl->aDefaultArr[APP_WRITER]);
 
     if(!pImpl->aDefaultArr[APP_WRITER_WEB].isEmpty() &&
-            pImpl->aDefaultArr[APP_WRITER_WEB] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITERWEB))
+            pImpl->aDefaultArr[APP_WRITER_WEB] != pImpl->aInitialDefaultArr[APP_WRITER_WEB])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITERWEB, pImpl->aDefaultArr[APP_WRITER_WEB]);
 
     if(!pImpl->aDefaultArr[APP_WRITER_GLOBAL].isEmpty() &&
-            pImpl->aDefaultArr[APP_WRITER_GLOBAL] != aModuleOpt.GetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITERGLOBAL))
+            pImpl->aDefaultArr[APP_WRITER_GLOBAL] != pImpl->aInitialDefaultArr[APP_WRITER_GLOBAL])
         aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITERGLOBAL, pImpl->aDefaultArr[APP_WRITER_GLOBAL]);
 
     xChanges->commit();
+    pImpl->aInitialDefaultArr = pImpl->aDefaultArr;
+
     return bModified;
 }
 

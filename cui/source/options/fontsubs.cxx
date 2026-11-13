@@ -27,6 +27,9 @@
 #include <vcl/weld/Builder.hxx>
 #include <svtools/fontsubstconfig.hxx>
 #include "fontsubs.hxx"
+#ifdef DAINVO_FONT_MANAGER
+#include "dainvofonts.hxx"
+#endif
 #include <helpids.h>
 #include <rtl/ustrbuf.hxx>
 
@@ -54,6 +57,11 @@ SvxFontSubstTabPage::SvxFontSubstTabPage(weld::Container* pPage, weld::DialogCon
     , m_xFontHeightLabel(m_xBuilder->weld_label(u"label9"_ustr))
     , m_xFontHeightImg(m_xBuilder->weld_widget(u"lockfontheight"_ustr))
 {
+#ifdef DAINVO_FONT_MANAGER
+    m_xManageFonts = m_xBuilder->weld_button(u"managefonts"_ustr);
+    m_xManageFonts->show();
+    m_xManageFonts->connect_clicked(LINK(this, SvxFontSubstTabPage, ManageFontsHdl));
+#endif
     m_xFont1CB->make_sorted();
     m_xFont1CB->set_size_request(1, -1);
     m_xFont2CB->make_sorted();
@@ -97,6 +105,13 @@ SvxFontSubstTabPage::SvxFontSubstTabPage(weld::Container* pPage, weld::DialogCon
     for(nHeight = 80; nHeight <= 96; nHeight+= 8)
         m_xFontHeightLB->append_text(OUString::number(nHeight));
 }
+
+#ifdef DAINVO_FONT_MANAGER
+IMPL_LINK_NOARG(SvxFontSubstTabPage, ManageFontsHdl, weld::Button&, void)
+{
+    ShowDainvoFonts(GetFrameWeld());
+}
+#endif
 
 IMPL_LINK(SvxFontSubstTabPage, HeaderBarClick, int, nColumn, void)
 {

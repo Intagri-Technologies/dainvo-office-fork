@@ -80,6 +80,21 @@ $(eval $(call gb_Library_use_externals,cui,\
     zxing \
 ))
 
+ifneq ($(filter $(OS),MACOSX WNT LINUX),)
+ifneq ($(ENABLE_CURL),)
+$(eval $(call gb_Library_add_defs,cui,-DDAINVO_FONT_MANAGER))
+$(eval $(call gb_Library_use_externals,cui,curl harfbuzz))
+$(eval $(call gb_Library_add_exception_objects,cui,cui/source/options/dainvofonts))
+ifeq ($(OS),MACOSX)
+$(eval $(call gb_Library_use_system_darwin_frameworks,cui,CoreText CoreFoundation))
+else ifeq ($(OS),WNT)
+$(eval $(call gb_Library_use_system_win32_libs,cui,gdi32 user32))
+else ifeq ($(OS),LINUX)
+$(eval $(call gb_Library_use_external,cui,fontconfig))
+endif
+endif
+endif
+
 ifeq ($(OS),WNT)
 $(eval $(call gb_Library_use_system_win32_libs,cui,\
     advapi32 \

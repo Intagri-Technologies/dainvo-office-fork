@@ -47,6 +47,11 @@ class SvxFontSubstTabPage : public SfxTabPage
     std::unique_ptr<weld::Label> m_xFontHeightLabel;
     std::unique_ptr<weld::Widget> m_xFontHeightImg;
 
+#ifdef DAINVO_FONT_MANAGER
+    std::unique_ptr<weld::Button> m_xManageFonts;
+    DECL_LINK(ManageFontsHdl, weld::Button&, void);
+#endif
+
     DECL_LINK(SelectComboBoxHdl, weld::ComboBox&, void);
     DECL_LINK(ToggleHdl, weld::Toggleable&, void);
     DECL_LINK(ClickHdl, weld::Button&, void);

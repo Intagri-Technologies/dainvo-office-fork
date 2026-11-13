@@ -20,10 +20,9 @@
 #include <com/sun/star/container/XNameContainer.hpp>
 #include <com/sun/star/lang/XSingleServiceFactory.hpp>
 #include <unotools/configmgr.hxx>
-#include <unotools/moduleoptions.hxx>
+#include <sfx2/dainvoformats.hxx>
 #include <vcl/svapp.hxx>
 #include <vcl/vclenum.hxx>
-#include <vcl/weld/Button.hxx>
 #include <vcl/weld/MessageDialog.hxx>
 
 #include <memory>
@@ -34,17 +33,6 @@ namespace
 {
 constexpr int RESPONSE_MSO = 100;
 constexpr int RESPONSE_ODF = 101;
-
-void SetMicrosoftOfficeDefaults()
-{
-    SvtModuleOptions aModuleOpt;
-    aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::WRITER,
-                                       u"MS Word 2007 XML"_ustr);
-    aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::CALC,
-                                       u"Calc MS Excel 2007 XML"_ustr);
-    aModuleOpt.SetFactoryDefaultFilter(SvtModuleOptions::EFactory::IMPRESS,
-                                       u"Impress MS PowerPoint 2007 XML"_ustr);
-}
 }
 
 void DainvoAskDefaultFileFormats()
@@ -73,15 +61,6 @@ void DainvoAskDefaultFileFormats()
         xBox->add_button(DpResId(STR_DAINVO_FORMAT_ODF), RESPONSE_ODF);
         xBox->add_button(DpResId(STR_DAINVO_FORMAT_MSO), RESPONSE_MSO);
         xBox->set_default_response(RESPONSE_MSO);
-        // Name the buttons for screen readers (VoiceOver)
-        for (const auto& [nResponse, pLabel] :
-             { std::pair{ RESPONSE_ODF, STR_DAINVO_FORMAT_ODF },
-               std::pair{ RESPONSE_MSO, STR_DAINVO_FORMAT_MSO } })
-        {
-            if (std::unique_ptr<weld::Button> xButton = xBox->weld_button_for_response(nResponse))
-                xButton->set_accessible_name(DpResId(pLabel));
-        }
-
         const int nResponse = xBox->run();
         // Close the dialog window right away, before any other work
         xBox->hide();
@@ -89,8 +68,7 @@ void DainvoAskDefaultFileFormats()
         // Closed without choosing (or the app was quitting): ask again next time
         if (nResponse != RESPONSE_MSO && nResponse != RESPONSE_ODF)
             return;
-        if (nResponse == RESPONSE_MSO)
-            SetMicrosoftOfficeDefaults();
+        sfx2::SetDainvoSaveFormats(nResponse == RESPONSE_MSO);
 
         std::shared_ptr<comphelper::ConfigurationChanges> batch(
             comphelper::ConfigurationChanges::create());

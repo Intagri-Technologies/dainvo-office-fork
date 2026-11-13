@@ -1366,6 +1366,14 @@
           <value>Normal,Serif</value>
         </prop>
       </node>
+      <node oor:name="segoeui" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>selawik</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
       <node oor:name="calibri" oor:op="replace">
         <prop oor:name="SubstFonts">
           <value>carlito;hiraginomarugothicpronw3;hiraginomarugothicprow3</value>

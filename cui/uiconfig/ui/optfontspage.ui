@@ -42,6 +42,14 @@
     <property name="orientation">vertical</property>
     <property name="spacing">12</property>
     <child>
+      <object class="GtkButton" id="managefonts">
+        <property name="can-focus">True</property>
+        <property name="no-show-all">True</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes" context="optfontspage|managefonts">Manage compatibility fonts…</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkFrame" id="frame2">
         <property name="visible">True</property>
         <property name="can-focus">False</property>

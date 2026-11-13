@@ -82,6 +82,19 @@ $(eval $(call gb_CppunitTest_use_externals,cui_dainvolanguages,\
 	zxing \
 ))
 
+ifneq ($(filter $(OS),MACOSX WNT LINUX),)
+ifneq ($(ENABLE_CURL),)
+$(eval $(call gb_CppunitTest_use_externals,cui_dainvolanguages,curl harfbuzz))
+ifeq ($(OS),MACOSX)
+$(eval $(call gb_CppunitTest_use_system_darwin_frameworks,cui_dainvolanguages,CoreText CoreFoundation))
+else ifeq ($(OS),WNT)
+$(eval $(call gb_CppunitTest_use_system_win32_libs,cui_dainvolanguages,advapi32 gdi32 user32))
+else ifeq ($(OS),LINUX)
+$(eval $(call gb_CppunitTest_use_external,cui_dainvolanguages,fontconfig))
+endif
+endif
+endif
+
 $(eval $(call gb_CppunitTest_use_ure,cui_dainvolanguages))
 
 $(eval $(call gb_CppunitTest_use_vcl,cui_dainvolanguages))
