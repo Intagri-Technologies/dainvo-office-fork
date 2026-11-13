@@ -28,17 +28,26 @@ jobs:
           security import "$work/cert.p12" -k "$keychain" -P "$MACOS_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
           rm -f "$work/cert.p12"
           security set-key-partition-list -S apple-tool:,apple: -s -k "$password" "$keychain" >/dev/null
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | tr -d '"')
           identity=$(security find-identity -v -p codesigning "$keychain" | awk '/"Developer ID Application: / && !found { print $2; found=1 }')
           test -n "$identity"
           cd "$work"
           printf '%s\n' 'int main(void) { return 0; }' | xcrun clang -x c -o office-signing-test -
-          codesign --keychain "$keychain" --force --options runtime --timestamp --sign "$identity" office-signing-test
+          echo "Signing the test executable"
+          codesign --force --options runtime --timestamp --sign "$identity" office-signing-test
           codesign --verify --strict office-signing-test
-          ditto -c -k --keepParent office-signing-test office-signing-test.zip
+          mkdir payload
+          mv office-signing-test payload/
+          hdiutil create -quiet -format UDZO -volname 'Office signing test' -srcfolder payload office-signing-test.dmg
+          echo "Signing the test DMG"
+          codesign --force --timestamp --sign "$identity" office-signing-test.dmg
           printf '%s' "$APPLE_API_KEY_BASE64" | base64 --decode > "$work/notary.p8"
-          xcrun notarytool submit office-signing-test.zip --key "$work/notary.p8" \
+          echo "Submitting the test DMG to Apple"
+          xcrun notarytool submit office-signing-test.dmg --key "$work/notary.p8" \
             --key-id "$APPLE_API_KEY_ID" --issuer "$APPLE_API_ISSUER" --wait --timeout 12m --output-format json > result.json
           jq -e '.status == "Accepted"' result.json
+          xcrun stapler staple office-signing-test.dmg
+          xcrun stapler validate office-signing-test.dmg
   windows:
     name: Azure Artifact Signing with GitHub OIDC
     runs-on: windows-2022
