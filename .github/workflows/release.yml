@@ -181,6 +181,13 @@ jobs:
 
       - uses: actions/checkout@v7
 
+      - name: Check out bundled dictionaries
+        shell: pwsh
+        run: |
+          git submodule init dictionaries
+          git config submodule.dictionaries.url https://github.com/LibreOffice/dictionaries.git
+          git submodule update --depth 1 dictionaries
+
       - uses: cygwin/cygwin-install-action@v7
         with:
           install-dir: C:\cygwin
@@ -192,13 +199,6 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-
-      - name: Check out bundled dictionaries
-        run: |
-          cd "$(cygpath -u "$GITHUB_WORKSPACE")"
-          git submodule init dictionaries
-          git config submodule.dictionaries.url https://github.com/LibreOffice/dictionaries.git
-          git submodule update --depth 1 dictionaries
 
       - name: Install LibreOffice's Windows build tools
         run: |
