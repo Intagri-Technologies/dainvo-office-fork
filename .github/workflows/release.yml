@@ -20,6 +20,9 @@ on:
         type: choice
         default: all
         options: [all, macos, windows, linux]
+      source_run_id:
+        description: Successful all-platform release run to reuse when creating a draft
+        type: string
 
 permissions:
   contents: read
@@ -56,7 +59,7 @@ jobs:
           echo "build=$build" >> "$GITHUB_OUTPUT"
 
   macos:
-    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'macos'
+    if: github.event_name == 'push' || (!inputs.source_run_id && (inputs.platform == 'all' || inputs.platform == 'macos'))
     name: macOS (arm64)
     needs: version
     runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
@@ -167,7 +170,7 @@ jobs:
           compression-level: 0
 
   windows:
-    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'windows'
+    if: github.event_name == 'push' || (!inputs.source_run_id && (inputs.platform == 'all' || inputs.platform == 'windows'))
     name: Windows (x64)
     needs: version
     runs-on: ${{ vars.WINDOWS_RUNNER || 'windows-2022' }}
@@ -319,7 +322,7 @@ jobs:
           compression-level: 0
 
   linux:
-    if: github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'linux'
+    if: github.event_name == 'push' || (!inputs.source_run_id && (inputs.platform == 'all' || inputs.platform == 'linux'))
     name: Linux (x86_64)
     needs: version
     runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
@@ -375,12 +378,45 @@ jobs:
   draft:
     name: Create draft release
     needs: [version, macos, windows, linux]
-    if: github.event_name == 'push' || (inputs.platform == 'all' && inputs.create_draft)
+    if: >-
+      ${{ !cancelled() && needs.version.result == 'success' &&
+          (github.event_name == 'push' || (inputs.platform == 'all' && inputs.create_draft)) &&
+          (inputs.source_run_id ||
+           (needs.macos.result == 'success' && needs.windows.result == 'success' && needs.linux.result == 'success')) }}
     # macOS: Sparkle's sign_update (EdDSA signatures) and the DMG check run there.
     runs-on: macos-15
     environment: release
+    permissions:
+      actions: read
+      contents: read
     steps:
+      - name: Verify source run
+        id: source
+        if: inputs.source_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          [[ "$SOURCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID")
+          revision=$(jq -er --arg repo "$GITHUB_REPOSITORY" '
+            select(.path == ".github/workflows/release.yml" and .head_repository.full_name == $repo
+                   and .head_branch == "main" and .status == "completed" and .conclusion == "success")
+            | .head_sha | select(test("^[a-f0-9]{40}$"))' <<< "$run")
+          jobs=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/attempts/$(jq -r .run_attempt <<< "$run")/jobs")
+          jq -e '
+            def passed($name; $step):
+              any(.jobs[]; .name == $name and .conclusion == "success" and
+                  any(.steps[]; .name == $step and .conclusion == "success"));
+            passed("macOS (arm64)"; "Sign and notarize the DMG") and
+            passed("Windows (x64)"; "Verify Windows signatures") and
+            any(.jobs[]; .name == "Linux (x86_64)" and .conclusion == "success")
+          ' <<< "$jobs" > /dev/null
+          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.source.outputs.revision || github.sha }}
 
       - uses: actions/setup-python@v7
         with:
@@ -391,6 +427,8 @@ jobs:
           pattern: dist-*
           path: incoming
           merge-multiple: true
+          github-token: ${{ inputs.source_run_id && github.token || '' }}
+          run-id: ${{ inputs.source_run_id || github.run_id }}
 
       - name: Sign installers and write appcast.xml
         env:
@@ -404,10 +442,15 @@ jobs:
 
       - name: Create the draft
         env:
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
           DAINVO_ED_PRIVATE_KEY: ${{ secrets.DAINVO_ED_PRIVATE_KEY }}
           GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
         run: |
           [ -n "$GH_TOKEN" ] || { echo "::error::RELEASES_TOKEN secret is missing"; exit 1; }
-          python3 dainvo/tools/release.py publish --replace-draft
+          if [ -n "$SOURCE_RUN_ID" ]; then
+            python3 dainvo/tools/release.py publish
+          else
+            python3 dainvo/tools/release.py publish --replace-draft
+          fi
           echo "Draft: https://github.com/$RELEASES_REPO/releases" >> "$GITHUB_STEP_SUMMARY"
           echo "Publish it with the 'Publish release' workflow (public or prerelease)." >> "$GITHUB_STEP_SUMMARY"

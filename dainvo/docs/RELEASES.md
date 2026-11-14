@@ -161,6 +161,10 @@ Steps:
 
 For a manual check, set **platform** to one platform in **Release build**.
 A single-platform run uploads its packages without creating a draft.
+To create a draft from an earlier successful all-platform run on `main`,
+enable **create_draft** and enter its GitHub Actions run ID in
+**source_run_id**. Keep **platform** set to **all**. The draft uses the
+source commit and signed packages from that run.
 
 ### One-time setup (repository settings of dainvo-office-fork)
 
